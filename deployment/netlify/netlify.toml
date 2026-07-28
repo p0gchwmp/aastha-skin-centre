@@ -1,0 +1,20 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "https://aasthaskincentre.in/*"
+  to = "https://www.aasthaskincentre.in/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://aasthaskincentre.com/*"
+  to = "https://www.aasthaskincentre.in/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.aasthaskincentre.com/*"
+  to = "https://www.aasthaskincentre.in/:splat"
+  status = 301
+  force = true

@@ -1,0 +1,418 @@
+[
+  {
+    "page_name": "Acne Treatment",
+    "url": "/treatments/acne-treatment/",
+    "file": "treatments/acne-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Acne Scar Treatment",
+    "url": "/treatments/acne-scar-treatment/",
+    "file": "treatments/acne-scar-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Laser Hair Reduction",
+    "url": "/treatments/laser-hair-reduction/",
+    "file": "treatments/laser-hair-reduction/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Hair Fall Treatment",
+    "url": "/treatments/hair-fall-treatment/",
+    "file": "treatments/hair-fall-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Pigmentation Treatment",
+    "url": "/treatments/pigmentation-treatment/",
+    "file": "treatments/pigmentation-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Melasma Treatment",
+    "url": "/treatments/melasma-treatment/",
+    "file": "treatments/melasma-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Fungal Infection Treatment",
+    "url": "/treatments/fungal-infection-treatment/",
+    "file": "treatments/fungal-infection-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Skin Allergy Treatment",
+    "url": "/treatments/skin-allergy-treatment/",
+    "file": "treatments/skin-allergy-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "PRP & GFC Hair Treatment",
+    "url": "/treatments/prp-gfc-hair-treatment/",
+    "file": "treatments/prp-gfc-hair-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Botulinum Toxin & Dermal Fillers",
+    "url": "/treatments/botulinum-toxin-dermal-fillers/",
+    "file": "treatments/botulinum-toxin-dermal-fillers/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Chemical Peels",
+    "url": "/treatments/chemical-peels/",
+    "file": "treatments/chemical-peels/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Wart, Mole & Skin Tag Removal",
+    "url": "/treatments/wart-mole-skin-tag-removal/",
+    "file": "treatments/wart-mole-skin-tag-removal/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Ingrown Toenail & Nail Surgery",
+    "url": "/treatments/ingrown-toenail-nail-surgery/",
+    "file": "treatments/ingrown-toenail-nail-surgery/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Cyst & Lipoma Removal",
+    "url": "/treatments/cyst-lipoma-removal/",
+    "file": "treatments/cyst-lipoma-removal/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Skin Biopsy",
+    "url": "/treatments/skin-biopsy/",
+    "file": "treatments/skin-biopsy/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Skin Abscess & Incision and Drainage",
+    "url": "/treatments/skin-abscess-incision-drainage/",
+    "file": "treatments/skin-abscess-incision-drainage/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "HIFU & RF Skin Tightening",
+    "url": "/treatments/hifu-rf-skin-tightening/",
+    "file": "treatments/hifu-rf-skin-tightening/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "HIFU Treatment",
+    "url": "/treatments/hifu-treatment/",
+    "file": "treatments/hifu-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "RF Skin Tightening",
+    "url": "/treatments/rf-skin-tightening/",
+    "file": "treatments/rf-skin-tightening/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Cryolipolysis & Body Contouring",
+    "url": "/treatments/cryolipolysis-body-contouring/",
+    "file": "treatments/cryolipolysis-body-contouring/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Laser Tattoo Removal",
+    "url": "/treatments/laser-tattoo-removal/",
+    "file": "treatments/laser-tattoo-removal/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Hydrafacial & Medifacial",
+    "url": "/treatments/hydrafacial-medifacial/",
+    "file": "treatments/hydrafacial-medifacial/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "IPL Photofacial",
+    "url": "/treatments/ipl-photofacial/",
+    "file": "treatments/ipl-photofacial/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "MNRF Treatment",
+    "url": "/treatments/mnrf-treatment/",
+    "file": "treatments/mnrf-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Fractional CO₂ Laser",
+    "url": "/treatments/fractional-co2-laser/",
+    "file": "treatments/fractional-co2-laser/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Q-Switched Laser & Laser Toning",
+    "url": "/treatments/q-switched-laser-toning/",
+    "file": "treatments/q-switched-laser-toning/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Hair Transplant",
+    "url": "/treatments/hair-transplant/",
+    "file": "treatments/hair-transplant/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "DPN & Seborrhoeic Keratosis Removal",
+    "url": "/treatments/dpn-seborrheic-keratosis-removal/",
+    "file": "treatments/dpn-seborrheic-keratosis-removal/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Paediatric Dermatology",
+    "url": "/treatments/paediatric-dermatology/",
+    "file": "treatments/paediatric-dermatology/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Psoriasis Treatment",
+    "url": "/treatments/psoriasis-treatment/",
+    "file": "treatments/psoriasis-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Rosacea Treatment",
+    "url": "/treatments/rosacea-treatment/",
+    "file": "treatments/rosacea-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Scabies Treatment",
+    "url": "/treatments/scabies-treatment/",
+    "file": "treatments/scabies-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Seborrhoeic Dermatitis & Dandruff",
+    "url": "/treatments/seborrheic-dermatitis-dandruff/",
+    "file": "treatments/seborrheic-dermatitis-dandruff/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Vitiligo Treatment",
+    "url": "/treatments/vitiligo-treatment/",
+    "file": "treatments/vitiligo-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Urticaria & Hives Treatment",
+    "url": "/treatments/urticaria-hives-treatment/",
+    "file": "treatments/urticaria-hives-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Eczema & Atopic Dermatitis",
+    "url": "/treatments/eczema-atopic-dermatitis-treatment/",
+    "file": "treatments/eczema-atopic-dermatitis-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Contact Dermatitis Treatment",
+    "url": "/treatments/contact-dermatitis-treatment/",
+    "file": "treatments/contact-dermatitis-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Alopecia Areata Treatment",
+    "url": "/treatments/alopecia-areata-treatment/",
+    "file": "treatments/alopecia-areata-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Lichen Planus Treatment",
+    "url": "/treatments/lichen-planus-treatment/",
+    "file": "treatments/lichen-planus-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Molluscum Contagiosum Treatment",
+    "url": "/treatments/molluscum-contagiosum-treatment/",
+    "file": "treatments/molluscum-contagiosum-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Black Neck & Acanthosis Nigricans",
+    "url": "/treatments/black-neck-acanthosis-nigricans-treatment/",
+    "file": "treatments/black-neck-acanthosis-nigricans-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Chickenpox Scar Treatment",
+    "url": "/treatments/chickenpox-scar-treatment/",
+    "file": "treatments/chickenpox-scar-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Corn Removal Treatment",
+    "url": "/treatments/corn-removal-treatment/",
+    "file": "treatments/corn-removal-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Dark Circles & Under-Eye Treatment",
+    "url": "/treatments/dark-circles-under-eye-treatment/",
+    "file": "treatments/dark-circles-under-eye-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Dark Lips & Lip Pigmentation",
+    "url": "/treatments/dark-lips-treatment/",
+    "file": "treatments/dark-lips-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Freckles & Sun Spots Treatment",
+    "url": "/treatments/freckles-treatment/",
+    "file": "treatments/freckles-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Xanthelasma Treatment & Removal",
+    "url": "/treatments/xanthelasma-removal/",
+    "file": "treatments/xanthelasma-removal/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Keloid & Hypertrophic Scar Treatment",
+    "url": "/treatments/keloid-hypertrophic-scar-treatment/",
+    "file": "treatments/keloid-hypertrophic-scar-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Skin Cancer Screening",
+    "url": "/treatments/skin-cancer-screening/",
+    "file": "treatments/skin-cancer-screening/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "STI & STD Treatment",
+    "url": "/treatments/sti-std-treatment/",
+    "file": "treatments/sti-std-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "Sun Damage Treatment",
+    "url": "/treatments/sun-damage-treatment/",
+    "file": "treatments/sun-damage-treatment/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  },
+  {
+    "page_name": "White & Grey Hair Removal",
+    "url": "/treatments/white-hair-removal/",
+    "file": "treatments/white-hair-removal/index.html",
+    "status": "content-ready stub",
+    "robots": "noindex,follow",
+    "next_action": "insert exported visible copy and JSON-LD, medical review, QA, then switch to index,follow"
+  }
+]

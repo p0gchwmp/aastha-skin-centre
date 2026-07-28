@@ -1,0 +1,11 @@
+{
+  "implemented_indexable_pages": 12,
+  "medical_noindex_stubs": 52,
+  "shared_assets": [
+    "assets/css/styles.css",
+    "assets/js/site.js",
+    "content/page-registry.json"
+  ],
+  "appointment_workflow": "WhatsApp request; no server-side storage",
+  "production_domain": "https://www.aasthaskincentre.in"
+}

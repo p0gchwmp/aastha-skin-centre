@@ -1,0 +1,15 @@
+CLOUDFLARE REDIRECT RULE
+
+Rule name:
+Aastha alternate domains to primary
+
+Match:
+(http.host eq "aasthaskincentre.in") or
+(http.host eq "aasthaskincentre.com") or
+(http.host eq "www.aasthaskincentre.com")
+
+Dynamic destination:
+concat("https://www.aasthaskincentre.in", http.request.uri.path)
+
+Preserve query string: Yes
+Status code: 301

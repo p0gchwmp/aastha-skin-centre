@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: aastha-skin-centre-staging
+    runtime: static
+    plan: free
+    buildCommand: python3 scripts/build_static_dist.py
+    staticPublishPath: ./dist
+    autoDeployTrigger: checksPass
+    renderSubdomainPolicy: enabled
+
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=()
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=86400, stale-while-revalidate=604800
+
+    routes:
+      - type: redirect
+        source: /patient-concerns
+        destination: /conditions/
+      - type: redirect
+        source: /patient-concerns/*
+        destination: /conditions/*
+      - type: redirect
+        source: /treatments/botox-dermal-fillers
+        destination: /treatments/botulinum-toxin-dermal-fillers/
+      - type: redirect
+        source: /treatments/eczema-treatment
+        destination: /treatments/eczema-atopic-dermatitis-treatment/
+      - type: redirect
+        source: /treatments/black-neck-acanthosis-nigricans
+        destination: /treatments/black-neck-acanthosis-nigricans-treatment/

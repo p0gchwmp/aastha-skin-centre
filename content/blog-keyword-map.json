@@ -1,0 +1,479 @@
+[
+  {
+    "status": "planned",
+    "keyword": "dermatology treatments",
+    "aliases": "Treatments Overview",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "acne treatment",
+    "aliases": "Acne",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/acne-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "acne scar treatment",
+    "aliases": "Acne Scar",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/acne-scar-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "laser hair reduction",
+    "aliases": "Laser Hair Reduction",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/laser-hair-reduction/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "hair fall treatment",
+    "aliases": "Hair Fall",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/hair-fall-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "skin pigmentation treatment",
+    "aliases": "Pigmentation",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/pigmentation-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "melasma treatment",
+    "aliases": "Melasma",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/melasma-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "fungal infection treatment",
+    "aliases": "Fungal Infection",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/fungal-infection-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "skin allergy treatment",
+    "aliases": "Skin Allergy",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/skin-allergy-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "PRP GFC hair treatment",
+    "aliases": "PRP & GFC Hair",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/prp-gfc-hair-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "botulinum toxin and dermal fillers",
+    "aliases": "Botulinum Toxin & Dermal Fillers",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/botulinum-toxin-dermal-fillers/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "chemical peel",
+    "aliases": "Chemical Peels",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/chemical-peels/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "wart mole skin tag removal",
+    "aliases": "Wart, Mole & Skin Tag Removal",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/wart-mole-skin-tag-removal/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "ingrown toenail surgery",
+    "aliases": "Ingrown Toenail & Nail Surgery",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/ingrown-toenail-nail-surgery/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "cyst and lipoma removal",
+    "aliases": "Cyst & Lipoma Removal",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/cyst-lipoma-removal/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "skin biopsy",
+    "aliases": "Skin Biopsy",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/skin-biopsy/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "skin abscess drainage",
+    "aliases": "Skin Abscess & Incision and Drainage",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/skin-abscess-incision-drainage/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "HIFU and RF skin tightening",
+    "aliases": "HIFU & RF Skin Tightening",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/hifu-rf-skin-tightening/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "HIFU treatment",
+    "aliases": "HIFU",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/hifu-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "RF skin tightening",
+    "aliases": "RF Skin Tightening",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/rf-skin-tightening/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "cryolipolysis",
+    "aliases": "Cryolipolysis & Body Contouring",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/cryolipolysis-body-contouring/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "laser tattoo removal",
+    "aliases": "Laser Tattoo Removal",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/laser-tattoo-removal/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "Hydrafacial",
+    "aliases": "Hydrafacial & Medifacial",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/hydrafacial-medifacial/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "IPL photofacial",
+    "aliases": "IPL Photofacial",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/ipl-photofacial/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "MNRF treatment",
+    "aliases": "MNRF",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/mnrf-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "fractional CO2 laser",
+    "aliases": "Fractional CO2 Laser",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/fractional-co2-laser/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "Q-switched laser",
+    "aliases": "Q-Switched Laser & Laser Toning",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/q-switched-laser-toning/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "hair transplant",
+    "aliases": "Hair Transplant",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/hair-transplant/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "DPN removal",
+    "aliases": "DPN & Seborrhoeic Keratosis Removal",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/dpn-seborrheic-keratosis-removal/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "paediatric dermatologist",
+    "aliases": "Paediatric Dermatology",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/paediatric-dermatology/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "psoriasis treatment",
+    "aliases": "Psoriasis",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/psoriasis-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "rosacea treatment",
+    "aliases": "Rosacea",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/rosacea-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "scabies treatment",
+    "aliases": "Scabies",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/scabies-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "dandruff treatment",
+    "aliases": "Seborrhoeic Dermatitis & Dandruff",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/seborrheic-dermatitis-dandruff/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "vitiligo treatment",
+    "aliases": "Vitiligo",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/vitiligo-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "urticaria treatment",
+    "aliases": "Urticaria & Hives",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/urticaria-hives-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "eczema treatment",
+    "aliases": "Eczema & Atopic Dermatitis",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/eczema-atopic-dermatitis-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "contact dermatitis treatment",
+    "aliases": "Contact Dermatitis",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/contact-dermatitis-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "alopecia areata treatment",
+    "aliases": "Alopecia Areata",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/alopecia-areata-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "lichen planus treatment",
+    "aliases": "Lichen Planus",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/lichen-planus-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "molluscum treatment",
+    "aliases": "Molluscum Contagiosum",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/molluscum-contagiosum-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "black neck treatment",
+    "aliases": "Black Neck & Acanthosis Nigricans",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/black-neck-acanthosis-nigricans-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "chickenpox scar treatment",
+    "aliases": "Chickenpox Scar",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/chickenpox-scar-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "corn removal",
+    "aliases": "Corn Removal",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/corn-removal-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "dark circles treatment",
+    "aliases": "Dark Circles & Under-Eye",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/dark-circles-under-eye-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "dark lips treatment",
+    "aliases": "Dark Lips & Lip Pigmentation",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/dark-lips-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "freckles treatment",
+    "aliases": "Freckles & Sun Spots",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/freckles-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "xanthelasma removal",
+    "aliases": "Xanthelasma & Removal",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/xanthelasma-removal/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "keloid treatment",
+    "aliases": "Keloid & Hypertrophic Scar",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/keloid-hypertrophic-scar-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "skin cancer screening",
+    "aliases": "Skin Cancer Screening",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/skin-cancer-screening/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "STI treatment",
+    "aliases": "STI & STD",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/sti-std-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "sun damage treatment",
+    "aliases": "Sun Damage",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/sun-damage-treatment/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  },
+  {
+    "status": "planned",
+    "keyword": "white hair removal",
+    "aliases": "White & Grey Hair Removal",
+    "target_blog_url": "",
+    "source_static_page": "/treatments/white-hair-removal/",
+    "max_links_per_page": 1,
+    "notes": "Add the blog URL and change status to published after the article is live."
+  }
+]

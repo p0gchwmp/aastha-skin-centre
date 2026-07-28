@@ -1,0 +1,37 @@
+AASTHA BULK CONTENT IMPORT — SIMPLE STEPS
+
+YOU DO NOT NEED TO IMPORT PAGES ONE BY ONE.
+
+1. Put every exported DOCX and JSON-LD file anywhere inside:
+   content-drop
+
+2. Subfolders are allowed.
+   Example:
+   content-drop/Acne/
+   content-drop/Hair/
+   content-drop/Pigmentation/
+
+3. File order does not matter.
+
+4. The safest pairing method is the page URL:
+   - DOCX must contain its Recommended URL.
+   - JSON-LD must contain the same page URL.
+
+5. Matching file names are used only as a fallback.
+
+RECOMMENDED WORKFLOW
+
+A. Copy all 52 DOCX and JSON files into content-drop.
+B. Double-click: 1_Dry_Check_All_Content.bat
+C. Open the newest report in the reports folder.
+D. Fix any ERROR rows.
+E. Double-click: 2_Import_All_Content.bat
+F. Double-click: 3_Run_Website_QA.bat
+G. Double-click: 4_Preview_Website.bat
+
+SAFETY
+
+- Existing HTML pages are backed up automatically before import.
+- Duplicate files are reported rather than silently overwritten.
+- Pages are changed from noindex to index only after successful validation.
+- The sitemap is rebuilt after import.

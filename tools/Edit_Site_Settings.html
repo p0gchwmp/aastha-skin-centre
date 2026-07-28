@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="/assets/js/theme-init.js"></script>
+<title>Aastha Local Site Settings Editor</title>
+<style>
+:root{--b:#7b1e3a;--g:#d4af37;--cream:#fffaf0;--ink:#242124}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,var(--cream),#f7e9ee);font-family:Arial,sans-serif;color:var(--ink)}
+main{width:min(920px,calc(100% - 32px));margin:40px auto;background:white;border:1px solid #eadde1;border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(75,24,42,.13)}
+h1{color:var(--b)}fieldset{border:1px solid #e5d7dc;border-radius:16px;padding:20px;margin:18px 0}legend{font-weight:bold;color:var(--b);padding:0 8px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}label{display:flex;flex-direction:column;gap:6px;font-weight:bold}input{padding:11px;border:1px solid #d8c9ce;border-radius:10px}
+button{border:0;border-radius:999px;background:var(--b);color:white;padding:13px 18px;font-weight:bold;cursor:pointer}.note{background:#fff7d9;border-left:4px solid var(--g);padding:14px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<h1>Aastha Site Settings Editor</h1>
+<p class="note">This tool does not write directly to the website. It downloads a new <strong>site-config.json</strong>. Replace the file inside <code>assets/data</code>, then run <code>1_Apply_Global_Settings.bat</code>.</p>
+<form id="form">
+<fieldset><legend>Fee and contact</legend><div class="grid">
+<label>Consultation fee<input name="consultation_fee" type="number" value="500"></label>
+<label>Follow-up days<input name="follow_up_days" type="number" value="10"></label>
+<label>Primary mobile<input name="primary_mobile" value="7006613362"></label>
+<label>Secondary mobile<input name="secondary_mobile" value="9796676541"></label>
+<label>Email<input name="email" value="aasthaskinsurgs@gmail.com"></label>
+</div></fieldset>
+<fieldset><legend>Social profiles</legend><div class="grid">
+<label>Instagram<input name="instagram" value="https://www.instagram.com/aastha_skin_centre/"></label>
+<label>YouTube<input name="youtube" value="https://www.youtube.com/@aasthaskincentre"></label>
+</div></fieldset>
+<fieldset><legend>Google Maps</legend><div class="grid">
+<label>Karan Nagar map<input name="karan_map" value="https://maps.app.goo.gl/pHCQ1r4crKuZBSi98"></label>
+<label>Paloura map<input name="paloura_map" value="https://maps.app.goo.gl/kh4AqZoUkscpEgWc8"></label>
+</div></fieldset>
+<button type="submit">Download updated site-config.json</button>
+</form>
+<script>
+const base = {"version": 1, "last_updated": "2026-07-28", "clinic": {"name": "Aastha Skin & Dermato-Cosmetic Centre", "short_name": "Aastha Skin Centre", "email": "aasthaskinsurgs@gmail.com", "consultation_fee": 500, "currency_symbol": "₹", "follow_up_days": 10, "follow_up_included": true, "online_response": "30–60 minutes during clinic hours", "appointment_confirmation_text": "Submitting this form requests an appointment. Your appointment is confirmed only after the clinic contacts you.", "emergency_note": "Clinic phone numbers are not emergency-service numbers."}, "contact": {"primary_mobile": "7006613362", "secondary_mobile": "9796676541", "whatsapp_mobile": "7006613362"}, "social": {"instagram": "https://www.instagram.com/aastha_skin_centre/", "youtube": "https://www.youtube.com/@aasthaskincentre", "facebook": "https://www.facebook.com/"}, "locations": {"karan_nagar": {"name": "Karan Nagar", "address": "Lane 2, Karan Nagar, near Amphalla Chowk, Jammu, Jammu & Kashmir – 180005", "landline": "0191-3509230", "google_maps": "https://maps.app.goo.gl/pHCQ1r4crKuZBSi98", "reception_hours": "Mon–Sat 10:00 AM–8:00 PM · Sun 10:00 AM–3:00 PM", "doctor_hours": "Mon–Sat 11:00 AM–4:00 PM · Sun 11:00 AM–3:00 PM", "procedure_hours": "Mon–Sat 11:00 AM–8:00 PM · Sun 11:00 AM–3:00 PM"}, "paloura": {"name": "Paloura Chowk", "address": "Paloura Chowk, Top Paloura, opposite Government Senior Secondary School, Jammu, Jammu & Kashmir – 181121", "landline": "0191-3135864", "google_maps": "https://maps.app.goo.gl/kh4AqZoUkscpEgWc8", "reception_hours": "Mon–Sat 10:00 AM–8:00 PM · Sun 10:00 AM–2:00 PM", "doctor_hours": "Mon–Sat 6:00 PM–8:00 PM · Sun 10:30 AM–12:00 PM", "procedure_hours": "Mon–Sat 10:00 AM–8:00 PM · Sun 10:30 AM–12:00 PM"}}, "theme": {"default": "system", "allow_toggle": true}, "blog": {"enabled": true, "auto_link_max_per_keyword_per_page": 1, "exclude_paths": ["/blog/", "/privacy-policy/", "/terms-and-conditions/", "/medical-disclaimer/", "/book-appointment/", "/contact/"]}};
+document.querySelector("#form").addEventListener("submit",event=>{
+ event.preventDefault(); const d=new FormData(event.currentTarget);
+ const output=structuredClone(base);
+ output.last_updated=new Date().toISOString().slice(0,10);
+ output.clinic.consultation_fee=Number(d.get("consultation_fee"));
+ output.clinic.follow_up_days=Number(d.get("follow_up_days"));
+ output.clinic.email=d.get("email");
+ output.contact.primary_mobile=d.get("primary_mobile");
+ output.contact.secondary_mobile=d.get("secondary_mobile");
+ output.contact.whatsapp_mobile=d.get("primary_mobile");
+ output.social.instagram=d.get("instagram");
+ output.social.youtube=d.get("youtube");
+ output.locations.karan_nagar.google_maps=d.get("karan_map");
+ output.locations.paloura.google_maps=d.get("paloura_map");
+ const blob=new Blob([JSON.stringify(output,null,2)],{type:"application/json"});
+ const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="site-config.json"; a.click(); URL.revokeObjectURL(a.href);
+});
+</script></main></body></html>

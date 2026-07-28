@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+backups/
+reports/
+content-drop/
+schema-drop/
+dist/
+*.zip
+*.docx
+*.xlsx
+*.xls
