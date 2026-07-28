@@ -2,7 +2,6 @@ services:
   - type: web
     name: aastha-skin-centre-staging
     runtime: static
-    plan: free
     buildCommand: python3 scripts/build_static_dist.py
     staticPublishPath: ./dist
     autoDeployTrigger: checksPass
