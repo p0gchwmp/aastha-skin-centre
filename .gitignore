@@ -1,12 +1,36 @@
+# Python and local environments
 .venv/
 __pycache__/
 *.pyc
+*.pyo
+
+# Local working data
 backups/
 reports/
 content-drop/
 schema-drop/
 dist/
-*.zip
+_project-docs/
+_legacy-tools/
+tools/
+deployment/
+
+# Local Windows helper files
+*.bat
+
+# Source exports and archives
 *.docx
 *.xlsx
 *.xls
+*.zip
+*.log
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# One-time repository cleanup helper
+_cleanup-files/
+Clean_GitHub_Repository.ps1
+Clean_GitHub_Repository.bat

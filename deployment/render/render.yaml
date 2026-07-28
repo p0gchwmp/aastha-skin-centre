@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: aastha-skin-centre
-    runtime: static
-    buildCommand: ""
-    staticPublishPath: .
