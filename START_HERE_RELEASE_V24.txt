@@ -1,0 +1,21 @@
+AASTHA PROFESSIONAL RELEASE V24
+
+This release was rebuilt from the latest source ZIP supplied on 29 July 2026.
+
+MAIN IMPROVEMENTS
+- Conditions and Treatments now render as clean linked card directories.
+- The doctor profile is concise and patient-facing instead of an SEO/CV dump.
+- Both clinic pages are concise, with address, timings, services, visit guidance and FAQs.
+- Appointment, Contact, About and Blog remain the redesigned concise versions.
+- Treatment pages keep useful clinical detail but move secondary sections into expanders.
+- Buttons and labels use sentence case.
+- Dark mode has explicit contrast rules for every home section, directory card, clinic card and CTA.
+- Blog route is supported at both /blog and /blog/.
+- Old patch runners and unused CSS/JS layers were removed from this release source.
+
+APPLY
+1. Keep a backup of the current repository.
+2. Extract this ZIP into a new folder and preview it first.
+3. Run 30_Verify_Professional_Release_v24.bat.
+4. Run 31_Preview_Professional_Release_v24.bat.
+5. After approval, replace the current repository contents with this release and push through GitHub Desktop.

@@ -29,6 +29,9 @@ services:
 
     routes:
       - type: redirect
+        source: /blog
+        destination: /blog/
+      - type: redirect
         source: /patient-concerns
         destination: /conditions/
       - type: redirect

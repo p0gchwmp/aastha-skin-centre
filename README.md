@@ -1,46 +1,39 @@
-# Aastha Skin & Dermato-Cosmetic Centre
+# Aastha Skin & Dermato-Cosmetic Centre — Professional Release v24
 
-Static website source for **Aastha Skin & Dermato-Cosmetic Centre, Jammu**.
+This folder is the cleaned, patient-facing static website source.
 
-## Technology
+## What changed
 
-- Semantic HTML
-- Shared CSS and JavaScript
-- Static page generation and validation with Python
-- Render static-site deployment
-- GitHub Actions quality checks
+- Concise appointment, contact, about, doctor and location pages
+- Card-based Conditions and Treatments directories with working links
+- Working Blog directory and `/blog` → `/blog/` redirect
+- Consistent sentence-case labels and CTAs
+- Proper lists instead of loose text runs
+- Long treatment details grouped into optional expandable sections
+- High-contrast light and dark themes
+- Responsive desktop and mobile layouts
+- Staging remains `noindex` until a production domain is connected
 
-## Local verification
+## Verify locally
 
-Run the local control menu:
+Run:
 
 ```text
-Aastha_Tools.bat
+30_Verify_Professional_Release_v24.bat
 ```
 
-The Windows BAT files are intentionally kept out of GitHub. They remain available in the local working folder.
+Then run:
+
+```text
+31_Preview_Professional_Release_v24.bat
+```
 
 ## Deployment
 
-Render uses:
+Render builds with:
 
 ```text
-Build command: python3 scripts/build_static_dist.py
-Publish directory: dist
+python3 scripts/build_static_dist.py
 ```
 
-The build script creates a clean public folder and excludes local reports, backups, DOCX exports, schema working files and development tools.
-
-## Primary domain
-
-The production canonical domain is:
-
-```text
-https://www.aasthaskincentre.in/
-```
-
-The `.com` domain, when registered, should permanently redirect to the matching `.in` URL.
-
-## Medical review
-
-Medical pages must be reviewed before production publication. Website information does not replace an individual medical consultation.
+and publishes `dist`.

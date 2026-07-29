@@ -1,0 +1,34 @@
+AASTHA PROFESSIONAL WEBSITE RELEASE V24 — QA SUMMARY
+
+Built from the latest source package supplied on 29 July 2026.
+
+STRUCTURE
+- Source HTML pages: 68
+- Public HTML pages built in dist: 67
+- Unpublished blog template included in dist: No
+- Blog page included in source and dist: Yes
+- /blog to /blog/ redirect present in render.yaml: Yes
+
+AUTOMATED CHECKS
+- Website QA errors: 0
+- Website QA warnings: 0
+- Predeployment errors: 0
+- Broken internal links: 0
+- Missing referenced assets: 0
+- Visible editorial/development labels found: 0
+
+DESIGN REVIEW
+- Light theme reviewed on Home, Conditions, Treatments, Acne, About, Contact,
+  Appointment, Blog, Doctor and Karan Nagar pages.
+- Dark theme reviewed on the same representative pages.
+- Mobile layouts reviewed on Home, Acne, Appointment and Blog.
+
+MAJOR RELEASE CHANGES
+- Conditions and Treatments are now linked card directories.
+- Doctor profile and both branch pages were rewritten as concise patient-facing pages.
+- Appointment and Contact pages use real forms/cards instead of authoring instructions.
+- Blog is a working guide directory with no public template instructions.
+- Treatment pages use structured lists, compact navigation and expandable detail areas.
+- Buttons and labels use sentence case.
+- Dark-mode contrast was standardised across headers, sections, cards, clinic details,
+  forms, calls to action and footers.
