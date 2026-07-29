@@ -1,9 +1,11 @@
-# Aastha Skin & Dermato-Cosmetic Centre — Professional Release v25
+# Aastha Skin & Dermato-Cosmetic Centre — Professional Release v26
 
 This folder is the cleaned, patient-facing static website source.
 
 ## What changed
 
+- Automatic content-hashed CSS and JavaScript URLs prevent stale Render/browser assets after deployment
+- Corrected the repeated spacing defect before “How care is planned” on long treatment pages
 - Site-wide dark-mode contrast fixes for FAQs, article cards, lists and sidebars
 - Responsive long-page grid fixes to prevent clipped consultation cards
 - Restrained typography and spacing inside imported expandable content
@@ -26,13 +28,13 @@ This folder is the cleaned, patient-facing static website source.
 Run:
 
 ```text
-30_Verify_Professional_Release_v24.bat
+30_Verify_Professional_Release_v26.bat
 ```
 
 Then run:
 
 ```text
-31_Preview_Professional_Release_v24.bat
+31_Preview_Professional_Release_v26.bat
 ```
 
 ## Deployment

@@ -1112,6 +1112,15 @@ html[data-theme="dark"] .release-v24 .home-cta p { color: #fff !important; }
 .release-v24 .deep-dive-body .article-section:first-child { padding-top: 12px !important; }
 .release-v24 .deep-dive-body .article-section:last-child { padding-bottom: 0 !important; }
 
+/*
+ * A disclosure is not an .article-section, so the normal adjacent-section
+ * spacing rule does not apply when "How care is planned" follows it.
+ * Restore the same deliberate visual break on every long treatment page.
+ */
+.release-v24 .article-stack > .deep-dive + .article-section {
+  padding-top: clamp(40px, 4.5vw, 52px);
+}
+
 /* Ensure long words, addresses and links never force horizontal overflow. */
 .release-v24 .content-layout,
 .release-v24 .article-stack,
@@ -1213,4 +1222,5 @@ html[data-theme="dark"] .release-v24 .faq-item button {
   .release-v24 .deep-dive > summary { padding: 17px 48px 17px 17px; font-size: 1.08rem; }
   .release-v24 .deep-dive-body { padding: 2px 17px 20px; }
   .release-v24 .deep-dive-body .article-section h2 { font-size: 1.38rem !important; }
+  .release-v24 .article-stack > .deep-dive + .article-section { padding-top: 34px; }
 }

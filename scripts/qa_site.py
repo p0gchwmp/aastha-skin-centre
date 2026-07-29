@@ -68,8 +68,19 @@ def main() -> int:
     canonicals = defaultdict(list)
     indexable_urls = set()
 
+    excluded_parts = {
+        ".venv",
+        "backups",
+        "content-drop",
+        "dist",
+        "reports",
+        "schema-drop",
+        "scripts",
+        "tools",
+    }
+
     for path in sorted(SITE_ROOT.rglob("*.html")):
-        if any(part in {"backups", "reports", "content-drop"} for part in path.parts):
+        if any(part in excluded_parts for part in path.parts):
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         rel = str(path.relative_to(SITE_ROOT)).replace("\\", "/")

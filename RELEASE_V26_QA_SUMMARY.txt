@@ -1,0 +1,32 @@
+AASTHA PROFESSIONAL WEBSITE RELEASE V26 — QA SUMMARY
+
+BASELINE
+- Supersedes professional release v25.
+- Repository commit diagnosed: 7d2ea31f051517b5edad9966c09758035b864527.
+- Render was confirmed to deploy that same commit from main.
+
+ROOT CAUSE CORRECTED
+- The v25 stylesheet changed without changing its public URL.
+- Render cached /assets/ for 24 hours, so the live site could reuse older CSS.
+- The deployment builder now creates content-hashed CSS and JavaScript files
+  and updates every built HTML reference automatically.
+
+SITE-WIDE VISUAL CORRECTION
+- Added consistent separation when an expandable guidance panel is followed
+  by a normal article section such as "How care is planned".
+- The shared selector covers 49 treatment pages with this HTML pattern.
+
+AUTOMATED VERIFICATION
+- Source QA errors: 0
+- Source QA warnings: 0
+- Predeployment errors: 0
+- Predeployment warnings: 0
+- Public HTML pages built: 67
+- Indexable URLs in sitemap: 65
+- Content-hashed CSS/JS references checked: 469
+- Missing versioned assets: 0
+- Unversioned built CSS/JS references: 0
+
+QA SCRIPT HARDENING
+- Source QA now excludes generated dist files, preventing false duplicate
+  canonical errors when QA is run after a local build.

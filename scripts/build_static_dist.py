@@ -10,6 +10,7 @@ This version is Windows-safe:
 
 from __future__ import annotations
 
+import hashlib
 import shutil
 import sys
 from pathlib import Path
@@ -71,6 +72,7 @@ EXCLUDED_SUFFIXES = {
     ".zip",
 }
 
+
 def ignore_public(path, names):
     """
     shutil.copytree passes `path` as a string on Windows.
@@ -90,6 +92,58 @@ def ignore_public(path, names):
             ignored.add(name)
 
     return ignored
+
+
+def add_content_hashed_asset_urls() -> tuple[int, int]:
+    """
+    Copy public CSS/JS files to content-hashed names and point built HTML at
+    those unique URLs.
+
+    Render and browsers may legitimately cache /assets/ responses. A new URL
+    for every changed asset prevents an older stylesheet or script from being
+    reused after a deployment while preserving efficient caching.
+    """
+    assets_root = DIST / "assets"
+    if not assets_root.exists():
+        return 0, 0
+
+    versioned_urls: dict[str, str] = {}
+    source_assets = sorted(
+        path
+        for path in assets_root.rglob("*")
+        if path.is_file() and path.suffix.lower() in {".css", ".js"}
+    )
+
+    for source in source_assets:
+        digest = hashlib.sha256(source.read_bytes()).hexdigest()[:12]
+        versioned_name = f"{source.stem}.{digest}{source.suffix}"
+        versioned_path = source.with_name(versioned_name)
+        shutil.copy2(source, versioned_path)
+
+        original_url = "/" + source.relative_to(DIST).as_posix()
+        versioned_urls[original_url] = "/" + versioned_path.relative_to(DIST).as_posix()
+
+    changed_pages = 0
+    changed_references = 0
+    for page in sorted(DIST.rglob("*.html")):
+        original = page.read_text(encoding="utf-8")
+        updated = original
+
+        for original_url, versioned_url in versioned_urls.items():
+            for quote in ('"', "'"):
+                needle = f"{quote}{original_url}{quote}"
+                replacement = f"{quote}{versioned_url}{quote}"
+                occurrences = updated.count(needle)
+                if occurrences:
+                    updated = updated.replace(needle, replacement)
+                    changed_references += occurrences
+
+        if updated != original:
+            page.write_text(updated, encoding="utf-8")
+            changed_pages += 1
+
+    return changed_pages, changed_references
+
 
 def main() -> int:
     try:
@@ -124,6 +178,10 @@ def main() -> int:
         if template.exists():
             shutil.rmtree(template)
 
+        versioned_pages, versioned_references = add_content_hashed_asset_urls()
+        if versioned_references == 0:
+            raise RuntimeError("No CSS or JavaScript references were versioned.")
+
         # Basic build verification.
         required = [
             DIST / "index.html",
@@ -141,6 +199,10 @@ def main() -> int:
         print(f"Deployment folder created successfully: {DIST}")
         print(f"Public roots copied: {len(copied)}")
         print(f"HTML pages in dist: {html_count}")
+        print(
+            "Content-hashed asset references: "
+            f"{versioned_references} across {versioned_pages} HTML pages"
+        )
         return 0
 
     except Exception as exc:

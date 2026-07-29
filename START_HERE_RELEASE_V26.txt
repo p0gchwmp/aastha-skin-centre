@@ -1,0 +1,29 @@
+AASTHA PROFESSIONAL RELEASE V26
+
+This release supersedes v25.
+
+WHY V26 IS REQUIRED
+- Render deployed the correct v25 commit, but the changed stylesheet retained
+  the old /assets/css/release-v24.css URL.
+- Render was configured to cache /assets/ responses for 24 hours, so the live
+  site could display stale v24 CSS while localhost displayed the corrected CSS.
+- The v26 build creates content-hashed CSS and JavaScript filenames
+  automatically. Any future asset change therefore receives a new URL.
+- A shared spacing rule now adds a clear visual break before
+  "How care is planned" wherever it follows an expandable guidance panel.
+
+VERIFY AND PREVIEW
+1. Extract this ZIP into a new folder.
+2. Run 30_Verify_Professional_Release_v26.bat.
+3. Run 31_Preview_Professional_Release_v26.bat.
+4. Confirm the corrected spacing and dark-mode text locally.
+
+DEPLOY
+1. Replace the current repository contents with this release.
+2. Commit and push the source files to the main branch.
+3. Wait for Render to deploy the new commit.
+4. Open the Render staging URL in an incognito window.
+5. Confirm that page source references hashed assets such as:
+   /assets/css/release-v24.<12-character-hash>.css
+
+Keep staging noindex enabled until final clinic approval.
