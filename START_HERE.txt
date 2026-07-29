@@ -1,0 +1,43 @@
+AASTHA GITHUB REPOSITORY CLEANUP V10
+
+The repository is uploaded correctly, but GitHub currently shows local Windows
+BAT files, reports and working tools that do not belong in the remote source.
+
+WHAT THIS CLEANUP DOES
+
+- Keeps all local BAT files on your computer.
+- Removes those BAT files from GitHub tracking.
+- Removes backups, reports, DOCX imports, schema working files, dist and other
+  local folders from GitHub tracking.
+- Keeps the real website source:
+  HTML pages, assets, scripts, .github, render.yaml, sitemap and robots.
+- Adds a clean README.md.
+- Replaces render.yaml with the staging-safe Render configuration.
+- Commits and pushes the cleanup to the main branch.
+
+HOW TO RUN
+
+1. Extract this ZIP.
+2. Copy the COMPLETE extracted contents into the local repository folder opened
+   through GitHub Desktop:
+       Repository > Show in Explorer
+3. Run:
+       Clean_GitHub_Repository.bat
+4. Wait for:
+       SUCCESS: Repository cleanup was pushed to GitHub.
+5. Refresh the GitHub website.
+
+The cleanup removes files only from Git tracking. Your local BAT files, reports,
+backups and working folders remain on the computer.
+
+RENDER CONNECTION AFTER CLEANUP
+
+1. Sign in at Render.
+2. Choose New > Blueprint.
+3. Choose GitHub and authorise Render.
+4. Grant access to the private aastha-skin-centre repository.
+5. Select the repository.
+6. Render detects render.yaml at the repository root.
+7. Choose Deploy Blueprint.
+8. Keep the temporary onrender.com address for staging.
+9. Do not connect the .in domain yet.

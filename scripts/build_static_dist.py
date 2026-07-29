@@ -11,6 +11,8 @@ This version is Windows-safe:
 from __future__ import annotations
 
 import hashlib
+import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -145,6 +147,92 @@ def add_content_hashed_asset_urls() -> tuple[int, int]:
     return changed_pages, changed_references
 
 
+def apply_global_config_to_dist() -> tuple[int, int]:
+    """Render clinic-wide facts from one JSON file into every built page.
+
+    Source pages intentionally retain the reviewed baseline values. The
+    deployment build replaces those values from site-config.json, so changing
+    the consultation fee, follow-up period, phone numbers, addresses, maps or
+    clinic hours once updates every public HTML page and JSON-LD block.
+    """
+    config_path = DIST / "assets" / "data" / "site-config.json"
+    if not config_path.exists():
+        raise RuntimeError("Missing assets/data/site-config.json")
+
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    clinic = config["clinic"]
+    contact = config["contact"]
+    locations = config["locations"]
+    fee = f'{clinic["currency_symbol"]}{clinic["consultation_fee"]}'
+    days = str(clinic["follow_up_days"])
+    whatsapp_digits = re.sub(r"\D", "", contact["whatsapp_mobile"])[-10:]
+
+    replacements = [
+        (
+            r"https://wa[.]me/(?:91)?7006613362",
+            f"https://wa.me/91{whatsapp_digits}",
+        ),
+        (r"₹\s*500\b", fee),
+        (r"\bwithin\s+10\s+days\b", f"within {days} days"),
+        (r"\b10-day\b", f"{days}-day"),
+        (r"\bten-day\b", f"{days}-day"),
+        (r"7006613362", contact["primary_mobile"]),
+        (r"9796676541", contact["secondary_mobile"]),
+        (
+            re.escape("aasthaskinsurgs@gmail.com"),
+            clinic["email"],
+        ),
+        (r"0191-3509230", locations["karan_nagar"]["landline"]),
+        (r"0191-3135864", locations["paloura"]["landline"]),
+        (
+            re.escape("https://maps.app.goo.gl/pHCQ1r4crKuZBSi98"),
+            locations["karan_nagar"]["google_maps"],
+        ),
+        (
+            re.escape("https://maps.app.goo.gl/kh4AqZoUkscpEgWc8"),
+            locations["paloura"]["google_maps"],
+        ),
+        (
+            re.escape(
+                "Lane 2, Karan Nagar, near Amphalla Chowk, Jammu, "
+                "Jammu & Kashmir – 180005"
+            ),
+            locations["karan_nagar"]["address"],
+        ),
+        (
+            re.escape(
+                "Paloura Chowk, Top Paloura, opposite Government Senior "
+                "Secondary School, Jammu, Jammu & Kashmir – 181121"
+            ),
+            locations["paloura"]["address"],
+        ),
+        (
+            re.escape("Mon–Sat 11:00 AM–4:00 PM · Sun 11:00 AM–3:00 PM"),
+            locations["karan_nagar"]["doctor_hours"],
+        ),
+        (
+            re.escape("Mon–Sat 6:00 PM–8:00 PM · Sun 10:30 AM–12:00 PM"),
+            locations["paloura"]["doctor_hours"],
+        ),
+    ]
+
+    matched_pages = 0
+    matched_values = 0
+    for page in sorted(DIST.rglob("*.html")):
+        before = page.read_text(encoding="utf-8")
+        after = before
+        page_matches = 0
+        for pattern, replacement in replacements:
+            after, count = re.subn(pattern, str(replacement), after, flags=re.I)
+            page_matches += count
+            matched_values += count
+        if after != before:
+            page.write_text(after, encoding="utf-8")
+        if page_matches:
+            matched_pages += 1
+    return matched_pages, matched_values
+
+
 def main() -> int:
     try:
         if DIST.exists():
@@ -178,6 +266,7 @@ def main() -> int:
         if template.exists():
             shutil.rmtree(template)
 
+        global_pages, global_values = apply_global_config_to_dist()
         versioned_pages, versioned_references = add_content_hashed_asset_urls()
         if versioned_references == 0:
             raise RuntimeError("No CSS or JavaScript references were versioned.")
@@ -202,6 +291,10 @@ def main() -> int:
         print(
             "Content-hashed asset references: "
             f"{versioned_references} across {versioned_pages} HTML pages"
+        )
+        print(
+            "Global clinic references resolved: "
+            f"{global_values} matches across {global_pages} HTML pages"
         )
         return 0
 

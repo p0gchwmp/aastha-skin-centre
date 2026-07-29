@@ -1,0 +1,29 @@
+AASTHA PROFESSIONAL RELEASE V27
+
+This release supersedes v26 and all earlier patch packages.
+
+WHY V27 IS REQUIRED
+- The v24 page rebuild retained only the first paragraph of many FAQ answers.
+- Several long pages repeated clinic addresses, timings, contact details and
+  unstyled telephone links inside the clinical content.
+- List introductions and related-page titles were sometimes rendered as loose
+  or incorrect content.
+- The previous link/build QA could not detect these visual-content defects.
+
+VERIFY AND PREVIEW
+1. Extract this ZIP into a new folder.
+2. Run 30_Verify_Professional_Release_v27.bat.
+3. Wait for:
+   SUCCESS: Professional release v27 passed all QA and dist was rebuilt.
+4. Run 31_Preview_Professional_Release_v27.bat.
+5. Test light and dark mode at desktop and mobile widths.
+
+DEPLOY
+1. Copy the complete v27 contents into the local GitHub repository.
+2. Commit and push to the main branch.
+3. Confirm Render deploys that exact commit.
+4. Open the Render staging URL in an incognito window.
+5. Confirm page source uses hashed assets such as:
+   /assets/css/release-v24.<12-character-hash>.css
+
+Keep staging noindex enabled until medical and operational approval is complete.

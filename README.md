@@ -1,48 +1,37 @@
-# Aastha Skin & Dermato-Cosmetic Centre — Professional Release v26
+# Aastha Skin Centre — static release v28
 
-This folder is the cleaned, patient-facing static website source.
+See `RELEASE_NOTES_V28.md` for the exact fixes, totals and deployment scope.
 
-## What changed
+This is the drop-in update for the existing Render Static Site.
 
-- Automatic content-hashed CSS and JavaScript URLs prevent stale Render/browser assets after deployment
-- Corrected the repeated spacing defect before “How care is planned” on long treatment pages
-- Site-wide dark-mode contrast fixes for FAQs, article cards, lists and sidebars
-- Responsive long-page grid fixes to prevent clipped consultation cards
-- Restrained typography and spacing inside imported expandable content
-- Empty heading-only sections removed across treatment pages
-- Patient-facing HIFU versus RF comparison page completed
-- Visible legal drafting notes removed
-- Unique social descriptions plus Open Graph image and Twitter card metadata
-- Concise appointment, contact, about, doctor and location pages
-- Card-based Conditions and Treatments directories with working links
-- Working Blog directory and `/blog` → `/blog/` redirect
-- Consistent sentence-case labels and CTAs
-- Proper lists instead of loose text runs
-- Long treatment details grouped into optional expandable sections
-- High-contrast light and dark themes
-- Responsive desktop and mobile layouts
-- Staging remains `noindex` until a production domain is connected
+## V28 corrections
 
-## Verify locally
+- Blackheads, whiteheads and the other acne signs now open meaningful dedicated guides or the relevant scar page instead of reopening the Acne page.
+- Added ten complete blog guides and rebuilt the Blog directory around real article pages.
+- Removed all main-content self-links found by the release audit.
+- Removed repeated “Dr. Cheena Langer’s timings” blocks and internal verification-file wording.
+- Normalised all 52 clinical pages to one care block, one clinic block, one FAQ section, one final CTA and one disclaimer.
+- Added a build-time global clinic configuration layer for consultation fee, follow-up period, phone numbers, addresses, maps and hours.
+- Added v28 content-graph QA for self-links, duplicate timings, internal notes, broken destinations and global facts.
+- Retains the v27 FAQ recovery, content integrity, cache-busting, responsive layout and dark-mode fixes.
+
+## Verify and preview on Windows
 
 Run:
 
 ```text
-30_Verify_Professional_Release_v26.bat
+30_Verify_Professional_Release_v28.bat
+31_Preview_Professional_Release_v28.bat
 ```
 
-Then run:
+The deployable output is rebuilt in `dist/`.
 
-```text
-31_Preview_Professional_Release_v26.bat
-```
+## Existing Render Static Site
 
-## Deployment
+- Build command: `python3 scripts/build_static_dist.py`
+- Publish directory: `dist`
+- Staging remains protected with `noindex, nofollow`
 
-Render builds with:
-
-```text
-python3 scripts/build_static_dist.py
-```
-
-and publishes `dist`.
+For visual page editing, new doctors/clinics, drag-and-drop sections, uploaded
+media, revisions and global changes from an admin screen, use the separate
+`aastha-skin-centre-cms-v28` release.

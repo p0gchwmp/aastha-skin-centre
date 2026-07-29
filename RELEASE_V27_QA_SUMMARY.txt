@@ -1,0 +1,38 @@
+AASTHA PROFESSIONAL WEBSITE RELEASE V27 — QA SUMMARY
+
+BASELINE
+- Supersedes professional release v26.
+- Built from GitHub main commit e53b93588d3df9350c49c67dad34700cd4c6f87f.
+
+SITE-WIDE CONTENT AND VISUAL CORRECTIONS
+- Restored 319 complete FAQ answers from the last complete source.
+- Retained 6 complete HIFU/RF comparison FAQs.
+- Promoted 20 existing practical-care sections into standard FAQs on four pages.
+- Final total: 345 complete FAQs across 52 clinical detail pages.
+- Replaced 36 raw telephone CTAs with structured appointment panels.
+- Removed 535 duplicated clinic/contact/timing lines from long disclosures.
+- Corrected 65 list-introduction hierarchy defects.
+- Converted 6 orphaned treatment titles into accessible related-care links.
+- Repaired 20 duplicate HTML ids and removed 6 adjacent duplicate paragraphs.
+- Standardised the HIFU/RF care and clinic components.
+
+PERMANENT QA COVERAGE
+- New content-integrity QA checks complete FAQs, list structure, raw phone
+  paragraphs, duplicate ids, duplicate text and required shared components.
+- GitHub Actions runs page QA, content-integrity QA, predeployment QA, the
+  clean build and built-asset verification on every push and pull request.
+
+AUTOMATED VERIFICATION
+- Source QA errors: 0
+- Source QA warnings: 0
+- Content-integrity errors: 0
+- Predeployment errors: 0
+- Predeployment warnings: 0
+- Source HTML pages checked: 68
+- Public HTML pages built: 67
+- Content-hashed CSS/JS references: 469
+- Missing or unversioned built assets: 0
+- Duplicate HTML ids: 0
+- Empty headings, links and sections: 0
+- Bare phone-number paragraphs: 0
+- Visible editorial markers: 0

@@ -1224,3 +1224,210 @@ html[data-theme="dark"] .release-v24 .faq-item button {
   .release-v24 .deep-dive-body .article-section h2 { font-size: 1.38rem !important; }
   .release-v24 .article-stack > .deep-dive + .article-section { padding-top: 34px; }
 }
+
+/* =====================================================================
+   Release v27 content-integrity and long-page rhythm
+   Complete FAQ content, semantic list leads and deliberate inline CTAs.
+   ===================================================================== */
+
+/* Imported list introductions belong above the bullets, not inside them. */
+.release-v24 .list-lead {
+  max-width: 750px;
+  margin: 15px 0 8px;
+  color: var(--r23-ink);
+  font-size: .98rem;
+  font-weight: 680;
+  line-height: 1.55;
+}
+.release-v24 .list-lead + .clean-list { margin-top: 8px; }
+
+/* A purposeful action panel replaces the former heading + raw numbers. */
+.release-v24 .deep-dive-cta {
+  margin: 7px 0 2px;
+  padding: clamp(19px, 3vw, 27px);
+  border: 1px solid #dbc1cc;
+  border-left: 4px solid var(--r23-burgundy);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fff 0%, #fff8fb 100%);
+  box-shadow: 0 10px 28px rgba(80, 28, 49, .08);
+}
+.release-v24 .deep-dive-cta .quiet-label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--r23-burgundy);
+}
+.release-v24 .deep-dive-cta h3 {
+  max-width: 680px;
+  margin: 0 0 9px !important;
+  color: var(--r23-ink);
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(1.25rem, 2.15vw, 1.58rem) !important;
+  font-weight: 750;
+  line-height: 1.28 !important;
+  text-wrap: balance;
+}
+.release-v24 .deep-dive-cta p {
+  margin: 0;
+  color: var(--r23-text);
+  font-size: .96rem;
+  line-height: 1.6;
+}
+.release-v24 .deep-dive-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 13px;
+  margin-top: 17px;
+}
+.release-v24 .deep-dive-actions .button {
+  min-height: 43px;
+  padding: 10px 16px;
+  font-size: .88rem;
+}
+.release-v24 .deep-dive-actions .plain-link {
+  padding: 9px 2px;
+  color: var(--r23-burgundy);
+  font-size: .9rem;
+  font-weight: 750;
+}
+
+/* Related pages that arrived as orphaned plain text are now real links. */
+.release-v24 .related-care-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  max-width: 750px;
+  margin: 20px 0 6px;
+  padding: 13px 15px;
+  border: 1px solid var(--r23-line);
+  border-radius: 13px;
+  background: var(--r23-soft);
+}
+.release-v24 .related-care-links .quiet-label { margin-right: 2px; }
+.release-v24 .related-care-links a {
+  padding: 6px 10px;
+  border: 1px solid #dfc5d0;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--r23-burgundy);
+  font-size: .84rem;
+  font-weight: 720;
+  line-height: 1.35;
+}
+
+/* Restored FAQ answers contain paragraphs, lists and occasional subheads. */
+.release-v24 .faq-clean-list summary {
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.release-v24 .faq-clean-list details[open] summary {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--r23-line);
+}
+.release-v24 .faq-answer {
+  padding: 17px 18px 20px;
+}
+.release-v24 .faq-answer p {
+  max-width: 760px;
+  margin: 0;
+  font-size: .94rem;
+  line-height: 1.65;
+}
+.release-v24 .faq-answer > * + * { margin-top: 12px; }
+.release-v24 .faq-answer .clean-list {
+  gap: 7px;
+  margin: 12px 0 1px;
+}
+.release-v24 .faq-answer .clean-list li {
+  padding-left: 20px;
+  font-size: .92rem;
+  line-height: 1.52;
+}
+.release-v24 .faq-answer .clean-list li::before {
+  left: 2px;
+  top: .65em;
+  width: 6px;
+  height: 6px;
+  box-shadow: 0 0 0 3px rgba(205,168,66,.12);
+}
+.release-v24 .faq-answer .faq-answer-heading {
+  margin: 18px 0 7px !important;
+  color: var(--r23-ink);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: .98rem !important;
+  font-weight: 780;
+  line-height: 1.4 !important;
+}
+
+/* Give the standard care block an unmistakable break after disclosures. */
+.release-v24 .article-stack > .deep-dive + .care-principles {
+  margin-top: clamp(15px, 2vw, 22px);
+}
+
+/* Link contrast must remain clear against dark cards and disclosures. */
+html[data-theme="dark"] .release-v24 .list-lead,
+html[data-theme="dark"] .release-v24 .deep-dive-cta h3,
+html[data-theme="dark"] .release-v24 .faq-answer .faq-answer-heading {
+  color: #fff8fb !important;
+}
+html[data-theme="dark"] .release-v24 .deep-dive-cta {
+  border-color: #684052;
+  border-left-color: #e287aa;
+  background: linear-gradient(135deg, #21161b 0%, #261720 100%);
+  box-shadow: none;
+}
+html[data-theme="dark"] .release-v24 .deep-dive-cta p {
+  color: #e3d4dc !important;
+}
+html[data-theme="dark"] .release-v24 .deep-dive-cta .quiet-label {
+  color: #f0d985 !important;
+}
+html[data-theme="dark"] .release-v24 .deep-dive-actions .plain-link,
+html[data-theme="dark"] .release-v24 .faq-answer a,
+html[data-theme="dark"] .release-v24 .related-care-links a,
+html[data-theme="dark"] .release-v24 .clean-list li a {
+  color: #f5abc6 !important;
+}
+html[data-theme="dark"] .release-v24 .related-care-links {
+  border-color: #4c303d;
+  background: #1b1217;
+}
+html[data-theme="dark"] .release-v24 .related-care-links a {
+  border-color: #684052;
+  background: #25171e;
+}
+html[data-theme="dark"] .release-v24 .faq-clean-list details[open] summary {
+  border-bottom-color: #4c303d;
+}
+
+@media (max-width: 700px) {
+  .release-v24 .deep-dive-cta { padding: 18px 16px; }
+  .release-v24 .deep-dive-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .release-v24 .deep-dive-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+  .release-v24 .deep-dive-actions .plain-link { text-align: center; }
+  .release-v24 .related-care-links {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .release-v24 .related-care-links .quiet-label { margin-bottom: 2px; }
+  .release-v24 .related-care-links a { text-align: center; }
+  .release-v24 .faq-answer { padding: 15px 16px 18px; }
+  .release-v24 .article-stack > .deep-dive + .care-principles { margin-top: 12px; }
+}
+
+@media print {
+  .release-v24 .deep-dive-cta {
+    border: 1px solid #bbb;
+    border-left: 4px solid #555;
+    background: #fff !important;
+    box-shadow: none;
+  }
+  .release-v24 .deep-dive-actions { display: none; }
+}

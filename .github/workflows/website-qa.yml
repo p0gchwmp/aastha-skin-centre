@@ -25,11 +25,17 @@ jobs:
       - name: Run page QA
         run: python scripts/qa_site.py
 
+      - name: Run content-integrity QA
+        run: python scripts/qa_content_integrity.py
+
       - name: Run predeployment check
         run: python scripts/predeploy_check.py
 
       - name: Build clean static deployment folder
         run: python scripts/build_static_dist.py
+
+      - name: Verify built asset integrity
+        run: python scripts/verify_dist_assets.py
 
       - name: Upload deployment build
         uses: actions/upload-artifact@v4

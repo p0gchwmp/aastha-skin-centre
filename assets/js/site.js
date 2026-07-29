@@ -377,47 +377,11 @@
     });
   }
 
-  function setupAppointmentForm(config) {
-    const form = document.querySelector("[data-appointment-form]");
-    if (!form) return;
-    const phoneInput = form.querySelector("[name='mobile']");
-    phoneInput?.addEventListener("input", () => {
-      phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 10);
-    });
-
-    form.addEventListener("submit", event => {
-      event.preventDefault();
-      const data = new FormData(form);
-      const mobile = String(data.get("mobile") || "");
-      if (!/^\d{10}$/.test(mobile)) {
-        alert("Please enter a valid 10-digit mobile number.");
-        phoneInput?.focus();
-        return;
-      }
-      const message = [
-        "Appointment request — Aastha Skin Centre",
-        `Name: ${data.get("name")}`,
-        `Mobile: ${mobile}`,
-        `Branch: ${data.get("branch")}`,
-        `Preferred date: ${data.get("preferred_date") || "Not specified"}`,
-        `Preferred time: ${data.get("preferred_time") || "Not specified"}`,
-        `Concern category: ${data.get("concern") || "Not specified"}`,
-        "",
-        config.clinic.appointment_confirmation_text
-      ].join("\n");
-      const wa = digits(config.contact.whatsapp_mobile);
-      window.open(`https://wa.me/91${wa}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
-      const status = form.querySelector("[data-form-status]");
-      if (status) {
-        status.hidden = false;
-        status.textContent = "WhatsApp has opened with your appointment request. Please send the message to complete your request.";
-      }
-    });
-  }
-
   async function boot() {
     const config = await loadConfig();
     window.AASTHA_SITE_CONFIG = config;
+    document.documentElement.dataset.whatsappUrl =
+      `https://wa.me/91${digits(config.contact.whatsapp_mobile)}`;
 
     document.querySelectorAll("[data-site-header]").forEach(el => el.innerHTML = buildHeader(config));
     document.querySelectorAll("[data-site-footer]").forEach(el => el.innerHTML = buildFooter(config));
@@ -427,7 +391,6 @@
     setupThemeToggle();
     setupNavigation();
     setupAccordions();
-    setupAppointmentForm(config);
   }
 
   boot();
