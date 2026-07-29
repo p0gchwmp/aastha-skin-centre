@@ -1074,3 +1074,143 @@ html[data-theme="dark"] .release-v24 .home-cta p { color: #fff !important; }
   .release-v24 .hub-link { min-height: 76px; }
   .release-v24 .section-heading { align-items: start; }
 }
+
+/* =====================================================================
+   Release v25 acceptance fixes
+   Shared corrections for long clinical pages and dark-mode components.
+   ===================================================================== */
+
+/* Keep the article/sidebar grid inside laptop and print-preview viewports. */
+@media (max-width: 1200px) {
+  .release-v24 .content-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 280px);
+    gap: 28px;
+  }
+}
+@media (max-width: 940px) {
+  .release-v24 .content-layout,
+  .release-v24 .appointment-layout { grid-template-columns: minmax(0, 1fr); }
+  .release-v24 .care-sidebar { position: static; }
+}
+
+/* Imported article content must retain a calm, readable hierarchy. */
+.release-v24 .deep-dive-body .article-section h2,
+.release-v24 .faq-section h2,
+.release-v24 .clinic-choice-section > h2 {
+  font-size: clamp(1.42rem, 2.15vw, 1.82rem) !important;
+  line-height: 1.24 !important;
+}
+.release-v24 .deep-dive-body .article-section h3 {
+  margin: 20px 0 8px !important;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 1.04rem !important;
+  line-height: 1.42 !important;
+}
+.release-v24 .deep-dive-body .article-section {
+  padding-block: 24px !important;
+}
+.release-v24 .deep-dive-body .article-section:first-child { padding-top: 12px !important; }
+.release-v24 .deep-dive-body .article-section:last-child { padding-bottom: 0 !important; }
+
+/* Ensure long words, addresses and links never force horizontal overflow. */
+.release-v24 .content-layout,
+.release-v24 .article-stack,
+.release-v24 .article-section,
+.release-v24 .care-sidebar,
+.release-v24 .clinic-choice-grid > article { min-width: 0; }
+.release-v24 .article-stack p,
+.release-v24 .article-stack li,
+.release-v24 .article-stack address,
+.release-v24 .article-stack a { overflow-wrap: anywhere; }
+
+/* Accessible dark mode for every repeated article component. */
+html[data-theme="dark"] body.release-v24 {
+  --r23-ink: #fff8fb;
+  --r23-text: #eadde4;
+  --r23-muted: #cbbbc3;
+  --r23-paper: #0f0b0d;
+  --r23-soft: #1b1217;
+  --r23-cream: #171014;
+  --r23-line: #4c303d;
+  background: #0f0b0d !important;
+  color: #fff8fb !important;
+}
+html[data-theme="dark"] .release-v24 .section:has(.content-layout),
+html[data-theme="dark"] .release-v24 .appointment-section,
+html[data-theme="dark"] .release-v24 .clinic-options-section,
+html[data-theme="dark"] .release-v24 .appointment-faq-section {
+  background: #0f0b0d !important;
+}
+html[data-theme="dark"] .release-v24 .article-section h2,
+html[data-theme="dark"] .release-v24 .article-section h3,
+html[data-theme="dark"] .release-v24 .article-section p,
+html[data-theme="dark"] .release-v24 .article-section li,
+html[data-theme="dark"] .release-v24 .article-section address,
+html[data-theme="dark"] .release-v24 .deep-dive p,
+html[data-theme="dark"] .release-v24 .faq-answer p,
+html[data-theme="dark"] .release-v24 .clinic-choice-grid h2,
+html[data-theme="dark"] .release-v24 .clinic-choice-grid h3,
+html[data-theme="dark"] .release-v24 .clinic-choice-grid p,
+html[data-theme="dark"] .release-v24 .clinic-choice-grid address {
+  color: #f7edf2 !important;
+  opacity: 1 !important;
+}
+html[data-theme="dark"] .release-v24 .article-section p,
+html[data-theme="dark"] .release-v24 .deep-dive p,
+html[data-theme="dark"] .release-v24 .faq-answer p,
+html[data-theme="dark"] .release-v24 .clinic-choice-grid p,
+html[data-theme="dark"] .release-v24 .clinic-choice-grid address {
+  color: #dfd0d8 !important;
+}
+html[data-theme="dark"] .release-v24 .deep-dive,
+html[data-theme="dark"] .release-v24 .faq-clean-list details,
+html[data-theme="dark"] .release-v24 .care-sidebar-card,
+html[data-theme="dark"] .release-v24 .clinic-choice-grid > article,
+html[data-theme="dark"] .release-v24 .premium-summary-item,
+html[data-theme="dark"] .release-v24 .release-toc,
+html[data-theme="dark"] .release-v24 .release-toc a,
+html[data-theme="dark"] .release-v24 .appointment-form-card,
+html[data-theme="dark"] .release-v24 .appointment-fact-card {
+  background: #1b1217 !important;
+  border-color: #4c303d !important;
+  color: #fff8fb !important;
+}
+html[data-theme="dark"] .release-v24 .deep-dive > summary,
+html[data-theme="dark"] .release-v24 .faq-clean-list summary,
+html[data-theme="dark"] .release-v24 .care-sidebar-card h2,
+html[data-theme="dark"] .release-v24 .care-facts dd,
+html[data-theme="dark"] .release-v24 .premium-summary-item strong,
+html[data-theme="dark"] .release-v24 .release-toc > strong,
+html[data-theme="dark"] .release-v24 .release-toc a {
+  color: #fff8fb !important;
+}
+html[data-theme="dark"] .release-v24 .care-sidebar-card p,
+html[data-theme="dark"] .release-v24 .care-facts dt,
+html[data-theme="dark"] .release-v24 .premium-summary-item span {
+  color: #d6c5ce !important;
+}
+html[data-theme="dark"] .release-v24 .clean-list li,
+html[data-theme="dark"] .release-v24 .premium-bullet-grid li,
+html[data-theme="dark"] .release-v24 article.prose ul > li,
+html[data-theme="dark"] .release-v24 article.prose ol > li {
+  background: transparent !important;
+  color: #f3e8ed !important;
+}
+html[data-theme="dark"] .release-v24 .clean-list--three li {
+  background: #21161b !important;
+  border-color: #4c303d !important;
+}
+html[data-theme="dark"] .release-v24 .faq-pro-list details,
+html[data-theme="dark"] .release-v24 .faq-pro-list summary,
+html[data-theme="dark"] .release-v24 .faq-item,
+html[data-theme="dark"] .release-v24 .faq-item button {
+  background: #1b1217 !important;
+  border-color: #4c303d !important;
+  color: #fff8fb !important;
+}
+
+@media (max-width: 700px) {
+  .release-v24 .deep-dive > summary { padding: 17px 48px 17px 17px; font-size: 1.08rem; }
+  .release-v24 .deep-dive-body { padding: 2px 17px 20px; }
+  .release-v24 .deep-dive-body .article-section h2 { font-size: 1.38rem !important; }
+}

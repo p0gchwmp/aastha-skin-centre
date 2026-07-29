@@ -1,9 +1,16 @@
-# Aastha Skin & Dermato-Cosmetic Centre — Professional Release v24
+# Aastha Skin & Dermato-Cosmetic Centre — Professional Release v25
 
 This folder is the cleaned, patient-facing static website source.
 
 ## What changed
 
+- Site-wide dark-mode contrast fixes for FAQs, article cards, lists and sidebars
+- Responsive long-page grid fixes to prevent clipped consultation cards
+- Restrained typography and spacing inside imported expandable content
+- Empty heading-only sections removed across treatment pages
+- Patient-facing HIFU versus RF comparison page completed
+- Visible legal drafting notes removed
+- Unique social descriptions plus Open Graph image and Twitter card metadata
 - Concise appointment, contact, about, doctor and location pages
 - Card-based Conditions and Treatments directories with working links
 - Working Blog directory and `/blog` → `/blog/` redirect
