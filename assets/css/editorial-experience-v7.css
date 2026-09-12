@@ -1,0 +1,72 @@
+/* Aastha Editorial Experience v7 — acne benchmark normalization */
+
+/* Restore cleaner How care works composition. */
+#approach .v6-care-ribbon,#approach .v6-decision-grid{display:none!important}
+#approach .v7-care-head{margin-bottom:30px}
+#approach .v7-care-stage{border:1px solid var(--line);box-shadow:0 16px 48px rgba(31,20,24,.07);background:rgba(255,255,255,.28)}
+#approach .v7-care-stage .process-nav{border-right:1px solid var(--line);background:rgba(243,239,232,.72)}
+#approach .v7-care-stage .process-nav button{min-height:64px;padding:14px 18px;border-bottom:1px solid var(--line);font-weight:780;letter-spacing:.055em}
+#approach .v7-care-stage .process-nav button.is-active{background:var(--wine);color:#fff}
+#approach .v7-care-stage .process-content{background:linear-gradient(135deg,rgba(255,255,255,.5),rgba(227,232,225,.3))}
+#approach .v7-care-stage .process-chapter{min-height:34vh;padding:clamp(30px,4vw,54px);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+#approach .v7-care-stage .process-chapter::after{content:attr(data-step);position:absolute;right:2%;bottom:-.2em;font:500 clamp(7rem,15vw,13rem)/.8 var(--display);color:rgba(97,27,52,.045);pointer-events:none}
+#approach .v7-care-stage .process-chapter h3{max-width:15ch;font-size:clamp(2.2rem,4vw,4.5rem)}
+#approach .v7-care-stage .process-chapter p{max-width:68ch;font-size:1rem;line-height:1.7}
+
+/* Visible on-page map: compact and premium rather than a floating gimmick. */
+.v7-page-map{position:sticky;top:66px;z-index:45;background:rgba(243,239,232,.95);backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.v7-page-map>.concept-shell{min-height:46px;display:flex;align-items:center;gap:20px}
+.v7-page-map>.concept-shell>span{flex:0 0 auto;font-size:.59rem;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:var(--wine)}
+.v7-page-map>.concept-shell>div{display:flex;gap:0;overflow:auto;scrollbar-width:none}
+.v7-page-map>.concept-shell>div::-webkit-scrollbar{display:none}
+.v7-page-map a{flex:0 0 auto;padding:14px 13px;text-decoration:none;border-left:1px solid var(--line);font-size:.67rem;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft);white-space:nowrap}
+.v7-page-map a:hover,.v7-page-map a:focus-visible{background:var(--aubergine);color:#fff}
+
+/* Make the shared compass feel like the acne page's explorer. */
+.v7-pattern-system{display:grid;grid-template-columns:minmax(220px,.46fr) minmax(0,1.54fr);border:1px solid var(--line);background:var(--paper);box-shadow:0 16px 54px rgba(31,20,24,.07)}
+.v7-pattern-system .v6-compass-head{grid-column:1/-1}
+.v7-pattern-system .v6-compass-body{grid-column:1/-1;display:grid;grid-template-columns:minmax(220px,.46fr) minmax(0,1.54fr)}
+.v7-pattern-system .v6-compass-nav{background:rgba(255,255,255,.34)}
+.v7-pattern-system .v6-compass-nav button{min-height:64px;padding:14px 16px}
+.v7-pattern-system .v6-compass-stage{min-height:260px;padding:clamp(26px,4vw,48px);display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(234,223,225,.48),rgba(227,232,225,.42))}
+.v7-pattern-system .v6-compass-stage h4{font-size:clamp(2.7rem,5.8vw,6.2rem);max-width:10ch}
+.v7-pattern-system .v6-compass-stage p{font-size:1rem;line-height:1.7;max-width:62ch}
+
+/* Acne-style quick explorer on pages that did not already have one. */
+.v7-quick-explorer .pattern-explorer{box-shadow:0 18px 56px rgba(31,20,24,.07)}
+.v7-quick-explorer .pattern-stage{background:linear-gradient(140deg,rgba(227,232,225,.7),rgba(234,223,225,.62));min-height:330px}
+.v7-quick-explorer .pattern-stage h3{font-size:clamp(2.7rem,5.8vw,6rem);line-height:.9;max-width:11ch}
+.v7-quick-explorer .pattern-tabs button{min-height:66px;padding:15px 18px;text-align:left}
+
+/* Unify treatment pages around the acne page's denser visual rhythm. */
+.v7-unified-treatment .editorial-hero{min-height:min(78svh,760px)}
+.v7-unified-treatment .editorial-hero+.v7-page-map+.editorial-section,
+.v7-unified-treatment .editorial-hero+.editorial-section{padding-top:44px}
+.v7-unified-treatment .section-head{margin-bottom:34px}
+.v7-unified-treatment .editorial-grid{gap:12px}
+.v7-unified-treatment .editorial-panel{border:1px solid var(--line);box-shadow:none}
+.v7-unified-treatment .editorial-panel:hover{box-shadow:0 15px 42px rgba(31,20,24,.08)}
+.v7-unified-treatment .fact-table{border-top:1px solid var(--line)}
+.v7-unified-treatment .fact-row{padding:15px 0;border-bottom:1px solid var(--line)}
+.v7-unified-treatment .process-stage{border:1px solid var(--line);box-shadow:0 16px 48px rgba(31,20,24,.07)}
+.v7-unified-treatment .process-chapter{min-height:36vh}
+.v7-unified-treatment .faq-stack,.v7-unified-treatment .v3-accordion{border-top:1px solid var(--line)}
+.v7-unified-treatment details{border-bottom:1px solid var(--line)}
+
+/* Small premium details. */
+.v7-unified-treatment .drag-card .num{color:var(--bronze)}
+.v7-unified-treatment .kicker,.v7-unified-treatment .section-no{color:var(--wine)}
+.v7-unified-treatment .hero-art{box-shadow:0 18px 60px rgba(31,20,24,.08)}
+.v7-unified-treatment .hero-art::after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.55);pointer-events:none}
+.v7-unified-treatment .hero-art{position:relative}
+
+@media(max-width:900px){
+  .v7-page-map>.concept-shell{display:block;padding:8px 0}.v7-page-map>.concept-shell>span{display:block;padding:0 4px 6px}.v7-page-map a:first-child{border-left:0}
+  .v7-pattern-system,.v7-pattern-system .v6-compass-body{grid-template-columns:1fr}.v7-pattern-system .v6-compass-nav{display:grid;grid-template-columns:repeat(2,1fr);border-right:0;border-bottom:1px solid var(--line)}
+  #approach .v7-care-stage{grid-template-columns:1fr}#approach .v7-care-stage .process-nav{border-right:0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));overflow:auto}
+  #approach .v7-care-stage .process-nav button{border-right:1px solid var(--line);border-bottom:0}
+}
+@media(max-width:620px){
+  .v7-page-map{top:64px}.v7-pattern-system .v6-compass-nav{grid-template-columns:1fr 1fr}.v7-unified-treatment .editorial-hero{min-height:auto}.v7-unified-treatment .section-head{margin-bottom:26px}
+  #approach .v7-care-stage .process-chapter{min-height:300px;padding:30px 20px}
+}
