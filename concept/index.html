@@ -6,14 +6,13 @@
   <meta name="robots" content="noindex,nofollow">
   <title>Aastha Editorial Concept — Homepage</title>
   <link rel="stylesheet" href="/assets/css/editorial-concept-v1.css">
+  <link rel="stylesheet" href="/assets/css/editorial-concept-v2.css">
 </head>
 <body class="concept-page">
   <header class="concept-nav">
     <div class="concept-shell">
       <a class="brand-mark" href="/concept/">AASTHA <span>Skin Centre · Jammu</span></a>
-      <nav class="concept-links" aria-label="Concept navigation">
-        <a href="#concerns">Concerns</a><a href="#treatments">Treatments</a><a href="/concept/dr-cheena-langer/">Doctor</a><a href="#clinics">Clinics</a>
-      </nav>
+      <nav class="concept-links" aria-label="Concept navigation"><a href="#concerns">Concerns</a><a href="#finder">Find your route</a><a href="#treatments">Treatments</a><a href="/concept/dr-cheena-langer/">Doctor</a><a href="#clinics">Clinics</a></nav>
       <a class="nav-cta" href="/book-appointment/">Book consultation</a>
     </div>
   </header>
@@ -28,27 +27,21 @@
           <p class="hero-copy">Consult Dr. Cheena Langer, MBBS, MD Dermatology, for diagnosis-led medical dermatology, acne and scar care, pigmentation, hair and scalp concerns, lasers and selected aesthetic procedures.</p>
           <div class="hero-actions"><a class="btn" href="/book-appointment/">Book consultation</a><a class="btn alt" href="#concerns">Explore concerns ↓</a></div>
         </div>
-        <figure class="hero-art" data-reveal>
-          <img src="/assets/images/professional/hero-care.svg" alt="Abstract dermatology care illustration" width="700" height="650">
-          <figcaption class="art-label">Aastha Skin &amp; Dermato-Cosmetic Centre</figcaption>
-        </figure>
+        <figure class="hero-art" data-reveal><img src="/assets/images/professional/hero-care.svg" alt="Abstract dermatology care illustration" width="700" height="650"><figcaption class="art-label">Aastha Skin &amp; Dermato-Cosmetic Centre</figcaption></figure>
       </div>
     </section>
 
     <section class="stats-band" aria-label="Clinic facts">
       <div class="concept-shell stats-grid">
-        <div class="stat"><strong>20+</strong><span>years in medicine</span></div>
-        <div class="stat"><strong>2</strong><span>clinics in Jammu</span></div>
+        <div class="stat"><strong data-count="20" data-suffix="+">20+</strong><span>years in medicine</span></div>
+        <div class="stat"><strong data-count="2">2</strong><span>clinics in Jammu</span></div>
         <div class="stat"><strong>MD</strong><span>Dermatology-led care</span></div>
       </div>
     </section>
 
     <section class="editorial-section" id="concerns">
       <div class="concept-shell">
-        <div class="section-head" data-reveal>
-          <div><span class="section-no">01 / Start here</span></div>
-          <div><h2 class="display-heading">What brings you here?</h2><p class="section-copy">Explore the concern first. This tool does not diagnose a condition; it simply takes you to the most relevant dermatologist-led information.</p></div>
-        </div>
+        <div class="section-head" data-reveal><div><span class="section-no">01 / Start here</span></div><div><h2 class="display-heading">What brings you here?</h2><p class="section-copy">Explore the concern first. This tool does not diagnose a condition; it simply takes you to the most relevant dermatologist-led information.</p></div></div>
         <div class="concern-explorer" data-reveal>
           <div class="concern-selector" role="tablist" aria-label="Skin and hair concerns">
             <button type="button" role="tab" aria-selected="true" data-concern data-title="Acne" data-copy="Active breakouts, recurring acne, blackheads, marks and scar concerns." data-href="/concept/acne-treatment/" data-background="linear-gradient(140deg,#f8e5e8,#e7c1cc)"><span>01</span><span>Acne</span></button>
@@ -58,61 +51,101 @@
             <button type="button" role="tab" aria-selected="false" data-concern data-title="Medical skin" data-copy="Rashes, infections, eczema, psoriasis, urticaria, vitiligo and other medical dermatology concerns." data-href="/conditions/" data-background="linear-gradient(140deg,#e8eced,#cbd6d8)"><span>05</span><span>Medical skin</span></button>
             <button type="button" role="tab" aria-selected="false" data-concern data-title="Ageing" data-copy="Fine lines, volume change and skin-quality concerns assessed for appropriate non-surgical options." data-href="/treatments/" data-background="linear-gradient(140deg,#f0e6d8,#dac6a9)"><span>06</span><span>Ageing</span></button>
           </div>
-          <div class="concern-stage" data-concern-stage>
-            <div><span class="kicker">Explore by concern</span><h3 data-concern-title>Acne</h3></div>
-            <div><p data-concern-copy>Active breakouts, recurring acne, blackheads, marks and scar concerns.</p><a class="btn" data-concern-link href="/concept/acne-treatment/">Explore this concern →</a></div>
+          <div class="concern-stage" data-concern-stage><div><span class="kicker">Explore by concern</span><h3 data-concern-title>Acne</h3></div><div><p data-concern-copy>Active breakouts, recurring acne, blackheads, marks and scar concerns.</p><a class="btn" data-concern-link href="/concept/acne-treatment/">Explore this concern →</a></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="editorial-section" id="finder">
+      <div class="concept-shell">
+        <div class="section-head" data-reveal><div><span class="section-no">02 / Find your route</span></div><div><h2 class="display-heading">A faster way into the site.</h2><p class="section-copy">Choose where the concern is and what it feels closest to. This is navigation—not diagnosis—and it points you toward the most relevant information.</p></div></div>
+        <div class="route-finder spotlight-panel" data-route-finder data-reveal>
+          <div class="route-controls">
+            <fieldset><legend>Where is the concern?</legend><div class="route-options"><button class="route-choice" type="button" aria-pressed="true" data-route-choice data-route-group="area" data-route-value="face">Face</button><button class="route-choice" type="button" aria-pressed="false" data-route-choice data-route-group="area" data-route-value="scalp">Scalp</button><button class="route-choice" type="button" aria-pressed="false" data-route-choice data-route-group="area" data-route-value="body">Body</button></div></fieldset>
+            <fieldset><legend>Closest concern</legend><div class="route-options"><button class="route-choice" type="button" aria-pressed="true" data-route-choice data-route-group="concern" data-route-value="acne">Breakouts</button><button class="route-choice" type="button" aria-pressed="false" data-route-choice data-route-group="concern" data-route-value="pigmentation">Pigmentation</button><button class="route-choice" type="button" aria-pressed="false" data-route-choice data-route-group="concern" data-route-value="hair">Hair fall</button><button class="route-choice" type="button" aria-pressed="false" data-route-choice data-route-group="concern" data-route-value="rash">Rash / infection</button><button class="route-choice" type="button" aria-pressed="false" data-route-choice data-route-group="concern" data-route-value="ageing">Ageing</button></div></fieldset>
           </div>
+          <div class="route-result"><div><span class="kicker">Suggested information path</span><h3 data-route-title>Acne &amp; breakouts</h3><p data-route-copy>Explore active acne, marks and scar pathways.</p></div><div><a class="btn" data-route-link href="/concept/acne-treatment/">Open this pathway →</a><p class="route-note">Educational navigation only · not a skin diagnosis</p></div></div>
         </div>
       </div>
     </section>
 
     <section class="editorial-section" id="treatments">
       <div class="concept-shell">
-        <div class="section-head" data-reveal><div><span class="section-no">02 / Treatment library</span></div><div><h2 class="display-heading">A clinic, organised like chapters.</h2><p class="section-copy">Drag through the areas patients most often explore. The interaction is playful; the pathways stay clinically clear.</p></div></div>
-        <div class="drag-wrap" data-reveal>
-          <p class="drag-label">Drag / swipe to explore</p>
-          <div class="drag-rail" data-drag-rail>
-            <a class="drag-card" href="/concept/acne-treatment/"><span class="num">01 / Acne</span><div><h3>Control active acne first.</h3><p>Diagnosis, severity, triggers, skin type and previous treatment shape the plan.</p></div></a>
-            <a class="drag-card" href="/treatments/acne-scar-treatment/"><span class="num">02 / Scars</span><div><h3>Scar type changes the strategy.</h3><p>Rolling, boxcar and ice-pick scars may need different or combined approaches.</p></div></a>
-            <a class="drag-card" href="/treatments/pigmentation-treatment/"><span class="num">03 / Pigmentation</span><div><h3>Treat the cause, not just the colour.</h3><p>Melasma and post-inflammatory pigmentation require different thinking and maintenance.</p></div></a>
-            <a class="drag-card" href="/treatments/hair-fall-treatment/"><span class="num">04 / Hair</span><div><h3>Hair loss starts with the pattern.</h3><p>History, scalp examination and likely cause come before procedures.</p></div></a>
-            <a class="drag-card" href="/treatments/laser-hair-reduction/"><span class="num">05 / Lasers</span><div><h3>Technology needs an indication.</h3><p>Laser choice, settings, skin type, expectations and aftercare matter.</p></div></a>
+        <div class="section-head" data-reveal><div><span class="section-no">03 / Treatment library</span></div><div><h2 class="display-heading">A clinic, organised like chapters.</h2><p class="section-copy">Drag through the areas patients most often explore. The interaction is playful; the pathways stay clinically clear.</p></div></div>
+        <div class="drag-wrap" data-reveal><p class="drag-label">Drag / swipe to explore</p><div class="drag-rail" data-drag-rail>
+          <a class="drag-card" href="/concept/acne-treatment/"><span class="num">01 / Acne</span><div><h3>Control active acne first.</h3><p>Diagnosis, severity, triggers, skin type and previous treatment shape the plan.</p></div></a>
+          <a class="drag-card" href="/treatments/acne-scar-treatment/"><span class="num">02 / Scars</span><div><h3>Scar type changes the strategy.</h3><p>Rolling, boxcar and ice-pick scars may need different or combined approaches.</p></div></a>
+          <a class="drag-card" href="/treatments/pigmentation-treatment/"><span class="num">03 / Pigmentation</span><div><h3>Treat the cause, not just the colour.</h3><p>Melasma and post-inflammatory pigmentation require different thinking and maintenance.</p></div></a>
+          <a class="drag-card" href="/treatments/hair-fall-treatment/"><span class="num">04 / Hair</span><div><h3>Hair loss starts with the pattern.</h3><p>History, scalp examination and likely cause come before procedures.</p></div></a>
+          <a class="drag-card" href="/treatments/laser-hair-reduction/"><span class="num">05 / Lasers</span><div><h3>Technology needs an indication.</h3><p>Laser choice, settings, skin type, expectations and aftercare matter.</p></div></a>
+          <a class="drag-card" href="/conditions/"><span class="num">06 / Medical skin</span><div><h3>Rashes are not all the same.</h3><p>Infections, eczema, allergy-related conditions and chronic dermatoses need different plans.</p></div></a>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="editorial-section" id="approach">
+      <div class="concept-shell">
+        <div class="section-head" data-reveal><div><span class="section-no">04 / How care works</span></div><div><h2 class="display-heading">The treatment should follow the diagnosis.</h2><p class="detail-intro">The original site had more medical depth. This version keeps that depth but turns the consultation pathway into a scroll-linked story instead of a dense block of cards.</p></div></div>
+        <div class="process-stage">
+          <div class="process-nav"><button class="is-active" type="button" data-process-target="process-understand">01 Understand</button><button type="button" data-process-target="process-examine">02 Examine</button><button type="button" data-process-target="process-explain">03 Explain</button><button type="button" data-process-target="process-plan">04 Plan</button><button type="button" data-process-target="process-review">05 Review</button></div>
+          <div class="process-content">
+            <article class="process-chapter" id="process-understand" data-process-chapter><span class="kicker">01 / Understand</span><h3>Start with what has actually been happening.</h3><p>Symptoms, duration, previous medicines, skincare, medical history and relevant triggers are reviewed before treatment is chosen.</p></article>
+            <article class="process-chapter" id="process-examine" data-process-chapter><span class="kicker">02 / Examine</span><h3>Similar-looking concerns can have different causes.</h3><p>Clinical examination helps establish the likely condition. Investigations may be considered when they could change diagnosis or management.</p></article>
+            <article class="process-chapter" id="process-explain" data-process-chapter><span class="kicker">03 / Explain</span><h3>Understand the options before agreeing to one.</h3><p>The likely diagnosis, alternatives, limitations, expected course and relevant aftercare are discussed in clear language.</p></article>
+            <article class="process-chapter" id="process-plan" data-process-chapter><span class="kicker">04 / Plan</span><h3>One concern does not mean one identical package.</h3><p>Skin or hair type, medical history, priorities, tolerability and acceptable downtime all influence treatment planning.</p></article>
+            <article class="process-chapter" id="process-review" data-process-chapter><span class="kicker">05 / Review</span><h3>Good care changes when the response changes.</h3><p>When follow-up is needed, progress and tolerability are reassessed so treatment can be continued, adjusted or simplified.</p></article>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="editorial-section">
+    <section class="editorial-section" id="doctor">
       <div class="concept-shell">
-        <div class="section-head" data-reveal><div><span class="section-no">03 / Your dermatologist</span></div><div><h2 class="display-heading">Diagnosis before treatment.</h2><p class="section-copy">The doctor profile should feel like an editorial authority page—not a stack of credential cards.</p></div></div>
-        <div class="hero-grid" data-reveal>
-          <figure class="hero-art"><img src="/assets/images/professional/doctor-care.svg" alt="Dermatologist care illustration" width="700" height="650"><figcaption class="art-label">Dr. Cheena Langer · MBBS, MD Dermatology</figcaption></figure>
-          <div><span class="kicker">Dr. Cheena Langer</span><h2 class="display-heading">Clear diagnosis. Realistic options. Individual plans.</h2><p class="section-copy">More than 20 years in medicine, with clinical work across medical dermatology, acne and scars, pigmentation, hair and scalp disorders, laser dermatology and selected aesthetic procedures.</p><div class="hero-actions"><a class="btn" href="/concept/dr-cheena-langer/">Meet Dr. Cheena →</a><a class="btn alt" href="/book-appointment/">Book consultation</a></div></div>
+        <div class="section-head" data-reveal><div><span class="section-no">05 / Your dermatologist</span></div><div><h2 class="display-heading">Diagnosis before treatment.</h2><p class="section-copy">Dr. Cheena Langer is MBBS and MD Dermatology qualified, with more than 20 years in medicine and clinical work spanning medical, laser, hair, aesthetic and selected procedural dermatology.</p></div></div>
+        <div class="hero-grid" data-reveal><figure class="hero-art"><img src="/assets/images/professional/doctor-care.svg" alt="Dermatologist care illustration" width="700" height="650"><figcaption class="art-label">Dr. Cheena Langer · MBBS, MD Dermatology</figcaption></figure><div><span class="kicker">Professional profile</span><h2 class="display-heading">Clear diagnosis. Realistic options. Individual plans.</h2><p class="section-copy">Her wider professional record includes postgraduate research, scientific publications, academic presentations, invited faculty activity and conference leadership.</p><div class="hero-actions"><a class="btn" href="/concept/dr-cheena-langer/">Explore the doctor profile →</a><a class="btn alt" href="/book-appointment/">Book consultation</a></div></div></div>
+      </div>
+    </section>
+
+    <section class="editorial-section" id="directory">
+      <div class="concept-shell">
+        <div class="section-head" data-reveal><div><span class="section-no">06 / More of the clinic</span></div><div><h2 class="display-heading">Go deeper without getting lost.</h2><p class="section-copy">The site can stay visually bold while still giving search engines and patients the detailed pathways your original website had.</p></div></div>
+        <div class="hover-directory" data-reveal>
+          <a class="hover-item" href="/conditions/"><span class="idx">01</span><strong>Conditions</strong><p>Rashes, infections, allergy-related concerns and chronic skin conditions.</p><span>↗</span></a>
+          <a class="hover-item" href="/treatments/"><span class="idx">02</span><strong>All treatments</strong><p>Medical, laser, hair, procedural and aesthetic treatment pathways.</p><span>↗</span></a>
+          <a class="hover-item" href="/locations/karan-nagar/"><span class="idx">03</span><strong>Karan Nagar</strong><p>Clinic details, timings, directions and appointment information.</p><span>↗</span></a>
+          <a class="hover-item" href="/locations/paloura/"><span class="idx">04</span><strong>Paloura Chowk</strong><p>Clinic details, timings, directions and appointment information.</p><span>↗</span></a>
+          <a class="hover-item" href="/blog/"><span class="idx">05</span><strong>Skin knowledge</strong><p>Long-form educational content for common dermatology questions.</p><span>↗</span></a>
         </div>
       </div>
     </section>
 
     <section class="editorial-section" id="clinics">
       <div class="concept-shell">
-        <div class="section-head" data-reveal><div><span class="section-no">04 / Two clinics</span></div><div><h2 class="display-heading">Choose where you want to be seen.</h2><p class="section-copy">One switch instead of two repetitive cards. Timings, address and directions update in place.</p></div></div>
-        <div class="clinic-switch" data-reveal>
-          <div class="clinic-tabs" role="tablist" aria-label="Clinic locations">
-            <button type="button" role="tab" aria-selected="true" data-clinic data-name="Karan Nagar" data-address="Lane 2, Karan Nagar, near Amphalla Chowk, Jammu – 180005" data-hours="Mon–Sat · 11:00 AM–4:00 PM<br>Sun · 11:00 AM–3:00 PM" data-directions="https://maps.app.goo.gl/pHCQ1r4crKuZBSi98" data-details="/locations/karan-nagar/"><strong>Karan Nagar</strong><br><small>Central Jammu</small></button>
-            <button type="button" role="tab" aria-selected="false" data-clinic data-name="Paloura Chowk" data-address="Top Paloura, opposite Government Senior Secondary School, Jammu – 181121" data-hours="Mon–Sat · 6:00 PM–8:00 PM<br>Sun · 10:30 AM–12:00 PM" data-directions="https://maps.app.goo.gl/kh4AqZoUkscpEgWc8" data-details="/locations/paloura/"><strong>Paloura Chowk</strong><br><small>Northern Jammu</small></button>
-          </div>
-          <div class="clinic-panel" data-clinic-panel><span class="kicker">Current selection</span><h3 data-clinic-name>Karan Nagar</h3><address data-clinic-address>Lane 2, Karan Nagar, near Amphalla Chowk, Jammu – 180005</address><p class="hours" data-clinic-hours>Mon–Sat · 11:00 AM–4:00 PM<br>Sun · 11:00 AM–3:00 PM</p><div class="hero-actions"><a class="btn" data-clinic-details href="/locations/karan-nagar/">Clinic details</a><a class="btn alt" data-clinic-directions href="https://maps.app.goo.gl/pHCQ1r4crKuZBSi98" target="_blank" rel="noopener">Directions ↗</a></div></div>
+        <div class="section-head" data-reveal><div><span class="section-no">07 / Two clinics</span></div><div><h2 class="display-heading">Choose where you want to be seen.</h2><p class="section-copy">One switch instead of two repetitive cards. Timings, address and directions update in place.</p></div></div>
+        <div class="clinic-switch spotlight-panel" data-reveal>
+          <div class="clinic-tabs" role="tablist" aria-label="Clinic locations"><button type="button" role="tab" aria-selected="true" data-clinic data-name="Karan Nagar" data-address="Lane 2, Karan Nagar, near Amphalla Chowk, Jammu – 180005" data-hours="Mon–Sat · 11:00 AM–4:00 PM<br>Sun · 11:00 AM–3:00 PM" data-directions="https://maps.app.goo.gl/pHCQ1r4crKuZBSi98" data-details="/locations/karan-nagar/"><strong>Karan Nagar</strong><br><small>Central Jammu</small></button><button type="button" role="tab" aria-selected="false" data-clinic data-name="Paloura Chowk" data-address="Top Paloura, opposite Government Senior Secondary School, Jammu – 181121" data-hours="Mon–Sat · 6:00 PM–8:00 PM<br>Sun · 10:30 AM–12:00 PM" data-directions="https://maps.app.goo.gl/kh4AqZoUkscpEgWc8" data-details="/locations/paloura/"><strong>Paloura Chowk</strong><br><small>Northern Jammu</small></button></div>
+          <div class="clinic-panel" data-clinic-panel><span class="kicker">Current selection</span><h3 data-clinic-name>Karan Nagar</h3><address data-clinic-address>Lane 2, Karan Nagar, near Amphalla Chowk, Jammu – 180005</address><p class="hours" data-clinic-hours>Mon–Sat · 11:00 AM–4:00 PM<br>Sun · 11:00 AM–3:00 PM</p><p>Consultation fee ₹500 · one follow-up for the same concern within 10 days.</p><div class="hero-actions"><a class="btn" data-clinic-details href="/locations/karan-nagar/">Clinic details</a><a class="btn alt" data-clinic-directions href="https://maps.app.goo.gl/pHCQ1r4crKuZBSi98" target="_blank" rel="noopener">Directions ↗</a></div></div>
         </div>
       </div>
     </section>
 
-    <section class="editorial-section">
-      <div class="concept-shell" data-reveal>
-        <span class="kicker">Next step</span><h2 class="display-heading">Your skin deserves a diagnosis, not a guess.</h2><div class="hero-actions"><a class="btn" href="/book-appointment/">Book an appointment</a><a class="btn alt" href="https://wa.me/917006613362">WhatsApp the clinic</a></div>
+    <section class="editorial-section" id="faq">
+      <div class="concept-shell">
+        <div class="section-head" data-reveal><div><span class="section-no">08 / Quick answers</span></div><div><h2 class="display-heading">Useful before you book.</h2></div></div>
+        <div class="faq-stack" data-reveal>
+          <details><summary>Who leads dermatology care at Aastha?</summary><div class="faq-answer-v2"><p>Dr. Cheena Langer is MBBS and MD Dermatology qualified and practises as a Consultant Dermatologist at Aastha Skin &amp; Dermato-Cosmetic Centre in Jammu.</p></div></details>
+          <details><summary>Which concerns can I explore on the website?</summary><div class="faq-answer-v2"><p>The site covers medical skin concerns, acne and scars, pigmentation, hair and scalp problems, lasers and selected aesthetic or procedural concerns.</p></div></details>
+          <details><summary>Where are the clinics?</summary><div class="faq-answer-v2"><p>Aastha has clinics at Karan Nagar near Amphalla Chowk and at Paloura Chowk in Jammu.</p></div></details>
+          <details><summary>Does website information replace a consultation?</summary><div class="faq-answer-v2"><p>No. Website content is educational. Diagnosis and treatment depend on an individual medical assessment.</p></div></details>
+        </div>
       </div>
     </section>
+
+    <section class="editorial-section"><div class="concept-shell" data-reveal><span class="kicker">Next step</span><h2 class="display-heading">Your skin deserves a diagnosis, not a guess.</h2><div class="hero-actions"><a class="btn" href="/book-appointment/">Book an appointment</a><a class="btn alt" href="https://wa.me/917006613362">WhatsApp the clinic</a></div></div></section>
   </main>
 
   <footer class="concept-footer"><div class="concept-shell"><p class="footer-word">AASTHA.</p><div class="footer-grid"><div><strong>Aastha Skin &amp; Dermato-Cosmetic Centre</strong><p>Dermatologist-led skin, hair, laser and aesthetic care in Jammu.</p></div><div><a href="/concept/dr-cheena-langer/">Doctor</a><br><a href="/treatments/">Treatments</a><br><a href="/conditions/">Conditions</a></div><div><a href="/book-appointment/">Book</a><br><a href="https://wa.me/917006613362">WhatsApp</a></div></div></div></footer>
   <script src="/assets/js/editorial-concept-v1.js" defer></script>
+  <script src="/assets/js/editorial-concept-v2.js" defer></script>
 </body>
 </html>
