@@ -7,22 +7,25 @@ import build_static_dist
 
 build_static_dist.PUBLIC_DIRECTORIES.add("concept")
 
+FONT_PRECONNECT_1 = '<link rel="preconnect" href="https://fonts.googleapis.com">'
+FONT_PRECONNECT_2 = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+FONT_STYLES = '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">'
 V3_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v3.css">'
 V3_FIX_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v3-fixes.css">'
+V4_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v4.css">'
 V3_JS = '<script src="/assets/js/editorial-experience-v3.js" defer></script>'
 V3_FIX_JS = '<script src="/assets/js/editorial-experience-v3-fixes.js" defer></script>'
+V4_JS = '<script src="/assets/js/editorial-experience-v4.js" defer></script>'
 
 
-def inject_v3_assets(page: Path) -> None:
+def inject_experience_assets(page: Path) -> None:
     source = page.read_text(encoding="utf-8")
-    if V3_CSS not in source:
-        source = source.replace("</head>", f"{V3_CSS}</head>", 1)
-    if V3_FIX_CSS not in source:
-        source = source.replace("</head>", f"{V3_FIX_CSS}</head>", 1)
-    if V3_JS not in source:
-        source = source.replace("</body>", f"{V3_JS}</body>", 1)
-    if V3_FIX_JS not in source:
-        source = source.replace("</body>", f"{V3_FIX_JS}</body>", 1)
+    for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, V3_CSS, V3_FIX_CSS, V4_CSS):
+        if tag not in source:
+            source = source.replace("</head>", f"{tag}</head>", 1)
+    for tag in (V3_JS, V3_FIX_JS, V4_JS):
+        if tag not in source:
+            source = source.replace("</body>", f"{tag}</body>", 1)
     page.write_text(source, encoding="utf-8")
 
 
@@ -37,10 +40,14 @@ def main() -> int:
     if not concept_home.exists():
         raise RuntimeError("Concept homepage was not included in the preview build")
 
-    # Apply the v3 experience layer to every concept page while leaving the
-    # original production pages in dist on their existing visual system.
-    for page in concept_root.rglob("*.html"):
-        inject_v3_assets(page)
+    concept_pages = list(concept_root.rglob("*.html"))
+    if len(concept_pages) < 15:
+        raise RuntimeError(f"Concept migration unexpectedly small: {len(concept_pages)} pages")
+
+    # Apply the premium experience only to concept pages. Production/static
+    # baseline pages in dist remain visually untouched for comparison/rollback.
+    for page in concept_pages:
+        inject_experience_assets(page)
 
     # Make the preview URL open the concept immediately.
     shutil.copy2(concept_home, dist / "index.html")
