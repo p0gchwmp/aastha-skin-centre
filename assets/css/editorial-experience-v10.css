@@ -1,0 +1,159 @@
+/* Aastha Editorial Experience v10 — additive interaction + visual polish on stable v8 */
+:root{
+  --v10-accent:#b68a61;
+  --v10-accent-soft:#d8b895;
+  --v10-accent-rgb:182,138,97;
+  --v10-deep:#171216;
+}
+
+body.v10-polish{
+  --v10-glow:rgba(var(--v10-accent-rgb),.14);
+}
+
+/* Keep v8 composition, add finer section rhythm and material detail. */
+body.v10-polish .editorial-section{position:relative;isolation:isolate}
+body.v10-polish .editorial-section::after{
+  content:"";position:absolute;left:max(20px,calc((100vw - 1240px)/2));right:max(20px,calc((100vw - 1240px)/2));top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(var(--v10-accent-rgb),.45),transparent);
+  transform:scaleX(.12);transform-origin:left center;opacity:.35;transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .5s ease;pointer-events:none
+}
+body.v10-polish .editorial-section.v10-inview::after{transform:scaleX(1);opacity:.7}
+body.v10-polish .section-no,
+body.v10-polish .eyeline{color:color-mix(in srgb,var(--v10-accent) 88%,#5c2038 12%)}
+body.v10-polish .kicker{letter-spacing:.125em}
+body.v10-polish .section-head{position:relative}
+body.v10-polish .section-head::before{
+  content:"";position:absolute;left:-18px;top:.25rem;width:2px;height:0;background:var(--v10-accent);opacity:.8;transition:height .7s cubic-bezier(.2,.7,.2,1)
+}
+body.v10-polish .editorial-section.v10-inview .section-head::before{height:42px}
+
+/* Category accent: subtle, never a full recolour. */
+body.v10-polish .btn:not(.alt),
+body.v10-polish .nav-cta{box-shadow:0 10px 28px rgba(var(--v10-accent-rgb),.11)}
+body.v10-polish .editorial-panel,
+body.v10-polish .fact-table,
+body.v10-polish .pattern-explorer,
+body.v10-polish .v8-topic-explorer,
+body.v10-polish .v5-compare>article,
+body.v10-polish .v4-fact{transition:border-color .24s ease,box-shadow .24s ease,transform .24s ease,opacity .24s ease}
+body.v10-polish .editorial-panel:hover,
+body.v10-polish .fact-table:hover,
+body.v10-polish .pattern-explorer:hover,
+body.v10-polish .v8-topic-explorer:hover{border-color:rgba(var(--v10-accent-rgb),.38);box-shadow:0 24px 70px rgba(30,18,24,.085)}
+
+/* Hero depth without changing layout. */
+body.v10-polish .editorial-hero .hero-art{
+  --v10-rx:0deg;--v10-ry:0deg;--v10-mx:50%;--v10-my:50%;
+  transform:perspective(1200px) rotateX(var(--v10-ry)) rotateY(var(--v10-rx)) translateZ(0);
+  transform-style:preserve-3d;transition:transform .2s ease-out,box-shadow .28s ease;will-change:transform
+}
+body.v10-polish .editorial-hero .hero-art::before{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:radial-gradient(circle at var(--v10-mx) var(--v10-my),rgba(var(--v10-accent-rgb),.18),transparent 28%);
+  opacity:.5;mix-blend-mode:screen;transition:opacity .2s ease
+}
+body.v10-polish .editorial-hero .hero-art:hover{box-shadow:0 42px 110px rgba(0,0,0,.34),0 0 0 1px rgba(var(--v10-accent-rgb),.15)}
+body.v10-polish .v8-clinical-plate{transform:translateZ(24px)}
+body.v10-polish .v8-plate-core h3{text-shadow:0 10px 45px rgba(0,0,0,.18)}
+
+/* Interactive lens on stages and results. */
+.v10-lens{
+  --v10-lx:50%;--v10-ly:50%;position:relative;overflow:hidden
+}
+.v10-lens::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(circle at var(--v10-lx) var(--v10-ly),rgba(var(--v10-accent-rgb),.13),transparent 30%);
+  opacity:0;transition:opacity .25s ease
+}
+.v10-lens:hover::before{opacity:1}
+.v10-lens>*{position:relative;z-index:1}
+
+/* Drag/swipe rails gain progress and a clearer premium affordance. */
+.v10-rail-shell{position:relative}
+.v10-rail-meta{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;margin-top:12px;color:var(--ink-soft)}
+.v10-rail-meta small{font:780 .56rem/1 var(--sans);letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}
+.v10-rail-track{height:1px;background:rgba(43,28,34,.12);overflow:hidden;position:relative}
+.v10-rail-track i{display:block;width:18%;height:100%;background:var(--v10-accent);transform-origin:left center;transform:scaleX(var(--v10-progress,0));transition:transform .12s linear}
+.v10-rail-count{font:700 .58rem/1 var(--sans);letter-spacing:.08em;min-width:50px;text-align:right}
+body.v10-polish [data-drag-rail]{scrollbar-width:none;scroll-snap-type:x proximity}
+body.v10-polish [data-drag-rail]::-webkit-scrollbar{display:none}
+body.v10-polish [data-drag-rail]>*{scroll-snap-align:start}
+
+/* Focus mode for comparisons and card groups. */
+.v10-focus-group{position:relative}
+.v10-focus-group.v10-has-focus>*{opacity:.56;filter:saturate(.8)}
+.v10-focus-group.v10-has-focus>.v10-is-focus{opacity:1;filter:none;transform:translateY(-5px);border-color:rgba(var(--v10-accent-rgb),.46)!important;box-shadow:0 24px 68px rgba(28,17,22,.12);z-index:2}
+.v10-focus-group>*{position:relative}
+
+/* Make selected states feel tactile rather than just recoloured. */
+body.v10-polish .pattern-tabs button[aria-selected="true"],
+body.v10-polish .v8-topic-tabs button[aria-selected="true"],
+body.v10-polish [data-choice][aria-selected="true"],
+body.v10-polish [data-atlas-choice][aria-selected="true"]{
+  box-shadow:inset 3px 0 0 var(--v10-accent),inset 0 0 0 1px rgba(var(--v10-accent-rgb),.12)
+}
+body.v10-polish .symptom-chip[aria-pressed="true"]{box-shadow:0 0 0 1px var(--v10-accent),0 10px 30px rgba(var(--v10-accent-rgb),.12)}
+
+/* Existing section dots become useful chapter markers. */
+body.v10-polish .v3-side-index{gap:9px}
+body.v10-polish .v3-side-index a{position:relative;transition:transform .18s ease,background .18s ease}
+body.v10-polish .v3-side-index a.is-active{background:var(--v10-accent);transform:scale(1.45)}
+body.v10-polish .v3-side-index a::after{
+  content:attr(data-v10-label);position:absolute;right:18px;top:50%;transform:translate(8px,-50%);opacity:0;pointer-events:none;
+  width:max-content;max-width:220px;padding:7px 9px;background:#171216;color:#fff;border:1px solid rgba(255,255,255,.1);
+  font:650 .58rem/1.2 var(--sans);letter-spacing:.04em;box-shadow:0 12px 34px rgba(0,0,0,.18);transition:.18s ease
+}
+body.v10-polish .v3-side-index a:hover::after,
+body.v10-polish .v3-side-index a:focus-visible::after{opacity:1;transform:translate(0,-50%)}
+
+/* Internal-link preview: one calm contextual card, not a noisy tooltip swarm. */
+.v10-link-preview{
+  position:fixed;left:22px;bottom:22px;width:min(330px,calc(100vw - 44px));z-index:180;
+  background:rgba(20,15,18,.96);color:#fff;border:1px solid rgba(255,255,255,.12);box-shadow:0 28px 80px rgba(0,0,0,.28);
+  padding:18px 18px 16px;opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .2s ease,transform .2s ease;backdrop-filter:blur(14px)
+}
+.v10-link-preview.is-visible{opacity:1;transform:none}
+.v10-link-preview small{display:block;color:var(--v10-accent-soft);font:800 .55rem/1 var(--sans);letter-spacing:.13em;text-transform:uppercase;margin-bottom:9px}
+.v10-link-preview strong{display:block;font:500 1.7rem/.95 var(--display);letter-spacing:-.025em;margin-bottom:8px}
+.v10-link-preview p{margin:0;color:rgba(255,255,255,.62);font-size:.74rem;line-height:1.5}
+
+/* Scroll-linked treatment route: amplify the active chapter only. */
+body.v10-polish .v8-route-theatre .process-chapter{transition:opacity .28s ease,filter .28s ease}
+body.v10-polish .v8-route-theatre .process-content.v10-route-tracking .process-chapter{opacity:.58}
+body.v10-polish .v8-route-theatre .process-content.v10-route-tracking .process-chapter.v10-route-active{opacity:1}
+body.v10-polish .v8-route-theatre .process-chapter.v10-route-active h3{text-shadow:0 0 44px rgba(var(--v10-accent-rgb),.12)}
+body.v10-polish .v8-route-theatre .process-chapter.v10-route-active::after{
+  content:"";position:absolute;left:0;top:22%;bottom:22%;width:2px;background:var(--v10-accent);box-shadow:0 0 22px rgba(var(--v10-accent-rgb),.35)
+}
+
+/* Refine menus / command palette without changing its information architecture. */
+body.v10-polish .v3-command-panel{border:1px solid rgba(var(--v10-accent-rgb),.2);box-shadow:0 38px 120px rgba(17,10,14,.32)}
+body.v10-polish .v3-command-item{transition:background .18s ease,transform .18s ease,border-color .18s ease}
+body.v10-polish .v3-command-item:hover{transform:translateX(3px);border-color:rgba(var(--v10-accent-rgb),.24)}
+body.v10-polish .v3-explore-toggle{position:relative;overflow:hidden}
+body.v10-polish .v3-explore-toggle::after{content:"";position:absolute;left:14px;right:14px;bottom:7px;height:1px;background:var(--v10-accent);transform:scaleX(0);transition:transform .2s ease}
+body.v10-polish .v3-explore-toggle:hover::after{transform:scaleX(1)}
+
+/* Tiny hover lift for high-value navigation surfaces. */
+body.v10-polish .hover-item,
+body.v10-polish .v5-index-grid a,
+body.v10-polish .related-care-links a,
+body.v10-polish .drag-card{transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease}
+body.v10-polish .hover-item:hover,
+body.v10-polish .v5-index-grid a:hover,
+body.v10-polish .drag-card:hover{transform:translateY(-4px);border-color:rgba(var(--v10-accent-rgb),.38);box-shadow:0 18px 54px rgba(31,18,24,.09)}
+
+@media (max-width:900px){
+  body.v10-polish .editorial-hero .hero-art{transform:none!important}
+  .v10-rail-meta{grid-template-columns:auto 1fr}.v10-rail-count{display:none}
+  .v10-link-preview{display:none}
+  body.v10-polish .v3-side-index a::after{display:none}
+  .v10-focus-group.v10-has-focus>*{opacity:1;filter:none}.v10-focus-group.v10-has-focus>.v10-is-focus{transform:none;box-shadow:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  body.v10-polish .editorial-hero .hero-art{transform:none!important;transition:none!important}
+  body.v10-polish .editorial-section::after,
+  body.v10-polish .section-head::before{transition:none!important}
+  .v10-link-preview{transition:none}
+}
