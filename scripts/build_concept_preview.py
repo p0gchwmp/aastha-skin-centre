@@ -8,15 +8,21 @@ import build_static_dist
 build_static_dist.PUBLIC_DIRECTORIES.add("concept")
 
 V3_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v3.css">'
+V3_FIX_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v3-fixes.css">'
 V3_JS = '<script src="/assets/js/editorial-experience-v3.js" defer></script>'
+V3_FIX_JS = '<script src="/assets/js/editorial-experience-v3-fixes.js" defer></script>'
 
 
 def inject_v3_assets(page: Path) -> None:
     source = page.read_text(encoding="utf-8")
     if V3_CSS not in source:
         source = source.replace("</head>", f"{V3_CSS}</head>", 1)
+    if V3_FIX_CSS not in source:
+        source = source.replace("</head>", f"{V3_FIX_CSS}</head>", 1)
     if V3_JS not in source:
         source = source.replace("</body>", f"{V3_JS}</body>", 1)
+    if V3_FIX_JS not in source:
+        source = source.replace("</body>", f"{V3_FIX_JS}</body>", 1)
     page.write_text(source, encoding="utf-8")
 
 
@@ -32,7 +38,7 @@ def main() -> int:
         raise RuntimeError("Concept homepage was not included in the preview build")
 
     # Apply the v3 experience layer to every concept page while leaving the
-    # original production pages in dist byte-for-byte on their existing system.
+    # original production pages in dist on their existing visual system.
     for page in concept_root.rglob("*.html"):
         inject_v3_assets(page)
 
