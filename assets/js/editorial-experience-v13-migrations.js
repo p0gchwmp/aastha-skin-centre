@@ -27,19 +27,74 @@
   requestAnimationFrame(rewriteAll);
 
   const destinations = [
-    ['Dark neck / acanthosis','Velvety neck or fold pigmentation','/concept/black-neck-acanthosis-nigricans-treatment/','black neck acanthosis insulin resistance pigmentation'],
-    ['Chickenpox scars','Indented or pigmented post-chickenpox marks','/concept/chickenpox-scar-treatment/','chickenpox scars pitted scar resurfacing'],
-    ['Corn treatment','Painful pressure lesions of the foot','/concept/corn-removal-treatment/','corn callus plantar wart foot'],
-    ['Cyst & lipoma','Skin lumps, cysts and fatty swellings','/concept/cyst-lipoma-removal/','cyst lipoma lump removal'],
-    ['Molluscum','Contagious dome-shaped viral bumps','/concept/molluscum-contagiosum-treatment/','molluscum viral bumps child'],
-    ['Paediatric dermatology','Dermatologist-led child skin care','/concept/paediatric-dermatology/','child baby eczema rash paediatric'],
-    ['Scabies','Night itch and household spread','/concept/scabies-treatment/','scabies itch mite family household'],
-    ['Skin biopsy','Diagnostic skin sampling','/concept/skin-biopsy/','biopsy punch shave histopathology'],
-    ['Skin cancer screening','Changing moles and suspicious lesions','/concept/skin-cancer-screening/','skin cancer mole melanoma screening'],
-    ['STI & genital skin','Confidential STI and genital dermatology assessment','/concept/sti-std-treatment/','sti std genital rash sexual health'],
-    ['White & grey hair','Hair-removal planning when laser cannot see pigment','/concept/white-hair-removal/','white grey hair electrolysis laser'],
-    ['Xanthelasma','Yellow eyelid plaque assessment and removal','/concept/xanthelasma-removal/','xanthelasma eyelid cholesterol plaque']
+    ['Dark neck / acanthosis','Velvety neck or fold pigmentation','/concept/black-neck-acanthosis-nigricans-treatment/','black neck acanthosis insulin resistance pigmentation','pigment'],
+    ['Chickenpox scars','Indented or pigmented post-chickenpox marks','/concept/chickenpox-scar-treatment/','chickenpox scars pitted scar resurfacing','scars'],
+    ['Corn treatment','Painful pressure lesions of the foot','/concept/corn-removal-treatment/','corn callus plantar wart foot','procedures'],
+    ['Cyst & lipoma','Skin lumps, cysts and fatty swellings','/concept/cyst-lipoma-removal/','cyst lipoma lump removal','procedures'],
+    ['Molluscum','Contagious dome-shaped viral bumps','/concept/molluscum-contagiosum-treatment/','molluscum viral bumps child','medical'],
+    ['Paediatric dermatology','Dermatologist-led child skin care','/concept/paediatric-dermatology/','child baby eczema rash paediatric','medical'],
+    ['Scabies','Night itch and household spread','/concept/scabies-treatment/','scabies itch mite family household','medical'],
+    ['Skin biopsy','Diagnostic skin sampling','/concept/skin-biopsy/','biopsy punch shave histopathology','procedures'],
+    ['Skin cancer screening','Changing moles and suspicious lesions','/concept/skin-cancer-screening/','skin cancer mole melanoma screening','medical'],
+    ['STI & genital skin','Confidential STI and genital dermatology assessment','/concept/sti-std-treatment/','sti std genital rash sexual health','medical'],
+    ['White & grey hair','Hair-removal planning when laser cannot see pigment','/concept/white-hair-removal/','white grey hair electrolysis laser','hair'],
+    ['Xanthelasma','Yellow eyelid plaque assessment and removal','/concept/xanthelasma-removal/','xanthelasma eyelid cholesterol plaque','procedures']
   ];
+
+  /* Make the new pages visible in the actual treatment directory, not only search. */
+  const treatmentDirectory = document.querySelector('[data-directory="treatments"]');
+  if (treatmentDirectory) {
+    destinations.forEach(([title,desc,href,,category]) => {
+      if (treatmentDirectory.querySelector(`a[href="${href}"]`)) return;
+      const a = document.createElement('a');
+      a.dataset.category = category;
+      a.href = href;
+      a.innerHTML = `<strong>${title}</strong><span>${desc}</span>`;
+      treatmentDirectory.appendChild(a);
+    });
+  }
+
+  /* Improve the concern hub wording and connect newly migrated routes. */
+  if (/\/concept\/conditions\/?$/.test(location.pathname)) {
+    const sectionHeads = [...document.querySelectorAll('.section-head .display-heading')];
+    sectionHeads.forEach(h => {
+      if (h.textContent.trim() === 'The original concern directory, made faster to scan.') h.textContent = 'Browse concerns by clinical family.';
+    });
+    document.querySelectorAll('.section-copy').forEach(p => {
+      if (p.textContent.includes('The older website repeatedly makes the same clinical point')) {
+        p.textContent = 'Several skin, hair and nail concerns can look similar at first glance. Assessment helps separate the diagnosis before medicines, procedures or lasers are chosen.';
+      }
+    });
+
+    const atlasButtons = [...document.querySelectorAll('[data-atlas-choice]')];
+    atlasButtons.forEach(btn => {
+      const title = btn.dataset.title;
+      let links = [];
+      try { links = JSON.parse(btn.dataset.links || '[]'); } catch (_) {}
+      const add = (label, href) => { if (!links.some(item => item[1] === href)) links.push([label, href]); };
+      if (title === 'Face') {
+        add('Dark neck / acanthosis','/concept/black-neck-acanthosis-nigricans-treatment/');
+        add('Xanthelasma','/concept/xanthelasma-removal/');
+      }
+      if (title === 'Scalp & hair') add('White & grey hair','/concept/white-hair-removal/');
+      if (title === 'Body') {
+        add('Molluscum','/concept/molluscum-contagiosum-treatment/');
+        add('Paediatric dermatology','/concept/paediatric-dermatology/');
+      }
+      if (title === 'Nails & growths') {
+        add('Cyst & lipoma','/concept/cyst-lipoma-removal/');
+        add('Corn treatment','/concept/corn-removal-treatment/');
+        add('Skin biopsy','/concept/skin-biopsy/');
+        add('Skin cancer screening','/concept/skin-cancer-screening/');
+      }
+      if (title === 'Infections & itching') {
+        add('Scabies','/concept/scabies-treatment/');
+        add('Molluscum','/concept/molluscum-contagiosum-treatment/');
+        add('STI & genital skin','/concept/sti-std-treatment/');
+      }
+      btn.dataset.links = JSON.stringify(links);
+    });
+  }
 
   const commandList = document.querySelector('.v3-command-list');
   if (commandList) {
