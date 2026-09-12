@@ -26,6 +26,7 @@ V5_FIX_JS = '<script src="/assets/js/editorial-experience-v5-fixes.js" defer></s
 V6_JS = '<script src="/assets/js/editorial-experience-v6.js" defer></script>'
 V6_POLISH_JS = '<script src="/assets/js/editorial-experience-v6-polish.js" defer></script>'
 V7_JS = '<script src="/assets/js/editorial-experience-v7.js" defer></script>'
+V7_POLISH_JS = '<script src="/assets/js/editorial-experience-v7-polish.js" defer></script>'
 
 
 def inject_experience_assets(page: Path) -> None:
@@ -33,7 +34,7 @@ def inject_experience_assets(page: Path) -> None:
     for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS, V6_CSS, V6_FIX_CSS, V7_CSS):
         if tag not in source:
             source = source.replace("</head>", f"{tag}</head>", 1)
-    for tag in (V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS, V6_JS, V6_POLISH_JS, V7_JS):
+    for tag in (V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS, V6_JS, V6_POLISH_JS, V7_JS, V7_POLISH_JS):
         if tag not in source:
             source = source.replace("</body>", f"{tag}</body>", 1)
     page.write_text(source, encoding="utf-8")
