@@ -10,23 +10,27 @@ build_static_dist.PUBLIC_DIRECTORIES.add("concept")
 FONT_PRECONNECT_1 = '<link rel="preconnect" href="https://fonts.googleapis.com">'
 FONT_PRECONNECT_2 = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
 FONT_STYLES = '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">'
+TRANSITION_GUARD = '<script>addEventListener("pageshow",()=>{document.body&&document.body.classList.remove("is-transitioning");document.documentElement.classList.remove("is-transitioning")});addEventListener("pagehide",()=>{document.body&&document.body.classList.remove("is-transitioning")});</script>'
 V3_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v3.css">'
 V3_FIX_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v3-fixes.css">'
 V4_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v4.css">'
 V5_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v5.css">'
+V6_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v6.css">'
+V6_FIX_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v6-fixes.css">'
 V3_JS = '<script src="/assets/js/editorial-experience-v3.js" defer></script>'
 V3_FIX_JS = '<script src="/assets/js/editorial-experience-v3-fixes.js" defer></script>'
 V4_JS = '<script src="/assets/js/editorial-experience-v4.js" defer></script>'
 V5_JS = '<script src="/assets/js/editorial-experience-v5.js" defer></script>'
 V5_FIX_JS = '<script src="/assets/js/editorial-experience-v5-fixes.js" defer></script>'
+V6_JS = '<script src="/assets/js/editorial-experience-v6.js" defer></script>'
 
 
 def inject_experience_assets(page: Path) -> None:
     source = page.read_text(encoding="utf-8")
-    for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS):
+    for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS, V6_CSS, V6_FIX_CSS):
         if tag not in source:
             source = source.replace("</head>", f"{tag}</head>", 1)
-    for tag in (V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS):
+    for tag in (V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS, V6_JS):
         if tag not in source:
             source = source.replace("</body>", f"{tag}</body>", 1)
     page.write_text(source, encoding="utf-8")
@@ -44,7 +48,7 @@ def main() -> int:
         raise RuntimeError("Concept homepage was not included in the preview build")
 
     concept_pages = list(concept_root.rglob("*.html"))
-    if len(concept_pages) < 22:
+    if len(concept_pages) < 28:
         raise RuntimeError(f"Concept migration unexpectedly small: {len(concept_pages)} pages")
 
     # Apply the premium experience only to concept pages. Production/static
