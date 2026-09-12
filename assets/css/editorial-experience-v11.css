@@ -1,0 +1,64 @@
+/* Aastha Editorial Experience v11 — palette lab + wording/polish layer */
+
+/* Preview-only palette lab. Current v10/v8 appearance remains the default. */
+body.v11-palette-bordeaux{
+  --ink:#160f12;--ink-soft:#45383c;--paper:#f2ece2;--paper-2:#e6dbcf;--white:#fffaf4;
+  --wine:#59162f;--wine-dark:#2d0c19;--rose:#c995a4;--line:rgba(22,15,18,.17);
+  --v8-night:#100c0f;--v8-charcoal:#181216;--v8-aubergine:#29131e;--v8-oxblood:#59162f;--v8-wine:#6a1d38;
+  --v8-bronze:#b78e66;--v8-bronze-soft:#dec09f;--v8-ivory:#f2ece2;--v8-stone:#d9cec1;
+}
+body.v11-palette-midnight{
+  --ink:#11151d;--ink-soft:#3d4651;--paper:#f3efe7;--paper-2:#e3ddd1;--white:#fffdf8;
+  --wine:#62213a;--wine-dark:#31111e;--rose:#c89baa;--line:rgba(17,21,29,.17);
+  --v8-night:#0d1118;--v8-charcoal:#141923;--v8-aubergine:#1d2330;--v8-oxblood:#62213a;--v8-wine:#7a2947;
+  --v8-bronze:#b69462;--v8-bronze-soft:#dcc39f;--v8-ivory:#f3efe7;--v8-stone:#d8d2c7;
+}
+body.v11-palette-forest{
+  --ink:#111714;--ink-soft:#3d4842;--paper:#f0ede5;--paper-2:#dde2da;--white:#fbfaf5;
+  --wine:#632333;--wine-dark:#321119;--rose:#b98e96;--line:rgba(17,23,20,.17);
+  --v8-night:#0d120f;--v8-charcoal:#141b17;--v8-aubergine:#1c2822;--v8-oxblood:#632333;--v8-wine:#713044;
+  --v8-bronze:#aa8b63;--v8-bronze-soft:#d6bd9b;--v8-ivory:#f0ede5;--v8-stone:#d5d3c9;
+}
+body.v11-palette-plum{
+  --ink:#171218;--ink-soft:#473d48;--paper:#f3ede5;--paper-2:#e4d9d6;--white:#fffaf6;
+  --wine:#54233e;--wine-dark:#2b1221;--rose:#c19aae;--line:rgba(23,18,24,.17);
+  --v8-night:#110d12;--v8-charcoal:#19131a;--v8-aubergine:#2d2030;--v8-oxblood:#54233e;--v8-wine:#6c2b50;
+  --v8-bronze:#b99a73;--v8-bronze-soft:#dfc7a7;--v8-ivory:#f3ede5;--v8-stone:#d9cec8;
+}
+
+/* Ensure the darker v8 surfaces inherit palette variables cleanly. */
+body[class*="v11-palette-"] .concept-nav{transition:background .28s ease,border-color .28s ease,color .28s ease}
+body[class*="v11-palette-"] .editorial-hero,
+body[class*="v11-palette-"] .v8-route-theatre,
+body[class*="v11-palette-"] .v8-form-aside{transition:background .32s ease,color .32s ease,border-color .32s ease}
+
+/* Palette lab — deliberately small, square and preview-only. */
+.v11-palette-lab{position:fixed;left:18px;bottom:18px;z-index:1200;font-family:var(--sans)}
+.v11-palette-toggle{height:38px;padding:0 13px;border:1px solid rgba(255,255,255,.22);background:#151115;color:#fff;text-transform:uppercase;letter-spacing:.11em;font-size:.58rem;cursor:pointer;box-shadow:0 12px 35px rgba(0,0,0,.18)}
+.v11-palette-panel{position:absolute;left:0;bottom:46px;width:min(340px,calc(100vw - 36px));background:#151115;color:#fff;border:1px solid rgba(255,255,255,.16);box-shadow:0 24px 70px rgba(0,0,0,.26);padding:12px;display:none}
+.v11-palette-lab.is-open .v11-palette-panel{display:block}
+.v11-palette-head{display:flex;justify-content:space-between;gap:16px;align-items:end;padding:8px 8px 12px;border-bottom:1px solid rgba(255,255,255,.12)}
+.v11-palette-head strong{font:500 1.55rem/1 var(--display)}
+.v11-palette-head small{font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.v11-palette-options{display:grid;gap:1px;background:rgba(255,255,255,.09);margin-top:10px}
+.v11-palette-option{border:0;background:#1b171b;color:#fff;padding:12px;text-align:left;cursor:pointer;display:grid;grid-template-columns:70px 1fr;gap:12px;align-items:center}
+.v11-palette-option:hover,.v11-palette-option[aria-pressed="true"]{background:#2a2026}
+.v11-palette-swatches{display:grid;grid-template-columns:repeat(4,1fr);height:26px;border:1px solid rgba(255,255,255,.15)}
+.v11-palette-swatches i{display:block}
+.v11-palette-option strong{display:block;font-size:.72rem;letter-spacing:.02em}
+.v11-palette-option small{display:block;margin-top:3px;color:rgba(255,255,255,.5);font-size:.58rem;line-height:1.35}
+.v11-palette-note{margin:10px 8px 3px;color:rgba(255,255,255,.48);font-size:.58rem;line-height:1.45}
+
+/* Slightly more deliberate copy hierarchy once wording is tightened. */
+body.v11-copy-polish .hero-copy{max-width:56ch}
+body.v11-copy-polish .section-copy,body.v11-copy-polish .detail-intro{line-height:1.72}
+body.v11-copy-polish .display-heading{letter-spacing:-.05em}
+body.v11-copy-polish .section-head p{margin-top:18px}
+
+/* Navigation link preview gets a cleaner editorial label in v11. */
+body.v11-copy-polish .v10-link-preview small{letter-spacing:.13em}
+
+@media(max-width:760px){
+  .v11-palette-lab{left:10px;bottom:64px}.v11-palette-toggle{height:34px;padding:0 10px}.v11-palette-panel{bottom:42px}
+}
+@media(prefers-reduced-motion:reduce){body[class*="v11-palette-"] *{transition-duration:.01ms!important}}
