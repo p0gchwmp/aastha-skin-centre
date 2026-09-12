@@ -1,0 +1,139 @@
+/* Aastha Editorial Experience v6 — richer palette, tighter craft, deeper interaction */
+:root{
+  --paper:#f3efe8;
+  --paper-2:#ebe4da;
+  --paper-3:#e3e8e1;
+  --paper-rose:#eadfe1;
+  --ink:#171315;
+  --ink-soft:#554b4e;
+  --wine:#611b34;
+  --wine-dark:#3c1223;
+  --aubergine:#2c1a24;
+  --sage:#7e897a;
+  --sage-deep:#5f6f62;
+  --stone:#cbc2b7;
+  --bronze:#9b7654;
+  --bronze-soft:#d7c4ad;
+  --line:rgba(23,19,21,.16);
+  --line-strong:rgba(23,19,21,.3);
+  --shadow-soft:0 18px 60px rgba(31,20,24,.08);
+  --shadow-lift:0 26px 80px rgba(31,20,24,.13);
+}
+body.concept-page{background:var(--paper);color:var(--ink)}
+body.concept-page::after{background:var(--wine-dark)}
+.concept-nav{background:rgba(243,239,232,.94);border-color:var(--line);box-shadow:0 10px 35px rgba(25,18,21,.04)}
+.brand-mark{color:var(--ink)}
+.brand-mark span{color:var(--wine)}
+.concept-links a[aria-current="page"]{color:var(--wine)}
+.btn,.nav-cta,.v3-explore-toggle{background:var(--wine);border-color:var(--wine);color:#fff}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn:hover,.nav-cta:hover,.v3-explore-toggle:hover{background:var(--aubergine);border-color:var(--aubergine)}
+.btn.alt:hover{background:var(--ink);color:#fff}
+
+/* More tonal variety without looking like a rainbow. */
+main>.editorial-section:nth-of-type(5n+1){background:var(--paper)}
+main>.editorial-section:nth-of-type(5n+2){background:linear-gradient(135deg,rgba(97,27,52,.035),rgba(255,255,255,.12))}
+main>.editorial-section:nth-of-type(5n+3){background:linear-gradient(135deg,rgba(126,137,122,.095),rgba(243,239,232,.78))}
+main>.editorial-section:nth-of-type(5n+4){background:linear-gradient(135deg,rgba(155,118,84,.06),rgba(255,255,255,.13))}
+main>.editorial-section:nth-of-type(5n){background:linear-gradient(135deg,rgba(44,26,36,.028),rgba(234,223,225,.52))}
+.stats-band{background:var(--aubergine);color:#fff}
+.stats-band .stat span{color:rgba(255,255,255,.72)}
+.v3-marquee,.marquee-band{background:var(--wine-dark);color:#fff}
+
+/* Command / Explore console — clear hierarchy, categories, zero collisions. */
+.v3-command{background:rgba(23,19,21,.76);backdrop-filter:blur(18px)}
+.v3-command-panel{width:min(1120px,calc(100vw - 34px));max-height:min(820px,90vh);background:var(--paper);border:1px solid rgba(255,255,255,.28);box-shadow:0 46px 140px rgba(0,0,0,.42)}
+.v3-command-head{grid-template-columns:1fr auto;background:var(--paper)}
+.v3-command-head input{font-family:var(--display);font-size:clamp(1.7rem,3.4vw,3.25rem);line-height:1;padding:25px 28px;color:var(--ink)}
+.v3-command-close{min-width:112px;color:var(--ink);font-weight:750}
+.v3-command-list{padding:0;overflow:auto;background:var(--paper)}
+.v6-command-meta{display:flex;justify-content:space-between;gap:16px;padding:12px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.28);font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-soft)}
+.v6-command-group{border-bottom:1px solid var(--line)}
+.v6-command-group:last-child{border-bottom:0}
+.v6-command-group-title{position:sticky;top:0;z-index:2;padding:10px 20px;background:rgba(243,239,232,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);font-size:.61rem;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--wine)}
+.v6-command-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.v3-command-item{display:grid;grid-template-columns:34px minmax(0,1fr) 24px;align-items:center;gap:14px;padding:17px 20px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:88px;color:var(--ink);text-decoration:none}
+.v3-command-item:nth-child(2n){border-right:0}
+.v3-command-item>div{display:grid;grid-template-columns:1fr;gap:5px;min-width:0}
+.v3-command-item strong{display:block;font:500 clamp(1.35rem,1.8vw,1.8rem)/1 var(--display);letter-spacing:-.028em;white-space:normal}
+.v3-command-item>div small{display:block;font:600 .62rem/1.35 var(--sans);letter-spacing:.095em;text-transform:uppercase;color:var(--ink-soft);white-space:normal}
+.v3-command-item>small:first-child{font:700 .6rem/1 var(--sans);letter-spacing:.1em;color:var(--bronze)}
+.v3-command-item:hover,.v3-command-item:focus-visible{background:var(--aubergine);color:#fff;transform:none;box-shadow:none}
+.v3-command-item:hover>div small,.v3-command-item:focus-visible>div small,.v3-command-item:hover>small:first-child{color:rgba(255,255,255,.68)}
+.v6-command-empty{display:none;padding:42px 24px;text-align:center;color:var(--ink-soft)}
+.v6-command-empty.is-visible{display:block}
+
+/* Denser, richer How care works section. */
+#approach .process-stage{margin-top:10px}
+.v6-care-ribbon{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-bottom:0;background:rgba(255,255,255,.36)}
+.v6-care-ribbon article{padding:18px 20px;border-right:1px solid var(--line);min-height:118px}
+.v6-care-ribbon article:last-child{border-right:0}
+.v6-care-ribbon small{display:block;color:var(--wine);font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+.v6-care-ribbon strong{display:block;font:500 1.5rem/1 var(--display);margin-bottom:6px}
+.v6-care-ribbon p{font-size:.78rem;line-height:1.5;color:var(--ink-soft);margin:0}
+.v6-decision-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);border:1px solid var(--line);border-top:0;background:var(--paper)}
+.v6-decision-main{padding:24px 26px;border-right:1px solid var(--line)}
+.v6-decision-main h3,.v6-decision-side h3{font:500 clamp(1.65rem,2.4vw,2.45rem)/1 var(--display);margin:0 0 15px}
+.v6-decision-chips{display:flex;flex-wrap:wrap;gap:7px}
+.v6-decision-chips span{padding:8px 10px;border:1px solid var(--line-strong);font-size:.68rem;text-transform:uppercase;letter-spacing:.075em;background:rgba(255,255,255,.42)}
+.v6-decision-side{padding:24px 26px;background:var(--aubergine);color:#fff}
+.v6-decision-side p{color:rgba(255,255,255,.72);margin:0}
+.process-stage{box-shadow:var(--shadow-soft)}
+.process-nav{background:rgba(255,255,255,.35)}
+.process-nav button.is-active{background:var(--wine);color:#fff}
+.process-chapter{background:rgba(255,255,255,.18)}
+
+/* Treatment-page clinical compass — useful interaction, not decoration. */
+.v6-compass{border:1px solid var(--line);background:var(--paper);box-shadow:var(--shadow-soft)}
+.v6-compass-head{display:grid;grid-template-columns:minmax(220px,.65fr) minmax(0,1.35fr);border-bottom:1px solid var(--line)}
+.v6-compass-head>div{padding:20px 22px}
+.v6-compass-head>div:first-child{border-right:1px solid var(--line);background:var(--aubergine);color:#fff}
+.v6-compass-head small{display:block;text-transform:uppercase;letter-spacing:.13em;font-size:.59rem;font-weight:800;opacity:.72;margin-bottom:8px}
+.v6-compass-head h3{font:500 clamp(1.85rem,3vw,3rem)/.95 var(--display);margin:0}
+.v6-compass-head p{margin:0;color:var(--ink-soft)}
+.v6-compass-body{display:grid;grid-template-columns:minmax(230px,.42fr) minmax(0,1.58fr)}
+.v6-compass-nav{border-right:1px solid var(--line)}
+.v6-compass-nav button{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;padding:15px 18px;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:center;cursor:pointer;color:var(--ink)}
+.v6-compass-nav button:last-child{border-bottom:0}
+.v6-compass-nav button[aria-selected="true"]{background:var(--wine);color:#fff}
+.v6-compass-nav small{font-size:.58rem;letter-spacing:.1em}
+.v6-compass-nav strong{font-size:.78rem;text-transform:uppercase;letter-spacing:.055em}
+.v6-compass-stage{padding:24px 28px;min-height:210px;position:relative;overflow:hidden}
+.v6-compass-stage::after{content:"";position:absolute;width:220px;height:220px;border:1px solid rgba(97,27,52,.15);border-radius:50%;right:-70px;bottom:-120px}
+.v6-compass-stage h4{font:500 clamp(2rem,4vw,4rem)/.9 var(--display);letter-spacing:-.04em;margin:0 0 12px;max-width:12ch}
+.v6-compass-stage p{max-width:70ch;color:var(--ink-soft)}
+.v6-compass-stage .v6-compass-tag{display:inline-flex;margin-top:12px;padding:8px 10px;background:var(--paper-3);border:1px solid rgba(95,111,98,.25);font-size:.63rem;text-transform:uppercase;letter-spacing:.09em;font-weight:800}
+
+/* Treatment pages get a denser top quarter and stronger reading rhythm. */
+body.concept-page main>.editorial-hero+.editorial-section{padding-top:40px;padding-bottom:40px}
+.v4-facts{box-shadow:0 10px 32px rgba(27,18,22,.045)}
+.v4-fact:nth-child(4n+1){background:rgba(234,223,225,.48)}
+.v4-fact:nth-child(4n+2){background:rgba(227,232,225,.58)}
+.v4-fact:nth-child(4n+3){background:rgba(215,196,173,.32)}
+.v4-fact:nth-child(4n){background:rgba(255,255,255,.38)}
+.longform li:hover{background:rgba(97,27,52,.035)}
+.v5-pathway-row{transition:background .2s ease,transform .2s ease}
+.v5-pathway-row:hover{background:rgba(126,137,122,.08);transform:translateX(3px)}
+.v5-compare article:first-child{background:rgba(227,232,225,.55)}
+.v5-compare article:last-child{background:rgba(234,223,225,.5)}
+.v5-warning{background:var(--aubergine);color:#fff;border-color:var(--aubergine)}
+.v5-warning p{color:rgba(255,255,255,.7)}
+
+/* Distinctive scroll progress — quiet, useful, visible. */
+.v6-reading-progress{position:fixed;left:0;top:65px;height:2px;width:0;background:linear-gradient(90deg,var(--bronze),var(--wine));z-index:1001;pointer-events:none;transition:width .08s linear}
+
+/* Make related navigation feel editorial, not footer filler. */
+.v4-related{background:var(--aubergine)}
+.v4-related-card:hover{background:var(--wine)}
+.v4-related-card strong{letter-spacing:-.03em}
+
+@media(max-width:900px){
+  .v6-command-grid{grid-template-columns:1fr}.v3-command-item{border-right:0}.v3-command-panel{width:min(100% - 20px,760px)}
+  .v6-care-ribbon{grid-template-columns:repeat(2,1fr)}.v6-care-ribbon article:nth-child(2){border-right:0}.v6-care-ribbon article:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .v6-decision-grid,.v6-compass-head,.v6-compass-body{grid-template-columns:1fr}.v6-decision-main,.v6-compass-head>div:first-child,.v6-compass-nav{border-right:0;border-bottom:1px solid var(--line)}
+  .v6-compass-nav{display:grid;grid-template-columns:repeat(2,1fr)}.v6-compass-nav button{border-right:1px solid var(--line)}
+}
+@media(max-width:620px){
+  .v3-command-head input{font-size:1.55rem;padding:20px}.v3-command-close{min-width:82px;padding:0 14px}.v3-command-item{min-height:82px;padding:14px 15px}.v6-care-ribbon{grid-template-columns:1fr}.v6-care-ribbon article{border-right:0;border-bottom:1px solid var(--line)}.v6-care-ribbon article:last-child{border-bottom:0}.v6-compass-nav{grid-template-columns:1fr}.v6-compass-nav button{border-right:0}.v6-compass-stage{padding:22px}.v6-decision-grid{display:block}.v6-reading-progress{top:64px}
+}
+@media(prefers-reduced-motion:reduce){.v5-pathway-row{transition:none}.v6-reading-progress{transition:none}}
