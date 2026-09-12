@@ -33,6 +33,7 @@ V7_POLISH_JS = '<script src="/assets/js/editorial-experience-v7-polish.js" defer
 V8_JS = '<script src="/assets/js/editorial-experience-v8.js" defer></script>'
 V10_JS = '<script src="/assets/js/editorial-experience-v10.js" defer></script>'
 V11_JS = '<script src="/assets/js/editorial-experience-v11.js" defer></script>'
+V11_MIGRATIONS_JS = '<script src="/assets/js/editorial-experience-v11-migrations.js" defer></script>'
 
 
 def inject_experience_assets(page: Path) -> None:
@@ -40,7 +41,7 @@ def inject_experience_assets(page: Path) -> None:
     for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS, V6_CSS, V6_FIX_CSS, V7_CSS, V8_CSS, V10_CSS, V11_CSS):
         if tag not in source:
             source = source.replace("</head>", f"{tag}</head>", 1)
-    for tag in (V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS, V6_JS, V6_POLISH_JS, V7_JS, V7_POLISH_JS, V8_JS, V10_JS, V11_JS):
+    for tag in (V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS, V6_JS, V6_POLISH_JS, V7_JS, V7_POLISH_JS, V8_JS, V10_JS, V11_JS, V11_MIGRATIONS_JS):
         if tag not in source:
             source = source.replace("</body>", f"{tag}</body>", 1)
     page.write_text(source, encoding="utf-8")
@@ -58,7 +59,7 @@ def main() -> int:
         raise RuntimeError("Concept homepage was not included in the preview build")
 
     concept_pages = list(concept_root.rglob("*.html"))
-    if len(concept_pages) < 42:
+    if len(concept_pages) < 47:
         raise RuntimeError(f"Concept migration unexpectedly small: {len(concept_pages)} pages")
 
     # Apply the premium experience only to concept pages. Production/static
