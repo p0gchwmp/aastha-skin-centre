@@ -3,7 +3,7 @@
 from pathlib import Path
 import shutil
 
-from scripts import build_static_dist
+import build_static_dist
 
 build_static_dist.PUBLIC_DIRECTORIES.add("concept")
 
