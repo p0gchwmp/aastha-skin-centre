@@ -1,0 +1,264 @@
+/* Aastha Editorial Experience v15 — visibility / contrast contract
+   Keep the softer v14 palette, but make text pairing deterministic.
+   Light surfaces always receive dark ink; dark anchors always receive ivory.
+*/
+
+html[data-aastha-mode="light"] body.concept-page{
+  --v15-on-light:var(--theme-ink);
+  --v15-on-light-muted:color-mix(in srgb,var(--theme-ink) 70%,var(--theme-paper));
+  --v15-on-light-soft:color-mix(in srgb,var(--theme-ink) 56%,var(--theme-paper));
+  --v15-on-dark:#f5efe9;
+  --v15-on-dark-muted:rgba(245,239,233,.72);
+  --v15-on-dark-soft:rgba(245,239,233,.56);
+  --v15-light-line:color-mix(in srgb,var(--theme-ink) 14%,transparent);
+}
+
+/* --------------------------------------------------------------------------
+   Header / navigation: v8 used white text because the nav used to be dark.
+   The current nav is light, so explicitly pair it with dark ink.
+   -------------------------------------------------------------------------- */
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .concept-nav,
+html[data-aastha-mode="light"] body.concept-page .concept-nav{
+  color:var(--v15-on-light)!important;
+}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .concept-nav .brand-mark,
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .concept-nav .concept-links a,
+html[data-aastha-mode="light"] body.concept-page .concept-nav .brand-mark,
+html[data-aastha-mode="light"] body.concept-page .concept-nav .concept-links a{
+  color:var(--v15-on-light)!important;
+  opacity:1!important;
+}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .concept-nav .brand-mark span,
+html[data-aastha-mode="light"] body.concept-page .concept-nav .brand-mark span{
+  color:color-mix(in srgb,var(--theme-accent) 62%,var(--theme-ink))!important;
+  opacity:.82!important;
+}
+html[data-aastha-mode="light"] body.concept-page .concept-nav .concept-links a:hover,
+html[data-aastha-mode="light"] body.concept-page .concept-nav .concept-links a:focus-visible{
+  color:var(--theme-accent)!important;
+}
+html[data-aastha-mode="light"] body.concept-page .concept-nav .v3-explore-toggle{
+  background:var(--theme-accent)!important;
+  border-color:var(--theme-accent)!important;
+  color:#fff!important;
+}
+html[data-aastha-mode="light"] body.concept-page .concept-nav .nav-cta{
+  background:var(--theme-metal)!important;
+  border-color:var(--theme-metal)!important;
+  color:color-mix(in srgb,var(--theme-ink) 92%,#000)!important;
+}
+
+/* --------------------------------------------------------------------------
+   Light shared surfaces. These components have existed across several design
+   versions, so never allow them to inherit stale white text.
+   -------------------------------------------------------------------------- */
+html[data-aastha-mode="light"] body.concept-page :is(
+  .v7-page-map,
+  .concern-explorer,
+  .pattern-explorer,
+  .v3-search-shell,
+  .v3-atlas,
+  .v3-choice-matrix,
+  .v3-reading-card,
+  .editorial-panel,
+  .drag-card,
+  .v4-facts,
+  .v4-fact,
+  .v4-note:not(.wine),
+  .fact-table,
+  .clinic-switch,
+  .clinic-panel,
+  .v6-compass,
+  .v7-pattern-system,
+  .v8-topic-explorer,
+  .v8-topic-stage,
+  .v8-booking-grid,
+  .v8-contact-grid a,
+  .v8-form-shell,
+  #approach .v7-care-stage,
+  #approach .v7-care-stage .process-nav,
+  #approach .v7-care-stage .process-content,
+  .v3-command-panel,
+  .v3-command-head,
+  .v3-command-list,
+  .v12-theme-panel,
+  .v12-theme-option
+){
+  color:var(--v15-on-light)!important;
+}
+
+html[data-aastha-mode="light"] body.concept-page :is(
+  .v3-reading-card,
+  .editorial-panel,
+  .drag-card,
+  .v4-fact,
+  .v4-note:not(.wine),
+  .fact-table,
+  .clinic-panel,
+  .v6-compass,
+  .v7-pattern-system,
+  .v8-topic-stage,
+  .v8-contact-grid a,
+  .v8-form-shell,
+  .v3-command-panel,
+  .v12-theme-panel
+) :is(p,dd,small,.section-copy,.detail-intro){
+  color:var(--v15-on-light-muted)!important;
+}
+
+html[data-aastha-mode="light"] body.concept-page :is(
+  .v3-reading-card,
+  .editorial-panel,
+  .drag-card,
+  .v4-fact,
+  .v4-note:not(.wine),
+  .fact-table,
+  .clinic-panel,
+  .v6-compass,
+  .v7-pattern-system,
+  .v8-topic-stage,
+  .v8-contact-grid a,
+  .v8-form-shell,
+  .v3-command-panel,
+  .v12-theme-panel
+) :is(h2,h3,h4,strong,dt){
+  color:var(--v15-on-light)!important;
+}
+
+/* Page map / utility links */
+html[data-aastha-mode="light"] body.concept-page .v7-page-map a{
+  color:var(--v15-on-light-muted)!important;
+  border-color:var(--v15-light-line)!important;
+}
+html[data-aastha-mode="light"] body.concept-page .v7-page-map a:hover,
+html[data-aastha-mode="light"] body.concept-page .v7-page-map a:focus-visible,
+html[data-aastha-mode="light"] body.concept-page .v7-page-map a[aria-current="true"]{
+  color:var(--v15-on-light)!important;
+}
+
+/* Command / Explore palette */
+html[data-aastha-mode="light"] body.concept-page .v3-command-head input,
+html[data-aastha-mode="light"] body.concept-page .v3-command-head button,
+html[data-aastha-mode="light"] body.concept-page .v3-command-item,
+html[data-aastha-mode="light"] body.concept-page .v3-command-item strong{
+  color:var(--v15-on-light)!important;
+}
+html[data-aastha-mode="light"] body.concept-page .v3-command-item small,
+html[data-aastha-mode="light"] body.concept-page .v6-command-group-title,
+html[data-aastha-mode="light"] body.concept-page .v3-command-head input::placeholder{
+  color:var(--v15-on-light-soft)!important;
+  opacity:1!important;
+}
+html[data-aastha-mode="light"] body.concept-page .v3-command-item:hover,
+html[data-aastha-mode="light"] body.concept-page .v3-command-item:focus-visible{
+  color:var(--v15-on-light)!important;
+}
+
+/* Palette chooser */
+html[data-aastha-mode="light"] body.concept-page .v12-theme-panel,
+html[data-aastha-mode="light"] body.concept-page .v12-theme-option{
+  color:var(--v15-on-light)!important;
+}
+html[data-aastha-mode="light"] body.concept-page .v12-theme-option small,
+html[data-aastha-mode="light"] body.concept-page .v12-theme-note,
+html[data-aastha-mode="light"] body.concept-page .v12-theme-head small{
+  color:var(--v15-on-light-muted)!important;
+}
+
+/* Forms and inputs on light surfaces */
+html[data-aastha-mode="light"] body.concept-page :is(input,select,textarea){
+  color:var(--v15-on-light)!important;
+}
+html[data-aastha-mode="light"] body.concept-page :is(input,textarea)::placeholder{
+  color:var(--v15-on-light-soft)!important;
+  opacity:1!important;
+}
+
+/* Explorer / tab systems: inactive lives on light; selected gets its own pair. */
+html[data-aastha-mode="light"] body.concept-page :is(
+  .pattern-tabs button,
+  .v8-topic-tabs button,
+  .v6-compass-nav button,
+  .v3-atlas-nav button,
+  .v3-choice-nav button,
+  #approach .v7-care-stage .process-nav button
+){
+  color:var(--v15-on-light-muted)!important;
+}
+html[data-aastha-mode="light"] body.concept-page :is(
+  .pattern-tabs button,
+  .v8-topic-tabs button,
+  .v6-compass-nav button,
+  .v3-atlas-nav button,
+  .v3-choice-nav button,
+  #approach .v7-care-stage .process-nav button
+)[aria-selected="true"],
+html[data-aastha-mode="light"] body.concept-page #approach .v7-care-stage .process-nav button.is-active{
+  color:#fff!important;
+}
+
+/* --------------------------------------------------------------------------
+   Dark anchors: explicitly restore a readable on-dark pair after the broad
+   light-surface contract above.
+   -------------------------------------------------------------------------- */
+html[data-aastha-mode="light"] body.concept-page :is(
+  .editorial-hero,
+  .v8-dark-anchor,
+  .v8-route-theatre,
+  .v7-unified-treatment .process-stage.v8-route-theatre,
+  .v8-form-aside,
+  .stats-band,
+  .v5-warning,
+  .v4-note.wine,
+  .v4-related,
+  .concept-footer
+){
+  color:var(--v15-on-dark)!important;
+}
+html[data-aastha-mode="light"] body.concept-page :is(
+  .editorial-hero,
+  .v8-dark-anchor,
+  .v8-route-theatre,
+  .v8-form-aside,
+  .stats-band,
+  .v5-warning,
+  .v4-note.wine,
+  .v4-related,
+  .concept-footer
+) :is(h1,h2,h3,h4,strong,a){
+  color:var(--v15-on-dark)!important;
+}
+html[data-aastha-mode="light"] body.concept-page :is(
+  .editorial-hero,
+  .v8-dark-anchor,
+  .v8-route-theatre,
+  .v8-form-aside,
+  .stats-band,
+  .v5-warning,
+  .v4-note.wine,
+  .v4-related,
+  .concept-footer
+) :is(p,small,.section-copy,.detail-intro){
+  color:var(--v15-on-dark-muted)!important;
+}
+
+/* Preserve intentional CTA contrast inside dark hero. */
+html[data-aastha-mode="light"] body.concept-page .editorial-hero .btn:not(.alt){
+  color:color-mix(in srgb,var(--theme-ink) 92%,#000)!important;
+}
+html[data-aastha-mode="light"] body.concept-page .editorial-hero .btn.alt{
+  color:var(--v15-on-dark)!important;
+}
+
+/* Ensure selected topic tabs stay readable after light-surface rules. */
+html[data-aastha-mode="light"] body.concept-page .pattern-tabs button[aria-selected="true"],
+html[data-aastha-mode="light"] body.concept-page .v8-topic-tabs button[aria-selected="true"],
+html[data-aastha-mode="light"] body.concept-page .v6-compass-nav button[aria-selected="true"]{
+  color:#fff!important;
+}
+
+/* Keyboard focus should be visible regardless of palette. */
+html[data-aastha-mode="light"] body.concept-page :focus-visible{
+  outline:2px solid color-mix(in srgb,var(--theme-accent) 68%,var(--theme-ink));
+  outline-offset:3px;
+}
