@@ -24,6 +24,7 @@ V8_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v8.css">
 V10_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v10.css">'
 V11_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v11.css">'
 V12_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v12.css">'
+V14_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v14.css">'
 V3_JS = '<script src="/assets/js/editorial-experience-v3.js" defer></script>'
 V3_FIX_JS = '<script src="/assets/js/editorial-experience-v3-fixes.js" defer></script>'
 V4_JS = '<script src="/assets/js/editorial-experience-v4.js" defer></script>'
@@ -43,7 +44,7 @@ V13_MIGRATIONS_JS = '<script src="/assets/js/editorial-experience-v13-migrations
 
 def inject_experience_assets(page: Path) -> None:
     source = page.read_text(encoding="utf-8")
-    for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, THEME_BOOT, V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS, V6_CSS, V6_FIX_CSS, V7_CSS, V8_CSS, V10_CSS, V11_CSS, V12_CSS):
+    for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, THEME_BOOT, V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS, V6_CSS, V6_FIX_CSS, V7_CSS, V8_CSS, V10_CSS, V11_CSS, V12_CSS, V14_CSS):
         if tag not in source:
             source = source.replace("</head>", f"{tag}</head>", 1)
     for tag in (V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS, V6_JS, V6_POLISH_JS, V7_JS, V7_POLISH_JS, V8_JS, V10_JS, V11_JS, V11_MIGRATIONS_JS, V12_JS, V13_MIGRATIONS_JS):
