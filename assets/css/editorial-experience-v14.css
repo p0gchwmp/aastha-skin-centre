@@ -1,0 +1,178 @@
+/* Aastha Editorial Experience v14 — softer contrast, richer tonal continuity */
+
+/*
+  v14 is deliberately an override layer on the stable v8/v10 structure.
+  It reduces harsh black/white and wine/ivory jumps without flattening the
+  editorial hierarchy or removing the darker hero / treatment-route anchors.
+*/
+html[data-aastha-mode="light"] body.concept-page{
+  --v14-surface:color-mix(in srgb,var(--theme-paper) 94%,var(--theme-paper-2) 6%);
+  --v14-surface-2:color-mix(in srgb,var(--theme-paper) 82%,var(--theme-paper-2) 18%);
+  --v14-surface-3:color-mix(in srgb,var(--theme-paper) 84%,var(--theme-paper-3) 16%);
+  --v14-tint:color-mix(in srgb,var(--theme-accent) 4.5%,var(--theme-paper));
+  --v14-metal-tint:color-mix(in srgb,var(--theme-metal) 6%,var(--theme-paper));
+  --v14-line:color-mix(in srgb,var(--theme-ink) 10%,transparent);
+  --v14-line-strong:color-mix(in srgb,var(--theme-ink) 17%,transparent);
+  --v14-deep:color-mix(in srgb,var(--theme-night-3) 90%,var(--theme-paper) 10%);
+  --v14-deep-2:color-mix(in srgb,var(--theme-night-2) 88%,var(--theme-paper) 12%);
+  --v14-deep-accent:color-mix(in srgb,var(--theme-accent-deep) 68%,var(--theme-night-3) 32%);
+  --line:var(--v14-line);
+  --line-strong:var(--v14-line-strong);
+}
+
+/* Section pacing: close tonal neighbours rather than bright alternating bands. */
+html[data-aastha-mode="light"] body.concept-page main>.editorial-section:nth-of-type(5n+1){background:var(--v14-surface)}
+html[data-aastha-mode="light"] body.concept-page main>.editorial-section:nth-of-type(5n+2){background:linear-gradient(135deg,var(--v14-tint),var(--v14-surface))}
+html[data-aastha-mode="light"] body.concept-page main>.editorial-section:nth-of-type(5n+3){background:linear-gradient(135deg,var(--v14-surface-3),var(--v14-surface))}
+html[data-aastha-mode="light"] body.concept-page main>.editorial-section:nth-of-type(5n+4){background:linear-gradient(135deg,var(--v14-metal-tint),var(--v14-surface))}
+html[data-aastha-mode="light"] body.concept-page main>.editorial-section:nth-of-type(5n){background:linear-gradient(135deg,color-mix(in srgb,var(--theme-accent) 3%,var(--theme-paper)),var(--v14-surface-2))}
+
+/* Keep the cinematic hero, but move it away from near-black. */
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero{
+  background:
+    radial-gradient(circle at 84% 14%,color-mix(in srgb,var(--theme-accent) 24%,transparent),transparent 33%),
+    radial-gradient(circle at 12% 88%,color-mix(in srgb,var(--theme-metal) 9%,transparent),transparent 31%),
+    linear-gradient(135deg,var(--v14-deep-2),var(--v14-deep) 64%,color-mix(in srgb,var(--theme-accent-deep) 52%,var(--v14-deep)));
+  border-bottom-color:rgba(255,255,255,.07)
+}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero .hero-copy{color:rgba(247,241,235,.68)}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero .hero-art{background:linear-gradient(145deg,rgba(255,255,255,.052),rgba(255,255,255,.015));border-color:rgba(255,255,255,.11);box-shadow:0 30px 80px rgba(0,0,0,.18)}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero .hero-art img{opacity:.17}
+
+/* Navigation and sticky UI should feel integrated rather than bright overlays. */
+html[data-aastha-mode="light"] body.concept-page .concept-nav{background:color-mix(in srgb,var(--theme-paper) 96%,transparent);border-color:var(--v14-line);box-shadow:0 10px 30px rgba(30,20,24,.025)}
+html[data-aastha-mode="light"] body.concept-page .v7-page-map{background:color-mix(in srgb,var(--theme-paper) 96%,transparent);border-color:var(--v14-line)}
+html[data-aastha-mode="light"] body.concept-page .v7-page-map a{border-color:var(--v14-line);color:color-mix(in srgb,var(--theme-ink) 72%,var(--theme-paper))}
+html[data-aastha-mode="light"] body.concept-page .v7-page-map a:hover,
+html[data-aastha-mode="light"] body.concept-page .v7-page-map a:focus-visible{background:color-mix(in srgb,var(--theme-accent) 10%,var(--theme-paper));color:var(--theme-ink)}
+
+/* Cards / panels: retire stark white tiles. */
+html[data-aastha-mode="light"] body.concept-page .editorial-panel,
+html[data-aastha-mode="light"] body.concept-page .drag-card,
+html[data-aastha-mode="light"] body.concept-page .v3-reading-card,
+html[data-aastha-mode="light"] body.concept-page .v4-note,
+html[data-aastha-mode="light"] body.concept-page .v4-facts,
+html[data-aastha-mode="light"] body.concept-page .v4-fact,
+html[data-aastha-mode="light"] body.concept-page .fact-table,
+html[data-aastha-mode="light"] body.concept-page .v5-compare article,
+html[data-aastha-mode="light"] body.concept-page .v6-compass,
+html[data-aastha-mode="light"] body.concept-page .v7-pattern-system,
+html[data-aastha-mode="light"] body.concept-page .v8-topic-explorer,
+html[data-aastha-mode="light"] body.concept-page .v8-booking-grid,
+html[data-aastha-mode="light"] body.concept-page .v8-contact-grid a,
+html[data-aastha-mode="light"] body.concept-page .clinic-panel,
+html[data-aastha-mode="light"] body.concept-page .clinic-switch{
+  background:var(--v14-surface-2);
+  border-color:var(--v14-line)
+}
+html[data-aastha-mode="light"] body.concept-page .editorial-panel:hover,
+html[data-aastha-mode="light"] body.concept-page .drag-card:hover,
+html[data-aastha-mode="light"] body.concept-page .v3-reading-card:hover,
+html[data-aastha-mode="light"] body.concept-page .v4-note:hover{box-shadow:0 14px 34px rgba(28,18,22,.045);transform:translateY(-2px)}
+
+/* Fact bands: subtle individual tints rather than four visibly different cards. */
+html[data-aastha-mode="light"] body.concept-page .v4-fact:nth-child(4n+1){background:color-mix(in srgb,var(--theme-accent) 3.5%,var(--theme-paper))}
+html[data-aastha-mode="light"] body.concept-page .v4-fact:nth-child(4n+2){background:color-mix(in srgb,var(--theme-paper-3) 28%,var(--theme-paper))}
+html[data-aastha-mode="light"] body.concept-page .v4-fact:nth-child(4n+3){background:color-mix(in srgb,var(--theme-metal) 4%,var(--theme-paper))}
+html[data-aastha-mode="light"] body.concept-page .v4-fact:nth-child(4n){background:var(--v14-surface)}
+
+/* Interactive stages: calm tinted canvases rather than pale-vs-colour blocks. */
+html[data-aastha-mode="light"] body.concept-page .concern-stage,
+html[data-aastha-mode="light"] body.concept-page .pattern-stage,
+html[data-aastha-mode="light"] body.concept-page .v3-atlas-stage,
+html[data-aastha-mode="light"] body.concept-page .v3-choice-result,
+html[data-aastha-mode="light"] body.concept-page .v6-compass-stage,
+html[data-aastha-mode="light"] body.concept-page .v7-pattern-system .v6-compass-stage,
+html[data-aastha-mode="light"] body.concept-page .v8-topic-stage{
+  background:linear-gradient(135deg,color-mix(in srgb,var(--theme-accent) 4.5%,var(--theme-paper)),color-mix(in srgb,var(--theme-paper-3) 32%,var(--theme-paper)))
+}
+html[data-aastha-mode="light"] body.concept-page .pattern-tabs button[aria-selected="true"],
+html[data-aastha-mode="light"] body.concept-page .v8-topic-tabs button[aria-selected="true"],
+html[data-aastha-mode="light"] body.concept-page .v6-compass-nav button[aria-selected="true"]{
+  background:color-mix(in srgb,var(--theme-accent) 82%,var(--theme-paper));
+  color:#fff
+}
+html[data-aastha-mode="light"] body.concept-page .pattern-tabs button:not([aria-selected="true"]):hover,
+html[data-aastha-mode="light"] body.concept-page .v8-topic-tabs button:not([aria-selected="true"]):hover,
+html[data-aastha-mode="light"] body.concept-page .v6-compass-nav button:not([aria-selected="true"]):hover{background:color-mix(in srgb,var(--theme-accent) 5%,var(--theme-paper))}
+
+/* How care works stays elegant and lower contrast. */
+html[data-aastha-mode="light"] body.concept-page #approach .v7-care-stage{background:var(--v14-surface-2);border-color:var(--v14-line);box-shadow:0 14px 42px rgba(31,20,24,.045)}
+html[data-aastha-mode="light"] body.concept-page #approach .v7-care-stage .process-nav{background:color-mix(in srgb,var(--theme-paper) 78%,var(--theme-paper-2) 22%);border-color:var(--v14-line)}
+html[data-aastha-mode="light"] body.concept-page #approach .v7-care-stage .process-nav button{border-color:var(--v14-line)}
+html[data-aastha-mode="light"] body.concept-page #approach .v7-care-stage .process-nav button.is-active{background:color-mix(in srgb,var(--theme-accent) 82%,var(--theme-paper));color:#fff}
+html[data-aastha-mode="light"] body.concept-page #approach .v7-care-stage .process-content{background:linear-gradient(135deg,var(--v14-surface),var(--v14-surface-3))}
+
+/* Treatment Route remains the darkest anchor, but softer and more coloured. */
+html[data-aastha-mode="light"] body.concept-page .v7-unified-treatment .process-stage.v8-route-theatre{background:var(--v14-deep);border-color:rgba(255,255,255,.07);box-shadow:0 28px 70px rgba(19,9,14,.14)}
+html[data-aastha-mode="light"] body.concept-page .v8-route-head{background:linear-gradient(90deg,color-mix(in srgb,var(--theme-accent-deep) 48%,var(--v14-deep)),var(--v14-deep));border-color:rgba(255,255,255,.07)}
+html[data-aastha-mode="light"] body.concept-page .v8-route-theatre .process-nav{background:color-mix(in srgb,var(--v14-deep) 92%,var(--theme-paper) 8%);border-color:rgba(255,255,255,.07)!important}
+html[data-aastha-mode="light"] body.concept-page .v8-route-theatre .process-content{background:radial-gradient(circle at 80% 20%,color-mix(in srgb,var(--theme-accent) 15%,transparent),transparent 34%),var(--v14-deep)!important}
+html[data-aastha-mode="light"] body.concept-page .v8-route-theatre .process-nav button.is-active{background:linear-gradient(90deg,color-mix(in srgb,var(--theme-accent) 26%,transparent),transparent)!important}
+html[data-aastha-mode="light"] body.concept-page .v8-route-theatre .process-chapter p{color:rgba(246,239,233,.61)}
+
+/* Stats: a coloured editorial band, not a near-black interruption. */
+html[data-aastha-mode="light"] body.concept-page .stats-band{
+  background:color-mix(in srgb,var(--theme-accent-deep) 72%,var(--theme-night-3));
+  color:#f7f0eb
+}
+html[data-aastha-mode="light"] body.concept-page .stats-band .stat{border-color:rgba(255,255,255,.09)}
+html[data-aastha-mode="light"] body.concept-page .stats-band .stat span{color:rgba(247,240,235,.63)}
+
+/* Warnings: reserve high saturation for truly urgent content. */
+html[data-aastha-mode="light"] body.concept-page .v5-warning{
+  background:color-mix(in srgb,var(--theme-accent-deep) 72%,var(--theme-paper));
+  border-color:color-mix(in srgb,var(--theme-accent-deep) 72%,var(--theme-paper));
+  color:#fff
+}
+html[data-aastha-mode="light"] body.concept-page .v5-warning p{color:rgba(255,255,255,.72)}
+html[data-aastha-mode="light"] body.concept-page .v4-note.wine{background:color-mix(in srgb,var(--theme-accent) 84%,var(--theme-paper));border-color:transparent}
+
+/* Comparisons / accordions / lists should read as one quiet content field. */
+html[data-aastha-mode="light"] body.concept-page .v5-compare article:first-child{background:color-mix(in srgb,var(--theme-paper-3) 32%,var(--theme-paper))}
+html[data-aastha-mode="light"] body.concept-page .v5-compare article:last-child{background:color-mix(in srgb,var(--theme-accent) 4%,var(--theme-paper))}
+html[data-aastha-mode="light"] body.concept-page details[open]{background:linear-gradient(90deg,color-mix(in srgb,var(--theme-accent) 2.8%,transparent),transparent 64%)}
+html[data-aastha-mode="light"] body.concept-page .longform li:hover{background:color-mix(in srgb,var(--theme-accent) 2.5%,transparent)}
+
+/* Related pathways: still a closing anchor, but less severe than the route theatre. */
+html[data-aastha-mode="light"] body.concept-page .v4-related{
+  background:color-mix(in srgb,var(--theme-night-3) 84%,var(--theme-paper) 16%);
+  border-top-color:rgba(255,255,255,.06)
+}
+html[data-aastha-mode="light"] body.concept-page .v4-related-card{border-color:rgba(255,255,255,.1)}
+html[data-aastha-mode="light"] body.concept-page .v4-related-card:hover{background:color-mix(in srgb,var(--theme-accent) 38%,var(--theme-night-3))}
+
+/* Command palette: softer paper, quieter hover. */
+html[data-aastha-mode="light"] body.concept-page .v3-command{background:rgba(24,18,21,.55)}
+html[data-aastha-mode="light"] body.concept-page .v3-command-panel,
+html[data-aastha-mode="light"] body.concept-page .v3-command-head,
+html[data-aastha-mode="light"] body.concept-page .v3-command-list{background:var(--v14-surface)}
+html[data-aastha-mode="light"] body.concept-page .v6-command-group-title{background:color-mix(in srgb,var(--theme-paper) 96%,transparent)}
+html[data-aastha-mode="light"] body.concept-page .v3-command-item{border-color:var(--v14-line)}
+html[data-aastha-mode="light"] body.concept-page .v3-command-item:hover,
+html[data-aastha-mode="light"] body.concept-page .v3-command-item:focus-visible{background:color-mix(in srgb,var(--theme-accent) 10%,var(--theme-paper));color:var(--theme-ink)}
+html[data-aastha-mode="light"] body.concept-page .v3-command-item:hover>div small,
+html[data-aastha-mode="light"] body.concept-page .v3-command-item:focus-visible>div small,
+html[data-aastha-mode="light"] body.concept-page .v3-command-item:hover>small:first-child{color:var(--theme-ink-soft)}
+
+/* Buttons: slightly quieter fills and less binary alternate buttons. */
+html[data-aastha-mode="light"] body.concept-page .btn:not(.alt),
+html[data-aastha-mode="light"] body.concept-page .nav-cta,
+html[data-aastha-mode="light"] body.concept-page .v3-explore-toggle{background:color-mix(in srgb,var(--theme-accent) 88%,var(--theme-paper));border-color:transparent}
+html[data-aastha-mode="light"] body.concept-page .btn:not(.alt):hover,
+html[data-aastha-mode="light"] body.concept-page .nav-cta:hover,
+html[data-aastha-mode="light"] body.concept-page .v3-explore-toggle:hover{background:color-mix(in srgb,var(--theme-accent-deep) 82%,var(--theme-paper));border-color:transparent}
+html[data-aastha-mode="light"] body.concept-page .btn.alt{background:color-mix(in srgb,var(--theme-paper) 72%,transparent);border-color:var(--v14-line-strong);color:var(--theme-ink)}
+html[data-aastha-mode="light"] body.concept-page .btn.alt:hover{background:color-mix(in srgb,var(--theme-accent) 7%,var(--theme-paper));color:var(--theme-ink);border-color:color-mix(in srgb,var(--theme-accent) 18%,transparent)}
+
+/* Palette picker itself joins the same calmer material language. */
+html[data-aastha-mode="light"] body.concept-page .v12-theme-panel{background:color-mix(in srgb,var(--theme-night-2) 94%,var(--theme-paper) 6%);border-color:rgba(255,255,255,.11);box-shadow:0 22px 60px rgba(0,0,0,.18)}
+html[data-aastha-mode="light"] body.concept-page .v12-theme-option{background:rgba(255,255,255,.025)}
+html[data-aastha-mode="light"] body.concept-page .v12-theme-option:hover,
+html[data-aastha-mode="light"] body.concept-page .v12-theme-option[aria-pressed="true"]{background:rgba(255,255,255,.075)}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-aastha-mode="light"] body.concept-page .editorial-panel,
+  html[data-aastha-mode="light"] body.concept-page .drag-card,
+  html[data-aastha-mode="light"] body.concept-page .v3-reading-card{transition:none}
+}
