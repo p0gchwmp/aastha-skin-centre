@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Bundle the layered concept CSS/JS into two content-hashed preview assets.
-
-The source files stay separate for iteration and rollback. Only the built preview
-is consolidated, preserving the exact cascade/runtime order while cutting dozens
-of HTTP requests and ensuring the injected experience layer is cache-busted.
-"""
+"""Bundle layered concept CSS/JS into two content-hashed preview assets."""
 from __future__ import annotations
 
 import hashlib
@@ -34,6 +29,8 @@ CSS_FILES = [
     "editorial-experience-v23.css",
     "editorial-experience-v24.css",
     "editorial-experience-v25.css",
+    "editorial-experience-v26.css",
+    "editorial-experience-v27.css",
 ]
 
 JS_FILES = [
@@ -57,8 +54,10 @@ JS_FILES = [
     "editorial-experience-v21.js",
     "editorial-experience-v22.js",
     "editorial-experience-v23.js",
-    "editorial-experience-v24.js",
+    # v24 runtime intentionally omitted: v25 replaced its generic navigator.
     "editorial-experience-v25.js",
+    "editorial-experience-v26.js",
+    "editorial-experience-v27.js",
 ]
 
 
@@ -86,6 +85,8 @@ def bundle_concept_assets(dist: Path, concept_pages: list[Path]) -> tuple[str, s
 
     css_tags = [f'<link rel="stylesheet" href="/assets/css/{name}">' for name in CSS_FILES]
     js_tags = [f'<script src="/assets/js/{name}" defer></script>' for name in JS_FILES]
+    # Also strip the retired v24 JS tag if an older page happens to contain it.
+    js_tags.append('<script src="/assets/js/editorial-experience-v24.js" defer></script>')
     bundle_css_tag = f'<link rel="stylesheet" href="{css_url}">'
     bundle_js_tag = f'<script src="{js_url}" defer></script>'
 
