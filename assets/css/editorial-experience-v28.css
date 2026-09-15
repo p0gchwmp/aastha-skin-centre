@@ -1,0 +1,23 @@
+/* Aastha Editorial Experience v28 — session trail + booking handoff polish */
+body.concept-page{--v28-ease:cubic-bezier(.2,.72,.2,1)}
+
+/* Keep personalization useful but quiet */
+.v28-trail{margin-top:28px;border-top:1px solid var(--line);padding-top:20px}.v28-trail-head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:12px}.v28-trail-head small{font:800 .5rem/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}.v28-trail-head button{border:0;background:transparent;color:var(--ink-soft);cursor:pointer;font:750 .5rem/1 var(--sans);text-transform:uppercase;letter-spacing:.07em}.v28-trail-list{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line)}.v28-trail-item{display:flex;flex-direction:column;min-height:126px;padding:16px;text-decoration:none;color:var(--theme-ink);border-right:1px solid var(--line);background:var(--theme-paper);transition:background .18s ease,transform .18s ease}.v28-trail-item:last-child{border-right:0}.v28-trail-item:hover{background:var(--theme-paper-2);transform:translateY(-1px)}.v28-trail-item small{font:800 .46rem/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--theme-accent)}.v28-trail-item strong{font:500 1.35rem/1 var(--display);margin:12px 0 auto}.v28-trail-item span{font:750 .5rem/1 var(--sans);text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft)}
+
+/* Booking handoff */
+.v28-booking-handoff{margin-bottom:18px;padding:18px 20px;border:1px solid var(--line-strong);background:linear-gradient(135deg,color-mix(in srgb,var(--theme-paper-2) 94%,var(--theme-metal) 6%),var(--theme-paper));display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center}.v28-booking-handoff small{display:block;font:800 .5rem/1 var(--sans);letter-spacing:.11em;text-transform:uppercase;color:var(--theme-accent);margin-bottom:8px}.v28-booking-handoff strong{display:block;font:500 clamp(1.35rem,2vw,1.85rem)/1 var(--display)}.v28-booking-handoff p{margin:8px 0 0;font-size:.74rem;line-height:1.5;color:var(--ink-soft)}.v28-booking-handoff a{display:inline-flex;min-height:36px;align-items:center;padding:0 12px;border:1px solid var(--line-strong);color:var(--theme-ink);text-decoration:none;font:750 .54rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;background:transparent}.v28-booking-handoff a:hover{background:var(--theme-ink);color:#fff}
+
+/* Make the context bar feel like navigation, not a banner */
+.v26-contextbar{box-shadow:0 7px 22px rgba(24,17,20,.035)}.v26-context-actions button,.v26-context-actions a{border-color:color-mix(in srgb,var(--line-strong) 78%,transparent)}
+.v26-context-current::before{content:"→ ";color:var(--theme-accent);font-family:var(--sans);font-size:.7em;vertical-align:middle}
+
+/* Tiny selection feedback across custom modules */
+.v27-trigger[aria-pressed="true"],.v27-hifu-tabs button[aria-pressed="true"],.v27-ink[aria-pressed="true"],.v27-loop-item[aria-pressed="true"],.v27-activity button[aria-pressed="true"]{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-metal-soft) 45%,transparent)}
+.v27-meter input,.v27-density input{cursor:grab}.v27-meter input:active,.v27-density input:active{cursor:grabbing}
+
+/* Drawer should read as a continuation space */
+.v26-drawer-panel{border-top:2px solid color-mix(in srgb,var(--theme-accent) 55%,var(--line-strong));background:linear-gradient(180deg,var(--theme-paper),color-mix(in srgb,var(--theme-paper-2) 96%,var(--theme-metal) 4%))}
+
+@media(max-width:980px){.v28-trail-list{grid-template-columns:1fr}.v28-trail-item{min-height:100px;border-right:0;border-bottom:1px solid var(--line)}.v28-trail-item:last-child{border-bottom:0}}
+@media(max-width:700px){.v28-booking-handoff{grid-template-columns:1fr;padding:16px}.v28-booking-handoff a{justify-self:start}.v28-trail{margin-top:20px}.v26-context-current::before{display:none}}
+@media(prefers-reduced-motion:reduce){.v28-trail-item{transition:none!important}}
