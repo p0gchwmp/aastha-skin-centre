@@ -6,8 +6,11 @@ import shutil
 
 import build_static_dist
 import concept_bundle_assets
+import concept_admin_upgrade
+import concept_media_upgrade
 import generate_concept_v13_pages
 import generate_concept_v18_system_pages
+import generate_concept_remaining_pages
 from concept_copy_cleanup import clean_patient_copy
 from concept_quality_audit import audit_concept
 
@@ -33,7 +36,6 @@ def inject_experience_assets(page: Path) -> None:
     for tag in js_tags:
         if tag not in source:
             source = source.replace("</body>", f"{tag}</body>", 1)
-    # Remove the retired v24 runtime if it exists in any source page.
     source = source.replace('<script src="/assets/js/editorial-experience-v24.js" defer></script>', "")
     page.write_text(source, encoding="utf-8")
 
@@ -67,6 +69,7 @@ def concept_route_map(concept_root: Path) -> dict[str, str]:
             routes[f"/{rel}/"] = concept_url
         elif "/" not in rel and rel not in reserved:
             routes[f"/treatments/{rel}/"] = concept_url
+            routes[f"/conditions/{rel}/"] = concept_url
     routes.update({
         "/treatments/hifu-rf-skin-tightening/": "/concept/hifu-treatment/",
         "/treatments/nail-surgery/": "/concept/ingrown-toenail-nail-surgery/",
@@ -106,6 +109,8 @@ def main() -> int:
         return 1
     if generate_concept_v18_system_pages.main() != 0:
         return 1
+    if generate_concept_remaining_pages.main() != 0:
+        return 1
 
     result = build_static_dist.main()
     if result != 0:
@@ -126,6 +131,9 @@ def main() -> int:
 
     rewrites = normalize_concept_links(concept_pages, concept_route_map(concept_root))
     clean_patient_copy(concept_pages)
+    concept_media_upgrade.upgrade_media(dist, concept_pages)
+    concept_admin_upgrade.upgrade_admin(dist, concept_pages)
+
     unresolved = sum(page.read_text(encoding="utf-8").count('href="/treatments/') for page in concept_pages)
     unresolved_blog = sum(page.read_text(encoding="utf-8").count('href="/blog/') for page in concept_pages)
     print(f"Premium route rewrites applied: {rewrites}")
