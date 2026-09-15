@@ -16,113 +16,124 @@
     if (/hifu|rf|filler|botulinum|hydrafacial|medifacial|cryo/.test(s)) return 'Aesthetic dermatology';
     if (/wart|mole|skin tag|biopsy|abscess|corn|cyst|lipoma|nail|dpn|keratosis/.test(s)) return 'Minor procedures';
     if (/eczema|psoriasis|urticaria|fungal|scabies|allergy|dermatitis|rosacea|lichen|molluscum|paediatric|sti|cancer/.test(s)) return 'Medical dermatology';
-    if (/doctor|cheena/.test(s)) return 'Doctor profile';
+    if (/doctor|cheena/.test(s)) return 'Doctor';
     if (/location|karan|paloura|contact|book/.test(s)) return 'Clinic access';
     if (/blog|journal/.test(s)) return 'Skin journal';
-    if (/media/.test(s)) return 'Media & updates';
+    if (/media/.test(s)) return 'Media';
     return 'Dermatology';
   };
 
   const family = inferFamily();
   body.dataset.pageFamily = family.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
+  /* Only explicit page profiles carry clinical micro-copy. Unknown pages stay minimal. */
   const profiles = {
-    'acne-treatment': ['Active acne first','Severity + pattern','Marks ≠ scars','Maintenance matters'],
-    'acne-scar-treatment': ['Scar type first','Active acne control','Skin tone matters','Combination planning'],
-    'pigmentation-treatment': ['Diagnosis first','Depth + trigger','Photoprotection','Maintenance'],
-    'melasma-treatment': ['Relapsing condition','Light + heat triggers','Layered treatment','Maintenance'],
-    'hair-fall-treatment': ['Pattern first','Scalp health','Medical causes','Track progression'],
-    'hair-transplant': ['Donor supply','Diagnosis first','Future loss','Realistic density'],
-    'laser-hair-reduction': ['Dark hair responds','Skin type matters','Multiple sessions','Maintenance possible'],
-    'hifu-treatment': ['Laxity ≠ volume loss','Depth selection','Gradual response','Suitability first'],
-    'rf-skin-tightening': ['Surface RF','Not MNRF','Firmness goal','Course based'],
-    'botulinum-toxin-dermal-fillers': ['Anatomy first','Movement vs volume','Natural expression','No preset map'],
-    'laser-tattoo-removal': ['Colour matters','Ink depth matters','Multiple sessions','Scar risk assessed'],
-    'vitiligo-treatment': ['Activity matters','Site matters','Look-alikes exist','Long-term review'],
-    'fungal-infection-treatment': ['Confirm fungus','Avoid steroid mixes','Treat enough','Household sources'],
-    'seborrheic-dermatitis-dandruff': ['Scalp inflammation','Relapsing pattern','Trigger control','Maintenance'],
-    'skin-allergy-treatment': ['Name the rash','Exposure history','Patch testing sometimes','Avoid trigger'],
-    'skin-cancer-screening': ['Change matters','ABCDE clues','Non-healing lesions','Biopsy if needed'],
-    'sti-std-treatment': ['Confidential care','Symptoms can overlap','Testing by context','Time-sensitive care'],
-    'paediatric-dermatology': ['Age-specific care','Body site matters','Gentle barrier care','Dose + duration matter'],
-    'cryolipolysis-body-contouring': ['Contour ≠ weight loss','Localised fat','Skin laxity matters','Expectation setting'],
-    'book-appointment': ['Choose clinic','Choose concern','Send request','Clinic confirms'],
-    'contact': ['Call','WhatsApp','Directions','Two Jammu clinics'],
-    'dr-cheena-langer': ['MBBS, MD Dermatology','20+ years in medicine','Medical + procedural care','Jammu'],
+    'acne-treatment': ['Active acne first','Severity and pattern'],
+    'acne-scar-treatment': ['Scar type first','Active acne control'],
+    'pigmentation-treatment': ['Diagnosis first','Trigger and depth'],
+    'melasma-treatment': ['Photoprotection','Long-term control'],
+    'hair-fall-treatment': ['Pattern first','Scalp examination'],
+    'hair-transplant': ['Donor supply','Future hair loss'],
+    'laser-hair-reduction': ['Hair pigment','Skin type'],
+    'hifu-treatment': ['Laxity','Anatomy'],
+    'rf-skin-tightening': ['Surface RF','Firmness'],
+    'botulinum-toxin-dermal-fillers': ['Anatomy','Movement or volume'],
+    'laser-tattoo-removal': ['Ink colour','Ink depth'],
+    'vitiligo-treatment': ['Activity','Distribution'],
+    'fungal-infection-treatment': ['Confirm fungus','Avoid steroid mixes'],
+    'seborrheic-dermatitis-dandruff': ['Scalp inflammation','Maintenance'],
+    'skin-allergy-treatment': ['Identify the rash','Exposure history'],
+    'skin-cancer-screening': ['Change matters','Biopsy when indicated'],
+    'paediatric-dermatology': ['Age-specific care','Body site'],
+    'book-appointment': ['Choose clinic','Send request'],
+    'contact': ['Two Jammu clinics','Call or WhatsApp'],
+    'dr-cheena-langer': ['MBBS, MD Dermatology','20+ years in medicine']
   };
-  const familyProfiles = {
-    'Acne & scars':['Diagnosis first','Pattern + severity','Skin type','Follow-up'],
-    'Pigmentation':['Diagnosis first','Trigger + depth','Sun protection','Maintenance'],
-    'Hair & scalp':['Pattern first','Scalp exam','Medical context','Progress review'],
-    'Laser dermatology':['Right indication','Skin type','Settings matter','Aftercare'],
-    'Aesthetic dermatology':['Anatomy first','Suitability','Natural goals','Review'],
-    'Minor procedures':['Identify lesion','Site + symptoms','Procedure choice','Aftercare'],
-    'Medical dermatology':['History','Examination','Diagnosis','Review'],
-    'Doctor profile':['Qualifications','Clinical work','Academic activity','Jammu'],
-    'Clinic access':['Karan Nagar','Paloura','WhatsApp','Call'],
-    'Skin journal':['Dermatologist-reviewed','Patient education','Related care','Jammu'],
-    'Media & updates':['Academic activity','Videos','Clinic stories','Press'],
-    'Dermatology':['Concern first','Assessment','Options','Review']
-  };
-  const profile = profiles[slug] || familyProfiles[family] || familyProfiles.Dermatology;
 
-  /* Replace generic hero placeholders with a page-authored clinical composition. */
+  /* Replace generic SVG hero art with a restrained page-specific plate. */
   const heroArt = document.querySelector('.editorial-hero .hero-art');
   if (heroArt && !heroArt.classList.contains('v18-authored-media') && !body.classList.contains('concept-admin')) {
-    heroArt.classList.add('v18-authored-media');
-    const img = heroArt.querySelector('img');
-    if (img) img.setAttribute('aria-hidden','true');
+    heroArt.classList.add('v18-authored-media','v18-authored-media--simple');
+    heroArt.querySelector('img')?.setAttribute('aria-hidden','true');
     heroArt.querySelector('.art-label')?.remove();
+    const profile = profiles[slug];
     const media = document.createElement('div');
-    media.className = 'v18-media-composition';
+    media.className = 'v18-media-composition v18-media-composition--simple';
     media.innerHTML = `
       <div class="v18-media-head"><small>${family}</small><strong>Aastha · Jammu</strong></div>
-      <div class="v18-media-core"><span class="v18-media-index">${String((slug.length % 8) + 1).padStart(2,'0')}</span><h3>${title.replace(/\s*[|—-]\s*Aastha.*$/i,'')}</h3><p>${profile[0]} · ${profile[1]}</p><div class="v18-media-tags"><span>${profile[0]}</span><span>${profile[1]}</span><span>${profile[2]}</span></div></div>
-      <div class="v18-media-foot"><div><small>Focus</small><strong>${profile[0]}</strong></div><div><small>Planning</small><strong>${profile[1]}</strong></div><div><small>Follow-through</small><strong>${profile[3]}</strong></div></div>`;
+      <div class="v18-media-core"><h3>${title.replace(/\s*[|—-]\s*Aastha.*$/i,'')}</h3>${profile ? `<p>${profile[0]} · ${profile[1]}</p>` : ''}</div>`;
     heroArt.appendChild(media);
   }
 
-  /* Page-specific strip on detail pages that do not already have a compact facts band. */
-  const isDetail = path.startsWith('/concept/') && !/\/(blog|media|admin|treatments|conditions|locations|book-appointment|contact)\/?$/.test(path) && slug !== 'home';
-  const hero = document.querySelector('.editorial-hero');
-  if (isDetail && hero && !hero.nextElementSibling?.classList.contains('stats-band') && !hero.nextElementSibling?.classList.contains('v18-context-strip')) {
-    const strip = document.createElement('section');
-    strip.className = 'v18-context-strip';
-    strip.setAttribute('aria-label','Page context');
-    strip.innerHTML = `<div class="concept-shell v18-context-grid">${profile.map((item,i)=>`<div><small>${['Start with','Look at','Plan around','Keep in mind'][i]}</small><strong>${item}</strong></div>`).join('')}</div>`;
-    hero.insertAdjacentElement('afterend', strip);
-  }
+  /* Remove older automatically generated context strips. They added noise. */
+  document.querySelectorAll('.v18-context-strip').forEach(el => el.remove());
 
-  /* Make Blog and Media first-class public destinations without crowding admin into public nav. */
+  /* Normalize public navigation once, then deduplicate by destination. */
   document.querySelectorAll('.concept-links').forEach(nav => {
-    const hrefs = [...nav.querySelectorAll('a')].map(a=>a.getAttribute('href'));
-    if (!hrefs.includes('/concept/blog/')) {
-      const a=document.createElement('a');a.href='/concept/blog/';a.textContent='Journal';nav.appendChild(a);
-    }
-    if (!hrefs.includes('/concept/media/')) {
-      const a=document.createElement('a');a.href='/concept/media/';a.textContent='Media';nav.appendChild(a);
-    }
+    [...nav.querySelectorAll('a')].forEach(a => {
+      const label = a.textContent.trim().toLowerCase();
+      if (label === 'doctor') a.href = '/concept/dr-cheena-langer/';
+      if (label === 'journal' || label === 'blog') { a.href = '/concept/blog/'; a.textContent = 'Journal'; }
+      if (label === 'media' || label === 'media & updates') { a.href = '/concept/media/'; a.textContent = 'Media'; }
+    });
+
+    const wanted = [
+      ['Journal','/concept/blog/'],
+      ['Media','/concept/media/']
+    ];
+    wanted.forEach(([label,href]) => {
+      if (![...nav.querySelectorAll('a')].some(a => new URL(a.href,location.href).pathname === href)) {
+        const a = document.createElement('a'); a.href = href; a.textContent = label; nav.appendChild(a);
+      }
+    });
+
+    const seen = new Set();
+    [...nav.querySelectorAll('a')].forEach(a => {
+      const url = new URL(a.href, location.href);
+      const key = `${url.pathname}${url.hash}`;
+      if (seen.has(key)) a.remove(); else seen.add(key);
+    });
   });
 
-  /* Enrich command palette with system pages. */
+  document.querySelectorAll('.nav-cta').forEach(a => { a.href = '/concept/book-appointment/'; });
+  document.querySelectorAll('a').forEach(a => {
+    const t = a.textContent.trim().toLowerCase();
+    if (t === 'book consultation' || t === 'book an appointment' || t === 'request an appointment') a.href = '/concept/book-appointment/';
+    if (t.includes('doctor profile')) a.href = '/concept/dr-cheena-langer/';
+  });
+
+  /* Clean prototype language that should never reach patients. */
+  const replacements = new Map([
+    ['The original site had more medical depth. This version keeps that depth but turns the consultation pathway into a scroll-linked story instead of a dense block of cards.','History, examination and treatment options are reviewed in sequence so the plan stays clear.'],
+    ['The site can stay visually bold while still giving search engines and patients the detailed pathways your original website had.','Browse conditions, treatments, clinic details and patient guides from one place.'],
+    ['One switch instead of two repetitive cards. Timings, address and directions update in place.','Choose a clinic to see timings, address and directions.'],
+    ['Drag through the areas patients most often explore. The interaction is playful; the pathways stay clinically clear.','Browse the main areas of care.'],
+    ['A clinic, organised like chapters.','Explore care by category.']
+  ]);
+  document.querySelectorAll('p,h2,h3').forEach(el => {
+    const next = replacements.get(el.textContent.trim());
+    if (next) el.textContent = next;
+  });
+
+  /* Enrich command palette with only high-value system pages. */
   const addCommandItems = () => {
     const list = document.querySelector('.v3-command-list');
-    if (!list || list.querySelector('[href="/concept/blog/"]')) return;
-    [
-      ['Journal','Patient guides and dermatologist-reviewed articles','/concept/blog/'],
-      ['Media & updates','Academic activity, video library and clinic stories','/concept/media/'],
-      ['About Aastha','Clinic approach and care model','/concept/about/'],
-      ['Contact','Phones, WhatsApp, directions and clinic details','/concept/contact/']
-    ].forEach(([name,desc,href],idx)=>{
+    if (!list) return;
+    const entries = [
+      ['Journal','Patient guides','/concept/blog/'],
+      ['Media','Clinic, academic and video updates','/concept/media/'],
+      ['Contact','Phones, directions and clinic details','/concept/contact/']
+    ];
+    entries.forEach(([name,desc,href],idx)=>{
+      if (list.querySelector(`[href="${href}"]`)) return;
       const a=document.createElement('a');a.className='v3-command-item';a.href=href;
-      a.innerHTML=`<span>${String(80+idx)}</span><strong>${name}</strong><small>${desc}</small><b>↗</b>`;
+      a.dataset.search=`${name} ${desc}`.toLowerCase();
+      a.innerHTML=`<small>${80+idx}</small><div><strong>${name}</strong><small>${desc}</small></div><span>↗</span>`;
       list.appendChild(a);
     });
   };
   addCommandItems();
-  setTimeout(addCommandItems,250);
 
-  /* Journal search. */
   const journalSearch = document.querySelector('[data-v18-journal-search]');
   if (journalSearch) {
     const cards=[...document.querySelectorAll('.v18-journal-card')];
