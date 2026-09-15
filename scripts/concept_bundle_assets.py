@@ -29,6 +29,7 @@ CSS_FILES = [
     "editorial-experience-v18.css",
     "editorial-experience-v19.css",
     "editorial-experience-v20.css",
+    "editorial-experience-v21.css",
 ]
 
 JS_FILES = [
@@ -49,6 +50,7 @@ JS_FILES = [
     "editorial-experience-v16.js",
     "editorial-experience-v18.js",
     "editorial-experience-v20.js",
+    "editorial-experience-v21.js",
 ]
 
 
@@ -91,7 +93,6 @@ def bundle_concept_assets(dist: Path, concept_pages: list[Path]) -> tuple[str, s
             updated = updated.replace(tag, "")
         if bundle_css_tag not in updated:
             if first_css_pos >= 0:
-                # CSS layers were originally appended immediately before </head>.
                 updated = updated.replace("</head>", f"{bundle_css_tag}</head>", 1)
             else:
                 updated = updated.replace("</head>", f"{bundle_css_tag}</head>", 1)
