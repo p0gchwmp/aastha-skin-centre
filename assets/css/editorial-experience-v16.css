@@ -1,0 +1,33 @@
+/* Aastha Editorial Experience v16 — completeness, discoverability, polish */
+
+.v16-directory-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--paper) 92%,var(--paper-2) 8%)}
+.v16-directory-search{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:600 .82rem/1.3 var(--sans);outline:none}
+.v16-directory-search::placeholder{color:color-mix(in srgb,var(--ink-soft) 72%,transparent)}
+.v16-directory-count{white-space:nowrap;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:800}
+.v16-directory-empty{grid-column:1/-1;padding:34px 20px;text-align:center;color:var(--ink-soft);border-top:1px solid var(--line)}
+.v16-directory-empty[hidden]{display:none}
+
+.v3-directory a{transition:background .2s ease,color .2s ease,transform .2s ease}
+.v3-directory a:hover,.v3-directory a:focus-visible{background:color-mix(in srgb,var(--wine) 5%,var(--paper));transform:translateX(3px)}
+.v3-directory a strong{color:var(--ink)}
+.v3-directory a span{color:var(--ink-soft)}
+
+/* Make long directory/filter pages feel intentional on laptop widths. */
+@media (min-width:901px){
+  .v3-filter-panel{position:sticky;top:92px;align-self:start}
+}
+
+/* Mobile nav: keep everything readable without crushing labels. */
+@media (max-width:900px){
+  .concept-nav .concept-shell{gap:10px}
+  .concept-links{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding-bottom:2px}
+  .concept-links::-webkit-scrollbar{display:none}
+  .concept-links a{white-space:nowrap}
+  .v16-directory-tools{padding:12px 13px}
+  .v16-directory-count{display:none}
+}
+
+/* Slightly calmer motion for repeated directory items. */
+@media (prefers-reduced-motion:reduce){
+  .v3-directory a{transition:none}.v3-directory a:hover,.v3-directory a:focus-visible{transform:none}
+}
