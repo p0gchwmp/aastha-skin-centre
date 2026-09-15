@@ -30,6 +30,7 @@ CSS_FILES = [
     "editorial-experience-v19.css",
     "editorial-experience-v20.css",
     "editorial-experience-v21.css",
+    "editorial-experience-v22.css",
 ]
 
 JS_FILES = [
@@ -51,6 +52,7 @@ JS_FILES = [
     "editorial-experience-v18.js",
     "editorial-experience-v20.js",
     "editorial-experience-v21.js",
+    "editorial-experience-v22.js",
 ]
 
 
