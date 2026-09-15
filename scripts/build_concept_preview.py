@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build the isolated editorial concept preview without changing production rules."""
 from pathlib import Path
+import re
 import shutil
 
 import build_static_dist
@@ -50,6 +51,8 @@ V13_MIGRATIONS_JS = '<script src="/assets/js/editorial-experience-v13-migrations
 V16_JS = '<script src="/assets/js/editorial-experience-v16.js" defer></script>'
 V18_JS = '<script src="/assets/js/editorial-experience-v18.js" defer></script>'
 V20_JS = '<script src="/assets/js/editorial-experience-v20.js" defer></script>'
+
+QUOTED_PATH_RE = re.compile(r'''(?P<q>["'])(?P<value>/[^"']+)(?P=q)''')
 
 
 def inject_experience_assets(page: Path) -> None:
@@ -111,16 +114,29 @@ def concept_route_map(concept_root: Path) -> dict[str, str]:
 
 
 def normalize_concept_links(concept_pages: list[Path], routes: dict[str, str]) -> int:
-    """Rewrite legacy links in HTML, including data attributes and JSON strings."""
+    """Rewrite complete quoted route values only; never mutate substrings of valid concept URLs."""
     replacements = 0
+
+    def rewrite_match(match: re.Match[str]) -> str:
+        nonlocal replacements
+        value = match.group("value")
+        # Preserve query/hash when the base route has a premium equivalent.
+        cut = len(value)
+        for sep in ("?", "#"):
+            pos = value.find(sep)
+            if pos != -1:
+                cut = min(cut, pos)
+        base, suffix = value[:cut], value[cut:]
+        target = routes.get(base)
+        if not target:
+            return match.group(0)
+        replacements += 1
+        quote = match.group("q")
+        return f"{quote}{target}{suffix}{quote}"
+
     for page in concept_pages:
         source = page.read_text(encoding="utf-8")
-        updated = source
-        for old, new in sorted(routes.items(), key=lambda item: len(item[0]), reverse=True):
-            count = updated.count(old)
-            if count:
-                updated = updated.replace(old, new)
-                replacements += count
+        updated = QUOTED_PATH_RE.sub(rewrite_match, source)
         if updated != source:
             page.write_text(updated, encoding="utf-8")
     return replacements
