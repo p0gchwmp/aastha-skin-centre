@@ -27,7 +27,7 @@
       const suffix = el.dataset.suffix || '';
       if (reduced || !Number.isFinite(target)) { el.textContent = `${target}${suffix}`; return; }
       const start = performance.now();
-      const duration = 900;
+      const duration = 650;
       const frame = (now) => {
         const p = Math.min(1, (now - start) / duration);
         const eased = 1 - Math.pow(1 - p, 3);
@@ -39,47 +39,9 @@
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => entries.forEach((e) => {
         if (e.isIntersecting) { animateCount(e.target); io.unobserve(e.target); }
-      }), { threshold: .45 });
+      }), { threshold: .4 });
       countEls.forEach((el) => io.observe(el));
     } else countEls.forEach(animateCount);
-  }
-
-  // Spotlight panels react subtly to pointer position.
-  document.querySelectorAll('.spotlight-panel').forEach((panel) => {
-    panel.addEventListener('pointermove', (e) => {
-      const rect = panel.getBoundingClientRect();
-      panel.style.setProperty('--spot-x', `${e.clientX - rect.left}px`);
-      panel.style.setProperty('--spot-y', `${e.clientY - rect.top}px`);
-    });
-  });
-
-  // Magnetic movement for primary actions; deliberately tiny to avoid gimmick overload.
-  if (!reduced && matchMedia('(pointer:fine)').matches) {
-    document.querySelectorAll('.btn, .nav-cta').forEach((el) => {
-      el.addEventListener('pointermove', (e) => {
-        const rect = el.getBoundingClientRect();
-        const dx = e.clientX - (rect.left + rect.width / 2);
-        const dy = e.clientY - (rect.top + rect.height / 2);
-        el.style.transform = `translate(${dx * .07}px, ${dy * .08}px)`;
-      });
-      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
-    });
-  }
-
-  // Cursor cue for drag rails / interactive explorers.
-  if (!reduced && matchMedia('(pointer:fine)').matches) {
-    const cue = document.createElement('div');
-    cue.className = 'cursor-cue';
-    cue.textContent = 'EXPLORE';
-    document.body.appendChild(cue);
-    document.addEventListener('pointermove', (e) => {
-      cue.style.left = `${e.clientX}px`;
-      cue.style.top = `${e.clientY}px`;
-    });
-    document.querySelectorAll('[data-drag-rail], .concern-explorer, .pattern-explorer, .route-finder').forEach((el) => {
-      el.addEventListener('pointerenter', () => cue.classList.add('is-visible'));
-      el.addEventListener('pointerleave', () => cue.classList.remove('is-visible'));
-    });
   }
 
   // Educational route finder: navigation only, never diagnostic.
@@ -92,14 +54,14 @@
     const state = { area: 'face', concern: 'acne' };
     const routes = {
       'face:acne': ['Acne & breakouts','Explore active acne, marks and scar pathways.','/concept/acne-treatment/'],
-      'face:pigmentation': ['Pigmentation','Explore melasma, post-acne marks and uneven tone.','/treatments/pigmentation-treatment/'],
-      'face:ageing': ['Skin ageing','Explore consultation-led aesthetic and skin-quality options.','/treatments/'],
-      'scalp:hair': ['Hair & scalp','Explore hair fall, thinning and scalp concerns.','/treatments/hair-fall-treatment/'],
-      'body:rash': ['Medical dermatology','Explore rashes, infections and chronic skin concerns.','/conditions/'],
+      'face:pigmentation': ['Pigmentation','Explore melasma, post-acne marks and uneven tone.','/concept/pigmentation-treatment/'],
+      'face:ageing': ['Skin ageing','Explore consultation-led aesthetic and skin-quality options.','/concept/treatments/'],
+      'scalp:hair': ['Hair & scalp','Explore hair fall, thinning and scalp concerns.','/concept/hair-fall-treatment/'],
+      'body:rash': ['Medical dermatology','Explore rashes, infections and chronic skin concerns.','/concept/conditions/'],
       'body:acne': ['Body acne','Explore acne that affects the chest, shoulders or back.','/concept/acne-treatment/']
     };
     const update = () => {
-      const result = routes[`${state.area}:${state.concern}`] || ['Start with a dermatologist','Your concern may need an individual assessment before choosing a pathway.','/book-appointment/'];
+      const result = routes[`${state.area}:${state.concern}`] || ['Start with a dermatologist','Your concern may need an individual assessment before choosing a pathway.','/concept/book-appointment/'];
       if (title) title.textContent = result[0];
       if (copy) copy.textContent = result[1];
       if (link) link.href = result[2];
@@ -125,7 +87,7 @@
         const best = entries.filter((e) => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (!best) return;
         processButtons.forEach((b) => b.classList.toggle('is-active', b.dataset.processTarget === best.target.id));
-      }, { rootMargin: '-25% 0px -45% 0px', threshold:[.1,.4,.7] });
+      }, { rootMargin: '-25% 0px -45% 0px', threshold:[.1,.45] });
       chapters.forEach((chapter) => io.observe(chapter));
     }
   }
@@ -154,7 +116,7 @@
         const best = entries.filter((e) => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (!best) return;
         links.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === `#${best.target.id}`));
-      }, { rootMargin:'-35% 0px -50% 0px', threshold:[.05,.3,.6] });
+      }, { rootMargin:'-35% 0px -50% 0px', threshold:[.05,.3] });
       dockSections.forEach((s) => io.observe(s));
     }
   }
