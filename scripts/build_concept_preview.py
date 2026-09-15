@@ -7,6 +7,7 @@ import shutil
 import build_static_dist
 import generate_concept_v13_pages
 import generate_concept_v18_system_pages
+from concept_copy_cleanup import clean_patient_copy
 from concept_quality_audit import audit_concept
 
 build_static_dist.PUBLIC_DIRECTORIES.add("concept")
@@ -48,7 +49,7 @@ V11_JS = '<script src="/assets/js/editorial-experience-v11.js" defer></script>'
 V11_MIGRATIONS_JS = '<script src="/assets/js/editorial-experience-v11-migrations.js" defer></script>'
 V12_JS = '<script src="/assets/js/editorial-experience-v12.js" defer></script>'
 V13_MIGRATIONS_JS = '<script src="/assets/js/editorial-experience-v13-migrations.js" defer></script>'
-V16_JS = '<script src="/assets/js/editorial-experience-v16.js" defer></script>'
+V16_JS = '<script src="/assets/js/editor-experience-v16.js" defer></script>'
 V18_JS = '<script src="/assets/js/editorial-experience-v18.js" defer></script>'
 V20_JS = '<script src="/assets/js/editorial-experience-v20.js" defer></script>'
 
@@ -120,7 +121,6 @@ def normalize_concept_links(concept_pages: list[Path], routes: dict[str, str]) -
     def rewrite_match(match: re.Match[str]) -> str:
         nonlocal replacements
         value = match.group("value")
-        # Preserve query/hash when the base route has a premium equivalent.
         cut = len(value)
         for sep in ("?", "#"):
             pos = value.find(sep)
@@ -166,6 +166,7 @@ def main() -> int:
         inject_experience_assets(page)
 
     rewrites = normalize_concept_links(concept_pages, concept_route_map(concept_root))
+    clean_patient_copy(concept_pages)
     unresolved = sum(page.read_text(encoding="utf-8").count('href="/treatments/') for page in concept_pages)
     unresolved_blog = sum(page.read_text(encoding="utf-8").count('href="/blog/') for page in concept_pages)
     print(f"Premium route rewrites applied: {rewrites}")
