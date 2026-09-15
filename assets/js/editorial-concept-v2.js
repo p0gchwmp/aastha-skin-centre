@@ -1,9 +1,9 @@
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Sitewide running strip, injected consistently across concept pages.
+  // One sitewide running strip only.
   const hero = document.querySelector('.editorial-hero');
-  if (hero && !document.querySelector('.marquee-band')) {
+  if (hero && !document.querySelector('.marquee-band,.v3-marquee')) {
     const items = [
       'Acne & scars','Pigmentation','Hair & scalp','Medical dermatology',
       'Laser dermatology','Aesthetic dermatology','Karan Nagar','Paloura Chowk',
@@ -18,7 +18,7 @@
   }
 
   // Animated stats, only once when visible.
-  const countEls = [...document.querySelectorAll('[data-count]')];
+  const countEls = [...document.querySelectorAll('[data-count]')].filter((el) => el.dataset.counted !== 'true');
   if (countEls.length) {
     const animateCount = (el) => {
       if (el.dataset.counted === 'true') return;
@@ -39,7 +39,7 @@
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => entries.forEach((e) => {
         if (e.isIntersecting) { animateCount(e.target); io.unobserve(e.target); }
-      }), { threshold: .4 });
+      }), { threshold: .35 });
       countEls.forEach((el) => io.observe(el));
     } else countEls.forEach(animateCount);
   }
@@ -87,7 +87,7 @@
         const best = entries.filter((e) => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (!best) return;
         processButtons.forEach((b) => b.classList.toggle('is-active', b.dataset.processTarget === best.target.id));
-      }, { rootMargin: '-25% 0px -45% 0px', threshold:[.1,.45] });
+      }, { rootMargin: '-25% 0px -45% 0px', threshold:[.1,.4] });
       chapters.forEach((chapter) => io.observe(chapter));
     }
   }
@@ -100,24 +100,5 @@
       symptomChips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
       symptomExplain.innerHTML = `<strong>${chip.dataset.title || chip.textContent}</strong><br>${chip.dataset.copy || ''}`;
     }));
-  }
-
-  // Active section dock for long pages.
-  const dockSections = [...document.querySelectorAll('main section[id]')].filter((s) => s.id);
-  if (dockSections.length >= 3 && innerWidth > 1000) {
-    const dock = document.createElement('nav');
-    dock.className = 'section-dock';
-    dock.setAttribute('aria-label','Page sections');
-    dock.innerHTML = dockSections.map((s, i) => `<a href="#${s.id}" aria-label="Section ${i + 1}">${i + 1}</a>`).join('');
-    document.body.appendChild(dock);
-    const links = [...dock.querySelectorAll('a')];
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        const best = entries.filter((e) => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!best) return;
-        links.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === `#${best.target.id}`));
-      }, { rootMargin:'-35% 0px -50% 0px', threshold:[.05,.3] });
-      dockSections.forEach((s) => io.observe(s));
-    }
   }
 })();
