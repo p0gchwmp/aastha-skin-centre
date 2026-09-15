@@ -33,6 +33,7 @@ CSS_FILES = [
     "editorial-experience-v27.css",
     "editorial-experience-v28.css",
     "editorial-experience-v29.css",
+    "editorial-experience-v30.css",
 ]
 
 JS_FILES = [
@@ -63,6 +64,7 @@ JS_FILES = [
     "editorial-experience-v27-bridge.js",
     "editorial-experience-v28.js",
     "editorial-experience-v29.js",
+    "editorial-experience-v30.js",
 ]
 
 
