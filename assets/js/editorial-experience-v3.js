@@ -1,16 +1,13 @@
 (() => {
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* Shared marquee if a page does not already have one. */
-  if (!document.querySelector('.v3-marquee')) {
+  /* Shared marquee only when the earlier concept runtime did not create one. */
+  if (!document.querySelector('.marquee-band,.v3-marquee')) {
     const marquee = document.createElement('div');
     marquee.className = 'v3-marquee';
     marquee.setAttribute('aria-label', 'Clinic services');
     const terms = ['Acne','Acne scars','Pigmentation','Hair & scalp','Medical dermatology','Lasers','Aesthetic dermatology','Karan Nagar','Paloura Chowk'];
     const sequence = [...terms, ...terms].map((t) => `<span class="v3-marquee-item">${t}</span>`).join('');
     marquee.innerHTML = `<div class="v3-marquee-track">${sequence}</div>`;
-    const hero = document.querySelector('.editorial-hero');
-    if (hero) hero.insertAdjacentElement('afterend', marquee);
+    document.querySelector('.editorial-hero')?.insertAdjacentElement('afterend', marquee);
   }
 
   /* Command palette / site explorer. */
@@ -31,14 +28,14 @@
   palette.innerHTML = `<div class="v3-command-panel" role="dialog" aria-modal="true" aria-label="Explore Aastha"><div class="v3-command-head"><input type="search" placeholder="Search treatments, concerns, doctor…" aria-label="Search site"><button class="v3-command-close" type="button">Close</button></div><div class="v3-command-list">${destinations.map(([n,t,d,h]) => `<a class="v3-command-item" href="${h}" data-search="${(t+' '+d).toLowerCase()}"><small>${n}</small><div><strong>${t}</strong><small>${d}</small></div><span>↗</span></a>`).join('')}</div></div>`;
   document.body.appendChild(palette);
   const input = palette.querySelector('input');
-  const items = [...palette.querySelectorAll('.v3-command-item')];
+  const baseItems = [...palette.querySelectorAll('.v3-command-item')];
   const closePalette = () => { palette.classList.remove('is-open'); palette.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
   const openPalette = () => { palette.classList.add('is-open'); palette.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; requestAnimationFrame(() => input.focus()); };
   palette.querySelector('.v3-command-close').addEventListener('click', closePalette);
   palette.addEventListener('click', (e) => { if (e.target === palette) closePalette(); });
   input.addEventListener('input', () => {
     const q = input.value.trim().toLowerCase();
-    items.forEach((item) => item.hidden = !!q && !item.dataset.search.includes(q));
+    baseItems.forEach((item) => item.hidden = !!q && !item.dataset.search.includes(q));
   });
   addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); palette.classList.contains('is-open') ? closePalette() : openPalette(); }
@@ -52,26 +49,27 @@
     if (cta) cta.insertAdjacentElement('beforebegin', toggle); else nav.appendChild(toggle);
   }
 
-  /* No artificial page-transition interception. Native navigation is faster and more reliable. */
-
-  /* Right-side section index. */
-  const sections = [...document.querySelectorAll('main > section[id], main > section.editorial-section')].filter((s, i) => i < 9);
-  if (sections.length > 2) {
-    const index = document.createElement('nav'); index.className='v3-side-index'; index.setAttribute('aria-label','Page sections');
-    sections.forEach((section, i) => {
-      if (!section.id) section.id = `section-${i+1}`;
-      const label = section.querySelector('.section-no,.kicker,h2')?.textContent?.trim().replace(/\s+/g,' ').slice(0,36) || `Section ${i+1}`;
-      index.insertAdjacentHTML('beforeend', `<a href="#${section.id}" aria-label="${label.replace(/"/g,'&quot;')}"></a>`);
-    });
-    document.body.appendChild(index);
-    if ('IntersectionObserver' in window) {
-      const links = [...index.querySelectorAll('a')];
-      const observer = new IntersectionObserver((entries) => {
-        const active = entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
-        if (!active) return;
-        links.forEach(a=>a.classList.toggle('is-active', a.getAttribute('href') === `#${active.target.id}`));
-      }, {rootMargin:'-30% 0px -55% 0px', threshold:[.01,.25]});
-      sections.forEach(s=>observer.observe(s));
+  /* Right-side section index is for editorial/utility pages only. Treatment pages
+     already have the richer sticky On-this-page map and should not pay for a second observer. */
+  if (!document.body.classList.contains('treatment-page') && !document.body.classList.contains('concept-admin')) {
+    const sections = [...document.querySelectorAll('main > section[id], main > section.editorial-section')].filter((s, i) => i < 9);
+    if (sections.length > 2) {
+      const index = document.createElement('nav'); index.className='v3-side-index'; index.setAttribute('aria-label','Page sections');
+      sections.forEach((section, i) => {
+        if (!section.id) section.id = `section-${i+1}`;
+        const label = section.querySelector('.section-no,.kicker,h2')?.textContent?.trim().replace(/\s+/g,' ').slice(0,36) || `Section ${i+1}`;
+        index.insertAdjacentHTML('beforeend', `<a href="#${section.id}" aria-label="${label.replace(/"/g,'&quot;')}"></a>`);
+      });
+      document.body.appendChild(index);
+      if ('IntersectionObserver' in window) {
+        const links = [...index.querySelectorAll('a')];
+        const observer = new IntersectionObserver((entries) => {
+          const active = entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+          if (!active) return;
+          links.forEach(a=>a.classList.toggle('is-active', a.getAttribute('href') === `#${active.target.id}`));
+        }, {rootMargin:'-30% 0px -55% 0px', threshold:[.01,.25]});
+        sections.forEach(s=>observer.observe(s));
+      }
     }
   }
 
@@ -104,7 +102,8 @@
       if(title) title.textContent = btn.dataset.title || '';
       if(copy) copy.textContent = btn.dataset.copy || '';
       if(links) {
-        const entries = JSON.parse(btn.dataset.links || '[]');
+        let entries = [];
+        try { entries = JSON.parse(btn.dataset.links || '[]'); } catch {}
         links.innerHTML = entries.map(([label,href]) => `<a href="${href}">${label}</a>`).join('');
       }
     };
@@ -139,15 +138,4 @@
     },{rootMargin:'-26% 0px -42% 0px',threshold:[.15,.5]});
     steps.forEach(s=>obs.observe(s));
   });
-
-  /* Count-up stats once. */
-  if (!reduced && 'IntersectionObserver' in window) {
-    const counters=[...document.querySelectorAll('[data-count]')];
-    const obs=new IntersectionObserver((entries)=>entries.forEach(entry=>{
-      if(!entry.isIntersecting)return;
-      const el=entry.target,target=Number(el.dataset.count||0),suffix=el.dataset.suffix||''; let start=null;
-      const tick=(t)=>{if(!start)start=t;const p=Math.min(1,(t-start)/650);el.textContent=`${Math.round(target*(1-Math.pow(1-p,3)))}${suffix}`;if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick);obs.unobserve(el);
-    }),{threshold:.4});
-    counters.forEach(c=>obs.observe(c));
-  }
 })();
