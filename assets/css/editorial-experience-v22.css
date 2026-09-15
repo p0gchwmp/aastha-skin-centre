@@ -1,0 +1,23 @@
+/* Aastha Editorial Experience v22 — cross-browser motion offsets */
+body.concept-page .hero-art.v18-authored-media.v21-motion-plate{
+  --v22-img-x:0px;
+  --v22-img-y:0px;
+  --v22-ring1-x:0px;
+  --v22-ring1-y:0px;
+  --v22-ring2-x:0px;
+  --v22-ring2-y:0px;
+}
+body.concept-page .hero-art.v18-authored-media.v21-motion-plate>img{
+  transform:scale(1.045) translate3d(var(--v22-img-x),var(--v22-img-y),0)!important;
+}
+body.concept-page .hero-art.v18-authored-media.v21-motion-plate .v18-media-core::before{
+  transform:translateY(-50%) translate3d(var(--v22-ring1-x),var(--v22-ring1-y),16px)!important;
+}
+body.concept-page .hero-art.v18-authored-media.v21-motion-plate .v18-media-core::after{
+  transform:translateY(-50%) translate3d(var(--v22-ring2-x),var(--v22-ring2-y),34px)!important;
+}
+@media(prefers-reduced-motion:reduce){
+  body.concept-page .hero-art.v18-authored-media.v21-motion-plate>img,
+  body.concept-page .hero-art.v18-authored-media.v21-motion-plate .v18-media-core::before,
+  body.concept-page .hero-art.v18-authored-media.v21-motion-plate .v18-media-core::after{transform:none!important}
+}
