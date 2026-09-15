@@ -35,6 +35,7 @@ V17_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v17.css
 V18_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v18.css">'
 V19_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v19.css">'
 V20_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v20.css">'
+V21_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v21.css">'
 V3_JS = '<script src="/assets/js/editorial-experience-v3.js" defer></script>'
 V3_FIX_JS = '<script src="/assets/js/editorial-experience-v3-fixes.js" defer></script>'
 V4_JS = '<script src="/assets/js/editorial-experience-v4.js" defer></script>'
@@ -52,6 +53,7 @@ V13_MIGRATIONS_JS = '<script src="/assets/js/editorial-experience-v13-migrations
 V16_JS = '<script src="/assets/js/editorial-experience-v16.js" defer></script>'
 V18_JS = '<script src="/assets/js/editorial-experience-v18.js" defer></script>'
 V20_JS = '<script src="/assets/js/editorial-experience-v20.js" defer></script>'
+V21_JS = '<script src="/assets/js/editorial-experience-v21.js" defer></script>'
 
 QUOTED_PATH_RE = re.compile(r'''(?P<q>["'])(?P<value>/[^"']+)(?P=q)''')
 
@@ -61,14 +63,14 @@ def inject_experience_assets(page: Path) -> None:
     for tag in (
         FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, THEME_BOOT,
         V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS, V6_CSS, V6_FIX_CSS, V7_CSS, V8_CSS,
-        V10_CSS, V11_CSS, V12_CSS, V14_CSS, V15_CSS, V16_CSS, V17_CSS, V18_CSS, V19_CSS, V20_CSS,
+        V10_CSS, V11_CSS, V12_CSS, V14_CSS, V15_CSS, V16_CSS, V17_CSS, V18_CSS, V19_CSS, V20_CSS, V21_CSS,
     ):
         if tag not in source:
             source = source.replace("</head>", f"{tag}</head>", 1)
     for tag in (
         V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS, V6_JS, V6_POLISH_JS, V7_JS,
         V7_POLISH_JS, V8_JS, V11_JS, V11_MIGRATIONS_JS, V12_JS, V13_MIGRATIONS_JS,
-        V16_JS, V18_JS, V20_JS,
+        V16_JS, V18_JS, V20_JS, V21_JS,
     ):
         if tag not in source:
             source = source.replace("</body>", f"{tag}</body>", 1)
