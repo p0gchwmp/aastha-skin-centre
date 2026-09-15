@@ -1,0 +1,48 @@
+/* Aastha Editorial Experience v34 — homepage route finder repair + navigation polish */
+
+/* Critical homepage navigation should never depend on reveal state. */
+#finder{min-height:auto!important;padding-block:clamp(58px,6vw,92px)!important;background:color-mix(in srgb,var(--theme-paper) 94%,var(--theme-paper-2) 6%)!important}
+#finder .section-head{margin-bottom:clamp(24px,3vw,38px)!important;align-items:start!important}
+#finder .section-head .display-heading{font-size:clamp(3.4rem,6.2vw,6.8rem)!important;max-width:10ch!important;line-height:.88!important}
+#finder .section-copy{max-width:42ch!important;font-size:clamp(.92rem,1.1vw,1.05rem)!important;line-height:1.62!important}
+#finder .route-finder[data-reveal],#finder .route-finder{opacity:1!important;visibility:visible!important;transform:none!important;display:grid!important;grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr)!important;min-height:0!important;border:1px solid var(--line-strong)!important;background:var(--theme-paper)!important;box-shadow:0 18px 56px rgba(26,18,21,.045)!important;overflow:hidden!important}
+#finder .route-controls{padding:clamp(24px,3vw,38px)!important;border-right:1px solid var(--line)!important;background:linear-gradient(180deg,var(--theme-paper),color-mix(in srgb,var(--theme-paper-2) 96%,var(--theme-metal) 4%))!important}
+#finder .route-controls fieldset{margin:0!important;padding:0!important;border:0!important}
+#finder .route-controls fieldset+fieldset{margin-top:30px!important;padding-top:28px!important;border-top:1px solid var(--line)!important}
+#finder .route-controls legend{display:flex!important;align-items:center!important;gap:10px!important;margin:0 0 14px!important;font:800 .56rem/1 var(--sans)!important;letter-spacing:.12em!important;text-transform:uppercase!important;color:var(--theme-ink)!important}
+#finder .route-controls fieldset:first-child legend::before{content:'01';color:var(--theme-accent)}
+#finder .route-controls fieldset:nth-child(2) legend::before{content:'02';color:var(--theme-accent)}
+#finder .route-options{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+#finder .route-choice{min-height:42px!important;padding:0 14px!important;border:1px solid var(--line-strong)!important;background:var(--theme-paper)!important;color:var(--theme-ink)!important;font:750 .62rem/1 var(--sans)!important;letter-spacing:.04em!important;text-transform:none!important;cursor:pointer!important;transition:background .16s ease,color .16s ease,border-color .16s ease,transform .16s ease!important}
+#finder .route-choice:hover{background:color-mix(in srgb,var(--theme-paper-2) 90%,var(--theme-metal) 10%)!important;transform:translateY(-1px)!important}
+#finder .route-choice[aria-pressed="true"]{background:var(--theme-ink)!important;color:var(--theme-paper)!important;border-color:var(--theme-ink)!important}
+#finder .route-choice[hidden]{display:none!important}
+#finder .route-result{padding:clamp(28px,4vw,52px)!important;min-height:330px!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important;gap:28px!important;background:linear-gradient(145deg,var(--theme-night),color-mix(in srgb,var(--theme-night) 82%,var(--theme-accent) 18%))!important;color:var(--theme-paper)!important}
+#finder .route-result .kicker{color:var(--theme-metal)!important}
+#finder .route-result h3{font:500 clamp(2.8rem,4.8vw,5.3rem)/.9 var(--display)!important;letter-spacing:-.045em!important;max-width:10ch!important;margin:12px 0 16px!important;color:var(--theme-paper)!important;text-wrap:balance!important}
+#finder .route-result p{max-width:46ch!important;font-size:clamp(.88rem,1vw,.98rem)!important;line-height:1.62!important;color:color-mix(in srgb,var(--theme-paper) 78%,transparent)!important}
+#finder .route-result .btn{border-color:color-mix(in srgb,var(--theme-paper) 34%,transparent)!important;color:var(--theme-paper)!important;background:rgba(255,255,255,.04)!important}
+#finder .route-result .btn:hover{background:var(--theme-paper)!important;color:var(--theme-night)!important}
+#finder .route-note{margin:16px 0 0!important;padding-top:14px!important;border-top:1px solid rgba(255,255,255,.14)!important;font-size:.54rem!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:rgba(255,255,255,.55)!important}
+
+/* Replace debug-looking square section dots with a quiet editorial progress rail. */
+.v3-side-index{right:14px!important;gap:8px!important;padding:10px 7px!important;background:rgba(248,244,237,.58)!important;border:1px solid rgba(50,39,42,.08)!important;backdrop-filter:blur(8px)!important}
+.v3-side-index a{width:4px!important;height:4px!important;border:0!important;border-radius:99px!important;background:color-mix(in srgb,var(--theme-ink) 38%,transparent)!important;transition:height .18s ease,background .18s ease,transform .18s ease!important}
+.v3-side-index a.is-active{height:20px!important;background:var(--theme-accent)!important;transform:none!important}
+.v3-side-index a::before{right:15px!important;border-radius:0!important}
+
+@media(max-width:1000px){
+  #finder .route-finder{grid-template-columns:1fr!important}
+  #finder .route-controls{border-right:0!important;border-bottom:1px solid var(--line)!important}
+  #finder .route-result{min-height:300px!important}
+}
+@media(max-width:700px){
+  #finder{padding-block:48px!important}
+  #finder .section-head .display-heading{font-size:clamp(3rem,14vw,4.4rem)!important}
+  #finder .route-controls{padding:22px 18px!important}
+  #finder .route-options{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #finder .route-choice{width:100%!important;text-align:left!important}
+  #finder .route-result{padding:28px 22px!important;min-height:280px!important}
+  .v3-side-index{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){#finder .route-choice{transition:none!important}.v3-side-index a{transition:none!important}}
