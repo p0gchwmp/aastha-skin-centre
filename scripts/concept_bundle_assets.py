@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+"""Bundle the layered concept CSS/JS into two content-hashed preview assets.
+
+The source files stay separate for iteration and rollback. Only the built preview
+is consolidated, preserving the exact cascade/runtime order while cutting dozens
+of HTTP requests and ensuring the injected experience layer is cache-busted.
+"""
+from __future__ import annotations
+
+import hashlib
+from pathlib import Path
+
+CSS_FILES = [
+    "editorial-experience-v3.css",
+    "editorial-experience-v3-fixes.css",
+    "editorial-experience-v4.css",
+    "editorial-experience-v5.css",
+    "editorial-experience-v6.css",
+    "editorial-experience-v6-fixes.css",
+    "editorial-experience-v7.css",
+    "editorial-experience-v8.css",
+    "editorial-experience-v10.css",
+    "editorial-experience-v11.css",
+    "editorial-experience-v12.css",
+    "editorial-experience-v14.css",
+    "editorial-experience-v15.css",
+    "editorial-experience-v16.css",
+    "editorial-experience-v17.css",
+    "editorial-experience-v18.css",
+    "editorial-experience-v19.css",
+    "editorial-experience-v20.css",
+]
+
+JS_FILES = [
+    "editorial-experience-v3.js",
+    "editorial-experience-v3-fixes.js",
+    "editorial-experience-v4.js",
+    "editorial-experience-v5.js",
+    "editorial-experience-v5-fixes.js",
+    "editorial-experience-v6.js",
+    "editorial-experience-v6-polish.js",
+    "editorial-experience-v7.js",
+    "editorial-experience-v7-polish.js",
+    "editorial-experience-v8.js",
+    "editorial-experience-v11.js",
+    "editorial-experience-v11-migrations.js",
+    "editorial-experience-v12.js",
+    "editorial-experience-v13-migrations.js",
+    "editorial-experience-v16.js",
+    "editorial-experience-v18.js",
+    "editorial-experience-v20.js",
+]
+
+
+def _bundle(folder: Path, filenames: list[str], kind: str) -> tuple[str, Path]:
+    chunks: list[str] = []
+    for name in filenames:
+        source = folder / name
+        if not source.exists():
+            raise RuntimeError(f"Missing concept {kind} source: {source}")
+        chunks.append(f"/* ---- {name} ---- */\n{source.read_text(encoding='utf-8').rstrip()}\n")
+    content = "\n".join(chunks)
+    digest = hashlib.sha256(content.encode("utf-8")).hexdigest()[:12]
+    suffix = ".css" if kind == "css" else ".js"
+    target = folder / f"editorial-experience.bundle.{digest}{suffix}"
+    target.write_text(content, encoding="utf-8")
+    url = "/" + target.relative_to(folder.parents[1]).as_posix()
+    return url, target
+
+
+def bundle_concept_assets(dist: Path, concept_pages: list[Path]) -> tuple[str, str, int]:
+    css_dir = dist / "assets" / "css"
+    js_dir = dist / "assets" / "js"
+    css_url, _ = _bundle(css_dir, CSS_FILES, "css")
+    js_url, _ = _bundle(js_dir, JS_FILES, "js")
+
+    css_tags = [f'<link rel="stylesheet" href="/assets/css/{name}">' for name in CSS_FILES]
+    js_tags = [f'<script src="/assets/js/{name}" defer></script>' for name in JS_FILES]
+    bundle_css_tag = f'<link rel="stylesheet" href="{css_url}">'
+    bundle_js_tag = f'<script src="{js_url}" defer></script>'
+
+    changed = 0
+    for page in concept_pages:
+        source = page.read_text(encoding="utf-8")
+        updated = source
+        first_css_pos = min((updated.find(tag) for tag in css_tags if tag in updated), default=-1)
+        first_js_pos = min((updated.find(tag) for tag in js_tags if tag in updated), default=-1)
+        for tag in css_tags:
+            updated = updated.replace(tag, "")
+        for tag in js_tags:
+            updated = updated.replace(tag, "")
+        if bundle_css_tag not in updated:
+            if first_css_pos >= 0:
+                # CSS layers were originally appended immediately before </head>.
+                updated = updated.replace("</head>", f"{bundle_css_tag}</head>", 1)
+            else:
+                updated = updated.replace("</head>", f"{bundle_css_tag}</head>", 1)
+        if bundle_js_tag not in updated:
+            updated = updated.replace("</body>", f"{bundle_js_tag}</body>", 1)
+        if updated != source:
+            page.write_text(updated, encoding="utf-8")
+            changed += 1
+
+    print(f"Concept bundles: {css_url} + {js_url} across {changed} pages")
+    return css_url, js_url, changed
