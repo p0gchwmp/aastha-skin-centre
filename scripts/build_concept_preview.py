@@ -49,7 +49,7 @@ V11_JS = '<script src="/assets/js/editorial-experience-v11.js" defer></script>'
 V11_MIGRATIONS_JS = '<script src="/assets/js/editorial-experience-v11-migrations.js" defer></script>'
 V12_JS = '<script src="/assets/js/editorial-experience-v12.js" defer></script>'
 V13_MIGRATIONS_JS = '<script src="/assets/js/editorial-experience-v13-migrations.js" defer></script>'
-V16_JS = '<script src="/assets/js/editor-experience-v16.js" defer></script>'
+V16_JS = '<script src="/assets/js/editorial-experience-v16.js" defer></script>'
 V18_JS = '<script src="/assets/js/editorial-experience-v18.js" defer></script>'
 V20_JS = '<script src="/assets/js/editorial-experience-v20.js" defer></script>'
 
