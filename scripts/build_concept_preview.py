@@ -27,6 +27,7 @@ V12_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v12.css
 V14_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v14.css">'
 V15_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v15.css">'
 V16_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v16.css">'
+V17_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v17.css">'
 V3_JS = '<script src="/assets/js/editorial-experience-v3.js" defer></script>'
 V3_FIX_JS = '<script src="/assets/js/editorial-experience-v3-fixes.js" defer></script>'
 V4_JS = '<script src="/assets/js/editorial-experience-v4.js" defer></script>'
@@ -47,7 +48,7 @@ V16_JS = '<script src="/assets/js/editorial-experience-v16.js" defer></script>'
 
 def inject_experience_assets(page: Path) -> None:
     source = page.read_text(encoding="utf-8")
-    for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, THEME_BOOT, V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS, V6_CSS, V6_FIX_CSS, V7_CSS, V8_CSS, V10_CSS, V11_CSS, V12_CSS, V14_CSS, V15_CSS, V16_CSS):
+    for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, THEME_BOOT, V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS, V6_CSS, V6_FIX_CSS, V7_CSS, V8_CSS, V10_CSS, V11_CSS, V12_CSS, V14_CSS, V15_CSS, V16_CSS, V17_CSS):
         if tag not in source:
             source = source.replace("</head>", f"{tag}</head>", 1)
     for tag in (V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS, V6_JS, V6_POLISH_JS, V7_JS, V7_POLISH_JS, V8_JS, V10_JS, V11_JS, V11_MIGRATIONS_JS, V12_JS, V13_MIGRATIONS_JS, V16_JS):
@@ -76,7 +77,6 @@ def concept_route_map(concept_root: Path) -> dict[str, str]:
             routes[f"/{rel}/"] = concept_url
         elif "/" not in rel and rel not in reserved:
             routes[f"/treatments/{rel}/"] = concept_url
-    # Known legacy aliases whose old slugs differ from the concept page slug.
     routes.update({
         "/treatments/hifu-rf-skin-tightening/": "/concept/hifu-treatment/",
         "/treatments/nail-surgery/": "/concept/ingrown-toenail-nail-surgery/",
