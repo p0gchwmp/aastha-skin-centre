@@ -1,6 +1,12 @@
 /* Aastha Editorial Experience v30 — image-led navigation reset */
 body.concept-page{--v30-ease:cubic-bezier(.2,.72,.2,1)}
 
+/* Real photography on the two discovery hubs */
+body.v30-image-hubs .editorial-hero .hero-art{overflow:hidden;background:var(--theme-night);border-color:rgba(255,255,255,.12)}
+body.v30-image-hubs .editorial-hero .hero-art img{width:100%;height:100%;min-height:460px;object-fit:cover;filter:saturate(.92) contrast(1.02) brightness(.78);transform:scale(1.01)}
+body.v30-image-hubs .editorial-hero .hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 48%,rgba(15,12,14,.38));pointer-events:none}
+body.v30-image-hubs .editorial-hero .art-label{z-index:3;background:rgba(18,14,16,.84);color:#fff;border-color:rgba(255,255,255,.14)}
+
 .v30-gallery-section{padding:clamp(56px,7vw,104px) 0;border-block:1px solid var(--line);background:linear-gradient(180deg,var(--theme-paper),color-mix(in srgb,var(--theme-paper-2) 96%,var(--theme-metal) 4%))}
 .v30-gallery-head{display:grid;grid-template-columns:minmax(160px,.32fr) minmax(0,1fr);gap:clamp(28px,5vw,76px);align-items:end;margin-bottom:clamp(30px,4vw,52px)}
 .v30-gallery-head small{font:800 .55rem/1 var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--theme-accent)}
@@ -43,5 +49,5 @@ body.v30-image-atlas .v23-atlas,body.v30-image-atlas .v3-atlas{display:none!impo
 body.v30-image-atlas #atlas>.concept-shell>.section-head{display:none!important}
 
 @media(max-width:1100px){.v30-concern-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.v30-card:first-child{grid-row:auto;min-height:520px;grid-column:1 / -1}.v30-card{min-height:340px}.v30-treatment-strip{grid-template-columns:repeat(3,1fr)}.v30-treatment-tile:nth-child(3){border-right:0}.v30-treatment-tile:nth-child(-n+3){border-bottom:1px solid var(--line)}}
-@media(max-width:700px){.v30-gallery-section{padding-block:42px}.v30-gallery-head{grid-template-columns:1fr;gap:14px}.v30-gallery-head h2{font-size:clamp(3rem,15vw,4.8rem)}.v30-concern-grid{grid-template-columns:1fr}.v30-card:first-child{grid-column:auto;min-height:430px}.v30-card{min-height:330px}.v30-treatment-strip{grid-template-columns:1fr 1fr}.v30-treatment-tile{min-height:180px}.v30-treatment-tile:nth-child(n){border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.v30-treatment-tile:nth-child(2n){border-right:0}.v30-treatment-tile:nth-last-child(-n+2){border-bottom:0}.v30-gallery-foot{display:block}.v30-gallery-foot>*+*{margin-top:8px}}
+@media(max-width:700px){body.v30-image-hubs .editorial-hero .hero-art img{min-height:360px}.v30-gallery-section{padding-block:42px}.v30-gallery-head{grid-template-columns:1fr;gap:14px}.v30-gallery-head h2{font-size:clamp(3rem,15vw,4.8rem)}.v30-concern-grid{grid-template-columns:1fr}.v30-card:first-child{grid-column:auto;min-height:430px}.v30-card{min-height:330px}.v30-treatment-strip{grid-template-columns:1fr 1fr}.v30-treatment-tile{min-height:180px}.v30-treatment-tile:nth-child(n){border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.v30-treatment-tile:nth-child(2n){border-right:0}.v30-treatment-tile:nth-last-child(-n+2){border-bottom:0}.v30-gallery-foot{display:block}.v30-gallery-foot>*+*{margin-top:8px}}
 @media(prefers-reduced-motion:reduce){.v30-card,.v30-card img,.v30-treatment-tile img{transition:none!important}}
