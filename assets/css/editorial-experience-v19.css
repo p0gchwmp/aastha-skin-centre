@@ -1,0 +1,134 @@
+/* Aastha Editorial Experience v19 — crisp, consistent, performance-first */
+
+/* Off-screen sections do less work without changing layout. */
+body.concept-page main > .editorial-section:nth-of-type(n+3){
+  content-visibility:auto;
+  contain-intrinsic-size:760px;
+}
+
+/* Kill legacy decorative runtime surfaces that no longer add value. */
+body.concept-page .v3-orb,
+body.concept-page .v3-cursor-label,
+body.concept-page .v10-link-preview,
+body.concept-page .v18-context-strip{display:none!important}
+
+body.concept-page .concept-nav{
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* The premium look comes from proportion and material, not excess effects. */
+body.concept-page *,body.concept-page *::before,body.concept-page *::after{
+  animation-duration:.28s;
+  animation-iteration-count:1;
+}
+body.concept-page a,
+body.concept-page button,
+body.concept-page .drag-card,
+body.concept-page .editorial-panel,
+body.concept-page .v3-reading-card{
+  transition-property:background-color,border-color,color,opacity,transform;
+  transition-duration:.16s;
+  transition-timing-function:ease-out;
+}
+
+/* Simpler authored hero plate. */
+body.concept-page .hero-art.v18-authored-media--simple{
+  min-height:clamp(330px,38vw,500px);
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.012)),
+    color-mix(in srgb,var(--theme-night-2) 88%,var(--theme-accent-deep) 12%);
+  border-color:color-mix(in srgb,var(--theme-metal) 20%,transparent);
+  box-shadow:0 22px 54px rgba(0,0,0,.18)!important;
+}
+body.concept-page .hero-art.v18-authored-media--simple>img{
+  opacity:.018!important;
+  filter:none!important;
+}
+body.concept-page .v18-media-composition--simple{
+  padding:clamp(22px,3vw,34px);
+  display:grid;
+  grid-template-rows:auto 1fr;
+}
+body.concept-page .v18-media-composition--simple .v18-media-core{
+  min-height:0;
+  justify-content:end;
+  padding-bottom:clamp(8px,2vw,22px);
+}
+body.concept-page .v18-media-composition--simple .v18-media-core::before,
+body.concept-page .v18-media-composition--simple .v18-media-core::after{display:none}
+body.concept-page .v18-media-composition--simple .v18-media-core h3{
+  max-width:11ch;
+  font-size:clamp(2.35rem,4.8vw,4.9rem);
+  line-height:.93;
+}
+body.concept-page .v18-media-composition--simple .v18-media-core p{
+  margin-top:14px;
+  max-width:34ch;
+  font-size:.78rem;
+  color:rgba(255,255,255,.67);
+}
+body.concept-page .v18-media-composition--simple .v18-media-tags,
+body.concept-page .v18-media-composition--simple .v18-media-foot,
+body.concept-page .v18-media-composition--simple .v18-media-index{display:none!important}
+
+/* Tighter, calmer page rhythm. */
+body.concept-page main > .editorial-section{padding-block:clamp(54px,6vw,88px)}
+body.concept-page .section-head{margin-bottom:clamp(30px,4vw,52px)}
+body.concept-page .section-copy,
+body.concept-page .detail-intro{line-height:1.65;max-width:62ch}
+body.concept-page .display-heading{max-width:15ch}
+
+/* Drag cards are navigation first, interaction second. */
+body.concept-page .drag-rail{scroll-snap-type:x proximity}
+body.concept-page .drag-card{
+  cursor:pointer;
+  scroll-snap-align:start;
+  position:relative;
+  min-height:clamp(360px,43vw,540px);
+  box-shadow:none!important;
+}
+body.concept-page .drag-card::after{
+  content:'↗';
+  position:absolute;
+  top:24px;
+  right:24px;
+  font:600 1.1rem/1 var(--sans);
+  opacity:.78;
+}
+body.concept-page .drag-card:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(20,14,17,.06)!important}
+body.concept-page .drag-rail.is-dragging .drag-card{cursor:grabbing}
+
+/* Keep cards full but not cluttered. */
+body.concept-page .v18-journal-card{min-height:260px;padding:clamp(22px,2.6vw,32px)}
+body.concept-page .v18-journal-card:first-child{min-height:320px}
+body.concept-page .v18-media-card{min-height:220px;padding:clamp(22px,2.6vw,32px)}
+body.concept-page .v18-media-card h3{font-size:clamp(1.75rem,2.7vw,2.8rem);line-height:.98}
+body.concept-page .v18-media-empty{display:none}
+
+/* Reduce repeated card theatrics on detail pages. */
+body.concept-page .v10-focus-group.v10-has-focus > *{opacity:1!important;filter:none!important}
+body.concept-page .v10-focus-group > *{transform:none!important}
+body.concept-page .v7-quick-explorer{display:none!important}
+
+/* Crisp FAQ and reading surfaces. */
+body.concept-page .faq-stack details,
+body.concept-page .v18-blog-article details{background:transparent!important}
+body.concept-page .faq-stack summary,
+body.concept-page .v18-blog-article summary{padding-block:16px}
+body.concept-page .v18-blog-article .article-section{margin-bottom:clamp(26px,4vw,46px);padding-bottom:clamp(26px,4vw,46px)}
+
+/* Public media is concise; admin carries the operational detail. */
+body.concept-page:not(.concept-admin) .v18-media-card p{max-width:42ch;line-height:1.58}
+
+/* Mobile: fewer fixed/floating layers and predictable motion. */
+@media(max-width:900px){
+  body.concept-page main > .editorial-section:nth-of-type(n+3){contain-intrinsic-size:620px}
+  body.concept-page .v3-side-index{display:none!important}
+  body.concept-page .v18-media-composition--simple .v18-media-core h3{font-size:clamp(2rem,11vw,3.7rem)}
+  body.concept-page .drag-card{min-height:380px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  body.concept-page *,body.concept-page *::before,body.concept-page *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
