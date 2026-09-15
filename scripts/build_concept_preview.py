@@ -6,6 +6,7 @@ import shutil
 import build_static_dist
 import generate_concept_v13_pages
 import generate_concept_v18_system_pages
+from concept_quality_audit import audit_concept
 
 build_static_dist.PUBLIC_DIRECTORIES.add("concept")
 
@@ -154,6 +155,8 @@ def main() -> int:
     print(f"Premium route rewrites applied: {rewrites}")
     print(f"Remaining legacy treatment hrefs (no concept equivalent yet): {unresolved}")
     print(f"Remaining legacy blog hrefs (no concept equivalent yet): {unresolved_blog}")
+
+    audit_concept(dist, concept_pages)
 
     shutil.copy2(concept_home, dist / "index.html")
     (dist / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
