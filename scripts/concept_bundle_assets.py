@@ -58,6 +58,7 @@ JS_FILES = [
     "editorial-experience-v25.js",
     "editorial-experience-v26.js",
     "editorial-experience-v27.js",
+    "editorial-experience-v27-bridge.js",
 ]
 
 
@@ -85,7 +86,6 @@ def bundle_concept_assets(dist: Path, concept_pages: list[Path]) -> tuple[str, s
 
     css_tags = [f'<link rel="stylesheet" href="/assets/css/{name}">' for name in CSS_FILES]
     js_tags = [f'<script src="/assets/js/{name}" defer></script>' for name in JS_FILES]
-    # Also strip the retired v24 JS tag if an older page happens to contain it.
     js_tags.append('<script src="/assets/js/editorial-experience-v24.js" defer></script>')
     bundle_css_tag = f'<link rel="stylesheet" href="{css_url}">'
     bundle_js_tag = f'<script src="{js_url}" defer></script>'
