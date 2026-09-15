@@ -16,124 +16,121 @@
     if (/hifu|rf|filler|botulinum|hydrafacial|medifacial|cryo/.test(s)) return 'Aesthetic dermatology';
     if (/wart|mole|skin tag|biopsy|abscess|corn|cyst|lipoma|nail|dpn|keratosis/.test(s)) return 'Minor procedures';
     if (/eczema|psoriasis|urticaria|fungal|scabies|allergy|dermatitis|rosacea|lichen|molluscum|paediatric|sti|cancer/.test(s)) return 'Medical dermatology';
-    if (/doctor|cheena/.test(s)) return 'Doctor';
+    if (/doctor|cheena/.test(s)) return 'Doctor profile';
     if (/location|karan|paloura|contact|book/.test(s)) return 'Clinic access';
     if (/blog|journal/.test(s)) return 'Skin journal';
-    if (/media/.test(s)) return 'Media';
+    if (/media/.test(s)) return 'Media & updates';
     return 'Dermatology';
   };
 
   const family = inferFamily();
   body.dataset.pageFamily = family.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
-  /* Only explicit page profiles carry clinical micro-copy. Unknown pages stay minimal. */
   const profiles = {
-    'acne-treatment': ['Active acne first','Severity and pattern'],
-    'acne-scar-treatment': ['Scar type first','Active acne control'],
-    'pigmentation-treatment': ['Diagnosis first','Trigger and depth'],
-    'melasma-treatment': ['Photoprotection','Long-term control'],
-    'hair-fall-treatment': ['Pattern first','Scalp examination'],
-    'hair-transplant': ['Donor supply','Future hair loss'],
-    'laser-hair-reduction': ['Hair pigment','Skin type'],
-    'hifu-treatment': ['Laxity','Anatomy'],
-    'rf-skin-tightening': ['Surface RF','Firmness'],
-    'botulinum-toxin-dermal-fillers': ['Anatomy','Movement or volume'],
-    'laser-tattoo-removal': ['Ink colour','Ink depth'],
-    'vitiligo-treatment': ['Activity','Distribution'],
-    'fungal-infection-treatment': ['Confirm fungus','Avoid steroid mixes'],
-    'seborrheic-dermatitis-dandruff': ['Scalp inflammation','Maintenance'],
-    'skin-allergy-treatment': ['Identify the rash','Exposure history'],
-    'skin-cancer-screening': ['Change matters','Biopsy when indicated'],
-    'paediatric-dermatology': ['Age-specific care','Body site'],
-    'book-appointment': ['Choose clinic','Send request'],
-    'contact': ['Two Jammu clinics','Call or WhatsApp'],
-    'dr-cheena-langer': ['MBBS, MD Dermatology','20+ years in medicine']
+    'acne-treatment': ['Active acne first','Severity + pattern','Marks ≠ scars','Maintenance matters'],
+    'acne-scar-treatment': ['Scar type first','Active acne control','Skin tone matters','Combination planning'],
+    'pigmentation-treatment': ['Diagnosis first','Depth + trigger','Photoprotection','Maintenance'],
+    'melasma-treatment': ['Relapsing condition','Light + heat triggers','Layered treatment','Maintenance'],
+    'hair-fall-treatment': ['Pattern first','Scalp health','Medical causes','Track progression'],
+    'hair-transplant': ['Donor supply','Diagnosis first','Future loss','Realistic density'],
+    'laser-hair-reduction': ['Dark hair responds','Skin type matters','Multiple sessions','Maintenance possible'],
+    'hifu-treatment': ['Laxity ≠ volume loss','Depth selection','Gradual response','Suitability first'],
+    'rf-skin-tightening': ['Surface RF','Not MNRF','Firmness goal','Course based'],
+    'botulinum-toxin-dermal-fillers': ['Anatomy first','Movement vs volume','Natural expression','No preset map'],
+    'laser-tattoo-removal': ['Colour matters','Ink depth matters','Multiple sessions','Scar risk assessed'],
+    'vitiligo-treatment': ['Activity matters','Site matters','Look-alikes exist','Long-term review'],
+    'fungal-infection-treatment': ['Confirm fungus','Avoid steroid mixes','Treat enough','Household sources'],
+    'seborrheic-dermatitis-dandruff': ['Scalp inflammation','Relapsing pattern','Trigger control','Maintenance'],
+    'skin-allergy-treatment': ['Name the rash','Exposure history','Patch testing sometimes','Avoid trigger'],
+    'skin-cancer-screening': ['Change matters','ABCDE clues','Non-healing lesions','Biopsy if needed'],
+    'sti-std-treatment': ['Confidential care','Symptoms can overlap','Testing by context','Time-sensitive care'],
+    'paediatric-dermatology': ['Age-specific care','Body site matters','Gentle barrier care','Dose + duration matter'],
+    'cryolipolysis-body-contouring': ['Contour ≠ weight loss','Localised fat','Skin laxity matters','Expectation setting'],
+    'dr-cheena-langer': ['MBBS, MD Dermatology','20+ years in medicine','Medical + procedural care','Jammu'],
   };
+  const familyProfiles = {
+    'Acne & scars':['Diagnosis first','Pattern + severity','Skin type','Follow-up'],
+    'Pigmentation':['Diagnosis first','Trigger + depth','Sun protection','Maintenance'],
+    'Hair & scalp':['Pattern first','Scalp exam','Medical context','Progress review'],
+    'Laser dermatology':['Right indication','Skin type','Settings matter','Aftercare'],
+    'Aesthetic dermatology':['Anatomy first','Suitability','Natural goals','Review'],
+    'Minor procedures':['Identify lesion','Site + symptoms','Procedure choice','Aftercare'],
+    'Medical dermatology':['History','Examination','Diagnosis','Review'],
+    'Doctor profile':['Qualifications','Clinical work','Academic activity','Jammu'],
+    'Dermatology':['Concern first','Assessment','Options','Review']
+  };
+  const profile = profiles[slug] || familyProfiles[family] || familyProfiles.Dermatology;
 
-  /* Replace generic SVG hero art with a restrained page-specific plate. */
+  /* Keep utility/system pages visually simple. Their main heading already carries
+     the meaning, so duplicating it inside the artwork creates clutter. */
+  const utilityPage = /^\/concept\/(?:book-appointment|contact|appointment-request-received|blog(?:\/|$)|media(?:\/|$)|about|privacy-policy|medical-disclaimer|terms-and-conditions)(?:\/|$)/.test(path);
   const heroArt = document.querySelector('.editorial-hero .hero-art');
-  if (heroArt && !heroArt.classList.contains('v18-authored-media') && !body.classList.contains('concept-admin')) {
+  if (heroArt && utilityPage && !body.classList.contains('concept-admin')) {
+    heroArt.classList.remove('v18-authored-media','v18-authored-media--simple');
+    heroArt.classList.add('v19-utility-art');
+    heroArt.querySelector('.v18-media-composition')?.remove();
+    const figcaption = heroArt.querySelector('figcaption');
+    if (figcaption && !figcaption.textContent.trim()) figcaption.textContent = 'Aastha Skin Centre · Jammu';
+  }
+
+  /* Clinical detail pages get one restrained authored visual, not a duplicate H1. */
+  const canUseClinicalPlate = heroArt && !utilityPage && !body.classList.contains('concept-admin') &&
+    !/^\/concept\/(?:treatments|conditions|locations)(?:\/)?$/.test(path);
+  if (canUseClinicalPlate && !heroArt.classList.contains('v18-authored-media--simple')) {
     heroArt.classList.add('v18-authored-media','v18-authored-media--simple');
-    heroArt.querySelector('img')?.setAttribute('aria-hidden','true');
+    const img = heroArt.querySelector('img');
+    if (img) img.setAttribute('aria-hidden','true');
     heroArt.querySelector('.art-label')?.remove();
-    const profile = profiles[slug];
+    heroArt.querySelector('figcaption:not(.art-label)')?.remove();
+    heroArt.querySelector('.v18-media-composition')?.remove();
     const media = document.createElement('div');
     media.className = 'v18-media-composition v18-media-composition--simple';
     media.innerHTML = `
       <div class="v18-media-head"><small>${family}</small><strong>Aastha · Jammu</strong></div>
-      <div class="v18-media-core"><h3>${title.replace(/\s*[|—-]\s*Aastha.*$/i,'')}</h3>${profile ? `<p>${profile[0]} · ${profile[1]}</p>` : ''}</div>`;
+      <div class="v18-media-core"><h3>${profile[0]}</h3><p>${profile[1]} · ${profile[2]}</p></div>`;
     heroArt.appendChild(media);
   }
 
-  /* Remove older automatically generated context strips. They added noise. */
+  /* Do not inject generic four-cell context strips. If a page needs a strip,
+     it should be authored in that page's own content. */
   document.querySelectorAll('.v18-context-strip').forEach(el => el.remove());
 
-  /* Normalize public navigation once, then deduplicate by destination. */
+  /* Normalize public navigation and de-duplicate destinations. */
   document.querySelectorAll('.concept-links').forEach(nav => {
-    [...nav.querySelectorAll('a')].forEach(a => {
-      const label = a.textContent.trim().toLowerCase();
-      if (label === 'doctor') a.href = '/concept/dr-cheena-langer/';
-      if (label === 'journal' || label === 'blog') { a.href = '/concept/blog/'; a.textContent = 'Journal'; }
-      if (label === 'media' || label === 'media & updates') { a.href = '/concept/media/'; a.textContent = 'Media'; }
-    });
-
-    const wanted = [
-      ['Journal','/concept/blog/'],
-      ['Media','/concept/media/']
-    ];
-    wanted.forEach(([label,href]) => {
-      if (![...nav.querySelectorAll('a')].some(a => new URL(a.href,location.href).pathname === href)) {
-        const a = document.createElement('a'); a.href = href; a.textContent = label; nav.appendChild(a);
-      }
-    });
-
     const seen = new Set();
     [...nav.querySelectorAll('a')].forEach(a => {
-      const url = new URL(a.href, location.href);
-      const key = `${url.pathname}${url.hash}`;
+      const href = a.getAttribute('href') || '';
+      const key = href.replace(/\/+$/, '/');
       if (seen.has(key)) a.remove(); else seen.add(key);
     });
+    const add = (href,label) => {
+      if ([...nav.querySelectorAll('a')].some(a => (a.getAttribute('href')||'').replace(/\/+$/,'/') === href)) return;
+      const a=document.createElement('a');a.href=href;a.textContent=label;nav.appendChild(a);
+    };
+    add('/concept/blog/','Journal');
+    add('/concept/media/','Media');
   });
 
-  document.querySelectorAll('.nav-cta').forEach(a => { a.href = '/concept/book-appointment/'; });
-  document.querySelectorAll('a').forEach(a => {
-    const t = a.textContent.trim().toLowerCase();
-    if (t === 'book consultation' || t === 'book an appointment' || t === 'request an appointment') a.href = '/concept/book-appointment/';
-    if (t.includes('doctor profile')) a.href = '/concept/dr-cheena-langer/';
-  });
-
-  /* Clean prototype language that should never reach patients. */
-  const replacements = new Map([
-    ['The original site had more medical depth. This version keeps that depth but turns the consultation pathway into a scroll-linked story instead of a dense block of cards.','History, examination and treatment options are reviewed in sequence so the plan stays clear.'],
-    ['The site can stay visually bold while still giving search engines and patients the detailed pathways your original website had.','Browse conditions, treatments, clinic details and patient guides from one place.'],
-    ['One switch instead of two repetitive cards. Timings, address and directions update in place.','Choose a clinic to see timings, address and directions.'],
-    ['Drag through the areas patients most often explore. The interaction is playful; the pathways stay clinically clear.','Browse the main areas of care.'],
-    ['A clinic, organised like chapters.','Explore care by category.']
-  ]);
-  document.querySelectorAll('p,h2,h3').forEach(el => {
-    const next = replacements.get(el.textContent.trim());
-    if (next) el.textContent = next;
-  });
-
-  /* Enrich command palette with only high-value system pages. */
+  /* Enrich command palette with system pages once. */
   const addCommandItems = () => {
     const list = document.querySelector('.v3-command-list');
-    if (!list) return;
-    const entries = [
+    if (!list || list.querySelector('[href="/concept/blog/"]')) return;
+    [
       ['Journal','Patient guides','/concept/blog/'],
-      ['Media','Clinic, academic and video updates','/concept/media/'],
-      ['Contact','Phones, directions and clinic details','/concept/contact/']
-    ];
-    entries.forEach(([name,desc,href],idx)=>{
-      if (list.querySelector(`[href="${href}"]`)) return;
+      ['Media','Clinic and academic updates','/concept/media/'],
+      ['About Aastha','Clinic approach','/concept/about/'],
+      ['Contact','Phones, WhatsApp and directions','/concept/contact/']
+    ].forEach(([name,desc,href],idx)=>{
       const a=document.createElement('a');a.className='v3-command-item';a.href=href;
       a.dataset.search=`${name} ${desc}`.toLowerCase();
-      a.innerHTML=`<small>${80+idx}</small><div><strong>${name}</strong><small>${desc}</small></div><span>↗</span>`;
+      a.innerHTML=`<span>${String(80+idx)}</span><strong>${name}</strong><small>${desc}</small><b>↗</b>`;
       list.appendChild(a);
     });
   };
   addCommandItems();
+  setTimeout(addCommandItems,100);
 
+  /* Journal search. */
   const journalSearch = document.querySelector('[data-v18-journal-search]');
   if (journalSearch) {
     const cards=[...document.querySelectorAll('.v18-journal-card')];
