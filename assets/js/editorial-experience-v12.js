@@ -3,18 +3,18 @@
   const root = document.documentElement;
   if (!body || !body.classList.contains('concept-page')) return;
 
-  /* v12 now owns palette personalization only. Dark mode is retired. */
+  /* v12 owns palette personalization only. Dark mode is retired. */
   document.querySelector('.v11-palette-lab')?.remove();
   [...body.classList].filter(cls => cls.startsWith('v11-palette-')).forEach(cls => body.classList.remove(cls));
   root.dataset.aasthaMode = 'light';
   localStorage.removeItem('aastha-preview-theme-mode');
 
   const palettes = {
-    current: {label:'Aastha', desc:'Wine · ivory · bronze · charcoal', sw:['#731c3a','#f4efe6','#b68a61','#171315']},
-    bordeaux: {label:'Bordeaux & Bone', desc:'Deep wine · bone · bronze · near-black', sw:['#59162f','#f2ece2','#b78e66','#160f12']},
-    midnight: {label:'Midnight & Oxblood', desc:'Ink navy · oxblood · brass · warm ivory', sw:['#11151d','#62213a','#b69462','#f3efe7']},
-    forest: {label:'Forest & Burgundy', desc:'Forest ink · burgundy · antique gold · stone', sw:['#111714','#632333','#aa8b63','#f0ede5']},
-    plum: {label:'Plum & Champagne', desc:'Deep plum · sand · champagne · near-black', sw:['#2d2030','#54233e','#b99a73','#f3ede5']}
+    current: {label:'Aastha', desc:'Jewel wine · warm ivory · champagne bronze · ink', sw:['#7c173a','#f6f1e9','#c7a06e','#171113']},
+    bordeaux: {label:'Bordeaux & Bone', desc:'Bordeaux · bone · antique champagne · near-black', sw:['#68132f','#f4efe7','#c29b65','#160f12']},
+    midnight: {label:'Midnight & Oxblood', desc:'Midnight ink · oxblood · brass · warm ivory', sw:['#0b131d','#74203f','#c4a268','#f5f1ea']},
+    forest: {label:'Forest & Burgundy', desc:'Forest ink · burgundy · antique gold · stone', sw:['#0c1611','#6b1d35','#b99a68','#f2efe8']},
+    plum: {label:'Plum & Champagne', desc:'Deep plum · berry · champagne · soft sand', sw:['#180f1a','#702650','#c2a06f','#f4eee7']}
   };
 
   const validPalette = key => Object.prototype.hasOwnProperty.call(palettes, key) ? key : 'current';
@@ -39,7 +39,7 @@
       <div class="v12-theme-options">
         ${Object.entries(palettes).map(([key,p]) => `<button class="v12-theme-option" type="button" data-v12-palette="${key}" aria-pressed="false"><span class="v12-theme-swatches">${p.sw.map(c=>`<i style="background:${c}"></i>`).join('')}</span><span><strong>${p.label}</strong><small>${p.desc}</small></span></button>`).join('')}
       </div>
-      <p class="v12-theme-note">Choose the colour mood you prefer. It changes the whole site and stays selected on this browser.</p>
+      <p class="v12-theme-note">Choose the colour mood you prefer. The palette changes across the full site and stays selected on this browser.</p>
     </div>`;
   body.appendChild(lab);
 
