@@ -33,6 +33,7 @@ CSS_FILES = [
     "editorial-experience-v22.css",
     "editorial-experience-v23.css",
     "editorial-experience-v24.css",
+    "editorial-experience-v25.css",
 ]
 
 JS_FILES = [
@@ -57,6 +58,7 @@ JS_FILES = [
     "editorial-experience-v22.js",
     "editorial-experience-v23.js",
     "editorial-experience-v24.js",
+    "editorial-experience-v25.js",
 ]
 
 
@@ -91,7 +93,6 @@ def bundle_concept_assets(dist: Path, concept_pages: list[Path]) -> tuple[str, s
     for page in concept_pages:
         source = page.read_text(encoding="utf-8")
         updated = source
-        first_css_pos = min((updated.find(tag) for tag in css_tags if tag in updated), default=-1)
         for tag in css_tags:
             updated = updated.replace(tag, "")
         for tag in js_tags:
