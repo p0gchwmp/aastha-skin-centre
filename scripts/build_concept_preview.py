@@ -26,6 +26,7 @@ V11_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v11.css
 V12_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v12.css">'
 V14_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v14.css">'
 V15_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v15.css">'
+V16_CSS = '<link rel="stylesheet" href="/assets/css/editorial-experience-v16.css">'
 V3_JS = '<script src="/assets/js/editorial-experience-v3.js" defer></script>'
 V3_FIX_JS = '<script src="/assets/js/editorial-experience-v3-fixes.js" defer></script>'
 V4_JS = '<script src="/assets/js/editorial-experience-v4.js" defer></script>'
@@ -41,21 +42,65 @@ V11_JS = '<script src="/assets/js/editorial-experience-v11.js" defer></script>'
 V11_MIGRATIONS_JS = '<script src="/assets/js/editorial-experience-v11-migrations.js" defer></script>'
 V12_JS = '<script src="/assets/js/editorial-experience-v12.js" defer></script>'
 V13_MIGRATIONS_JS = '<script src="/assets/js/editorial-experience-v13-migrations.js" defer></script>'
+V16_JS = '<script src="/assets/js/editorial-experience-v16.js" defer></script>'
 
 
 def inject_experience_assets(page: Path) -> None:
     source = page.read_text(encoding="utf-8")
-    for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, THEME_BOOT, V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS, V6_CSS, V6_FIX_CSS, V7_CSS, V8_CSS, V10_CSS, V11_CSS, V12_CSS, V14_CSS, V15_CSS):
+    for tag in (FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, THEME_BOOT, V3_CSS, V3_FIX_CSS, V4_CSS, V5_CSS, V6_CSS, V6_FIX_CSS, V7_CSS, V8_CSS, V10_CSS, V11_CSS, V12_CSS, V14_CSS, V15_CSS, V16_CSS):
         if tag not in source:
             source = source.replace("</head>", f"{tag}</head>", 1)
-    for tag in (V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS, V6_JS, V6_POLISH_JS, V7_JS, V7_POLISH_JS, V8_JS, V10_JS, V11_JS, V11_MIGRATIONS_JS, V12_JS, V13_MIGRATIONS_JS):
+    for tag in (V3_JS, V3_FIX_JS, V4_JS, V5_JS, V5_FIX_JS, V6_JS, V6_POLISH_JS, V7_JS, V7_POLISH_JS, V8_JS, V10_JS, V11_JS, V11_MIGRATIONS_JS, V12_JS, V13_MIGRATIONS_JS, V16_JS):
         if tag not in source:
             source = source.replace("</body>", f"{tag}</body>", 1)
     page.write_text(source, encoding="utf-8")
 
 
+def concept_route_map(concept_root: Path) -> dict[str, str]:
+    """Map legacy public routes to concept routes whenever a concept page exists."""
+    routes = {
+        "/book-appointment/": "/concept/book-appointment/",
+        "/contact/": "/concept/contact/",
+        "/conditions/": "/concept/conditions/",
+        "/treatments/": "/concept/treatments/",
+        "/dr-cheena-langer/": "/concept/dr-cheena-langer/",
+        "/locations/": "/concept/locations/",
+    }
+    reserved = {"conditions", "treatments", "dr-cheena-langer", "book-appointment", "contact", "locations"}
+    for page in concept_root.rglob("index.html"):
+        rel = page.parent.relative_to(concept_root).as_posix()
+        if rel in (".", ""):
+            continue
+        concept_url = f"/concept/{rel}/"
+        if rel.startswith("locations/"):
+            routes[f"/{rel}/"] = concept_url
+        elif "/" not in rel and rel not in reserved:
+            routes[f"/treatments/{rel}/"] = concept_url
+    # Known legacy aliases whose old slugs differ from the concept page slug.
+    routes.update({
+        "/treatments/hifu-rf-skin-tightening/": "/concept/hifu-treatment/",
+        "/treatments/nail-surgery/": "/concept/ingrown-toenail-nail-surgery/",
+    })
+    return routes
+
+
+def normalize_concept_links(concept_pages: list[Path], routes: dict[str, str]) -> int:
+    """Rewrite legacy links in HTML, including data attributes and JSON strings."""
+    replacements = 0
+    for page in concept_pages:
+        source = page.read_text(encoding="utf-8")
+        updated = source
+        for old, new in sorted(routes.items(), key=lambda item: len(item[0]), reverse=True):
+            count = updated.count(old)
+            if count:
+                updated = updated.replace(old, new)
+                replacements += count
+        if updated != source:
+            page.write_text(updated, encoding="utf-8")
+    return replacements
+
+
 def main() -> int:
-    # Generate the latest concept migration batch before the static build copies public roots.
     if generate_concept_v13_pages.main() != 0:
         return 1
 
@@ -75,6 +120,11 @@ def main() -> int:
 
     for page in concept_pages:
         inject_experience_assets(page)
+
+    rewrites = normalize_concept_links(concept_pages, concept_route_map(concept_root))
+    unresolved = sum(page.read_text(encoding="utf-8").count('href="/treatments/') for page in concept_pages)
+    print(f"Premium route rewrites applied: {rewrites}")
+    print(f"Remaining legacy treatment hrefs (no concept equivalent yet): {unresolved}")
 
     shutil.copy2(concept_home, dist / "index.html")
     (dist / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
