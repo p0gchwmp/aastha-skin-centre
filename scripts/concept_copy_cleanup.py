@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Remove prototype-era wording and dead preview actions from built concept pages.
+"""Remove prototype-era wording, resolve dead preview actions and bundle concept assets.
 
-The source pages remain easy to iterate on, while the preview output is kept
-patient-facing and free of internal design commentary.
+The source pages remain easy to iterate on, while the built preview is kept
+patient-facing, cache-safe and materially lighter to load.
 """
 from pathlib import Path
+
+from concept_bundle_assets import bundle_concept_assets
 
 REPLACEMENTS = {
     "The original site had more medical depth. This version keeps that depth but turns the consultation pathway into a scroll-linked story instead of a dense block of cards.":
@@ -30,6 +32,13 @@ REPLACEMENTS = {
     "Real clinic-approved portrait can replace this placeholder":
         "Professional profile · Dr. Cheena Langer",
 }
+
+
+def _dist_root(page: Path) -> Path:
+    for parent in page.parents:
+        if parent.name == "dist":
+            return parent
+    raise RuntimeError(f"Could not locate dist root for {page}")
 
 
 def clean_patient_copy(pages: list[Path]) -> int:
@@ -67,5 +76,9 @@ def clean_patient_copy(pages: list[Path]) -> int:
 
         if updated != source:
             page.write_text(updated, encoding="utf-8")
+
+    if pages:
+        bundle_concept_assets(_dist_root(pages[0]), pages)
+
     print(f"Patient-facing/admin preview cleanup replacements: {changed}")
     return changed
