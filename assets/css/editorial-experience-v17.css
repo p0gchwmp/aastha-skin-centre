@@ -1,0 +1,203 @@
+/* Aastha Editorial Experience v17 — jewel palettes + premium materials */
+
+/*
+  Premium colour rule:
+  - large surfaces stay neutral and calm
+  - jewel colour is concentrated in deliberate accents
+  - dark anchors remain genuinely dark
+  - bronze/champagne behaves like a metal accent, not a beige wash
+*/
+html[data-aastha-palette="current"]{
+  --theme-accent:#7c173a;--theme-accent-deep:#42091f;--theme-accent-soft:#c8899e;
+  --theme-metal:#c7a06e;--theme-metal-soft:#e2c79f;
+  --theme-paper:#f6f1e9;--theme-paper-2:#eee6db;--theme-paper-3:#e8e2d9;
+  --theme-ink:#171113;--theme-ink-soft:#51474a;
+  --theme-night:#140f13;--theme-night-2:#1e151a;--theme-night-3:#2c1721;
+  --theme-jewel:#351423;--theme-line:rgba(23,17,19,.14)
+}
+html[data-aastha-palette="bordeaux"]{
+  --theme-accent:#68132f;--theme-accent-deep:#350817;--theme-accent-soft:#bf8394;
+  --theme-metal:#c29b65;--theme-metal-soft:#dfc49b;
+  --theme-paper:#f4efe7;--theme-paper-2:#ece3d8;--theme-paper-3:#e6dfd7;
+  --theme-ink:#160f12;--theme-ink-soft:#4b4144;
+  --theme-night:#150d11;--theme-night-2:#1f1217;--theme-night-3:#2b131c;
+  --theme-jewel:#3b0d20;--theme-line:rgba(22,15,18,.14)
+}
+html[data-aastha-palette="midnight"]{
+  --theme-accent:#74203f;--theme-accent-deep:#3f1025;--theme-accent-soft:#c28b9e;
+  --theme-metal:#c4a268;--theme-metal-soft:#e0c89f;
+  --theme-paper:#f5f1ea;--theme-paper-2:#eae4da;--theme-paper-3:#e2e5e8;
+  --theme-ink:#101621;--theme-ink-soft:#46505d;
+  --theme-night:#0b131d;--theme-night-2:#111b27;--theme-night-3:#1b2431;
+  --theme-jewel:#172840;--theme-line:rgba(16,22,33,.14)
+}
+html[data-aastha-palette="forest"]{
+  --theme-accent:#6b1d35;--theme-accent-deep:#390e1e;--theme-accent-soft:#b98390;
+  --theme-metal:#b99a68;--theme-metal-soft:#d9c39f;
+  --theme-paper:#f2efe8;--theme-paper-2:#e8e5dc;--theme-paper-3:#dfe5df;
+  --theme-ink:#101612;--theme-ink-soft:#424c46;
+  --theme-night:#0c1611;--theme-night-2:#122019;--theme-night-3:#1b2a22;
+  --theme-jewel:#173125;--theme-line:rgba(16,22,18,.14)
+}
+html[data-aastha-palette="plum"]{
+  --theme-accent:#702650;--theme-accent-deep:#3c142c;--theme-accent-soft:#c18ca9;
+  --theme-metal:#c2a06f;--theme-metal-soft:#dfc7a1;
+  --theme-paper:#f4eee7;--theme-paper-2:#ebe2da;--theme-paper-3:#e7dedb;
+  --theme-ink:#181118;--theme-ink-soft:#4f454f;
+  --theme-night:#180f1a;--theme-night-2:#241525;--theme-night-3:#321b31;
+  --theme-jewel:#35183c;--theme-line:rgba(24,17,24,.14)
+}
+
+html[data-aastha-palette] body.concept-page{
+  --v14-surface:color-mix(in srgb,var(--theme-paper) 97%,var(--theme-paper-2) 3%);
+  --v14-surface-2:color-mix(in srgb,var(--theme-paper) 91%,var(--theme-paper-2) 9%);
+  --v14-surface-3:color-mix(in srgb,var(--theme-paper) 92%,var(--theme-paper-3) 8%);
+  --v14-tint:color-mix(in srgb,var(--theme-accent) 2.25%,var(--theme-paper));
+  --v14-metal-tint:color-mix(in srgb,var(--theme-metal) 2.75%,var(--theme-paper));
+  --v14-deep:var(--theme-night-2);
+  --v14-deep-2:var(--theme-night);
+  --v14-deep-accent:var(--theme-accent-deep);
+  --line:color-mix(in srgb,var(--theme-ink) 10%,transparent);
+  --line-strong:color-mix(in srgb,var(--theme-ink) 18%,transparent)
+}
+
+/* Large sections: premium neutrals instead of washed accent tinting. */
+html[data-aastha-mode="light"] body.concept-page main>.editorial-section:nth-of-type(5n+1){background:var(--theme-paper)}
+html[data-aastha-mode="light"] body.concept-page main>.editorial-section:nth-of-type(5n+2){background:linear-gradient(135deg,var(--theme-paper),var(--v14-surface-2))}
+html[data-aastha-mode="light"] body.concept-page main>.editorial-section:nth-of-type(5n+3){background:linear-gradient(135deg,var(--v14-surface-3),var(--theme-paper))}
+html[data-aastha-mode="light"] body.concept-page main>.editorial-section:nth-of-type(5n+4){background:linear-gradient(135deg,var(--theme-paper-2),var(--theme-paper))}
+html[data-aastha-mode="light"] body.concept-page main>.editorial-section:nth-of-type(5n){background:linear-gradient(135deg,var(--theme-paper),color-mix(in srgb,var(--theme-paper-2) 76%,var(--theme-paper)))}
+
+/* Hero: clearer dark material, less mauve haze. */
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero{
+  background:
+    radial-gradient(circle at 84% 16%,color-mix(in srgb,var(--theme-accent) 24%,transparent),transparent 32%),
+    radial-gradient(circle at 13% 86%,color-mix(in srgb,var(--theme-metal) 8%,transparent),transparent 28%),
+    linear-gradient(132deg,var(--theme-night) 0%,var(--theme-jewel) 58%,var(--theme-accent-deep) 118%);
+  border-bottom-color:color-mix(in srgb,var(--theme-metal) 24%,transparent)
+}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.025),transparent 27%,transparent 72%,rgba(255,255,255,.015));
+  mix-blend-mode:screen
+}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero .hero-copy{color:rgba(249,245,239,.76)}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero .hero-title em{color:var(--theme-metal-soft)}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero .kicker{color:var(--theme-metal-soft)}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero .hero-art{
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.018));
+  border-color:color-mix(in srgb,var(--theme-metal) 27%,transparent);
+  box-shadow:0 36px 90px rgba(0,0,0,.27),inset 0 1px 0 rgba(255,255,255,.04)
+}
+html[data-aastha-mode="light"] body.concept-page.v8-dark-system .editorial-hero .hero-art img{opacity:.19;filter:grayscale(1) contrast(1.18)}
+
+/* Navigation: warm neutral shell with precise jewel + metal actions. */
+html[data-aastha-mode="light"] body.concept-page .concept-nav{
+  background:color-mix(in srgb,var(--theme-paper) 97%,transparent);
+  border-bottom-color:color-mix(in srgb,var(--theme-metal) 22%,var(--theme-line));
+  box-shadow:0 9px 30px rgba(20,14,17,.035)
+}
+html[data-aastha-mode="light"] body.concept-page .nav-cta{background:var(--theme-metal)!important;border-color:var(--theme-metal)!important;color:var(--theme-ink)!important;box-shadow:0 8px 20px color-mix(in srgb,var(--theme-metal) 18%,transparent)}
+html[data-aastha-mode="light"] body.concept-page .v3-explore-toggle{background:var(--theme-accent)!important;border-color:var(--theme-accent)!important;color:#fff!important;box-shadow:0 8px 20px color-mix(in srgb,var(--theme-accent) 18%,transparent)}
+
+/* Strong actions use saturated pigment; secondary actions stay quiet. */
+html[data-aastha-mode="light"] body.concept-page .btn:not(.alt){background:var(--theme-accent);border-color:var(--theme-accent);color:#fff}
+html[data-aastha-mode="light"] body.concept-page .editorial-hero .btn:not(.alt){background:var(--theme-metal);border-color:var(--theme-metal);color:var(--theme-ink)}
+html[data-aastha-mode="light"] body.concept-page .btn.alt{background:transparent;border-color:color-mix(in srgb,var(--theme-ink) 24%,transparent);color:var(--theme-ink)}
+html[data-aastha-mode="light"] body.concept-page .editorial-hero .btn.alt{border-color:rgba(255,255,255,.28);color:#fff}
+
+/* Cards stay elegant and neutral; colour appears in details rather than fogging the whole card. */
+html[data-aastha-mode="light"] body.concept-page .editorial-panel,
+html[data-aastha-mode="light"] body.concept-page .drag-card,
+html[data-aastha-mode="light"] body.concept-page .v3-reading-card,
+html[data-aastha-mode="light"] body.concept-page .v4-note,
+html[data-aastha-mode="light"] body.concept-page .v4-facts,
+html[data-aastha-mode="light"] body.concept-page .fact-table,
+html[data-aastha-mode="light"] body.concept-page .v5-compare article,
+html[data-aastha-mode="light"] body.concept-page .v6-compass,
+html[data-aastha-mode="light"] body.concept-page .v7-pattern-system,
+html[data-aastha-mode="light"] body.concept-page .v8-topic-explorer,
+html[data-aastha-mode="light"] body.concept-page .v8-booking-grid,
+html[data-aastha-mode="light"] body.concept-page .clinic-panel,
+html[data-aastha-mode="light"] body.concept-page .clinic-switch{
+  background:var(--v14-surface);
+  border-color:color-mix(in srgb,var(--theme-ink) 11%,transparent);
+  box-shadow:0 16px 42px rgba(24,16,20,.035)
+}
+html[data-aastha-mode="light"] body.concept-page .v3-reading-card::before,
+html[data-aastha-mode="light"] body.concept-page .drag-card::before{background:var(--theme-metal)}
+
+/* Selected states: clear jewel solids, not dusty mixes. */
+html[data-aastha-mode="light"] body.concept-page .pattern-tabs button[aria-selected="true"],
+html[data-aastha-mode="light"] body.concept-page .v8-topic-tabs button[aria-selected="true"],
+html[data-aastha-mode="light"] body.concept-page .v6-compass-nav button[aria-selected="true"],
+html[data-aastha-mode="light"] body.concept-page #approach .v7-care-stage .process-nav button.is-active{
+  background:var(--theme-accent)!important;color:#fff!important
+}
+html[data-aastha-mode="light"] body.concept-page .pattern-tabs button:not([aria-selected="true"]):hover,
+html[data-aastha-mode="light"] body.concept-page .v8-topic-tabs button:not([aria-selected="true"]):hover,
+html[data-aastha-mode="light"] body.concept-page .v6-compass-nav button:not([aria-selected="true"]):hover{background:color-mix(in srgb,var(--theme-accent) 4%,var(--theme-paper))}
+
+/* Fact bands: near-neutral with crisp metal / jewel micro-accents. */
+html[data-aastha-mode="light"] body.concept-page .v4-fact{background:var(--v14-surface)!important}
+html[data-aastha-mode="light"] body.concept-page .v4-fact strong{color:var(--theme-accent-deep)}
+html[data-aastha-mode="light"] body.concept-page .v4-fact:nth-child(odd){box-shadow:inset 0 2px 0 color-mix(in srgb,var(--theme-metal) 58%,transparent)}
+html[data-aastha-mode="light"] body.concept-page .v4-fact:nth-child(even){box-shadow:inset 0 2px 0 color-mix(in srgb,var(--theme-accent) 42%,transparent)}
+
+/* Dark editorial bands should read as lacquer / ink, not greyed wine. */
+html[data-aastha-mode="light"] body.concept-page .stats-band{
+  background:linear-gradient(110deg,var(--theme-accent-deep),var(--theme-jewel));
+  color:#fff;border-color:color-mix(in srgb,var(--theme-metal) 20%,transparent)
+}
+html[data-aastha-mode="light"] body.concept-page .v4-related{
+  background:linear-gradient(135deg,var(--theme-night-2),var(--theme-jewel));
+  border-top-color:color-mix(in srgb,var(--theme-metal) 20%,transparent)
+}
+html[data-aastha-mode="light"] body.concept-page .v4-related-card:hover{background:color-mix(in srgb,var(--theme-accent) 32%,var(--theme-night-2))}
+html[data-aastha-mode="light"] body.concept-page .v5-warning{background:var(--theme-accent-deep);border-color:var(--theme-accent-deep)}
+html[data-aastha-mode="light"] body.concept-page .v4-note.wine{background:var(--theme-accent);border-color:var(--theme-accent)}
+
+/* Treatment Route: deep lacquer with clean brass detail. */
+html[data-aastha-mode="light"] body.concept-page .v7-unified-treatment .process-stage.v8-route-theatre{
+  background:linear-gradient(145deg,var(--theme-night),var(--theme-jewel));
+  border-color:color-mix(in srgb,var(--theme-metal) 18%,transparent);
+  box-shadow:0 30px 80px rgba(15,8,12,.22)
+}
+html[data-aastha-mode="light"] body.concept-page .v8-route-head{background:linear-gradient(90deg,var(--theme-accent-deep),var(--theme-night));border-color:rgba(255,255,255,.085)}
+html[data-aastha-mode="light"] body.concept-page .v8-route-theatre .process-nav{background:color-mix(in srgb,var(--theme-night) 92%,var(--theme-jewel) 8%)}
+html[data-aastha-mode="light"] body.concept-page .v8-route-theatre .process-content{background:radial-gradient(circle at 82% 16%,color-mix(in srgb,var(--theme-accent) 22%,transparent),transparent 34%),linear-gradient(140deg,var(--theme-night),var(--theme-jewel))!important}
+html[data-aastha-mode="light"] body.concept-page .v8-route-meter i{background:var(--theme-metal)}
+
+/* Search / command / directory: ivory paper with crisp ink and jewel focus. */
+html[data-aastha-mode="light"] body.concept-page .v3-command-panel,
+html[data-aastha-mode="light"] body.concept-page .v3-command-head,
+html[data-aastha-mode="light"] body.concept-page .v3-command-list{background:var(--theme-paper)}
+html[data-aastha-mode="light"] body.concept-page .v3-command-head input:focus,
+html[data-aastha-mode="light"] body.concept-page .v16-directory-search:focus{outline:2px solid color-mix(in srgb,var(--theme-accent) 52%,transparent);outline-offset:2px}
+html[data-aastha-mode="light"] body.concept-page .v3-command-item:hover,
+html[data-aastha-mode="light"] body.concept-page .v3-command-item:focus-visible,
+html[data-aastha-mode="light"] body.concept-page .v3-directory>a:hover,
+html[data-aastha-mode="light"] body.concept-page .v3-directory>a:focus-visible{background:color-mix(in srgb,var(--theme-accent) 4.5%,var(--theme-paper));box-shadow:inset 3px 0 0 var(--theme-accent)}
+
+/* Palette selector itself should sell the palettes, not flatten them. */
+html[data-aastha-mode="light"] body.concept-page .v12-theme-panel{background:var(--theme-paper);border-color:color-mix(in srgb,var(--theme-metal) 34%,var(--theme-line));box-shadow:0 28px 80px rgba(20,12,16,.16)}
+html[data-aastha-mode="light"] body.concept-page .v12-theme-option[aria-pressed="true"]{background:color-mix(in srgb,var(--theme-accent) 5%,var(--theme-paper));box-shadow:inset 3px 0 0 var(--theme-accent)}
+html[data-aastha-mode="light"] body.concept-page .v12-theme-swatches i{box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+
+/* Running / marquee style variants used across concept versions. */
+html[data-aastha-mode="light"] body.concept-page .running-strip,
+html[data-aastha-mode="light"] body.concept-page .v2-running-strip,
+html[data-aastha-mode="light"] body.concept-page [data-running-strip]{
+  background:linear-gradient(90deg,var(--theme-accent-deep),var(--theme-accent),var(--theme-accent-deep));
+  color:var(--theme-paper);
+  border-color:color-mix(in srgb,var(--theme-metal) 24%,transparent)
+}
+
+@media (prefers-reduced-motion:no-preference){
+  html[data-aastha-palette] body.concept-page .btn,
+  html[data-aastha-palette] body.concept-page .nav-cta,
+  html[data-aastha-palette] body.concept-page .v3-explore-toggle{transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+  html[data-aastha-palette] body.concept-page .btn:hover,
+  html[data-aastha-palette] body.concept-page .nav-cta:hover,
+  html[data-aastha-palette] body.concept-page .v3-explore-toggle:hover{transform:translateY(-1px)}
+}
