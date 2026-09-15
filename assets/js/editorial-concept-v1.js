@@ -2,12 +2,18 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const progress = document.querySelector('.scroll-progress');
+  let progressRAF = 0;
   const updateProgress = () => {
+    progressRAF = 0;
     if (!progress) return;
     const max = document.documentElement.scrollHeight - innerHeight;
     progress.style.width = `${max > 0 ? Math.min(100, (scrollY / max) * 100) : 0}%`;
   };
-  addEventListener('scroll', updateProgress, { passive: true });
+  const requestProgress = () => {
+    if (!progressRAF) progressRAF = requestAnimationFrame(updateProgress);
+  };
+  addEventListener('scroll', requestProgress, { passive: true });
+  addEventListener('resize', requestProgress, { passive: true });
   updateProgress();
 
   if (!reduced && 'IntersectionObserver' in window) {
@@ -18,37 +24,68 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.08 });
     document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
   } else {
     document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible'));
   }
 
+  /* Click-safe drag rail: normal clicks navigate; dragging only starts after movement. */
   document.querySelectorAll('[data-drag-rail]').forEach((rail) => {
-    let down = false;
+    let pointerId = null;
     let startX = 0;
     let startScroll = 0;
-    rail.addEventListener('pointerdown', (e) => {
-      if (e.pointerType === 'mouse' && e.button !== 0) return;
-      down = true;
-      startX = e.clientX;
+    let dragging = false;
+    let moved = false;
+    let raf = 0;
+    let nextScroll = 0;
+
+    rail.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      pointerId = event.pointerId;
+      startX = event.clientX;
       startScroll = rail.scrollLeft;
-      rail.classList.add('is-dragging');
-      rail.setPointerCapture?.(e.pointerId);
+      dragging = false;
+      moved = false;
     });
-    rail.addEventListener('pointermove', (e) => {
-      if (!down) return;
-      rail.scrollLeft = startScroll - (e.clientX - startX) * 1.15;
-    });
-    const stop = () => {
-      down = false;
+
+    rail.addEventListener('pointermove', (event) => {
+      if (pointerId !== event.pointerId) return;
+      const delta = event.clientX - startX;
+      if (!dragging && Math.abs(delta) < 7) return;
+      if (!dragging) {
+        dragging = true;
+        moved = true;
+        rail.classList.add('is-dragging');
+        rail.setPointerCapture?.(pointerId);
+      }
+      nextScroll = startScroll - delta;
+      if (!raf) {
+        raf = requestAnimationFrame(() => {
+          rail.scrollLeft = nextScroll;
+          raf = 0;
+        });
+      }
+    }, { passive: true });
+
+    const stop = (event) => {
+      if (pointerId !== null && event?.pointerId != null && event.pointerId !== pointerId) return;
+      if (pointerId !== null) rail.releasePointerCapture?.(pointerId);
+      pointerId = null;
+      dragging = false;
       rail.classList.remove('is-dragging');
+      setTimeout(() => { moved = false; }, 0);
     };
     rail.addEventListener('pointerup', stop);
     rail.addEventListener('pointercancel', stop);
-    rail.addEventListener('pointerleave', () => {
-      if (down) stop();
-    });
+
+    /* Suppress the click only when the gesture was genuinely a drag. */
+    rail.addEventListener('click', (event) => {
+      if (!moved) return;
+      event.preventDefault();
+      event.stopPropagation();
+      moved = false;
+    }, true);
   });
 
   const concernStage = document.querySelector('[data-concern-stage]');
@@ -63,8 +100,6 @@
       if (copy) copy.textContent = button.dataset.copy || '';
       if (link) link.href = button.dataset.href || '#';
       concernStage.style.background = button.dataset.background || '';
-      concernStage.classList.remove('bump');
-      requestAnimationFrame(() => concernStage.classList.add('bump'));
     };
     concernButtons.forEach((button) => {
       button.addEventListener('click', () => activate(button));
@@ -104,7 +139,7 @@
       timelineSteps.forEach((step) => step.classList.toggle('is-active', step === visible.target));
       if (stickyTitle) stickyTitle.textContent = visible.target.dataset.title || '';
       if (stickyCopy) stickyCopy.textContent = visible.target.dataset.copy || '';
-    }, { rootMargin: '-25% 0px -45% 0px', threshold: [0.1, 0.5, 0.9] });
+    }, { rootMargin: '-25% 0px -45% 0px', threshold: [0.1, 0.5] });
     timelineSteps.forEach((step) => timelineObserver.observe(step));
   }
 
@@ -121,17 +156,5 @@
       if (note) note.textContent = button.dataset.note || '';
     };
     patternButtons.forEach((button) => button.addEventListener('click', () => activatePattern(button)));
-  }
-
-  if (!reduced && matchMedia('(pointer:fine)').matches) {
-    document.querySelectorAll('.hero-art').forEach((art) => {
-      art.addEventListener('pointermove', (e) => {
-        const rect = art.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        art.style.transform = `perspective(900px) rotateY(${x * 3}deg) rotateX(${y * -3}deg)`;
-      });
-      art.addEventListener('pointerleave', () => { art.style.transform = ''; });
-    });
   }
 })();
