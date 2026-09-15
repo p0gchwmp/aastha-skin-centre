@@ -44,35 +44,80 @@
     } else countEls.forEach(animateCount);
   }
 
-  // Educational route finder: navigation only, never diagnostic.
+  // Educational route finder: body area determines the relevant choices.
   const finder = document.querySelector('[data-route-finder]');
   if (finder) {
-    const choices = [...finder.querySelectorAll('[data-route-choice]')];
+    const areaButtons = [...finder.querySelectorAll('[data-route-group="area"]')];
+    const concernButtons = [...finder.querySelectorAll('[data-route-group="concern"]')];
     const title = finder.querySelector('[data-route-title]');
     const copy = finder.querySelector('[data-route-copy]');
     const link = finder.querySelector('[data-route-link]');
     const state = { area: 'face', concern: 'acne' };
+
+    const options = {
+      face: [
+        ['acne','Breakouts'],['pigmentation','Pigmentation'],['rash','Redness / rash'],['ageing','Skin ageing'],['unwanted-hair','Unwanted hair']
+      ],
+      scalp: [
+        ['hair','Hair fall'],['rash','Flaking / itch'],['patches','Smooth patches'],['bumps','Scalp bumps']
+      ],
+      body: [
+        ['rash','Rash / infection'],['acne','Body acne'],['pigmentation','Dark patches'],['unwanted-hair','Unwanted hair'],['growth','Growth / lump']
+      ]
+    };
+
     const routes = {
       'face:acne': ['Acne & breakouts','Explore active acne, marks and scar pathways.','/concept/acne-treatment/'],
       'face:pigmentation': ['Pigmentation','Explore melasma, post-acne marks and uneven tone.','/concept/pigmentation-treatment/'],
-      'face:ageing': ['Skin ageing','Explore consultation-led aesthetic and skin-quality options.','/concept/treatments/'],
-      'scalp:hair': ['Hair & scalp','Explore hair fall, thinning and scalp concerns.','/concept/hair-fall-treatment/'],
-      'body:rash': ['Medical dermatology','Explore rashes, infections and chronic skin concerns.','/concept/conditions/'],
-      'body:acne': ['Body acne','Explore acne that affects the chest, shoulders or back.','/concept/acne-treatment/']
+      'face:rash': ['Facial redness or rash','Start with medical dermatology pathways for redness, irritation and recurring facial rashes.','/concept/conditions/'],
+      'face:ageing': ['Skin ageing','Explore consultation-led options for skin quality, expression lines, laxity and volume change.','/concept/botulinum-toxin-dermal-fillers/'],
+      'face:unwanted-hair': ['Unwanted facial hair','Explore laser hair reduction after suitability assessment.','/concept/laser-hair-reduction/'],
+      'scalp:hair': ['Hair fall & thinning','Explore shedding, thinning and scalp assessment.','/concept/hair-fall-treatment/'],
+      'scalp:rash': ['Flaking, itch or scalp inflammation','Explore dandruff and seborrheic-dermatitis pathways.','/concept/seborrheic-dermatitis-dandruff/'],
+      'scalp:patches': ['Patchy hair loss','Explore alopecia areata and other patchy hair-loss pathways.','/concept/alopecia-areata-treatment/'],
+      'scalp:bumps': ['Scalp bumps or irritation','Start with the wider condition directory when the scalp problem is not clearly hair loss.','/concept/conditions/'],
+      'body:rash': ['Body rash / infection','Explore fungal infection and other medical dermatology pathways.','/concept/fungal-infection-treatment/'],
+      'body:acne': ['Body acne','Explore acne affecting the chest, shoulders or back.','/concept/acne-treatment/'],
+      'body:pigmentation': ['Dark patches on the body','Explore pigmentation pathways and causes before choosing a procedure.','/concept/pigmentation-treatment/'],
+      'body:unwanted-hair': ['Unwanted body hair','Explore laser hair reduction after skin and hair assessment.','/concept/laser-hair-reduction/'],
+      'body:growth': ['Growth, mole, wart or lump','Explore assessment-led minor-procedure pathways.','/concept/wart-mole-skin-tag-removal/']
     };
-    const update = () => {
-      const result = routes[`${state.area}:${state.concern}`] || ['Start with a dermatologist','Your concern may need an individual assessment before choosing a pathway.','/concept/book-appointment/'];
+
+    const updateResult = () => {
+      const result = routes[`${state.area}:${state.concern}`] || ['Book an assessment','If the pattern does not fit a clear information pathway, start with direct dermatology assessment.','/concept/book-appointment/'];
       if (title) title.textContent = result[0];
       if (copy) copy.textContent = result[1];
-      if (link) link.href = result[2];
+      if (link) { link.href = result[2]; link.textContent = 'Open this pathway →'; }
     };
-    choices.forEach((button) => button.addEventListener('click', () => {
-      const group = button.dataset.routeGroup;
-      finder.querySelectorAll(`[data-route-group="${group}"]`).forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
-      state[group] = button.dataset.routeValue;
-      update();
+
+    const renderConcernOptions = (area, preferred) => {
+      const set = options[area] || [];
+      concernButtons.forEach((button, index) => {
+        const item = set[index];
+        if (!item) { button.hidden = true; button.setAttribute('aria-pressed','false'); return; }
+        const [value,label] = item;
+        button.hidden = false;
+        button.dataset.routeValue = value;
+        button.textContent = label;
+      });
+      const values = set.map(([value])=>value);
+      state.concern = values.includes(preferred) ? preferred : values[0];
+      concernButtons.forEach(button => button.setAttribute('aria-pressed',String(!button.hidden && button.dataset.routeValue===state.concern)));
+      updateResult();
+    };
+
+    areaButtons.forEach(button => button.addEventListener('click', () => {
+      areaButtons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      state.area = button.dataset.routeValue;
+      renderConcernOptions(state.area,state.concern);
     }));
-    update();
+    concernButtons.forEach(button => button.addEventListener('click', () => {
+      if (button.hidden) return;
+      concernButtons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      state.concern = button.dataset.routeValue;
+      updateResult();
+    }));
+    renderConcernOptions(state.area,state.concern);
   }
 
   // Scroll-linked process navigation.
