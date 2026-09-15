@@ -1,0 +1,91 @@
+/* Aastha Editorial Experience v35 — homepage journey refinement */
+
+/* Treatment library: understandable without dragging. */
+#treatments{background:color-mix(in srgb,var(--theme-paper) 96%,var(--theme-paper-2) 4%)}
+#treatments .section-head{margin-bottom:clamp(28px,4vw,48px)!important}
+#treatments .drag-label{display:none!important}
+.v35-rail-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.v35-rail-toolbar .v35-rail-copy{font:750 .58rem/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--theme-ink-soft)}
+.v35-rail-actions{display:flex;align-items:center;gap:7px}.v35-rail-count{min-width:64px;text-align:center;font:800 .58rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--theme-ink-soft)}
+.v35-rail-actions button{width:38px;height:38px;border:1px solid var(--line-strong);background:var(--theme-paper);color:var(--theme-ink);cursor:pointer;transition:background .16s ease,color .16s ease,transform .16s ease}.v35-rail-actions button:hover{background:var(--theme-ink);color:var(--theme-paper);transform:translateY(-1px)}
+#treatments .drag-rail{grid-auto-columns:min(54vw,590px)!important;gap:10px!important;padding-bottom:2px!important;scroll-padding-inline:1px}
+#treatments .drag-card{min-height:330px!important;padding:clamp(24px,3vw,34px)!important;background:var(--theme-paper)!important;color:var(--theme-ink)!important;border-color:var(--line-strong)!important;transition:background .18s ease,border-color .18s ease,transform .18s ease!important}
+#treatments .drag-card:nth-child(2n){background:color-mix(in srgb,var(--theme-paper-2) 82%,var(--theme-paper) 18%)!important;color:var(--theme-ink)!important;border-color:var(--line-strong)!important}
+#treatments .drag-card:nth-child(2n) p{color:var(--theme-ink-soft)!important}
+#treatments .drag-card:hover,#treatments .drag-card:focus-visible{background:color-mix(in srgb,var(--theme-paper) 92%,var(--theme-metal) 8%)!important;border-color:color-mix(in srgb,var(--theme-accent) 44%,var(--line-strong))!important;transform:translateY(-2px)!important}
+#treatments .drag-card h3{font-size:clamp(2.5rem,4.3vw,4.6rem)!important;max-width:10ch!important;line-height:.9!important}
+#treatments .drag-card p{font-size:.92rem!important;line-height:1.58!important;max-width:43ch!important;color:var(--theme-ink-soft)!important}
+#treatments .drag-card .num{color:var(--theme-accent)!important;font-weight:800!important}
+
+/* Care flow: five clear steps, no five-screen scroll theatre. */
+#approach{background:color-mix(in srgb,var(--theme-paper-2) 72%,var(--theme-paper) 28%)}
+#approach .section-head{margin-bottom:clamp(26px,4vw,46px)!important}
+#approach .process-stage{display:block!important;border:1px solid var(--line-strong)!important;background:var(--theme-paper)!important}
+#approach .process-nav{position:static!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;padding:0!important;border:0!important;border-bottom:1px solid var(--line)!important;overflow:visible!important}
+#approach .process-nav button{min-width:0!important;width:auto!important;padding:16px 14px!important;border:0!important;border-right:1px solid var(--line)!important;text-align:left!important;font:800 .56rem/1.25 var(--sans)!important;letter-spacing:.07em!important;text-transform:uppercase!important;opacity:.58!important;color:var(--theme-ink-soft)!important;background:transparent!important}
+#approach .process-nav button:last-child{border-right:0!important}
+#approach .process-nav button.is-active{opacity:1!important;color:var(--theme-accent)!important;background:color-mix(in srgb,var(--theme-paper-2) 82%,var(--theme-metal) 18%)!important;padding-left:14px!important}
+#approach .process-content{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;border:0!important}
+#approach .process-chapter{min-height:320px!important;padding:clamp(22px,2.3vw,32px)!important;justify-content:flex-start!important;border:0!important;border-right:1px solid var(--line)!important;background:transparent!important;opacity:1!important;transform:none!important}
+#approach .process-chapter:last-child{border-right:0!important}
+#approach .process-chapter .kicker{margin-bottom:auto!important;color:var(--theme-accent)!important}
+#approach .process-chapter h3{font:500 clamp(1.8rem,2.3vw,2.65rem)/.98 var(--display)!important;letter-spacing:-.035em!important;max-width:11ch!important;margin:26px 0 14px!important}
+#approach .process-chapter p{font-size:.84rem!important;line-height:1.55!important;color:var(--theme-ink-soft)!important}
+
+/* Doctor handoff: verified credentials instead of placeholder artwork. */
+#doctor{background:linear-gradient(140deg,var(--theme-night),color-mix(in srgb,var(--theme-night) 88%,var(--theme-accent) 12%));color:var(--theme-paper)}
+#doctor .section-no,#doctor .kicker{color:var(--theme-metal)!important}
+#doctor .section-copy,#doctor p{color:color-mix(in srgb,var(--theme-paper) 75%,transparent)!important}
+#doctor .section-head{margin-bottom:clamp(26px,4vw,48px)!important}
+#doctor .hero-grid{grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr)!important;align-items:stretch!important;gap:1px!important;background:rgba(255,255,255,.12)!important;border:1px solid rgba(255,255,255,.14)!important}
+#doctor .hero-grid>.hero-art{display:none!important}
+.v35-doctor-card{min-height:420px;padding:clamp(28px,4vw,52px);background:rgba(255,255,255,.035);display:flex;flex-direction:column;justify-content:space-between}
+.v35-doctor-card .v35-doctor-label{font:800 .58rem/1 var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--theme-metal)}
+.v35-doctor-card h3{font:500 clamp(3.3rem,5.8vw,6.2rem)/.85 var(--display);letter-spacing:-.055em;margin:24px 0;color:var(--theme-paper);max-width:8ch}
+.v35-doctor-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid rgba(255,255,255,.15)}
+.v35-doctor-meta div{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.12)}.v35-doctor-meta div:nth-child(odd){border-right:1px solid rgba(255,255,255,.12);padding-right:16px}.v35-doctor-meta div:nth-child(even){padding-left:16px}
+.v35-doctor-meta strong{display:block;font:700 .76rem/1.3 var(--sans);color:var(--theme-paper)}.v35-doctor-meta span{display:block;margin-top:4px;font-size:.68rem;color:rgba(255,255,255,.58)}
+#doctor .hero-grid>div:last-child{padding:clamp(28px,4vw,52px)!important;background:color-mix(in srgb,var(--theme-night) 92%,#000 8%)!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
+#doctor .hero-grid>div:last-child .display-heading{font-size:clamp(2.8rem,4.8vw,5.2rem)!important;color:var(--theme-paper)!important;max-width:9ch!important}
+#doctor .btn{border-color:rgba(255,255,255,.28)!important}.v35-doctor-card a{color:inherit}
+
+/* Clinics: clear choice, then details. */
+#clinics .section-head{margin-bottom:clamp(28px,4vw,48px)!important}
+#clinics .clinic-switch{grid-template-columns:minmax(260px,.38fr) minmax(0,.62fr)!important;border-color:var(--line-strong)!important;background:var(--theme-paper)!important;box-shadow:0 18px 52px rgba(26,18,21,.04)}
+#clinics .clinic-tabs{border-right:1px solid var(--line)!important;background:color-mix(in srgb,var(--theme-paper-2) 68%,var(--theme-paper) 32%)!important}
+#clinics .clinic-tabs button{min-height:130px!important;padding:24px!important;color:var(--theme-ink)!important;background:transparent!important;border-bottom:1px solid var(--line)!important;position:relative!important}
+#clinics .clinic-tabs button::after{content:'→';position:absolute;right:20px;top:50%;transform:translateY(-50%);opacity:.35}
+#clinics .clinic-tabs button[aria-selected="true"]{background:var(--theme-ink)!important;color:var(--theme-paper)!important}
+#clinics .clinic-tabs button[aria-selected="true"]::after{opacity:1;color:var(--theme-metal)}
+#clinics .clinic-tabs strong{font:500 clamp(1.8rem,2.8vw,2.7rem)/1 var(--display)!important;letter-spacing:-.03em!important}
+#clinics .clinic-tabs small{font-size:.66rem!important;letter-spacing:.05em!important;opacity:.65!important}
+#clinics .clinic-panel{padding:clamp(30px,5vw,66px)!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
+#clinics .clinic-panel h3{font-size:clamp(3rem,5vw,5.4rem)!important;color:var(--theme-ink)!important}
+#clinics .clinic-panel address,#clinics .clinic-panel p{font-size:.9rem!important;line-height:1.6!important;color:var(--theme-ink-soft)!important}
+
+@media(max-width:1050px){
+  #approach .process-content{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #approach .process-chapter{min-height:260px!important;border-bottom:1px solid var(--line)!important}
+  #approach .process-chapter:nth-child(2n){border-right:0!important}
+  #approach .process-chapter:last-child{grid-column:1/-1!important}
+}
+@media(max-width:800px){
+  #treatments .drag-rail{grid-auto-columns:min(84vw,520px)!important}
+  #approach .process-nav{display:flex!important;overflow-x:auto!important;scrollbar-width:none!important}
+  #approach .process-nav button{min-width:max-content!important}
+  #doctor .hero-grid,#clinics .clinic-switch{grid-template-columns:1fr!important}
+  #clinics .clinic-tabs{display:grid!important;grid-template-columns:1fr 1fr!important;border-right:0!important;border-bottom:1px solid var(--line)!important}
+  #clinics .clinic-tabs button{min-height:96px!important;border-bottom:0!important;border-right:1px solid var(--line)!important}
+  #clinics .clinic-tabs button:last-child{border-right:0!important}
+}
+@media(max-width:620px){
+  .v35-rail-toolbar{align-items:flex-end!important}.v35-rail-copy{max-width:18ch!important}
+  #treatments .drag-rail{grid-auto-columns:88vw!important}
+  #treatments .drag-card{min-height:300px!important}
+  #approach .process-content{grid-template-columns:1fr!important}
+  #approach .process-chapter,#approach .process-chapter:last-child{grid-column:auto!important;min-height:0!important;border-right:0!important;padding:26px 20px!important}
+  #approach .process-chapter h3{margin-top:34px!important;max-width:13ch!important}
+  .v35-doctor-meta{grid-template-columns:1fr!important}.v35-doctor-meta div:nth-child(odd),.v35-doctor-meta div:nth-child(even){border-right:0!important;padding:12px 0!important}
+  #clinics .clinic-tabs{grid-template-columns:1fr!important}#clinics .clinic-tabs button{border-right:0!important;border-bottom:1px solid var(--line)!important}
+}
+@media(prefers-reduced-motion:reduce){.v35-rail-actions button,#treatments .drag-card{transition:none!important}}
