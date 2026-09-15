@@ -1,0 +1,263 @@
+/* Aastha Editorial Experience v33 — treatment directory repair */
+
+/* The v16 search tools were inserted as a third child into a two-column grid.
+   Explicit grid areas keep filters, tools and results in the intended columns. */
+#directory{scroll-margin-top:96px}
+#directory .v3-search-shell{
+  display:grid!important;
+  grid-template-columns:minmax(210px,248px) minmax(0,1fr)!important;
+  grid-template-areas:
+    "filters tools"
+    "filters directory"!important;
+  grid-template-rows:auto auto!important;
+  align-items:start!important;
+  min-height:0!important;
+  border:1px solid var(--line)!important;
+  background:var(--theme-paper)!important;
+  overflow:visible!important;
+}
+
+#directory .v3-filter-panel{
+  grid-area:filters!important;
+  align-self:start!important;
+  position:sticky!important;
+  top:86px!important;
+  padding:22px 20px!important;
+  border-right:1px solid var(--line)!important;
+  border-bottom:0!important;
+  background:color-mix(in srgb,var(--theme-paper-2) 94%,var(--theme-metal) 6%)!important;
+  z-index:2;
+}
+#directory .v3-filter-panel h3{
+  margin:0 0 16px!important;
+  font:500 clamp(1.55rem,2vw,2rem)/1 var(--display)!important;
+  letter-spacing:-.025em!important;
+}
+#directory .v3-filter-buttons{display:flex!important;flex-direction:column!important;gap:0!important}
+#directory .v3-filter-buttons button{
+  position:relative;
+  min-height:50px!important;
+  padding:13px 22px 13px 2px!important;
+  border:0!important;
+  border-top:1px solid var(--line)!important;
+  background:transparent!important;
+  color:var(--theme-ink)!important;
+  font:700 .68rem/1.25 var(--sans)!important;
+  letter-spacing:.075em!important;
+  text-transform:none!important;
+  transition:color .16s ease,padding-left .16s ease,background .16s ease!important;
+}
+#directory .v3-filter-buttons button:last-child{border-bottom:1px solid var(--line)!important}
+#directory .v3-filter-buttons button::after{
+  content:"";
+  position:absolute;
+  right:3px;
+  top:50%;
+  width:6px;
+  height:6px;
+  border:1px solid color-mix(in srgb,var(--theme-ink) 34%,transparent);
+  border-radius:50%;
+  transform:translateY(-50%);
+  transition:.16s ease;
+}
+#directory .v3-filter-buttons button:hover,
+#directory .v3-filter-buttons button:focus-visible{padding-left:7px!important;color:var(--theme-accent)!important}
+#directory .v3-filter-buttons button[aria-pressed="true"]{
+  padding-left:7px!important;
+  color:var(--theme-accent)!important;
+  font-weight:800!important;
+}
+#directory .v3-filter-buttons button[aria-pressed="true"]::after{
+  background:var(--theme-accent)!important;
+  border-color:var(--theme-accent)!important;
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--theme-accent) 11%,transparent);
+}
+
+#directory .v16-directory-tools{
+  grid-area:tools!important;
+  min-height:68px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:14px!important;
+  padding:12px 16px!important;
+  border:0!important;
+  border-bottom:1px solid var(--line)!important;
+  background:color-mix(in srgb,var(--theme-paper) 97%,var(--theme-metal) 3%)!important;
+}
+#directory .v16-directory-search{
+  width:100%!important;
+  height:42px!important;
+  padding:0 14px!important;
+  border:1px solid var(--line-strong)!important;
+  background:var(--theme-paper)!important;
+  color:var(--theme-ink)!important;
+  font:650 .74rem/1 var(--sans)!important;
+  outline:none!important;
+  border-radius:0!important;
+  transition:border-color .16s ease,box-shadow .16s ease,background .16s ease!important;
+}
+#directory .v16-directory-search:focus{
+  border-color:color-mix(in srgb,var(--theme-accent) 62%,var(--line-strong))!important;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-accent) 8%,transparent)!important;
+  background:#fff!important;
+}
+#directory .v16-directory-search::placeholder{color:color-mix(in srgb,var(--theme-ink) 46%,transparent)!important}
+#directory .v16-directory-count{
+  min-width:70px;
+  text-align:right;
+  color:var(--theme-ink)!important;
+  font:800 .5rem/1 var(--sans)!important;
+  letter-spacing:.11em!important;
+  opacity:.72;
+}
+
+#directory .v3-directory{
+  grid-area:directory!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-content:start!important;
+  padding:0!important;
+  background:var(--theme-paper)!important;
+  min-width:0!important;
+}
+#directory .v3-directory>a[data-category]{
+  position:relative;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:space-between!important;
+  gap:22px!important;
+  min-width:0!important;
+  min-height:156px!important;
+  padding:21px 20px 18px!important;
+  border:0!important;
+  border-right:1px solid var(--line)!important;
+  border-bottom:1px solid var(--line)!important;
+  background:var(--theme-paper)!important;
+  color:var(--theme-ink)!important;
+  transform:none!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+#directory .v3-directory>a[data-category]:nth-of-type(3n){border-right:0!important}
+#directory .v3-directory>a[data-category]::after{
+  content:"↗";
+  position:absolute;
+  right:17px;
+  top:16px;
+  font:500 .9rem/1 var(--sans);
+  opacity:.42;
+  transition:transform .16s ease,opacity .16s ease;
+}
+#directory .v3-directory>a[data-category] strong{
+  display:block!important;
+  padding-right:24px!important;
+  margin:0!important;
+  max-width:14ch!important;
+  color:var(--theme-ink)!important;
+  font:500 clamp(1.55rem,1.8vw,2.15rem)/.98 var(--display)!important;
+  letter-spacing:-.035em!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
+#directory .v3-directory>a[data-category] span{
+  display:block!important;
+  max-width:31ch!important;
+  margin:0!important;
+  color:var(--ink-soft)!important;
+  font:550 .69rem/1.5 var(--sans)!important;
+  opacity:.82!important;
+}
+#directory .v3-directory>a[data-category]:hover,
+#directory .v3-directory>a[data-category]:focus-visible{
+  z-index:1;
+  background:color-mix(in srgb,var(--theme-paper-2) 91%,var(--theme-metal) 9%)!important;
+  color:var(--theme-ink)!important;
+  transform:none!important;
+  box-shadow:inset 0 -3px 0 var(--theme-accent)!important;
+}
+#directory .v3-directory>a[data-category]:hover::after,
+#directory .v3-directory>a[data-category]:focus-visible::after{transform:translate(2px,-2px);opacity:1}
+#directory .v3-directory>a[data-category][hidden]{display:none!important}
+#directory .v16-directory-empty{
+  grid-column:1/-1!important;
+  min-height:160px!important;
+  display:grid;
+  place-items:center;
+  padding:32px!important;
+  border:0!important;
+  color:var(--ink-soft)!important;
+  background:var(--theme-paper)!important;
+  font-size:.78rem!important;
+}
+#directory .v16-directory-empty[hidden]{display:none!important}
+
+/* The image family selector above the directory should feel like navigation, not a second hero. */
+.v30-treatment-gallery{padding-block:clamp(38px,4vw,58px)!important}
+.v30-treatment-gallery .v30-gallery-head{margin-bottom:20px!important}
+.v30-treatment-gallery .v30-treatment-strip{max-height:none!important}
+.v30-treatment-gallery .v30-treatment-tile{min-height:190px!important;aspect-ratio:1.65/1!important}
+
+@media(max-width:1240px){
+  #directory .v3-directory{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #directory .v3-directory>a[data-category]:nth-of-type(3n){border-right:1px solid var(--line)!important}
+  #directory .v3-directory>a[data-category]:nth-of-type(2n){border-right:0!important}
+}
+
+@media(max-width:900px){
+  #directory .v3-search-shell{
+    grid-template-columns:1fr!important;
+    grid-template-areas:"filters" "tools" "directory"!important;
+    grid-template-rows:auto auto auto!important;
+  }
+  #directory .v3-filter-panel{
+    position:relative!important;
+    top:auto!important;
+    border-right:0!important;
+    border-bottom:1px solid var(--line)!important;
+    padding:14px!important;
+  }
+  #directory .v3-filter-panel h3{font-size:1.35rem!important;margin-bottom:10px!important}
+  #directory .v3-filter-buttons{
+    display:flex!important;
+    flex-direction:row!important;
+    gap:7px!important;
+    overflow-x:auto!important;
+    padding-bottom:2px!important;
+    scrollbar-width:none;
+  }
+  #directory .v3-filter-buttons::-webkit-scrollbar{display:none}
+  #directory .v3-filter-buttons button{
+    flex:0 0 auto!important;
+    min-height:38px!important;
+    padding:0 12px!important;
+    border:1px solid var(--line-strong)!important;
+    white-space:nowrap!important;
+    letter-spacing:.04em!important;
+    font-size:.62rem!important;
+  }
+  #directory .v3-filter-buttons button:last-child{border-bottom:1px solid var(--line-strong)!important}
+  #directory .v3-filter-buttons button::after{display:none!important}
+  #directory .v3-filter-buttons button:hover,
+  #directory .v3-filter-buttons button:focus-visible,
+  #directory .v3-filter-buttons button[aria-pressed="true"]{padding-left:12px!important}
+  #directory .v3-filter-buttons button[aria-pressed="true"]{background:var(--theme-ink)!important;color:#fff!important;border-color:var(--theme-ink)!important}
+  #directory .v16-directory-tools{padding:10px 12px!important;min-height:62px!important}
+  #directory .v3-directory{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+
+@media(max-width:640px){
+  #directory .v16-directory-tools{grid-template-columns:1fr!important}
+  #directory .v16-directory-count{display:none!important}
+  #directory .v3-directory{grid-template-columns:1fr!important}
+  #directory .v3-directory>a[data-category]{min-height:128px!important;border-right:0!important;padding:18px 17px!important}
+  #directory .v3-directory>a[data-category] strong{font-size:1.65rem!important;max-width:16ch!important}
+  .v30-treatment-gallery .v30-treatment-tile{aspect-ratio:1.35/1!important;min-height:170px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  #directory .v3-filter-buttons button,
+  #directory .v16-directory-search,
+  #directory .v3-directory>a[data-category],
+  #directory .v3-directory>a[data-category]::after{transition:none!important}
+}
