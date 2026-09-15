@@ -31,6 +31,7 @@ CSS_FILES = [
     "editorial-experience-v20.css",
     "editorial-experience-v21.css",
     "editorial-experience-v22.css",
+    "editorial-experience-v23.css",
 ]
 
 JS_FILES = [
@@ -53,6 +54,7 @@ JS_FILES = [
     "editorial-experience-v20.js",
     "editorial-experience-v21.js",
     "editorial-experience-v22.js",
+    "editorial-experience-v23.js",
 ]
 
 
@@ -88,16 +90,12 @@ def bundle_concept_assets(dist: Path, concept_pages: list[Path]) -> tuple[str, s
         source = page.read_text(encoding="utf-8")
         updated = source
         first_css_pos = min((updated.find(tag) for tag in css_tags if tag in updated), default=-1)
-        first_js_pos = min((updated.find(tag) for tag in js_tags if tag in updated), default=-1)
         for tag in css_tags:
             updated = updated.replace(tag, "")
         for tag in js_tags:
             updated = updated.replace(tag, "")
         if bundle_css_tag not in updated:
-            if first_css_pos >= 0:
-                updated = updated.replace("</head>", f"{bundle_css_tag}</head>", 1)
-            else:
-                updated = updated.replace("</head>", f"{bundle_css_tag}</head>", 1)
+            updated = updated.replace("</head>", f"{bundle_css_tag}</head>", 1)
         if bundle_js_tag not in updated:
             updated = updated.replace("</body>", f"{bundle_js_tag}</body>", 1)
         if updated != source:
