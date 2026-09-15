@@ -1,0 +1,75 @@
+/* Aastha Editorial Experience v26 — aesthetic refinement + contextual utility */
+body.concept-page{--v26-ease:cubic-bezier(.2,.72,.2,1)}
+
+/* Context utility: compact, useful, not another content section */
+.v26-contextbar{position:relative;z-index:18;border-block:1px solid var(--line);background:color-mix(in srgb,var(--theme-paper) 94%,var(--theme-metal) 6%)}
+.v26-contextbar-inner{min-height:64px;display:grid;grid-template-columns:minmax(180px,.8fr) minmax(260px,1.5fr) auto;align-items:center;gap:20px}
+.v26-context-label{display:flex;align-items:center;gap:10px;min-width:0;font:800 .54rem/1 var(--sans);letter-spacing:.11em;text-transform:uppercase;color:var(--ink-soft)}
+.v26-context-label::before{content:"";width:22px;height:1px;background:var(--theme-accent);flex:0 0 auto}
+.v26-context-current{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:500 clamp(1.15rem,1.55vw,1.55rem)/1 var(--display);color:var(--theme-ink)}
+.v26-context-actions{display:flex;align-items:center;gap:8px}
+.v26-context-actions a,.v26-context-actions button{min-height:36px;padding:0 11px;border:1px solid var(--line-strong);background:transparent;color:var(--theme-ink);cursor:pointer;text-decoration:none;font:800 .52rem/1 var(--sans);letter-spacing:.075em;text-transform:uppercase;transition:.18s ease}
+.v26-context-actions a:hover,.v26-context-actions button:hover,.v26-context-actions a:focus-visible,.v26-context-actions button:focus-visible{background:var(--theme-ink);color:#fff;border-color:var(--theme-ink)}
+.v26-context-actions .v26-book{background:var(--theme-accent);color:#fff;border-color:var(--theme-accent)}
+
+/* Related-care drawer */
+.v26-drawer[hidden]{display:none}.v26-drawer{position:fixed;inset:0;z-index:9998;display:grid;align-items:end;background:rgba(18,12,15,.36);backdrop-filter:blur(4px)}
+.v26-drawer-panel{background:var(--theme-paper);border-top:1px solid var(--line-strong);box-shadow:0 -28px 80px rgba(20,14,17,.18);padding:clamp(24px,4vw,44px) max(24px,calc((100vw - min(92vw,1480px))/2));max-height:min(74vh,720px);overflow:auto}
+.v26-drawer-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:24px}.v26-drawer-head h2{font:500 clamp(2.2rem,4vw,4.4rem)/.9 var(--display);letter-spacing:-.04em;margin:6px 0 0}.v26-drawer-close{width:42px;height:42px;border:1px solid var(--line-strong);background:transparent;color:var(--theme-ink);cursor:pointer;font-size:1.2rem}
+.v26-related-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line-strong)}
+.v26-related-card{display:flex;flex-direction:column;min-height:210px;padding:22px;text-decoration:none;color:var(--theme-ink);border-right:1px solid var(--line);background:var(--theme-paper-2);transition:background .2s ease,transform .2s ease}.v26-related-card:last-child{border-right:0}.v26-related-card:hover{background:color-mix(in srgb,var(--theme-paper-2) 88%,var(--theme-metal) 12%)}
+.v26-related-card small{font:800 .5rem/1 var(--sans);letter-spacing:.11em;text-transform:uppercase;color:var(--theme-accent)}.v26-related-card strong{font:500 clamp(1.75rem,2.4vw,2.7rem)/.92 var(--display);margin:16px 0 auto}.v26-related-card span{font:750 .58rem/1 var(--sans);text-transform:uppercase;letter-spacing:.07em}
+
+/* Booking context */
+.v26-booking-context{margin-bottom:24px;padding:16px 18px;border:1px solid var(--line-strong);border-left:3px solid var(--theme-accent);background:color-mix(in srgb,var(--theme-paper-2) 91%,var(--theme-metal) 9%);display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
+.v26-booking-context small{font:800 .5rem/1 var(--sans);letter-spacing:.11em;text-transform:uppercase;color:var(--theme-accent)}.v26-booking-context strong{font:500 1.35rem/1.1 var(--display)}.v26-booking-context button{border:0;background:transparent;color:var(--ink-soft);cursor:pointer;font:750 .55rem/1 var(--sans);text-transform:uppercase;letter-spacing:.06em}
+
+/* v25 global proportion cleanup */
+.v25-module{padding:clamp(44px,5.5vw,76px) 0;background:linear-gradient(180deg,color-mix(in srgb,var(--theme-paper-2) 95%,var(--theme-metal) 5%),var(--theme-paper))}
+.v25-shell{box-shadow:0 18px 54px rgba(24,17,20,.055)}
+.v25-title{font-size:clamp(2.55rem,4.15vw,4.8rem);line-height:.93;max-width:11ch}
+.v25-copy{font-size:clamp(.88rem,.96vw,.98rem);line-height:1.65}
+.v25-linkrow a{min-height:36px;background:transparent}.v25-linkrow a:hover{transform:translateY(-1px)}
+
+/* Hair: scanner should read as scalp/hair, not generic bars */
+.v25-hair-stage::before{content:"";position:absolute;left:12%;right:12%;top:52px;height:190px;border:1px solid rgba(255,255,255,.12);border-bottom:0;border-radius:50% 50% 0 0/70% 70% 0 0;opacity:.72}
+.v25-hair-stage::after{content:"SCAN";position:absolute;right:34px;top:28px;font:800 .48rem/1 var(--sans);letter-spacing:.16em;color:rgba(255,255,255,.34)}
+.v25-hair-grid{inset:92px 12% 150px;gap:7px;mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 100%)}
+.v25-strand{box-shadow:0 0 18px rgba(255,255,255,.025)}
+.v25-range{height:28px;cursor:grab}.v25-range:active{cursor:grabbing}.v25-range::-webkit-slider-runnable-track{height:2px;background:var(--line-strong)}.v25-range::-webkit-slider-thumb{margin-top:-7px;width:16px;height:16px;border-radius:50%;background:var(--theme-accent)}
+
+/* Pigmentation: cleaner face map with anatomical guide points */
+.v25-pigment-visual::before{content:"";position:absolute;left:50%;top:48%;width:min(72%,410px);aspect-ratio:1;border:1px solid color-mix(in srgb,var(--theme-metal) 16%,transparent);border-radius:50%;transform:translate(-50%,-50%)}
+.v25-pigment-visual::after{content:"PATTERN MAP";position:absolute;left:24px;bottom:22px;font:800 .48rem/1 var(--sans);letter-spacing:.16em;color:rgba(255,255,255,.35)}
+.v25-face{filter:drop-shadow(0 28px 50px rgba(0,0,0,.18))}.v25-face-outline{stroke:rgba(255,255,255,.38)}
+.v25-pigment-tabs button{transition:background .18s ease,color .18s ease,transform .18s ease}.v25-pigment-tabs button:hover{transform:translateY(-1px)}
+
+/* Medical: stronger flow without dead-looking locked columns */
+.v25-flow{position:relative;background:var(--theme-paper-2)}.v25-flow::before{content:"";position:absolute;left:8%;right:8%;top:25px;height:1px;background:linear-gradient(90deg,var(--theme-accent),var(--line-strong),var(--line-strong));opacity:.5}
+.v25-flow-step{padding-top:40px;background:var(--theme-paper)}.v25-flow-step[data-locked="true"]{opacity:.48;filter:saturate(.72)}
+.v25-flow-actions button[aria-pressed="true"]{background:var(--theme-accent);border-color:var(--theme-accent)}
+.v25-flow-result{margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--theme-accent);padding:18px 20px}
+
+/* Aesthetic: turn the matrix into a deliberate composition */
+.v25-matrix{padding:42px;background:linear-gradient(145deg,var(--theme-night),color-mix(in srgb,var(--theme-night) 84%,var(--theme-accent) 16%))}
+.v25-quadrant{transition:opacity .2s ease,transform .24s var(--v26-ease),background .2s ease}.v25-quadrant:hover{transform:translateY(-2px);background:rgba(255,255,255,.045)}
+.v25-quadrant[aria-pressed="true"]{background:color-mix(in srgb,var(--theme-accent) 18%,rgba(255,255,255,.035));border-color:color-mix(in srgb,var(--theme-metal-soft) 55%,rgba(255,255,255,.12))}
+.v25-matrix:has(.v25-quadrant[aria-pressed="true"]) .v25-quadrant:not([aria-pressed="true"]){opacity:.64}
+.v25-matrix-axis-x,.v25-matrix-axis-y{color:rgba(255,255,255,.48)}
+
+/* Minor procedure: less card-wall, clearer safety order */
+.v25-gates{gap:0;border:1px solid var(--line-strong)}.v25-gate{min-height:250px;border:0;border-right:1px solid var(--line);background:var(--theme-paper);position:relative}.v25-gate:last-child{border-right:0}.v25-gate::after{content:"→";position:absolute;right:18px;top:18px;color:var(--ink-soft);opacity:.35}.v25-gate[aria-pressed="true"]::after{color:#fff;opacity:1}.v25-gate:hover{transform:none;background:var(--theme-paper-2)}.v25-gate[aria-pressed="true"]{background:linear-gradient(150deg,var(--theme-night),color-mix(in srgb,var(--theme-night) 83%,var(--theme-accent) 17%))}
+
+/* Laser: more instrument-panel, less generic timeline */
+.v25-spectrum{background:linear-gradient(145deg,var(--theme-night),color-mix(in srgb,var(--theme-night) 88%,var(--theme-accent) 12%));box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
+.v25-spectrum-track{height:2px;margin-top:82px}.v25-spectrum-track::before,.v25-spectrum-track::after{content:"";position:absolute;top:-32px;width:1px;height:66px;background:rgba(255,255,255,.12)}.v25-spectrum-track::before{left:0}.v25-spectrum-track::after{right:0}
+.v25-spectrum-fill{height:2px;box-shadow:0 0 18px color-mix(in srgb,var(--theme-accent) 46%,transparent)}
+.v25-spectrum-node{width:54px;height:54px;background:color-mix(in srgb,var(--theme-night) 94%,white 6%)}
+
+/* Slightly calmer page rhythm: distinct sections without white-out */
+body.treatment-page .editorial-section:nth-of-type(4n+2){background:color-mix(in srgb,var(--theme-paper-2) 96%,var(--theme-metal) 4%)}
+body.treatment-page .editorial-section:nth-of-type(4n+3){background:color-mix(in srgb,var(--theme-paper) 97%,var(--theme-accent) 3%)}
+
+@media(max-width:980px){.v26-contextbar-inner{grid-template-columns:1fr auto}.v26-context-label{display:none}.v26-related-grid{grid-template-columns:1fr}.v26-related-card{min-height:145px;border-right:0;border-bottom:1px solid var(--line)}.v26-related-card:last-child{border-bottom:0}.v25-gate{border-right:0;border-bottom:1px solid var(--line)}.v25-gate:last-child{border-bottom:0}}
+@media(max-width:700px){.v26-contextbar-inner{min-height:58px;gap:10px}.v26-context-current{font-size:1rem}.v26-context-actions button{display:none}.v26-context-actions a{min-height:34px;padding-inline:10px}.v26-drawer-panel{padding:22px}.v26-booking-context{grid-template-columns:1fr}.v25-module{padding-block:34px}.v25-matrix{padding:20px}.v25-hair-grid{inset-inline:9%}.v25-gate{min-height:190px}}
+@media(prefers-reduced-motion:reduce){.v26-context-actions *,.v26-related-card,.v25-module *{transition:none!important}}
