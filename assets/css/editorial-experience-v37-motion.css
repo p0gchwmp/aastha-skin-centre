@@ -1,0 +1,182 @@
+/* Aastha Editorial Experience v37 — Motion.dev interaction polish */
+
+html.has-motion-dev body.concept-page [data-reveal]{
+  opacity:1!important;
+  transform:none!important;
+  visibility:visible!important;
+}
+
+html.has-motion-dev body.concept-page .editorial-hero .hero-grid>*{
+  will-change:transform,opacity;
+}
+
+html.has-motion-dev body.concept-page .hero-art img,
+html.has-motion-dev body.concept-page .v30-card img,
+html.has-motion-dev body.concept-page .v30-treatment-tile img,
+html.has-motion-dev body.concept-page .legacy-media-frame img{
+  will-change:transform;
+}
+
+/* Treatment rail — useful scroll progress, Bklit-inspired but native. */
+.v37-rail-progress{
+  flex:1 1 180px;
+  min-width:120px;
+  max-width:320px;
+  height:3px;
+  position:relative;
+  overflow:hidden;
+  background:color-mix(in srgb,var(--theme-ink) 12%,transparent);
+}
+.v37-rail-progress>span{
+  position:absolute;
+  inset:0;
+  transform:scaleX(0);
+  transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--theme-accent),var(--theme-metal));
+}
+.v35-rail-toolbar{gap:16px!important}
+.v35-rail-actions{flex:0 0 auto}
+#treatments .drag-card.is-v37-focused{
+  border-color:color-mix(in srgb,var(--theme-accent) 52%,var(--line-strong))!important;
+}
+
+/* Care journey — scroll-linked progress, not another giant widget. */
+#approach .process-nav{overflow:visible!important}
+.v37-care-meter{
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:color-mix(in srgb,var(--theme-ink) 10%,transparent);
+  pointer-events:none;
+  z-index:3;
+}
+.v37-care-meter>span{
+  position:absolute;
+  inset:0;
+  transform:scaleY(0);
+  transform-origin:50% 0;
+  background:linear-gradient(180deg,var(--theme-accent),var(--theme-metal));
+}
+#approach .process-nav button{position:relative}
+#approach .process-nav button.is-active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  width:7px;
+  height:7px;
+  border-radius:999px;
+  background:var(--theme-metal);
+  transform:translate(-2px,-50%);
+  box-shadow:0 0 0 5px color-mix(in srgb,var(--theme-metal) 16%,transparent);
+}
+
+/* Route finder — compact visual explanation of the chosen path. */
+.v37-route-map{
+  display:grid;
+  grid-template-columns:auto minmax(28px,1fr) auto minmax(28px,1fr) auto;
+  align-items:center;
+  gap:8px;
+  margin:0 0 22px;
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(255,255,255,.13);
+}
+.v37-route-node{
+  min-width:0;
+}
+.v37-route-node small{
+  display:block;
+  margin-bottom:6px;
+  font:800 .46rem/1 var(--sans);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.45);
+}
+.v37-route-node strong{
+  display:block;
+  max-width:16ch;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font:650 .68rem/1.25 var(--sans);
+  color:rgba(255,255,255,.92);
+}
+.v37-route-line{
+  height:1px;
+  position:relative;
+  overflow:hidden;
+  background:rgba(255,255,255,.16);
+}
+.v37-route-line::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,var(--theme-metal),rgba(255,255,255,.38));
+  transform:scaleX(.82);
+  transform-origin:0 50%;
+}
+
+/* Pigmentation deck — calmer, richer state transitions. */
+html.has-motion-dev .v31-pigment-photo>img{
+  transition:none!important;
+}
+html.has-motion-dev .v31-pigment-copy>*{
+  will-change:transform,opacity;
+}
+.v31-pigment-tabs button[aria-pressed="true"]{
+  box-shadow:inset 0 -3px 0 var(--theme-accent), inset 0 0 0 1px color-mix(in srgb,var(--theme-accent) 20%,transparent)!important;
+}
+
+/* Slightly more authored interactive photo behavior without cursor gimmicks. */
+html.has-motion-dev .v30-card,
+html.has-motion-dev .v30-treatment-tile,
+html.has-motion-dev .legacy-media-frame{
+  transform:translateZ(0);
+}
+html.has-motion-dev .v30-card:focus-visible,
+html.has-motion-dev .v30-treatment-tile:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--theme-accent) 58%,white 42%);
+  outline-offset:3px;
+}
+
+@media(max-width:900px){
+  .v37-rail-progress{max-width:none}
+  #approach .process-nav{position:static!important}
+  .v37-care-meter{display:none}
+  #approach .process-nav button.is-active::after{display:none}
+}
+@media(max-width:620px){
+  .v35-rail-toolbar{
+    display:grid!important;
+    grid-template-columns:1fr auto!important;
+  }
+  .v37-rail-progress{
+    grid-column:1/-1;
+    grid-row:2;
+    width:100%;
+    max-width:none;
+  }
+  .v37-route-map{
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+  .v37-route-line{
+    width:1px;
+    height:18px;
+    margin-left:4px;
+  }
+  .v37-route-line::after{
+    transform:scaleY(.82);
+    transform-origin:50% 0;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html.has-motion-dev body.concept-page *{
+    scroll-behavior:auto!important;
+  }
+  .v37-rail-progress>span,.v37-care-meter>span{
+    transition:none!important;
+  }
+}
