@@ -10,44 +10,7 @@
     document.querySelector('.editorial-hero')?.insertAdjacentElement('afterend', marquee);
   }
 
-  /* Command palette / site explorer. */
-  const destinations = [
-    ['01','Home','Homepage','/concept/'],
-    ['02','Treatments','Treatment directory','/concept/treatments/'],
-    ['03','Conditions','Browse by concern','/concept/conditions/'],
-    ['04','Dr. Cheena Langer','Consultant dermatologist','/concept/dr-cheena-langer/'],
-    ['05','Acne','Acne guide','/concept/acne-treatment/'],
-    ['06','Pigmentation','Melasma, marks and uneven tone','/concept/pigmentation-treatment/'],
-    ['07','Hair fall','Shedding, thinning and scalp assessment','/concept/hair-fall-treatment/'],
-    ['08','Laser hair reduction','Unwanted facial and body hair','/concept/laser-hair-reduction/'],
-    ['09','Book consultation','Appointment request','/concept/book-appointment/'],
-  ];
-  const palette = document.createElement('div');
-  palette.className = 'v3-command';
-  palette.setAttribute('aria-hidden', 'true');
-  palette.innerHTML = `<div class="v3-command-panel" role="dialog" aria-modal="true" aria-label="Explore Aastha"><div class="v3-command-head"><input type="search" placeholder="Search treatments, concerns, doctor…" aria-label="Search site"><button class="v3-command-close" type="button">Close</button></div><div class="v3-command-list">${destinations.map(([n,t,d,h]) => `<a class="v3-command-item" href="${h}" data-search="${(t+' '+d).toLowerCase()}"><small>${n}</small><div><strong>${t}</strong><small>${d}</small></div><span>↗</span></a>`).join('')}</div></div>`;
-  document.body.appendChild(palette);
-  const input = palette.querySelector('input');
-  const baseItems = [...palette.querySelectorAll('.v3-command-item')];
-  const closePalette = () => { palette.classList.remove('is-open'); palette.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
-  const openPalette = () => { palette.classList.add('is-open'); palette.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; requestAnimationFrame(() => input.focus()); };
-  palette.querySelector('.v3-command-close').addEventListener('click', closePalette);
-  palette.addEventListener('click', (e) => { if (e.target === palette) closePalette(); });
-  input.addEventListener('input', () => {
-    const q = input.value.trim().toLowerCase();
-    baseItems.forEach((item) => item.hidden = !!q && !item.dataset.search.includes(q));
-  });
-  addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); palette.classList.contains('is-open') ? closePalette() : openPalette(); }
-    if (e.key === 'Escape') closePalette();
-  });
-  const nav = document.querySelector('.concept-nav .concept-shell');
-  if (nav && !nav.querySelector('.v3-explore-toggle')) {
-    const toggle = document.createElement('button');
-    toggle.className='v3-explore-toggle'; toggle.type='button'; toggle.textContent='Explore'; toggle.addEventListener('click', openPalette);
-    const cta = nav.querySelector('.nav-cta');
-    if (cta) cta.insertAdjacentElement('beforebegin', toggle); else nav.appendChild(toggle);
-  }
+  /* Explore is provided by the v39 command palette layer. */
 
   /* Right-side section index is for editorial/utility pages only. Treatment pages
      already have the richer sticky On-this-page map and should not pay for a second observer. */
