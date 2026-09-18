@@ -44,6 +44,7 @@ CSS_FILES = [
     "editorial-experience-v37-motion.css",
     "editorial-experience-v38-refinement.css",
     "editorial-experience-v39-explore.css",
+    "editorial-experience-v40-admin-insights.css",
 ]
 
 JS_FILES = [
