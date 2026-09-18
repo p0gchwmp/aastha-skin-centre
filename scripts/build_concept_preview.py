@@ -19,16 +19,38 @@ build_static_dist.PUBLIC_DIRECTORIES.add("concept")
 FONT_PRECONNECT_1 = '<link rel="preconnect" href="https://fonts.googleapis.com">'
 FONT_PRECONNECT_2 = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
 FONT_STYLES = '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">'
+MOTION_PRECONNECT = '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>'
 MOTION_SCRIPT = '<script src="https://cdn.jsdelivr.net/npm/motion@13.4.0/dist/motion.js" defer></script>'
 TRANSITION_GUARD = '<script>addEventListener("pageshow",()=>{document.body&&document.body.classList.remove("is-transitioning");document.documentElement.classList.remove("is-transitioning")});addEventListener("pagehide",()=>{document.body&&document.body.classList.remove("is-transitioning")});</script>'
 THEME_BOOT = '<script>(()=>{try{const r=document.documentElement,p=localStorage.getItem("aastha-preview-theme-palette")||localStorage.getItem("aastha-preview-palette")||"current",ok=["current","bordeaux","midnight","forest","plum"];r.dataset.aasthaPalette=ok.includes(p)?p:"current";r.dataset.aasthaMode="light";localStorage.removeItem("aastha-preview-theme-mode")}catch(e){document.documentElement.dataset.aasthaPalette="current";document.documentElement.dataset.aasthaMode="light"}})();</script>'
 
 QUOTED_PATH_RE = re.compile(r'''(?P<q>["'])(?P<value>/[^"']+)(?P=q)''')
+HERO_IMG_RE = re.compile(
+    r'''(<section\b[^>]*class=["'][^"']*\beditorial-hero\b[^"']*["'][^>]*>.*?<img\b)([^>]*>)''',
+    re.I | re.S,
+)
+
+
+def prioritize_hero_image(source: str) -> str:
+    """Prioritize only the first above-the-fold editorial hero image."""
+
+    def patch(match: re.Match[str]) -> str:
+        attrs = match.group(2)
+        attrs = re.sub(r'''\sloading=["'][^"']*["']''', "", attrs, flags=re.I)
+        if not re.search(r'''\sdecoding=["'][^"']*["']''', attrs, re.I):
+            attrs = ' decoding="async"' + attrs
+        if not re.search(r'''\sfetchpriority=["'][^"']*["']''', attrs, re.I):
+            attrs = ' fetchpriority="high"' + attrs
+        attrs = ' loading="eager"' + attrs
+        return match.group(1) + attrs
+
+    return HERO_IMG_RE.sub(patch, source, count=1)
 
 
 def inject_experience_assets(page: Path) -> None:
     source = page.read_text(encoding="utf-8")
-    head_tags = [FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, MOTION_SCRIPT, TRANSITION_GUARD, THEME_BOOT]
+    source = prioritize_hero_image(source)
+    head_tags = [FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, MOTION_PRECONNECT, MOTION_SCRIPT, TRANSITION_GUARD, THEME_BOOT]
     head_tags += [f'<link rel="stylesheet" href="/assets/css/{name}">' for name in concept_bundle_assets.CSS_FILES]
     js_tags = [f'<script src="/assets/js/{name}" defer></script>' for name in concept_bundle_assets.JS_FILES]
     for tag in head_tags:
