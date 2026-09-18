@@ -33,8 +33,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: "npm"
-          cache-dependency-path: package-lock.json
 
       - name: Build exact concept commit
         run: python3 scripts/build_concept_preview.py
