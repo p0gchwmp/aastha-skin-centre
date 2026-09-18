@@ -1,0 +1,54 @@
+name: Manus concept QA
+
+on:
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: Manus agent profile
+        required: true
+        default: standard
+        type: choice
+        options:
+          - lite
+          - standard
+          - max
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manus-concept-qa
+  cancel-in-progress: true
+
+jobs:
+  read-only-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MANUS_API_KEY: ${{ secrets.MANUS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Validate QA source
+        run: python -m py_compile scripts/manus_concept_qa.py
+
+      - name: Run Manus read-only concept review
+        run: |
+          python scripts/manus_concept_qa.py \
+            --base-url "https://aastha-editorial-concept-preview.onrender.com" \
+            --profile "${{ inputs.profile }}" \
+            --timeout-seconds 900 \
+            --output audit-artifacts/manus-concept-qa.json
+
+      - name: Upload Manus QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manus-concept-qa-${{ github.sha }}
+          path: audit-artifacts/manus-concept-qa.json
+          if-no-files-found: warn
+          retention-days: 3
