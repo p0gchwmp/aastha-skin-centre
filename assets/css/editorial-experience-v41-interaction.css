@@ -1,0 +1,60 @@
+/* Aastha Editorial Experience v41 — interaction hardening.
+ * No redesign: expose Explore on mobile, preserve the existing header rhythm,
+ * and tighten focus/keyboard behavior.
+ */
+
+.v41-header-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  min-width:0;
+}
+.v41-mobile-explore{
+  display:none;
+  width:42px;
+  height:42px;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 42px;
+  border:1px solid var(--line-strong);
+  background:transparent;
+  color:var(--theme-ink,var(--ink));
+  cursor:pointer;
+}
+.v41-mobile-explore svg{width:17px;height:17px}
+.v41-mobile-explore:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--theme-accent,var(--accent)) 64%,white 36%);
+  outline-offset:3px;
+}
+
+/* Active search option is controlled by the combobox, not by Tab order. */
+.v39-command-option[tabindex="-1"]{outline:0}
+.v39-command-option.is-active{
+  box-shadow:inset 3px 0 0 var(--theme-accent,var(--accent));
+}
+
+/* Make the treatment rail an explicit keyboard surface. */
+#treatments [data-drag-rail][tabindex="0"]{
+  border-radius:0;
+}
+#treatments [data-drag-rail][tabindex="0"]:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--theme-accent,var(--accent)) 64%,white 36%);
+  outline-offset:6px;
+}
+
+@media(max-width:900px){
+  .v41-mobile-explore{display:inline-flex}
+  .v41-header-actions .nav-cta{
+    white-space:nowrap;
+  }
+}
+@media(max-width:520px){
+  .v41-header-actions{gap:6px}
+  .v41-mobile-explore{width:38px;height:38px;flex-basis:38px}
+  .v41-header-actions .nav-cta{
+    padding:10px 11px!important;
+    font-size:.66rem!important;
+    letter-spacing:.06em!important;
+  }
+}
