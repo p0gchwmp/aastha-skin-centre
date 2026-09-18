@@ -23,6 +23,7 @@ jobs:
   visual-qa:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+
     steps:
       - uses: actions/checkout@v4
 
@@ -39,7 +40,10 @@ jobs:
 
       - name: Install visual QA tooling
         run: |
-          npm install --no-save playwright@1.63.0 @axe-core/playwright@4.13.0 lighthouse@13.4.1
+          npm install --no-save --no-package-lock \
+            playwright@1.63.0 \
+            @axe-core/playwright@4.13.0 \
+            lighthouse@13.4.1
           npx playwright install --with-deps chromium
 
       - name: Start local preview
@@ -65,34 +69,101 @@ jobs:
         if: always()
         run: |
           mkdir -p audit-artifacts/lighthouse
-          npx lighthouse http://127.0.0.1:4173/             --quiet             --chrome-flags="--headless --no-sandbox"             --only-categories=performance,accessibility,best-practices             --output=json             --output-path=audit-artifacts/lighthouse/home.json
 
-      - name: Summarize Lighthouse
+          npx lighthouse http://127.0.0.1:4173/ \
+            --quiet \
+            --chrome-flags="--headless --no-sandbox" \
+            --only-categories=performance,accessibility,best-practices \
+            --output=json \
+            --output-path=audit-artifacts/lighthouse/home-mobile.json
+
+          npx lighthouse http://127.0.0.1:4173/ \
+            --quiet \
+            --preset=desktop \
+            --chrome-flags="--headless --no-sandbox" \
+            --only-categories=performance,accessibility,best-practices \
+            --output=json \
+            --output-path=audit-artifacts/lighthouse/home-desktop.json
+
+      - name: Enforce Lighthouse milestone
         if: always()
         run: |
           node - <<'NODE'
           const fs = require('fs');
-          const p = 'audit-artifacts/lighthouse/home.json';
-          if (!fs.existsSync(p)) process.exit(0);
-          const r = JSON.parse(fs.readFileSync(p, 'utf8'));
-          const c = r.categories || {};
-          const score = (name) => Math.round(((c[name] && c[name].score) || 0) * 100);
-          const md = [
-            '# Lighthouse',
+
+          const reports = [
+            ['Mobile', 'audit-artifacts/lighthouse/home-mobile.json'],
+            ['Desktop', 'audit-artifacts/lighthouse/home-desktop.json'],
+          ];
+
+          const thresholds = {
+            performance: 90,
+            accessibility: 95,
+            'best-practices': 95,
+          };
+
+          const rows = [];
+          const failures = [];
+
+          for (const [label, file] of reports) {
+            if (!fs.existsSync(file)) {
+              failures.push(label + ': Lighthouse report missing');
+              continue;
+            }
+
+            const report = JSON.parse(fs.readFileSync(file, 'utf8'));
+            const categories = report.categories || {};
+            const scores = {};
+
+            for (const key of Object.keys(thresholds)) {
+              scores[key] = Math.round(((categories[key] && categories[key].score) || 0) * 100);
+              if (scores[key] < thresholds[key]) {
+                failures.push(label + ' ' + key + ': ' + scores[key] + ' < ' + thresholds[key]);
+              }
+            }
+
+            rows.push(
+              '| ' + label +
+              ' | ' + scores.performance +
+              ' | ' + scores.accessibility +
+              ' | ' + scores['best-practices'] + ' |'
+            );
+          }
+
+          const markdown = [
+            '# Lighthouse milestone',
             '',
-            '- Performance: ' + score('performance'),
-            '- Accessibility: ' + score('accessibility'),
-            '- Best Practices: ' + score('best-practices'),
+            '| Profile | Performance | Accessibility | Best Practices |',
+            '| --- | ---: | ---: | ---: |',
+            ...rows,
+            '',
+            'Thresholds: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95.',
+            '',
+            failures.length
+              ? '## Failures\n' + failures.map((x) => '- ' + x).join('\n')
+              : '## Failures\n- None',
             '',
           ].join('\n');
-          fs.writeFileSync('audit-artifacts/lighthouse/summary.md', md);
-          console.log(md);
+
+          fs.writeFileSync('audit-artifacts/lighthouse/summary.md', markdown);
+          console.log(markdown);
+
+          if (failures.length) process.exit(1);
           NODE
 
       - name: Smoke live Render preview
         if: always()
         run: |
-          curl --retry 10 --retry-delay 5 --retry-all-errors             --fail --silent --show-error             "https://aastha-editorial-concept-preview.onrender.com/?qa=${GITHUB_SHA}"             -o /tmp/live-home.html
+          curl \
+            --retry 10 \
+            --retry-delay 5 \
+            --retry-all-errors \
+            --fail \
+            --silent \
+            --show-error \
+            "https://aastha-editorial-concept-preview.onrender.com/?qa=${GITHUB_SHA}" \
+            -o /tmp/live-home.html
+
           grep -qi 'name="robots"' /tmp/live-home.html
           grep -qi 'noindex' /tmp/live-home.html
 
