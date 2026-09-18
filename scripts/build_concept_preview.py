@@ -30,6 +30,27 @@ HERO_IMG_RE = re.compile(
     re.I | re.S,
 )
 
+IMG_TAG_RE = re.compile(r'''<img\b([^>]*)>''', re.I)
+
+
+def optimize_image_loading(source: str) -> str:
+    """Lazy-load non-critical images and decode all images asynchronously."""
+
+    def patch(match: re.Match[str]) -> str:
+        attrs = match.group(1)
+        high_priority = bool(
+            re.search(r'''\bfetchpriority=["']high["']''', attrs, re.I)
+            or re.search(r'''\bloading=["']eager["']''', attrs, re.I)
+        )
+        if not re.search(r'''\bdecoding=["'][^"']+["']''', attrs, re.I):
+            attrs = ' decoding="async"' + attrs
+        if not re.search(r'''\bloading=["'][^"']+["']''', attrs, re.I):
+            attrs = (' loading="eager"' if high_priority else ' loading="lazy"') + attrs
+        return "<img" + attrs + ">"
+
+    return IMG_TAG_RE.sub(patch, source)
+
+
 
 def prioritize_hero_image(source: str) -> str:
     """Prioritize only the first above-the-fold editorial hero image."""
@@ -161,8 +182,9 @@ def main() -> int:
     for page in concept_pages:
         final_source = page.read_text(encoding="utf-8")
         prioritized = prioritize_hero_image(final_source)
-        if prioritized != final_source:
-            page.write_text(prioritized, encoding="utf-8")
+        optimized = optimize_image_loading(prioritized)
+        if optimized != final_source:
+            page.write_text(optimized, encoding="utf-8")
 
     concept_admin_upgrade.upgrade_admin(dist, concept_pages)
 
