@@ -27,7 +27,7 @@ QUOTED_PATH_RE = re.compile(r'''(?P<q>["'])(?P<value>/[^"']+)(?P=q)''')
 
 def inject_experience_assets(page: Path) -> None:
     source = page.read_text(encoding="utf-8")
-    head_tags = [FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, TRANSITION_GUARD, THEME_BOOT]
+    head_tags = [FONT_PRECONNECT_1, FONT_PRECONNECT_2, FONT_STYLES, MOTION_SCRIPT, TRANSITION_GUARD, THEME_BOOT]
     head_tags += [f'<link rel="stylesheet" href="/assets/css/{name}">' for name in concept_bundle_assets.CSS_FILES]
     js_tags = [f'<script src="/assets/js/{name}" defer></script>' for name in concept_bundle_assets.JS_FILES]
     for tag in head_tags:
