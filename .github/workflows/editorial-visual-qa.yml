@@ -1,0 +1,108 @@
+name: Editorial visual QA
+
+on:
+  push:
+    branches:
+      - concept/editorial-interactive-v1
+    paths:
+      - "concept/**"
+      - "assets/css/**"
+      - "assets/js/**"
+      - "scripts/**"
+      - ".github/workflows/editorial-visual-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: editorial-visual-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  visual-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Build exact concept commit
+        run: python3 scripts/build_concept_preview.py
+
+      - name: Install visual QA tooling
+        run: |
+          npm install --no-save playwright@1.63.0 @axe-core/playwright@4.13.0 lighthouse@13.4.1
+          npx playwright install --with-deps chromium
+
+      - name: Start local preview
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/aastha-visual-server.log 2>&1 &
+          echo $! > /tmp/aastha-visual-server.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/aastha-visual-server.log
+          exit 1
+
+      - name: Capture screenshots and run browser QA
+        env:
+          VISUAL_QA_BASE_URL: http://127.0.0.1:4173
+          VISUAL_QA_OUTPUT: audit-artifacts/editorial-visual-qa
+        run: node scripts/editorial_visual_qa.mjs
+
+      - name: Lighthouse homepage
+        if: always()
+        run: |
+          mkdir -p audit-artifacts/lighthouse
+          npx lighthouse http://127.0.0.1:4173/             --quiet             --chrome-flags="--headless --no-sandbox"             --only-categories=performance,accessibility,best-practices             --output=json             --output-path=audit-artifacts/lighthouse/home.json
+
+      - name: Summarize Lighthouse
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = 'audit-artifacts/lighthouse/home.json';
+          if (!fs.existsSync(p)) process.exit(0);
+          const r = JSON.parse(fs.readFileSync(p, 'utf8'));
+          const c = r.categories || {};
+          const score = (name) => Math.round(((c[name] && c[name].score) || 0) * 100);
+          const md = [
+            '# Lighthouse',
+            '',
+            '- Performance: ' + score('performance'),
+            '- Accessibility: ' + score('accessibility'),
+            '- Best Practices: ' + score('best-practices'),
+            '',
+          ].join('\n');
+          fs.writeFileSync('audit-artifacts/lighthouse/summary.md', md);
+          console.log(md);
+          NODE
+
+      - name: Smoke live Render preview
+        if: always()
+        run: |
+          curl --retry 10 --retry-delay 5 --retry-all-errors             --fail --silent --show-error             "https://aastha-editorial-concept-preview.onrender.com/?qa=${GITHUB_SHA}"             -o /tmp/live-home.html
+          grep -qi 'name="robots"' /tmp/live-home.html
+          grep -qi 'noindex' /tmp/live-home.html
+
+      - name: Upload visual QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: editorial-visual-qa-${{ github.sha }}
+          path: audit-artifacts/
+          if-no-files-found: warn
+          retention-days: 7
