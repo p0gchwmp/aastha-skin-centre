@@ -31,6 +31,22 @@ REPLACEMENTS = {
         "Abstract dermatologist profile illustration",
     "Real clinic-approved portrait can replace this placeholder":
         "Professional profile · Dr. Cheena Langer",
+    "Tap through common presentations from the original guide. This is educational—it cannot diagnose a patch from a website.":
+        "Explore common pigmentation patterns. This is educational and cannot diagnose a patch from a website.",
+    "The original page is explicit that one brightening cream, peel or laser is not appropriate for every pigmentation concern.":
+        "One brightening cream, peel or laser is not appropriate for every pigmentation concern.",
+    "The original guide treats photoprotection as part of the treatment and relapse-prevention plan, not as an optional extra.":
+        "Photoprotection is part of treatment and relapse prevention, not an optional extra.",
+    "Tap what looks familiar. The interaction explains the terminology from the original page without pretending to identify your condition.":
+        "Explore common acne terminology without treating a website interaction as a diagnosis.",
+    "Homepage concept":
+        "Homepage",
+    "Doctor concept":
+        "Doctor profile",
+    "Aastha Editorial Concept — Homepage":
+        "Aastha Skin Centre Jammu | Dermatologist-led Skin & Hair Care",
+    " — Editorial Concept":
+        " | Aastha Skin Centre Jammu",
 }
 
 
