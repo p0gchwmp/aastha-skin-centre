@@ -188,6 +188,14 @@ def main() -> int:
 
     concept_admin_upgrade.upgrade_admin(dist, concept_pages)
 
+    # Admin upgrade can inject additional media cards. Normalize those final
+    # images too so every generated page has an explicit loading strategy.
+    for page in concept_pages:
+        final_source = page.read_text(encoding="utf-8")
+        optimized = optimize_image_loading(final_source)
+        if optimized != final_source:
+            page.write_text(optimized, encoding="utf-8")
+
     unresolved = sum(page.read_text(encoding="utf-8").count('href="/treatments/') for page in concept_pages)
     unresolved_blog = sum(page.read_text(encoding="utf-8").count('href="/blog/') for page in concept_pages)
     print(f"Premium route rewrites applied: {rewrites}")
