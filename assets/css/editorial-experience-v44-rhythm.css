@@ -1,0 +1,75 @@
+/* Aastha Editorial Experience v44 — visual rhythm refinement.
+ * Preserve the approved editorial composition while tightening typography,
+ * anchor behavior and small-screen density.
+ */
+
+:where(.hero-title,.display-heading,.section-head h2,.drag-card h3,.process-chapter h3,.v35-doctor-card h3){
+  text-wrap:balance;
+}
+:where(.hero-copy,.section-copy,.detail-intro,.process-chapter p,.route-result p,.clinic-panel p,.clinic-panel address){
+  text-wrap:pretty;
+}
+
+main section[id],
+[data-process-chapter]{
+  scroll-margin-top:96px;
+}
+
+.concept-nav .nav-cta{
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.faq-stack summary,
+.v3-accordion summary{
+  min-height:52px;
+  display:flex;
+  align-items:center;
+}
+
+@media(max-width:900px){
+  main section[id],
+  [data-process-chapter]{
+    scroll-margin-top:78px;
+  }
+
+  .editorial-section{
+    padding-block:clamp(62px,10vw,88px)!important;
+  }
+
+  .section-head{
+    margin-bottom:clamp(28px,6vw,44px);
+  }
+
+  .concept-footer{
+    padding-bottom:calc(88px + env(safe-area-inset-bottom))!important;
+  }
+
+  .v3-quickbar{
+    bottom:max(10px,env(safe-area-inset-bottom))!important;
+  }
+}
+
+@media(max-width:560px){
+  .hero-copy,
+  .section-copy,
+  .detail-intro{
+    line-height:1.62;
+  }
+
+  .hero-actions{
+    gap:8px;
+  }
+
+  .hero-actions .btn{
+    min-height:46px;
+    padding-inline:16px;
+  }
+
+  .faq-stack summary,
+  .v3-accordion summary{
+    min-height:56px;
+  }
+}
