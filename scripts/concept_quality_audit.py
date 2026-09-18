@@ -33,6 +33,12 @@ PROTOTYPE_PHRASES = (
     "visually bold",
     "playful interactions",
     "design prototype",
+    "original page",
+    "original guide",
+    "original profile",
+    "homepage concept",
+    "doctor concept",
+    "editorial concept",
 )
 
 
