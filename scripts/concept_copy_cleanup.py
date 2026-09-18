@@ -5,6 +5,7 @@ The source pages remain easy to iterate on, while the built preview is kept
 patient-facing, cache-safe and materially lighter to load.
 """
 from pathlib import Path
+import re
 
 from concept_bundle_assets import bundle_concept_assets
 
@@ -66,6 +67,20 @@ def clean_patient_copy(pages: list[Path]) -> int:
             if old in updated:
                 updated = updated.replace(old, new)
                 changed += 1
+
+        generic_replacements = (
+            (r"\\bAastha Editorial Concept\\b", "Aastha Skin Centre Jammu"),
+            (r"\\bEditorial Concept\\b", "Aastha Skin Centre Jammu"),
+            (r"\\bthe original page\\b", "this guide"),
+            (r"\\bthe original guide\\b", "this guide"),
+            (r"\\boriginal page\\b", "guide"),
+            (r"\\boriginal guide\\b", "guide"),
+            (r"\\bhomepage concept\\b", "homepage"),
+            (r"\\bdoctor concept\\b", "doctor profile"),
+        )
+        for pattern, replacement in generic_replacements:
+            updated, count = re.subn(pattern, replacement, updated, flags=re.I)
+            changed += count
 
         # Admin is a design preview, but every visible action should still have a
         # valid destination/state rather than a decorative href="#".
