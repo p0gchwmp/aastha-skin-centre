@@ -69,14 +69,14 @@ def clean_patient_copy(pages: list[Path]) -> int:
                 changed += 1
 
         generic_replacements = (
-            (r"\\bAastha Editorial Concept\\b", "Aastha Skin Centre Jammu"),
-            (r"\\bEditorial Concept\\b", "Aastha Skin Centre Jammu"),
-            (r"\\bthe original page\\b", "this guide"),
-            (r"\\bthe original guide\\b", "this guide"),
-            (r"\\boriginal page\\b", "guide"),
-            (r"\\boriginal guide\\b", "guide"),
-            (r"\\bhomepage concept\\b", "homepage"),
-            (r"\\bdoctor concept\\b", "doctor profile"),
+            (r"\bAastha Editorial Concept\b", "Aastha Skin Centre Jammu"),
+            (r"\bEditorial Concept\b", "Aastha Skin Centre Jammu"),
+            (r"\bthe original page\b", "this guide"),
+            (r"\bthe original guide\b", "this guide"),
+            (r"\boriginal page\b", "guide"),
+            (r"\boriginal guide\b", "guide"),
+            (r"\bhomepage concept\b", "homepage"),
+            (r"\bdoctor concept\b", "doctor profile"),
         )
         for pattern, replacement in generic_replacements:
             updated, count = re.subn(pattern, replacement, updated, flags=re.I)
