@@ -48,6 +48,7 @@ CSS_FILES = [
     "editorial-experience-v41-interaction.css",
     "editorial-experience-v43-a11y.css",
     "editorial-experience-v44-rhythm.css",
+    "editorial-experience-v46-nav-state.css",
 ]
 
 JS_FILES = [
@@ -91,6 +92,7 @@ JS_FILES = [
     "editorial-experience-v41-interaction.js",
     "editorial-experience-v43-a11y.js",
     "editorial-experience-v45-micro-motion.js",
+    "editorial-experience-v46-nav-state.js",
 ]
 
 
