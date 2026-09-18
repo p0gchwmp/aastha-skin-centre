@@ -1,0 +1,27 @@
+/* Aastha Editorial Experience v46 — current-section navigation state. */
+.concept-links a{
+  position:relative;
+}
+.concept-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-7px;
+  height:1px;
+  background:var(--theme-accent,var(--accent));
+  transform:scaleX(0);
+  transform-origin:0 50%;
+  transition:transform .18s ease;
+}
+.concept-links a:hover::after,
+.concept-links a:focus-visible::after,
+.concept-links a[aria-current="location"]::after{
+  transform:scaleX(1);
+}
+.concept-links a[aria-current="location"]{
+  color:var(--theme-accent,var(--accent));
+}
+@media(prefers-reduced-motion:reduce){
+  .concept-links a::after{transition:none}
+}
