@@ -155,6 +155,15 @@ def main() -> int:
     rewrites = normalize_concept_links(concept_pages, concept_route_map(concept_root))
     clean_patient_copy(concept_pages)
     concept_media_upgrade.upgrade_media(dist, concept_pages)
+
+    # Media upgrades can replace hero <img> nodes, so enforce LCP attributes
+    # against the final rendered markup rather than only the source templates.
+    for page in concept_pages:
+        final_source = page.read_text(encoding="utf-8")
+        prioritized = prioritize_hero_image(final_source)
+        if prioritized != final_source:
+            page.write_text(prioritized, encoding="utf-8")
+
     concept_admin_upgrade.upgrade_admin(dist, concept_pages)
 
     unresolved = sum(page.read_text(encoding="utf-8").count('href="/treatments/') for page in concept_pages)
