@@ -14,6 +14,14 @@ from urllib.parse import urlsplit
 ATTR_RE = re.compile(r'''\b(href|src)\s*=\s*["']([^"']+)["']''', re.I)
 ID_RE = re.compile(r'''\bid\s*=\s*["']([^"']+)["']''', re.I)
 H1_RE = re.compile(r"<h1\b", re.I)
+ROBOTS_RE = re.compile(
+    r'''<meta\b[^>]*name=["']robots["'][^>]*content=["']([^"']+)["'][^>]*>''',
+    re.I,
+)
+HERO_IMG_RE = re.compile(
+    r'''<section\b[^>]*class=["'][^"']*\beditorial-hero\b[^"']*["'][^>]*>.*?<img\b([^>]*)>''',
+    re.I | re.S,
+)
 
 PROTOTYPE_PHRASES = (
     "lorem ipsum",
@@ -57,6 +65,21 @@ def audit_concept(dist: Path, concept_pages: list[Path]) -> dict[str, int]:
         h1_count = len(H1_RE.findall(source))
         if h1_count != 1:
             warnings.append(f"{rel}: expected 1 h1, found {h1_count}")
+
+        robots = ROBOTS_RE.search(source)
+        robots_value = robots.group(1).lower() if robots else ""
+        if "noindex" not in robots_value:
+            fatals.append(f"{rel}: concept preview must include robots noindex")
+
+        hero_img = HERO_IMG_RE.search(source)
+        if hero_img:
+            hero_attrs = hero_img.group(1)
+            if not re.search(r'''\bfetchpriority=["']high["']''', hero_attrs, re.I):
+                fatals.append(f"{rel}: above-the-fold hero image missing fetchpriority=high")
+            if not re.search(r'''\bloading=["']eager["']''', hero_attrs, re.I):
+                fatals.append(f"{rel}: above-the-fold hero image missing loading=eager")
+            if not re.search(r'''\bdecoding=["']async["']''', hero_attrs, re.I):
+                fatals.append(f"{rel}: above-the-fold hero image missing decoding=async")
 
         for attr, raw in ATTR_RE.findall(source):
             if not raw or raw.startswith(("http://", "https://", "mailto:", "tel:", "javascript:", "data:")):
