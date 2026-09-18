@@ -1,0 +1,52 @@
+/* Aastha Editorial Experience v38 — refinement layer only.
+ * Preserve the approved concept; improve control states, keyboard behavior and
+ * mobile treatment navigation without changing the section architecture.
+ */
+
+/* Treatment library: deterministic controls + calmer mobile snapping. */
+#treatments [data-drag-rail]{
+  scroll-snap-type:x mandatory!important;
+  overscroll-behavior-inline:contain;
+  scroll-behavior:smooth;
+}
+#treatments .drag-card{scroll-snap-align:start}
+.v35-rail-actions button:disabled{
+  cursor:default!important;
+  opacity:.38!important;
+  color:var(--theme-ink-soft)!important;
+  background:transparent!important;
+  transform:none!important;
+}
+.v35-rail-actions button:disabled:hover{
+  color:var(--theme-ink-soft)!important;
+  background:transparent!important;
+  transform:none!important;
+}
+#treatments [data-drag-rail]:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--theme-accent) 64%,white 36%);
+  outline-offset:5px;
+}
+
+/* Existing tab-like controls: same appearance, stronger keyboard affordance. */
+.concern-selector [role="tab"]:focus-visible,
+#clinics [role="tab"]:focus-visible,
+#approach .process-nav button:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--theme-accent) 64%,white 36%)!important;
+  outline-offset:-4px!important;
+  position:relative;
+  z-index:4;
+}
+#approach .process-nav button[aria-current="step"]{
+  opacity:1!important;
+}
+
+/* Keep interactive panels from feeling like isolated widgets on narrow screens. */
+@media(max-width:700px){
+  .v35-rail-toolbar{gap:10px!important}
+  .v35-rail-actions{gap:5px!important}
+  .v35-rail-actions button{width:42px!important;height:42px!important}
+  #treatments [data-drag-rail]{scroll-padding-inline:0}
+}
+@media(prefers-reduced-motion:reduce){
+  #treatments [data-drag-rail]{scroll-behavior:auto}
+}
