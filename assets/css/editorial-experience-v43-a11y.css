@@ -1,0 +1,17 @@
+/* Aastha Editorial Experience v43 — treatment interaction accessibility. */
+.pattern-tabs [role="tab"]:focus-visible,
+.v3-choice-matrix [role="tab"]:focus-visible,
+[data-atlas-choice][role="tab"]:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--theme-accent,var(--accent)) 64%,white 36%)!important;
+  outline-offset:-4px!important;
+  position:relative;
+  z-index:3;
+}
+.pattern-stage[role="tabpanel"],
+.v3-choice-result[role="tabpanel"]{
+  min-width:0;
+}
+@media(prefers-reduced-motion:reduce){
+  .pattern-tabs [role="tab"],
+  .v3-choice-matrix [role="tab"]{scroll-behavior:auto!important}
+}
