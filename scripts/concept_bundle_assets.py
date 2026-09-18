@@ -90,6 +90,7 @@ JS_FILES = [
     "editorial-experience-v39-explore.js",
     "editorial-experience-v41-interaction.js",
     "editorial-experience-v43-a11y.js",
+    "editorial-experience-v45-micro-motion.js",
 ]
 
 
