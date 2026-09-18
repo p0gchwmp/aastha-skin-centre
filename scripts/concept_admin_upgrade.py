@@ -74,6 +74,41 @@ def upgrade_admin(dist: Path, concept_pages: list[Path]) -> int:
     clinical_count=sum(1 for _t,k,_u in routes if k=="Clinical guide")
     dashboard_stats=f'''<div class="v18-admin-stats"><div class="v18-admin-stat"><strong>{len(routes)}</strong><span>Public routes</span></div><div class="v18-admin-stat"><strong>{clinical_count}</strong><span>Clinical guides</span></div><div class="v18-admin-stat"><strong>{journal_count}</strong><span>Journal guides</span></div><div class="v18-admin-stat"><strong>2</strong><span>Jammu clinics</span></div></div>'''
 
+    total=max(len(routes),1)
+    clinical_share=round((clinical_count/total)*100)
+    journal_share=round((journal_count/total)*100)
+    type_counts={}
+    for _title_text, kind, _route in routes:
+        type_counts[kind]=type_counts.get(kind,0)+1
+
+    def _bar(label: str, kind: str) -> str:
+        count=type_counts.get(kind,0)
+        share=round((count/total)*100)
+        return (
+            f'<div class="v40-admin-bar-row"><span>{escape(label)}</span>'
+            f'<div class="v40-admin-bar-track"><i style="--value:{share}"></i></div>'
+            f'<strong>{count}</strong></div>'
+        )
+
+    dashboard_insights=f'''<section class="v40-admin-insights" aria-labelledby="v40-insights-title">
+      <div class="v40-admin-insights-head"><div><small>Content inventory</small><h2 id="v40-insights-title">Website insights</h2></div><p>Build-derived publishing coverage only. This preview does not invent visitor, conversion or revenue analytics.</p></div>
+      <div class="v40-admin-insights-grid">
+        <div class="v40-admin-rings">
+          <article class="v40-admin-ring-card"><div class="v40-admin-ring" style="--value:{clinical_share}"><strong>{clinical_share}%</strong></div><div class="v40-admin-ring-copy"><small>Clinical share</small><b>{clinical_count} clinical guides</b></div></article>
+          <article class="v40-admin-ring-card"><div class="v40-admin-ring" style="--value:{journal_share}"><strong>{journal_share}%</strong></div><div class="v40-admin-ring-copy"><small>Journal share</small><b>{journal_count} patient guides</b></div></article>
+        </div>
+        <div class="v40-admin-bars">
+          {_bar("Clinical guides","Clinical guide")}
+          {_bar("Directories","Directory")}
+          {_bar("Core pages","Core page")}
+          {_bar("Journal","Journal")}
+          {_bar("Clinics","Clinic")}
+          {_bar("Policies","Policy")}
+        </div>
+      </div>
+      <p class="v40-admin-insights-foot">Inspired by compact Bklit-style data visualisation, but driven entirely by the concept build inventory.</p>
+    </section>'''
+
     changed = 0
     for page in concept_pages:
         raw = page.read_text(encoding="utf-8")
@@ -93,6 +128,8 @@ def upgrade_admin(dist: Path, concept_pages: list[Path]) -> int:
                 updated = re.sub(r'<div class="v18-admin-grid">.*?</div>\s*$', media_manager, updated, count=1, flags=re.S)
             elif current == "dashboard":
                 updated = re.sub(r'<div class="v18-admin-stats">.*?</div></div>', dashboard_stats, updated, count=1, flags=re.S)
+                if 'v40-admin-insights' not in updated:
+                    updated = updated.replace(dashboard_stats, dashboard_stats + dashboard_insights, 1)
             note = '<div class="v36-admin-note"><strong>Admin preview only.</strong> Changes here are local UX demonstrations; the live CMS remains the authenticated Wagtail application.</div>'
             if 'Admin preview only.' not in updated:
                 updated = updated.replace('<p class="v18-admin-intro">', note + '<p class="v18-admin-intro">', 1)
