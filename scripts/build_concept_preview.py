@@ -19,6 +19,7 @@ build_static_dist.PUBLIC_DIRECTORIES.add("concept")
 FONT_PRECONNECT_1 = '<link rel="preconnect" href="https://fonts.googleapis.com">'
 FONT_PRECONNECT_2 = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
 FONT_STYLES = '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">'
+MOTION_SCRIPT = '<script src="https://cdn.jsdelivr.net/npm/motion@13.4.0/dist/motion.js" defer></script>'
 TRANSITION_GUARD = '<script>addEventListener("pageshow",()=>{document.body&&document.body.classList.remove("is-transitioning");document.documentElement.classList.remove("is-transitioning")});addEventListener("pagehide",()=>{document.body&&document.body.classList.remove("is-transitioning")});</script>'
 THEME_BOOT = '<script>(()=>{try{const r=document.documentElement,p=localStorage.getItem("aastha-preview-theme-palette")||localStorage.getItem("aastha-preview-palette")||"current",ok=["current","bordeaux","midnight","forest","plum"];r.dataset.aasthaPalette=ok.includes(p)?p:"current";r.dataset.aasthaMode="light";localStorage.removeItem("aastha-preview-theme-mode")}catch(e){document.documentElement.dataset.aasthaPalette="current";document.documentElement.dataset.aasthaMode="light"}})();</script>'
 
