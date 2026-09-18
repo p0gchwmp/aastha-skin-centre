@@ -23,6 +23,8 @@ HERO_IMG_RE = re.compile(
     re.I | re.S,
 )
 
+IMG_TAG_RE = re.compile(r'''<img\b([^>]*)>''', re.I)
+
 PROTOTYPE_PHRASES = (
     "lorem ipsum",
     "placeholder text",
@@ -86,6 +88,12 @@ def audit_concept(dist: Path, concept_pages: list[Path]) -> dict[str, int]:
                 fatals.append(f"{rel}: above-the-fold hero image missing loading=eager")
             if not re.search(r'''\bdecoding=["']async["']''', hero_attrs, re.I):
                 fatals.append(f"{rel}: above-the-fold hero image missing decoding=async")
+
+        for image_attrs in IMG_TAG_RE.findall(source):
+            if not re.search(r'''\bloading=["'](?:lazy|eager)["']''', image_attrs, re.I):
+                fatals.append(f"{rel}: image missing explicit loading strategy")
+            if not re.search(r'''\bdecoding=["']async["']''', image_attrs, re.I):
+                fatals.append(f"{rel}: image missing decoding=async")
 
         for attr, raw in ATTR_RE.findall(source):
             if not raw or raw.startswith(("http://", "https://", "mailto:", "tel:", "javascript:", "data:")):
