@@ -52,24 +52,8 @@
     }, { passive: true });
   }
 
-  /* Replace homepage placeholder doctor art with a verified credential handoff. */
-  const doctorGrid = document.querySelector('#doctor .hero-grid');
-  if (doctorGrid && !doctorGrid.querySelector('.v35-doctor-card')) {
-    const card = document.createElement('article');
-    card.className = 'v35-doctor-card';
-    card.innerHTML = `
-      <div>
-        <span class="v35-doctor-label">Your dermatologist</span>
-        <h3>Dr. Cheena Langer</h3>
-      </div>
-      <div class="v35-doctor-meta" aria-label="Doctor credentials and clinic facts">
-        <div><strong>MBBS · MD Dermatology</strong><span>Consultant dermatologist</span></div>
-        <div><strong>20+ years</strong><span>in medicine</span></div>
-        <div><strong>2 Jammu clinics</strong><span>Karan Nagar · Paloura</span></div>
-        <div><strong>Diagnosis-led care</strong><span>skin · hair · laser · procedures</span></div>
-      </div>`;
-    doctorGrid.prepend(card);
-  }
+  /* The homepage keeps the clinic-approved real doctor photograph visible.
+     Credential text remains in the authored section instead of replacing media. */
 
   /* Number branch choices without changing the source content. */
   const clinicButtons = [...document.querySelectorAll('#clinics [data-clinic]')];

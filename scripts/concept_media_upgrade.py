@@ -67,7 +67,13 @@ def replace_hero(raw: str, slug: str) -> str:
         before=m.group(1)
         after=m.group(2)
         after=re.sub(r'\s+alt=["\'][^"\']*["\']','',after,flags=re.I)
-        return f'{before}src="{src}" alt="{alt}" data-existing-aastha-media="true"{after}'
+        fallback = "/assets/images/professional/doctor-care.svg" if slug in {"", ".", "dr-cheena-langer"} else ""
+        if fallback:
+            after = re.sub(r'\s+onerror=["\'][^"\']*["\']', '', after, flags=re.I)
+            fallback_attr = f' onerror="this.onerror=null;this.src=\'{fallback}\'"'
+        else:
+            fallback_attr = ""
+        return f'{before}src="{src}" alt="{alt}" data-existing-aastha-media="true"{fallback_attr}{after}'
     updated=re.sub(pattern,repl,raw,count=1,flags=re.I|re.S)
     if updated!=raw:
         updated=re.sub(r'(<figure\b[^>]*class=["\'][^"\']*hero-art[^"\']*["\'][^>]*>.*?<figcaption\b[^>]*>).*?(</figcaption>)',rf'\1{label}\2',updated,count=1,flags=re.I|re.S)
@@ -77,9 +83,9 @@ def replace_hero(raw: str, slug: str) -> str:
 def results_section(slug: str, count: int) -> str:
     figures=[]
     for i in range(1,count+1):
-        src=f"{SITE}/static/images/clinical-results/{slug}/{slug}-{i:02d}.webp"
-        figures.append(f'''<figure class="legacy-result-card"><img src="{src}" loading="lazy" decoding="async" alt="Existing Aastha clinical media for {slug.replace('-', ' ')}" onerror="this.closest('figure').remove()"><figcaption>Existing clinic media · image {i:02d}</figcaption></figure>''')
-    return f'''<section class="editorial-section v36-legacy-results" data-existing-aastha-results><div class="concept-shell"><div class="section-head"><div><span class="section-no">Clinical media</span></div><div><h2 class="display-heading">From the existing Aastha media library.</h2><p class="section-copy">These images are reused from the clinic's earlier website media. Individual presentation, treatment suitability and results vary.</p></div></div><div class="legacy-result-grid">{''.join(figures)}</div></div></section>'''
+        src=f"/assets/images/clinical-results/{slug}/{slug}-{i:02d}.webp"
+        figures.append(f'''<figure class="legacy-result-card"><img src="{src}" loading="lazy" decoding="async" alt="Clinic-supplied clinical media for {slug.replace('-', ' ')}" onerror="this.closest('figure').remove()"><figcaption>Clinic-supplied media · image {i:02d}</figcaption></figure>''')
+    return f'''<section class="editorial-section v36-legacy-results" data-existing-aastha-results><div class="concept-shell"><div class="section-head"><div><span class="section-no">Clinical media</span></div><div><h2 class="display-heading">From the existing Aastha media library.</h2><p class="section-copy">These clinic-supplied images are now stored with this preview instead of being hotlinked. Individual presentation, treatment suitability and results vary.</p></div></div><div class="legacy-result-grid">{''.join(figures)}</div></div></section>'''
 
 
 def upgrade_media(dist: Path, concept_pages: list[Path]) -> int:

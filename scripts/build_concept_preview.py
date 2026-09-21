@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build the isolated editorial concept preview without changing production rules."""
 from pathlib import Path
+import os
 import re
 import shutil
 
@@ -31,6 +32,19 @@ HERO_IMG_RE = re.compile(
 )
 
 IMG_TAG_RE = re.compile(r'''<img\b([^>]*)>''', re.I)
+
+TARGET_RENDER_SERVICE = "aastha-editorial-concept-preview"
+
+
+def assert_target_service() -> None:
+    """Fail closed if this preview build is wired to the wrong Render service."""
+
+    service = os.environ.get("RENDER_SERVICE_NAME", "").strip()
+    if service and service != TARGET_RENDER_SERVICE:
+        raise RuntimeError(
+            "Editorial preview target lock refused build on "
+            f"{service!r}; expected {TARGET_RENDER_SERVICE!r}."
+        )
 
 
 def optimize_image_loading(source: str) -> str:
@@ -93,6 +107,7 @@ def concept_route_map(concept_root: Path) -> dict[str, str]:
         "/dr-cheena-langer/": "/concept/dr-cheena-langer/",
         "/locations/": "/concept/locations/",
         "/blog/": "/concept/blog/",
+        "/media/": "/concept/media/",
         "/about/": "/concept/about/",
         "/privacy-policy/": "/concept/privacy-policy/",
         "/medical-disclaimer/": "/concept/medical-disclaimer/",
@@ -149,6 +164,7 @@ def normalize_concept_links(concept_pages: list[Path], routes: dict[str, str]) -
 
 
 def main() -> int:
+    assert_target_service()
     if generate_concept_v13_pages.main() != 0:
         return 1
     if generate_concept_v18_system_pages.main() != 0:
