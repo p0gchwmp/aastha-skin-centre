@@ -75,17 +75,39 @@ def generate_blog():
 
 
 def generate_media():
-    body = hero("Media & updates · Aastha", "Clinical work, <em>shared responsibly.</em>", "A home for academic activity, conference participation, patient-education videos, clinic stories and verified press or media features.", "doctor-care.svg", '<div class="hero-actions"><a class="btn" href="#media-library">Explore media ↓</a><a class="btn alt" href="/concept/dr-cheena-langer/">Doctor profile</a></div>')
-    cards = '''<div class="v18-media-grid" id="media-library">
-      <article class="v18-media-card wide"><div><small>Academic & conference</small><h3>Faculty, talks and professional activity.</h3><p>Conference participation, academic presentations and professional updates can live here once the exact event details and approved photographs are entered through the CMS.</p></div><div class="v18-media-empty">No unverified event cards are being invented for the preview. Admin is ready for dated, sourced entries.</div></article>
-      <article class="v18-media-card"><div><small>Video library</small><h3>Patient education.</h3><p>Short dermatologist-led explainers, procedure education and clinic videos, grouped by topic rather than social platform.</p></div><a href="/concept/blog/">Pair videos with patient guides →</a></article>
-      <article class="v18-media-card"><div><small>Clinic gallery</small><h3>Real spaces. Real team.</h3><p>Approved photographs from Karan Nagar and Paloura can replace abstract visual plates once uploaded.</p></div><a href="/concept/locations/">Explore clinics →</a></article>
-      <article class="v18-media-card"><div><small>Press & features</small><h3>Verified mentions only.</h3><p>Articles, interviews or external features should include the publication, date and source link.</p></div><div class="v18-media-empty">Empty until a verified source is added.</div></article>
-      <article class="v18-media-card"><div><small>Media kit</small><h3>Approved clinic facts.</h3><p>Doctor bio, clinic name, addresses, contact details, logo guidance and approved photographs can be managed centrally.</p></div><a href="/concept/contact/">Clinic contact information →</a></article>
+    body = '''<section class="editorial-hero v47-media-hero">
+      <div class="concept-shell">
+        <span class="kicker">Dr. Cheena Langer · independently published record</span>
+        <h1 class="hero-title">Media, academic work <em>&amp; professional activity.</em></h1>
+        <p class="hero-copy">A source-linked record of selected news coverage, authored patient-education articles, conference activity and professional work. The clinic does not reproduce publisher articles or imagery here; each item opens the original source.</p>
+        <div class="hero-actions"><a class="btn" href="#coverage">Explore coverage ↓</a><a class="btn alt" href="/concept/dr-cheena-langer/">Doctor profile</a></div>
+      </div>
+    </section>'''
+
+    coverage = '''<div class="v47-media-list">
+      <article><div><time datetime="2024-05-26">26 May 2024</time><span>Daily Excelsior · International conference</span></div><div><h2>Dr Cheena Langer delivers lecture at international dermatology conference in Poland</h2><p>Coverage of her “Melasma: Behind and Beyond” lecture at the 8th Continental Congress of Dermatology and 12th Controversies in Dermatology Conference in Wroclaw.</p><a href="https://www.dailyexcelsior.com/dr-cheena-langer-delivers-lecture-at-intl-dermatology-conference-in-poland/" target="_blank" rel="noopener noreferrer">Read original coverage ↗</a></div></article>
+      <article><div><time datetime="2023-12-17">17 Dec 2023</time><span>Daily Excelsior · Conference leadership</span></div><div><h2>CUTICON JK annual conference</h2><p>Daily Excelsior reported the IADVL J&amp;K conference as led by Dr. Cheena Langer as organising chairperson, with Dr. Arti Sakral as organising secretary.</p><a href="https://www.dailyexcelsior.com/news/archive/two-day-annual-conference-of-iadvl-cuticon-jk-inaugurated" target="_blank" rel="noopener noreferrer">Read original coverage ↗</a></div></article>
+      <article><div><time datetime="2019-07-07">07 Jul 2019</time><span>Daily Excelsior · Fellowship</span></div><div><h2>Fellowship at Sapienza University of Rome</h2><p>Coverage of Dr. Langer’s fellowship in Surgical &amp; Cosmetic Dermatology at Sapienza University of Rome, Italy.</p><a href="https://www.dailyexcelsior.com/news/archive/dr-cheena-awarded-fellowship-by-sapienza-university" target="_blank" rel="noopener noreferrer">Read original coverage ↗</a></div></article>
     </div>'''
-    body += section("01 / Media library", "One source of truth for public-facing media.", "The public media area only shows approved assets. Drafts and uploads belong in the admin workspace.", cards)
-    body += section("02 / Editorial rule", "Evidence before promotion.", "Conference, press and procedure content should be dated, attributable and linked to a real source. Patient photography should only appear when consent and usage approval are recorded.", '<div class="v3-reading-grid"><article class="v3-reading-card"><h3>Doctor profile</h3><p>Qualifications, academic activity and professional context.</p><a href="/concept/dr-cheena-langer/">View profile →</a></article><article class="v3-reading-card"><h3>Skin journal</h3><p>Longer educational context around common patient questions.</p><a href="/concept/blog/">Read journal →</a></article><article class="v3-reading-card"><h3>Two clinics</h3><p>Public location and access information.</p><a href="/concept/locations/">View clinics →</a></article></div>')
-    write("media", shell("Media & Updates", body))
+    body += section("01 / Coverage", "Reported work & conference activity.", "Selected independently published coverage with direct links to the original publisher.", coverage, "coverage")
+
+    authored = '''<div class="v47-authority-grid">
+      <article><time datetime="2025-02-23">23 Feb 2025</time><span>Daily Excelsior</span><h3>Combating Winter Acne Woes</h3><p>Patient-facing discussion of why winter can worsen acne and practical measures for skin care.</p><a href="https://www.dailyexcelsior.com/combating-winter-acne-woes/" target="_blank" rel="noopener noreferrer">Read article ↗</a></article>
+      <article><time datetime="2024-08-25">25 Aug 2024</time><span>Daily Excelsior</span><h3>Fungal Infection of Skin: An Epidemic on the Rise</h3><p>Overview of common signs, contributing factors and treatment considerations for superficial fungal infection.</p><a href="https://www.dailyexcelsior.com/fungal-infection-of-skin-an-epidemic-on-the-rise/" target="_blank" rel="noopener noreferrer">Read article ↗</a></article>
+      <article><time datetime="2024-06-16">16 Jun 2024</time><span>Daily Excelsior</span><h3>Sunscreen | The Shield Against Sun’s Wrath</h3><p>Public education on ultraviolet exposure, sunscreen use and practical photoprotection.</p><a href="https://www.dailyexcelsior.com/sunscreen-the-shield-against-suns-wrath/" target="_blank" rel="noopener noreferrer">Read article ↗</a></article>
+    </div>'''
+    body += section("02 / Authored patient education", "Articles published outside the clinic website.", "Selected patient-education articles attributed to Dr. Cheena Langer by the publisher.", authored, "articles")
+
+    professional = '''<div class="v47-media-list compact">
+      <article><div><time datetime="2026">2026–27</time><span>IADVL Academy</span></div><div><h2>IADVL Scholarships</h2><p>The IADVL Academy committee lists Dr. Cheena Langer with responsibility for IADVL Scholarships.</p><a href="https://www.iadvl.org/academy/academy-committee" target="_blank" rel="noopener noreferrer">View IADVL source ↗</a></div></article>
+      <article><div><time datetime="2007-01-16">16 Jan 2007</time><span>J&amp;K Medical Council</span></div><div><h2>Medical registration record</h2><p>The council’s additional-qualification register lists Dr. Cheena Mahajan (née Langer), MBBS, registration no. 9538 dated 16 January 2007, with MD Dermatology recorded as an additional qualification.</p><a href="https://www.jkmedicalcouncil.in/additionalqualificationcertificate.php?page_no=37" target="_blank" rel="noopener noreferrer">View council record ↗</a></div></article>
+    </div>'''
+    body += section("03 / Professional record", "Association & credential sources.", "Professional records are linked to the organisation that publishes them.", professional, "professional")
+
+    publication = '''<div class="v47-feature-publication"><span>Indian Journal of Dermatology · indexed in PubMed Central</span><h2>Bleomycin Containing Chemotherapeutic Regimen Induced Acquired Partial Lipodystrophy</h2><p>Dr. Cheena Langer is listed as a co-author from the Department of Dermatology, Government Medical College, Jammu.</p><a class="btn" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4763651/" target="_blank" rel="noopener noreferrer">Open publication ↗</a></div>'''
+    body += section("04 / Publication", "Peer-reviewed work.", "A selected indexed publication with the original journal record.", publication, "publications")
+    body += section("05 / Profile", "Return to the clinical profile.", "Media and professional records add context; clinical suitability still depends on an individual consultation.", '<div class="hero-actions"><a class="btn" href="/concept/dr-cheena-langer/">Doctor profile</a><a class="btn alt" href="/concept/book-appointment/">Book consultation</a></div>')
+    write("media", shell("Media & Professional Activity", body))
     return 1
 
 
