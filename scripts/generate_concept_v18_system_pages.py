@@ -26,8 +26,15 @@ def hero(kicker: str, title: str, copy: str, art: str = "hero-care.svg", actions
     return f'''<section class="editorial-hero"><div class="concept-shell hero-grid"><div><span class="kicker">{kicker}</span><h1 class="hero-title">{title}</h1><p class="hero-copy">{copy}</p>{actions}</div><figure class="hero-art"><img src="/assets/images/professional/{art}" alt="" aria-hidden="true"><figcaption class="art-label">Aastha Skin Centre · Jammu</figcaption></figure></div></section>'''
 
 
-def section(no: str, heading: str, copy: str, content: str = "") -> str:
-    return f'''<section class="editorial-section"><div class="concept-shell"><div class="section-head"><div><span class="section-no">{no}</span></div><div><h2 class="display-heading">{heading}</h2><p class="section-copy">{copy}</p></div></div>{content}</div></section>'''
+def section(
+    no: str,
+    heading: str,
+    copy: str,
+    content: str = "",
+    section_id: str = "",
+) -> str:
+    id_attr = f' id="{section_id}"' if section_id else ""
+    return f'''<section class="editorial-section"{id_attr}><div class="concept-shell"><div class="section-head"><div><span class="section-no">{no}</span></div><div><h2 class="display-heading">{heading}</h2><p class="section-copy">{copy}</p></div></div>{content}</div></section>'''
 
 
 def rx(pattern: str, text: str, default: str = "") -> str:
