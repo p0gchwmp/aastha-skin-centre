@@ -1,16 +1,16 @@
 (() => {
   const body=document.body;if(!body?.classList.contains('concept-page'))return;
   const path=location.pathname.replace(/\/+$/,'/')||'/';
-  const px=(id,w=1400)=>`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
+  const cue=(name)=>`/assets/images/visual-cues/${name}.jpg`;
   const photos={
-    acne:px(6475987),
-    pigment:px(7479572),
-    hair:px(9755382),
-    medical:px(5712685),
-    laser:px(7446683),
-    procedure:px(32260065),
-    clinic:px(7446690),
-    room:px(7016405)
+    acne:cue('acne-care'),
+    pigment:cue('pigmentation-care'),
+    hair:cue('hair-scalp-care'),
+    medical:cue('allergy-inflammatory-rashes'),
+    laser:cue('complete-care'),
+    procedure:cue('clinical-skin-care'),
+    clinic:cue('two-clinic-locations'),
+    room:cue('clinic-directions')
   };
 
   const prepareImg=(img,{src,alt='',pos='50% 50%',eager=false}={})=>{

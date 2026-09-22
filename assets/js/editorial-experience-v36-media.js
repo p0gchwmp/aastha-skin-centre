@@ -1,6 +1,5 @@
 (() => {
-  const SITE='https://www.aasthaskincentre.in';
-  const cue=(name)=>`${SITE}/static/images/visual-cues/${name}-512.webp`;
+  const cue=(name)=>`/assets/images/visual-cues/${name}.jpg`;
   const prefer=(img,src)=>{
     if(!img||!src||img.dataset.v36Media==='1')return;
     const fallback=img.currentSrc||img.src;

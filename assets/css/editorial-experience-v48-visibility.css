@@ -143,3 +143,63 @@ body.v30-image-hubs .editorial-hero .hero-art img{
   .v47-media-hero .hero-title{font-size:clamp(3.2rem,15vw,5.2rem)!important}
   .v47-media-hero .hero-copy{font-size:1rem!important;line-height:1.62!important}
 }
+
+
+/* Acne planning compass: explicit light-surface contrast contract. */
+.v6-compass{
+  background:var(--theme-paper)!important;
+  color:var(--theme-ink)!important;
+}
+.v6-compass-head>div:last-child,
+.v6-compass-stage{
+  background:var(--theme-paper)!important;
+  color:var(--theme-ink)!important;
+}
+.v6-compass-head>div:last-child :is(h3,p,small,strong),
+.v6-compass-stage :is(h4,p,small,strong,span){
+  color:var(--theme-ink)!important;
+}
+.v6-compass-head>div:last-child p,
+.v6-compass-stage p{
+  color:var(--theme-ink-soft)!important;
+}
+.v6-compass-nav{
+  background:var(--theme-paper)!important;
+}
+.v6-compass-nav button{
+  background:var(--theme-paper)!important;
+  color:var(--theme-ink)!important;
+}
+.v6-compass-nav button :is(strong,small){color:inherit!important}
+.v6-compass-nav button[aria-selected="true"]{
+  background:var(--theme-accent)!important;
+  color:#fff!important;
+}
+.v6-compass-nav button[aria-selected="true"] :is(strong,small){color:#fff!important}
+.v6-compass-stage .v6-compass-tag{
+  background:#efe4d8!important;
+  color:var(--theme-ink)!important;
+}
+
+/* Real media wins over the older authored-text plate. */
+.hero-art:has(> [data-existing-aastha-media="true"]) .v18-media-composition,
+.hero-art:has(> [data-existing-aastha-media="true"]) .v21-state-nav,
+.hero-art:has(> [data-existing-aastha-media="true"]) .v21-plate-hint{
+  display:none!important;
+}
+
+/* Keep fixed actions useful without covering the page on small screens. */
+@media(max-width:700px){
+  body.concept-page{padding-bottom:84px!important}
+  .v3-quickbar{
+    width:calc(100% - 28px)!important;
+    max-width:520px!important;
+    bottom:max(10px,env(safe-area-inset-bottom))!important;
+  }
+  .v3-quickbar a{
+    min-height:48px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+}

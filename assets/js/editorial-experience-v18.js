@@ -74,7 +74,8 @@
   }
 
   /* Clinical detail pages get one restrained authored visual, not a duplicate H1. */
-  const canUseClinicalPlate = heroArt && !utilityPage && !body.classList.contains('concept-admin') &&
+  const hasVisibleClinicalMedia = !!heroArt?.querySelector('[data-existing-aastha-media="true"]');
+  const canUseClinicalPlate = heroArt && !hasVisibleClinicalMedia && !utilityPage && !body.classList.contains('concept-admin') &&
     !/^\/concept\/(?:treatments|conditions|locations)(?:\/)?$/.test(path);
   if (canUseClinicalPlate && !heroArt.classList.contains('v18-authored-media--simple')) {
     heroArt.classList.add('v18-authored-media','v18-authored-media--simple');
