@@ -1,0 +1,145 @@
+/* v48 — image visibility, contrast and public-copy polish.
+   Final layer: fixes light-mode white-on-cream regressions without changing structure. */
+
+body.concept-page:not(.concept-admin){
+  --theme-ink:#1d1719;
+  --theme-ink-soft:#51474a;
+  --theme-paper:#f6f0e7;
+  --theme-paper-2:#e9ded2;
+  --theme-night:#1b1317;
+  color:var(--theme-ink)!important;
+}
+
+/* Authored hero plates: show the photograph instead of reducing it to a near-black/near-white texture. */
+body.concept-page .hero-art.v18-authored-media,
+body.concept-page .hero-art.v18-authored-media.v21-motion-plate{
+  background:var(--theme-night)!important;
+  color:#fffaf5!important;
+}
+body.concept-page .hero-art.v18-authored-media>img,
+body.concept-page .hero-art.v18-authored-media.v21-motion-plate>img{
+  opacity:1!important;
+  filter:none!important;
+  transform:scale(1.01)!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  padding:0!important;
+}
+body.concept-page .hero-art.v18-authored-media .v18-media-composition,
+body.concept-page .hero-art.v18-authored-media .v18-media-composition--simple{
+  color:#fffaf5!important;
+  background:
+    linear-gradient(180deg,rgba(17,11,14,.72) 0%,rgba(17,11,14,.34) 35%,rgba(17,11,14,.76) 100%)!important;
+  text-shadow:0 1px 16px rgba(0,0,0,.22);
+}
+body.concept-page .hero-art.v18-authored-media :is(.v18-media-head strong,.v18-media-core h3,.v18-media-core p,.v18-media-foot strong,.v21-state-nav button){
+  color:#fffaf5!important;
+}
+body.concept-page .hero-art.v18-authored-media .v18-media-core p{color:rgba(255,250,245,.88)!important}
+body.concept-page .hero-art.v18-authored-media .v18-media-index{color:rgba(255,255,255,.16)!important}
+body.concept-page .hero-art.v18-authored-media .v21-state-nav button{color:rgba(255,250,245,.68)!important}
+body.concept-page .hero-art.v18-authored-media .v21-state-nav button[aria-pressed="true"]{color:#fff!important}
+
+/* Doctor imagery must remain visible and readable. */
+.profile-page .profile-hero{
+  background:linear-gradient(135deg,var(--theme-paper),var(--theme-paper-2))!important;
+  color:var(--theme-ink)!important;
+}
+.profile-page .profile-hero :is(.hero-title,.hero-copy,.profile-meta,.kicker){color:var(--theme-ink)!important}
+.profile-page .profile-hero .hero-title em{color:var(--theme-accent)!important}
+.profile-page .profile-hero .hero-art{background:#d8cabc!important}
+.profile-page .profile-hero .hero-art img,
+#doctor .hero-art img{
+  opacity:1!important;
+  filter:none!important;
+  padding:0!important;
+  object-fit:cover!important;
+  object-position:center top!important;
+}
+#doctor{
+  background:linear-gradient(135deg,var(--theme-paper-2),var(--theme-paper))!important;
+  color:var(--theme-ink)!important;
+}
+#doctor :is(.display-heading,.section-copy,p){color:var(--theme-ink)!important}
+#doctor .hero-grid>.hero-art{display:block!important;background:#d8cabc!important}
+#doctor .hero-grid>div:last-child{background:var(--theme-paper)!important;color:var(--theme-ink)!important}
+#doctor .btn.alt{color:var(--theme-ink)!important;border-color:var(--theme-ink)!important}
+.v35-doctor-card{display:none!important}
+
+/* Treatment and condition hero photos fill the frame instead of appearing as tiny artwork. */
+.treatment-page .treatment-hero .hero-art img,
+.concept-imported-page .editorial-hero .hero-art img,
+body.v30-image-hubs .editorial-hero .hero-art img{
+  opacity:1!important;
+  filter:none!important;
+  padding:0!important;
+  object-fit:cover!important;
+}
+
+/* Light editorial surfaces: force dark copy. */
+:is(
+  .pattern-explorer,.pattern-stage,.route-controls,.route-finder,
+  .clinic-switch,.clinic-panel,.v29-panel,.v29-readout,
+  .v31-pigment-panel,.v31-pigment-copy,.v28-trail-item,
+  .v26-drawer-panel,.v27-shell,.v27-melasma-copy,.v27-hifu-copy,
+  .v27-vitiligo,.v27-activity-result,.v47-authority-grid article,
+  .v47-feature-publication,.v47-media-list article
+){
+  color:var(--theme-ink)!important;
+}
+:is(
+  .pattern-stage,.route-controls,.clinic-panel,.v29-readout,.v31-pigment-copy,
+  .v27-melasma-copy,.v27-hifu-copy,.v47-authority-grid article,.v47-feature-publication
+) :is(h1,h2,h3,h4,strong,dt){
+  color:var(--theme-ink)!important;
+}
+:is(
+  .pattern-stage,.route-controls,.clinic-panel,.v29-readout,.v31-pigment-copy,
+  .v27-melasma-copy,.v27-hifu-copy,.v47-authority-grid article,.v47-feature-publication
+) :is(p,dd){
+  color:var(--theme-ink-soft)!important;
+}
+
+/* Ordinary editorial cards use dark text; explicitly dark/wine cards keep light text. */
+.editorial-panel:not(.dark):not(.wine){color:var(--theme-ink)!important}
+.editorial-panel:not(.dark):not(.wine) :is(h3,p,.eyeline){color:var(--theme-ink)!important}
+.editorial-panel:not(.dark):not(.wine) p{color:var(--theme-ink-soft)!important}
+.editorial-panel.dark,.editorial-panel.wine{color:#fffaf5!important}
+.editorial-panel.dark :is(h3,.eyeline),.editorial-panel.wine :is(h3,.eyeline){color:#fffaf5!important}
+.editorial-panel.dark p,.editorial-panel.wine p{color:rgba(255,250,245,.86)!important}
+
+/* Media page hero is intentionally light, so never inherit white hero typography. */
+.v47-media-hero{
+  background:linear-gradient(135deg,#f6efe5,#e8d9c9)!important;
+  color:var(--theme-ink)!important;
+}
+.v47-media-hero :is(.kicker,.hero-title,.hero-copy){color:var(--theme-ink)!important}
+.v47-media-hero .hero-title em{color:#9b6b2d!important}
+.v47-media-hero .btn.alt{color:var(--theme-ink)!important;border-color:var(--theme-ink)!important}
+
+/* Clinical galleries: photographs first, copy second. */
+.v36-legacy-results{background:var(--theme-paper-2)!important;color:var(--theme-ink)!important}
+.v36-legacy-results :is(.display-heading,.section-copy,.section-no){color:var(--theme-ink)!important}
+.legacy-result-card{background:#d8c9bc!important;color:var(--theme-ink)!important}
+.legacy-result-card img{display:block!important;opacity:1!important;filter:none!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.legacy-result-card figcaption{background:rgba(249,244,237,.94)!important;color:var(--theme-ink)!important}
+
+/* Photo navigation must never collapse to featureless black when images are present. */
+.v30-card img,.v30-treatment-tile img,.v31-pigment-photo>img{
+  opacity:1!important;
+  filter:saturate(.94) contrast(1.02) brightness(.92)!important;
+}
+.v30-card::before{background:linear-gradient(180deg,rgba(14,10,12,.03) 18%,rgba(14,10,12,.18) 52%,rgba(14,10,12,.82) 100%)!important}
+.v30-treatment-tile::before{background:linear-gradient(180deg,rgba(14,10,12,.04),rgba(14,10,12,.76))!important}
+
+/* Mobile readability. */
+@media(max-width:700px){
+  body.concept-page .hero-art.v18-authored-media,
+  body.concept-page .hero-art.v18-authored-media.v21-motion-plate{min-height:430px!important}
+  body.concept-page .hero-art.v18-authored-media .v18-media-composition,
+  body.concept-page .hero-art.v18-authored-media .v18-media-composition--simple{
+    background:linear-gradient(180deg,rgba(17,11,14,.72),rgba(17,11,14,.42) 34%,rgba(17,11,14,.82))!important;
+  }
+  .v47-media-hero .hero-title{font-size:clamp(3.2rem,15vw,5.2rem)!important}
+  .v47-media-hero .hero-copy{font-size:1rem!important;line-height:1.62!important}
+}

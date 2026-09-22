@@ -13,6 +13,18 @@ import re
 SITE = "https://www.aasthaskincentre.in"
 DR_CHEENA = SITE + "/media/images/DSC_5241_1.max-900x900.format-webp.webp"
 
+CUE_META = {
+    "acne-care": ("Dermatology care for acne and acne-prone skin", "Acne care"),
+    "pigmentation-care": ("Dermatology care for pigmentation and uneven skin tone", "Pigmentation care"),
+    "hair-scalp-care": ("Dermatology care for hair and scalp concerns", "Hair & scalp care"),
+    "fungal-infection-care": ("Dermatology care for fungal and recurrent skin infections", "Infection care"),
+    "allergy-inflammatory-rashes": ("Dermatology care for inflammatory rashes and skin allergy", "Inflammatory skin care"),
+    "skin-quality-ageing": ("Dermatologist-led skin quality and ageing assessment", "Skin quality care"),
+    "two-clinic-locations": ("Aastha Skin Centre clinic locations in Jammu", "Two Jammu clinics"),
+    "appointment-booking": ("Dermatology consultation and appointment planning", "Book a consultation"),
+    "clinical-skin-care": ("Dermatologist-led clinical skin care", "Dermatology care"),
+}
+
 RESULT_COUNTS = {
     "acne-scar-treatment":4,
     "acne-treatment":1,
@@ -47,7 +59,7 @@ def cue_for(slug: str) -> str:
 
 
 def cue_url(cue: str) -> str:
-    return f"{SITE}/static/images/visual-cues/{cue}-512.webp"
+    return f"/assets/images/visual-cues/{cue}.jpg"
 
 
 def replace_hero(raw: str, slug: str) -> str:
@@ -58,8 +70,7 @@ def replace_hero(raw: str, slug: str) -> str:
     else:
         cue=cue_for(slug)
         src=cue_url(cue)
-        alt=f"Existing Aastha website visual for {slug.replace('-', ' ')}"
-        label="Existing Aastha website media"
+        alt,label=CUE_META.get(cue, CUE_META["clinical-skin-care"])
 
     # Replace only generic/placeholder hero artwork. Purpose-built page photography is left alone.
     pattern=r'(<figure\b[^>]*class=["\'][^"\']*hero-art[^"\']*["\'][^>]*>.*?<img\b[^>]*?)src=["\'](?:/assets/images/professional/[^"\']+|/assets/images/premium-v2/[^"\']+)["\']([^>]*>)'
@@ -67,7 +78,7 @@ def replace_hero(raw: str, slug: str) -> str:
         before=m.group(1)
         after=m.group(2)
         after=re.sub(r'\s+alt=["\'][^"\']*["\']','',after,flags=re.I)
-        fallback = "/assets/images/professional/doctor-care.svg" if slug in {"", ".", "dr-cheena-langer"} else ""
+        fallback = "/assets/images/visual-cues/medical-experience.jpg" if slug in {"", ".", "dr-cheena-langer"} else ""
         if fallback:
             after = re.sub(r'\s+onerror=["\'][^"\']*["\']', '', after, flags=re.I)
             fallback_attr = f' onerror="this.onerror=null;this.src=\'{fallback}\'"'
@@ -84,8 +95,8 @@ def results_section(slug: str, count: int) -> str:
     figures=[]
     for i in range(1,count+1):
         src=f"/assets/images/clinical-results/{slug}/{slug}-{i:02d}.webp"
-        figures.append(f'''<figure class="legacy-result-card"><img src="{src}" loading="lazy" decoding="async" alt="Clinic-supplied clinical media for {slug.replace('-', ' ')}" onerror="this.closest('figure').remove()"><figcaption>Clinic-supplied media · image {i:02d}</figcaption></figure>''')
-    return f'''<section class="editorial-section v36-legacy-results" data-existing-aastha-results><div class="concept-shell"><div class="section-head"><div><span class="section-no">Clinical media</span></div><div><h2 class="display-heading">From the existing Aastha media library.</h2><p class="section-copy">These clinic-supplied images are now stored with this preview instead of being hotlinked. Individual presentation, treatment suitability and results vary.</p></div></div><div class="legacy-result-grid">{''.join(figures)}</div></div></section>'''
+        figures.append(f'''<figure class="legacy-result-card"><img src="{src}" loading="lazy" decoding="async" alt="Clinical example related to {slug.replace('-', ' ')}" onerror="this.closest('figure').remove()"><figcaption>Clinical example · {i:02d}</figcaption></figure>''')
+    return f'''<section class="editorial-section v36-legacy-results" data-existing-aastha-results><div class="concept-shell"><div class="section-head"><div><span class="section-no">Clinical examples</span></div><div><h2 class="display-heading">Selected clinical photographs.</h2><p class="section-copy">A small selection of photographs from Aastha Skin Centre records. Appearance, treatment choice and response vary between patients, so suitability is assessed individually.</p></div></div><div class="legacy-result-grid">{''.join(figures)}</div></div></section>'''
 
 
 def upgrade_media(dist: Path, concept_pages: list[Path]) -> int:

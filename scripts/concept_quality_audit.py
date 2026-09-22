@@ -25,6 +25,18 @@ HERO_IMG_RE = re.compile(
 
 IMG_TAG_RE = re.compile(r'''<img\b([^>]*)>''', re.I)
 
+PUBLIC_INTERNAL_PHRASES = (
+    "stored with this preview",
+    "clinic-supplied",
+    "existing aastha website media",
+    "from the existing aastha media library",
+    "real clinic-approved portrait can replace this placeholder",
+    "illustration placeholder",
+    "design prototype",
+    "preview only",
+    "maps to wagtail",
+)
+
 PROTOTYPE_PHRASES = (
     "lorem ipsum",
     "placeholder text",
@@ -111,6 +123,11 @@ def audit_concept(dist: Path, concept_pages: list[Path]) -> dict[str, int]:
                     fatals.append(f"{rel}: missing {attr} target {path}")
 
         lower = source.lower()
+        is_admin = rel.startswith("admin/")
+        if not is_admin:
+            for phrase in PUBLIC_INTERNAL_PHRASES:
+                if phrase in lower:
+                    fatals.append(f"{rel}: public page contains internal wording '{phrase}'")
         for phrase in PROTOTYPE_PHRASES:
             if phrase in lower:
                 warnings.append(f"{rel}: prototype wording contains '{phrase}'")

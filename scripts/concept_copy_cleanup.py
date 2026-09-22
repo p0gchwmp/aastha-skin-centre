@@ -18,6 +18,10 @@ REPLACEMENTS = {
         "Browse common care pathways and open the guide that fits your concern.",
     "A clinic, organised like chapters.":
         "Explore care by concern and treatment.",
+    "The original treatment directory is preserved here, but compressed into a filterable editorial interface instead of a long stack of cards.":
+        "Browse treatments by clinical category and open the detailed guide that matches your concern.",
+    "The clinic does not reproduce publisher articles or imagery here; each item opens the original source.":
+        "Each item links directly to the original publisher, journal or professional body.",
     "Clinical depth without a wall of cards.":
         "Clinical areas, clearly organised.",
     "The same breadth from the original profile is here, but organised as a direct, editorial directory.":
@@ -77,6 +81,9 @@ def clean_patient_copy(pages: list[Path]) -> int:
             (r"\boriginal guide\b", "guide"),
             (r"\bhomepage concept\b", "homepage"),
             (r"\bdoctor concept\b", "doctor profile"),
+            (r"\bexisting Aastha website media\b", "Aastha Skin Centre"),
+            (r"\bfrom the existing Aastha media library\b", "Selected clinical photographs"),
+            (r"\bclinic-supplied media\b", "clinical example"),
         )
         for pattern, replacement in generic_replacements:
             updated, count = re.subn(pattern, replacement, updated, flags=re.I)

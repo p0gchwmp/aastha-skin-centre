@@ -50,6 +50,7 @@ CSS_FILES = [
     "editorial-experience-v44-rhythm.css",
     "editorial-experience-v46-nav-state.css",
     "editorial-experience-v47-media-authority.css",
+    "editorial-experience-v48-visibility.css",
 ]
 
 JS_FILES = [
