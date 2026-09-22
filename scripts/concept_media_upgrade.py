@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Reuse existing Aastha website media in the concept preview.
+"""Apply approved Aastha photography to the editorial site.
 
-The preview intentionally points at public assets already served by the current Aastha
-website instead of inventing new patient/doctor photography. Production migration can
-later copy the approved media into the final Wagtail media library.
+Clinic visual cues and clinical photographs are served locally by this preview.
+The approved Dr. Cheena portrait remains sourced from the clinic's public media
+until the final production media migration.
 """
 from __future__ import annotations
 
@@ -115,5 +115,5 @@ def upgrade_media(dist: Path, concept_pages: list[Path]) -> int:
         if updated!=raw:
             page.write_text(updated,encoding="utf-8")
             changed+=1
-    print(f"Existing Aastha media applied to {changed} concept page(s)")
+    print(f"Approved Aastha media applied to {changed} concept page(s)")
     return changed

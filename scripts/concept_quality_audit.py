@@ -37,6 +37,22 @@ PUBLIC_INTERNAL_PHRASES = (
     "maps to wagtail",
 )
 
+PUBLIC_COPY_FORBIDDEN = (
+    "placeholder",
+    "stored with this preview",
+    "clinic-supplied",
+    "existing aastha website media",
+    "existing aastha media library",
+    "the original site",
+    "the original page",
+    "the original guide",
+    "the original profile",
+    "homepage concept",
+    "doctor concept",
+    "editorial concept",
+    "design prototype",
+)
+
 PROTOTYPE_PHRASES = (
     "lorem ipsum",
     "placeholder text",

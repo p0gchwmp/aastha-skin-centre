@@ -3,18 +3,18 @@
   if (!body?.classList.contains('concept-page')) return;
   const path = location.pathname.replace(/\/+$/, '/') || '/';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const px = (id, w = 1600) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
+  const cue = name => `/assets/images/visual-cues/${name}.jpg`;
 
   const photos = {
-    acne: px(6475987),
-    pigment: px(7479572),
-    pigmentPortrait: px(8058674),
-    hair: px(9755382),
-    medical: px(5712685),
-    laser: px(7446683),
-    procedure: px(32260065),
-    clinic: px(7446690),
-    vitiligo: px(5301536),
+    acne: cue('acne-care'),
+    pigment: cue('pigmentation-care'),
+    pigmentPortrait: cue('pigmentation-care'),
+    hair: cue('hair-scalp-care'),
+    medical: cue('allergy-inflammatory-rashes'),
+    laser: cue('complete-care'),
+    procedure: cue('clinical-skin-care'),
+    clinic: cue('two-clinic-locations'),
+    vitiligo: cue('clinical-skin-care'),
   };
 
   const setImg = (img, src, alt, pos = '50% 50%') => {
@@ -94,7 +94,7 @@
         key:'depig', label:'White patches', eyebrow:'Loss of pigment', title:'Loss of colour is a different diagnostic pathway.',
         copy:'White patches are not a “lighter version” of dark pigmentation. Vitiligo and other causes of colour loss need their own assessment before treatment is discussed.',
         cue:'Areas lighter than the surrounding skin', plan:'Confirm the cause and whether the pattern is active', href:'/concept/vitiligo-treatment/', cta:'Read the vitiligo guide',
-        image:photos.vitiligo, alt:'Person with vitiligo, illustrating visible loss of skin pigment', pos:'50% 42%'
+        image:photos.vitiligo, alt:'Dermatology consultation image used to illustrate assessment of pigment loss', pos:'50% 42%'
       }
     ];
 

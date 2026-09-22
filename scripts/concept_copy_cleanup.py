@@ -48,6 +48,12 @@ REPLACEMENTS = {
         "Homepage",
     "Doctor concept":
         "Doctor profile",
+    "The original treatment directory is preserved here, but compressed into a filterable editorial interface instead of a long stack of cards.":
+        "Browse treatment families, then filter the directory to find the most relevant guide.",
+    "These clinic-supplied images are now stored with this preview instead of being hotlinked. Individual presentation, treatment suitability and results vary.":
+        "These photographs help illustrate the range of presentations and treatment contexts seen in dermatology practice. Individual findings, suitability and response vary.",
+    "From the existing Aastha media library.":
+        "Clinical photographs and treatment context.",
     "Aastha Editorial Concept — Homepage":
         "Aastha Skin Centre Jammu | Dermatologist-led Skin & Hair Care",
     " — Editorial Concept":
@@ -81,6 +87,9 @@ def clean_patient_copy(pages: list[Path]) -> int:
             (r"\boriginal guide\b", "guide"),
             (r"\bhomepage concept\b", "homepage"),
             (r"\bdoctor concept\b", "doctor profile"),
+            (r"\bclinic-supplied\b", "clinical"),
+            (r"\bexisting Aastha website media\b", "Aastha Skin Centre"),
+            (r"\bexisting Aastha media library\b", "clinical media"),
             (r"\bexisting Aastha website media\b", "Aastha Skin Centre"),
             (r"\bfrom the existing Aastha media library\b", "Selected clinical photographs"),
             (r"\bclinic-supplied media\b", "clinical example"),

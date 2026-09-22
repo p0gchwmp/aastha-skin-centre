@@ -55,8 +55,8 @@
 
   const treatmentPage = document.body.classList.contains('v7-unified-treatment');
   if (treatmentPage) {
-    const darkTarget = document.querySelector('.v7-quick-explorer') || document.querySelector('.v6-compass-section');
-    darkTarget?.classList.add('v8-dark-anchor');
+    document.querySelector('.v7-quick-explorer')?.classList.add('v8-dark-anchor');
+    document.querySelectorAll('.v6-compass-section').forEach(section => section.classList.remove('v8-dark-anchor'));
   }
 
   document.querySelectorAll('[data-v8-explorer]').forEach(explorer => {

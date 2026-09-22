@@ -3,11 +3,6 @@
   const path=location.pathname.replace(/\/+$/,'/')||'/';
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Make the external image origin cheaper before lower-page images begin loading. */
-  if(document.querySelector('.v30-card,.v30-treatment-gallery,.v31-pigment-deck')&&!document.querySelector('link[data-v32-pexels]')){
-    const link=document.createElement('link');link.rel='preconnect';link.href='https://images.pexels.com';link.crossOrigin='anonymous';link.dataset.v32Pexels='1';document.head.appendChild(link);
-  }
-
   if(path==='/concept/conditions/'){
     body.classList.add('v32-conditions-clean');
     const oldFamily=document.querySelector('#browse-family');
