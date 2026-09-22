@@ -203,3 +203,75 @@ body.v30-image-hubs .editorial-hero .hero-art img{
     justify-content:center!important;
   }
 }
+
+
+/* Hard contrast pins for light surfaces that also carry the legacy v8 dark-system class. */
+body.concept-page.v8-dark-system.profile-page .profile-hero{
+  background:linear-gradient(135deg,#f6f0e7,#e9ded2)!important;
+  color:#1d1719!important;
+}
+body.concept-page.v8-dark-system.profile-page .profile-hero .kicker,
+body.concept-page.v8-dark-system.profile-page .profile-hero .hero-title{
+  color:#1d1719!important;
+}
+body.concept-page.v8-dark-system.profile-page .profile-hero .hero-title em{
+  color:#7b1d42!important;
+}
+body.concept-page.v8-dark-system.profile-page .profile-hero .hero-copy,
+body.concept-page.v8-dark-system.profile-page .profile-hero .profile-meta{
+  color:#51474a!important;
+}
+body.concept-page.v8-dark-system.profile-page .profile-hero .btn.alt{
+  color:#1d1719!important;
+  border-color:#75676d!important;
+  background:rgba(255,255,255,.24)!important;
+}
+
+body.concept-page.v8-dark-system .editorial-hero.v47-media-hero{
+  background:linear-gradient(135deg,#f6efe5,#e8d9c9)!important;
+  color:#1d1719!important;
+}
+body.concept-page.v8-dark-system .editorial-hero.v47-media-hero .kicker{
+  color:#7b1d42!important;
+}
+body.concept-page.v8-dark-system .editorial-hero.v47-media-hero .hero-title{
+  color:#1d1719!important;
+}
+body.concept-page.v8-dark-system .editorial-hero.v47-media-hero .hero-title em{
+  color:#8b5b25!important;
+}
+body.concept-page.v8-dark-system .editorial-hero.v47-media-hero .hero-copy{
+  color:#51474a!important;
+}
+body.concept-page.v8-dark-system .editorial-hero.v47-media-hero .btn.alt{
+  color:#1d1719!important;
+  border-color:#75676d!important;
+  background:rgba(255,255,255,.2)!important;
+}
+
+body.concept-page.v8-dark-system .v6-compass{
+  background:#f6f0e7!important;
+  color:#1d1719!important;
+}
+body.concept-page.v8-dark-system .v6-compass-head>div:last-child,
+body.concept-page.v8-dark-system .v6-compass-stage,
+body.concept-page.v8-dark-system .v6-compass-nav{
+  background:#f6f0e7!important;
+  color:#1d1719!important;
+}
+body.concept-page.v8-dark-system .v6-compass-head>div:last-child :is(h3,small,strong),
+body.concept-page.v8-dark-system .v6-compass-stage :is(h4,small,strong,span){
+  color:#1d1719!important;
+}
+body.concept-page.v8-dark-system .v6-compass-head>div:last-child p,
+body.concept-page.v8-dark-system .v6-compass-stage p{
+  color:#51474a!important;
+}
+body.concept-page.v8-dark-system .v6-compass-nav button{
+  background:#f6f0e7!important;
+  color:#1d1719!important;
+}
+body.concept-page.v8-dark-system .v6-compass-nav button[aria-selected="true"]{
+  background:#7b1d42!important;
+  color:#fff!important;
+}
