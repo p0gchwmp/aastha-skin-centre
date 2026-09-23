@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Static QA for the isolated Aastha concept preview.
 
-Fail only on structural defects that should never ship. Softer content smells are
-reported as warnings so the preview can keep moving while copy is refined.
+Structural defects, internal/prototype copy and known stale public facts fail the
+build. Softer content smells remain warnings while the preview is refined.
 """
 from __future__ import annotations
 
@@ -37,20 +37,18 @@ PUBLIC_INTERNAL_PHRASES = (
     "maps to wagtail",
 )
 
-PUBLIC_COPY_FORBIDDEN = (
-    "placeholder",
-    "stored with this preview",
-    "clinic-supplied",
-    "existing aastha website media",
-    "existing aastha media library",
-    "the original site",
-    "the original page",
-    "the original guide",
-    "the original profile",
-    "homepage concept",
-    "doctor concept",
-    "editorial concept",
-    "design prototype",
+STALE_PUBLIC_FACTS = (
+    "11:00 am–4:00 pm",
+    "11 am–4 pm",
+    "sunday doctor",
+    "sunday consultation window",
+    "10:30 am–12:00 pm",
+    "10:30–12",
+    "requires final clinical approval",
+    "should only advertise dhi",
+    "supporting records are available",
+    "approved clinic statement",
+    "https://www.aasthaskincentre.in/static/images/visual-cues/",
 )
 
 PROTOTYPE_PHRASES = (
@@ -144,6 +142,9 @@ def audit_concept(dist: Path, concept_pages: list[Path]) -> dict[str, int]:
             for phrase in PUBLIC_INTERNAL_PHRASES:
                 if phrase in lower:
                     fatals.append(f"{rel}: public page contains internal wording '{phrase}'")
+            for phrase in STALE_PUBLIC_FACTS:
+                if phrase in lower:
+                    fatals.append(f"{rel}: public page contains stale fact/copy '{phrase}'")
         for phrase in PROTOTYPE_PHRASES:
             if phrase in lower:
                 warnings.append(f"{rel}: prototype wording contains '{phrase}'")

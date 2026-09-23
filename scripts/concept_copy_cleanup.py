@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Remove prototype-era wording, resolve dead preview actions and bundle concept assets.
+"""Remove prototype-era wording and reconcile patient-facing preview facts.
 
 The source pages remain easy to iterate on, while the built preview is kept
-patient-facing, cache-safe and materially lighter to load.
+patient-facing, cache-safe and aligned with the latest clinic-approved facts.
 """
 from pathlib import Path
 import re
@@ -68,6 +68,32 @@ REPLACEMENTS = {
         "Aastha Skin Centre Jammu | Dermatologist-led Skin & Hair Care",
     " — Editorial Concept":
         " | Aastha Skin Centre Jammu",
+    " — Aastha Concept":
+        " | Aastha Skin Centre Jammu",
+    " — Concept":
+        " | Aastha Skin Centre Jammu",
+    "The approved clinic statement is that Dr. Cheena Langer has more than 20 years in medicine.":
+        "Dr. Cheena Langer has more than 20 years in medicine.",
+    "This guide was prepared from established dermatology patient guidance and requires final clinical approval by Dr. Cheena Langer before launch.":
+        "This guide uses established dermatology patient guidance and is intended for general education. Individual diagnosis and treatment require a consultation.",
+    "Aastha Skin Centre should only advertise DHI when the exact technique, equipment and operating-team training have been verified.":
+        "The exact hair-transplant technique is selected only after assessing the hair-loss pattern, donor area and surgical plan.",
+    "The device’s manufacturer, exact wavelengths and regulatory status should not be claimed until supporting records are available.":
+        "The exact laser wavelength and treatment settings are selected according to tattoo colour, skin type and clinical assessment.",
+    "The device's manufacturer, exact wavelengths and regulatory status should not be claimed until supporting records are available.":
+        "The exact laser wavelength and treatment settings are selected according to tattoo colour, skin type and clinical assessment.",
+    "Mon–Sat · 11:00 AM–4:00 PM<br>Sun · 11:00 AM–3:00 PM":
+        "Clinic open · 10:00 AM–8:00 PM<br>Doctor consultation · 11:00 AM–3:00 PM",
+    "Mon–Sat · 6:00 PM–8:00 PM<br>Sun · 10:30 AM–12:00 PM":
+        "Clinic open · 10:00 AM–8:00 PM<br>Doctor consultation · 6:00 PM–8:00 PM",
+    "Monday–Saturday 11:00 AM–4:00 PM; Sunday 11:00 AM–3:00 PM":
+        "11:00 AM–3:00 PM",
+    "Monday–Saturday 6:00 PM–8:00 PM; Sunday 10:30 AM–12:00 PM":
+        "6:00 PM–8:00 PM",
+    "Monday–Saturday 10:00 AM–8:00 PM; Sunday 10:00 AM–3:00 PM":
+        "10:00 AM–8:00 PM",
+    "Monday–Saturday 10:00 AM–8:00 PM; Sunday 10:00 AM–2:00 PM":
+        "10:00 AM–8:00 PM",
 }
 
 
@@ -76,6 +102,122 @@ def _dist_root(page: Path) -> Path:
         if parent.name == "dist":
             return parent
     raise RuntimeError(f"Could not locate dist root for {page}")
+
+
+def _reconcile_location_page(updated: str, normalized: str) -> str:
+    """Apply the current branch hours without inventing an unconfirmed Sunday slot."""
+
+    is_karan = normalized.endswith("/locations/karan-nagar/index.html")
+    is_paloura = normalized.endswith("/locations/paloura/index.html")
+    is_hub = normalized.endswith("/locations/index.html")
+
+    if is_karan:
+        updated = re.sub(
+            r'<div class="v4-fact"><small>Doctor</small><strong>.*?</strong><p>.*?</p></div>',
+            '<div class="v4-fact"><small>Doctor consultation</small><strong>11 AM–3 PM</strong><p>Please confirm same-day availability before travelling.</p></div>',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+        updated = re.sub(
+            r'<div class="v4-fact"><small>Sunday doctor</small>.*?</div>',
+            '',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+        updated = re.sub(
+            r'<div class="v4-fact"><small>Reception</small><strong>.*?</strong><p>.*?</p></div>',
+            '<div class="v4-fact"><small>Clinic hours</small><strong>10 AM–8 PM</strong><p>Reception and scheduled services.</p></div>',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+        updated = re.sub(
+            r'(<h3>Doctor consultation</h3>\s*<p>).*?(</p>)',
+            r'\g<1>11:00 AM–3:00 PM\2',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+        updated = re.sub(
+            r'(<h3>Reception</h3>\s*<p>).*?(</p>)',
+            r'\g<1>10:00 AM–8:00 PM\2',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+        updated = updated.replace(
+            'What are the doctor consultation timings at Karan Nagar?</summary><div class="faq-answer"><p>11:00 AM–4:00 PM</p>',
+            'What are the doctor consultation timings at Karan Nagar?</summary><div class="faq-answer"><p>11:00 AM–3:00 PM. Please confirm same-day availability before travelling.</p>',
+        )
+        updated = re.sub(
+            r'<details><summary>Is the Karan Nagar clinic open on Sunday\?</summary>.*?</details>',
+            '<details><summary>Should I confirm timings before visiting?</summary><div class="faq-answer"><p>Yes. Please confirm same-day doctor availability and procedure scheduling before travelling.</p></div></details>',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+
+    if is_paloura:
+        updated = re.sub(
+            r'<div class="v4-fact"><small>Doctor</small><strong>.*?</strong><p>.*?</p></div>',
+            '<div class="v4-fact"><small>Doctor consultation</small><strong>6 PM–8 PM</strong><p>Please confirm same-day availability before travelling.</p></div>',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+        updated = re.sub(
+            r'<div class="v4-fact"><small>Sunday doctor</small>.*?</div>',
+            '',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+        updated = re.sub(
+            r'<div class="v4-fact"><small>Reception</small><strong>.*?</strong><p>.*?</p></div>',
+            '<div class="v4-fact"><small>Clinic hours</small><strong>10 AM–8 PM</strong><p>Reception and scheduled services.</p></div>',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+        updated = updated.replace(
+            "with evening consultation hours on most weekdays.",
+            "with doctor consultation from 6:00 PM to 8:00 PM. Please confirm same-day availability before travelling.",
+        )
+        updated = re.sub(
+            r'(<h3>Doctor consultation</h3>\s*<p>).*?(</p>)',
+            r'\g<1>6:00 PM–8:00 PM\2',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+        updated = re.sub(
+            r'(<h3>Reception</h3>\s*<p>).*?(</p>)',
+            r'\g<1>10:00 AM–8:00 PM\2',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+        updated = updated.replace(
+            'What are the doctor consultation timings at Paloura Chowk?</summary><div class="faq-answer"><p>6:00 PM–8:00 PM</p>',
+            'What are the doctor consultation timings at Paloura Chowk?</summary><div class="faq-answer"><p>6:00 PM–8:00 PM. Please confirm same-day availability before travelling.</p>',
+        )
+        updated = re.sub(
+            r'<details><summary>Is the Paloura Chowk clinic open on Sunday\?</summary>.*?</details>',
+            '<details><summary>Should I confirm timings before visiting?</summary><div class="faq-answer"><p>Yes. Please confirm same-day doctor availability and procedure scheduling before travelling.</p></div></details>',
+            updated,
+            count=1,
+            flags=re.I | re.S,
+        )
+
+    if is_hub:
+        updated = updated.replace("Dr. Cheena: Mon–Sat 11:00 AM–4:00 PM", "Dr. Cheena: 11:00 AM–3:00 PM")
+        updated = updated.replace("Dr. Cheena: Mon–Sat 6:00 PM–8:00 PM", "Dr. Cheena: 6:00 PM–8:00 PM")
+        updated = re.sub(r'<li>Sunday doctor hours:.*?</li>', '', updated, flags=re.I | re.S)
+        updated = updated.replace("Reception: Mon–Sat 10:00 AM–8:00 PM", "Clinic hours: 10:00 AM–8:00 PM")
+
+    return updated
 
 
 def clean_patient_copy(pages: list[Path]) -> int:
@@ -107,9 +249,30 @@ def clean_patient_copy(pages: list[Path]) -> int:
             updated, count = re.subn(pattern, replacement, updated, flags=re.I)
             changed += count
 
+        # Keep imported concept photography local rather than depending on the
+        # current production host for visual-cue assets.
+        updated, cue_count = re.subn(
+            r'https://www\.aasthaskincentre\.in/static/images/visual-cues/([a-z0-9-]+)-512\.webp',
+            r'/assets/images/visual-cues/\1.jpg',
+            updated,
+            flags=re.I,
+        )
+        changed += cue_count
+
+        normalized = page.as_posix().replace("\\", "/")
+        updated = _reconcile_location_page(updated, normalized)
+
+        # Surface the public registration record on the doctor profile without
+        # inventing additional credential claims.
+        if normalized.endswith("/dr-cheena-langer/index.html") and "Registration No. 9538" not in updated:
+            anchor = '<div class="fact-row"><dt>Qualifications</dt><dd>MBBS, MD Dermatology.</dd></div>'
+            registration = '<div class="fact-row"><dt>Medical registration</dt><dd>J&amp;K Medical Council · Registration No. 9538 · 16 Jan 2007.</dd></div>'
+            if anchor in updated:
+                updated = updated.replace(anchor, anchor + registration, 1)
+                changed += 1
+
         # Admin is a design preview, but every visible action should still have a
         # valid destination/state rather than a decorative href="#".
-        normalized = page.as_posix().replace("\\", "/")
         if normalized.endswith("/admin/pages/index.html"):
             replacements = (
                 ('href="#">Add page', 'href="?action=new">Add page'),
@@ -136,5 +299,5 @@ def clean_patient_copy(pages: list[Path]) -> int:
     if pages:
         bundle_concept_assets(_dist_root(pages[0]), pages)
 
-    print(f"Patient-facing/admin preview cleanup replacements: {changed}")
+    print(f"Patient-facing fact/copy reconciliation replacements: {changed}")
     return changed
