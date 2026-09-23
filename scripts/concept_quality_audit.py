@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Static QA for the isolated Aastha concept preview.
 
-Structural defects, internal/prototype copy and known stale public facts fail the
-build. Softer content smells remain warnings while the preview is refined.
+Structural defects, internal/prototype copy, known stale public facts and launch
+SEO regressions fail the build. Softer content smells remain warnings while the
+preview is refined.
 """
 from __future__ import annotations
 
@@ -11,18 +12,14 @@ from pathlib import Path
 import re
 from urllib.parse import urlsplit
 
+from concept_launch_hardening import harden_launch_metadata
+from concept_launch_readiness import audit_launch_readiness
+
 ATTR_RE = re.compile(r'''\b(href|src)\s*=\s*["']([^"']+)["']''', re.I)
 ID_RE = re.compile(r'''\bid\s*=\s*["']([^"']+)["']''', re.I)
 H1_RE = re.compile(r"<h1\b", re.I)
-ROBOTS_RE = re.compile(
-    r'''<meta\b[^>]*name=["']robots["'][^>]*content=["']([^"']+)["'][^>]*>''',
-    re.I,
-)
-HERO_IMG_RE = re.compile(
-    r'''<section\b[^>]*class=["'][^"']*\beditorial-hero\b[^"']*["'][^>]*>.*?<img\b([^>]*)>''',
-    re.I | re.S,
-)
-
+ROBOTS_RE = re.compile(r'''<meta\b[^>]*name=["']robots["'][^>]*content=["']([^"']+)["'][^>]*>''', re.I)
+HERO_IMG_RE = re.compile(r'''<section\b[^>]*class=["'][^"']*\beditorial-hero\b[^"']*["'][^>]*>.*?<img\b([^>]*)>''', re.I | re.S)
 IMG_TAG_RE = re.compile(r'''<img\b([^>]*)>''', re.I)
 
 PUBLIC_INTERNAL_PHRASES = (
@@ -83,8 +80,12 @@ def _target_file(dist: Path, path: str) -> Path:
 
 
 def audit_concept(dist: Path, concept_pages: list[Path]) -> dict[str, int]:
-    fatals: list[str] = []
-    warnings: list[str] = []
+    # Apply production-target metadata/schema before auditing it. This does not
+    # change preview indexing: every public concept page remains noindex.
+    harden_launch_metadata(dist, concept_pages)
+
+    fatals = []
+    warnings = []
     concept_root = dist / "concept"
 
     for page in concept_pages:
@@ -164,6 +165,8 @@ def audit_concept(dist: Path, concept_pages: list[Path]) -> dict[str, int]:
     if fatals:
         raise RuntimeError(f"Concept quality audit failed with {len(fatals)} structural issue(s)")
 
+    # Final fail-closed launch rehearsal while preserving preview noindex.
+    audit_launch_readiness(dist, concept_pages)
     return {"pages": len(concept_pages), "warnings": len(warnings), "fatals": len(fatals)}
 
 
