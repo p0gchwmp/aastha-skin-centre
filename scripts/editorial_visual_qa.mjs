@@ -22,7 +22,8 @@ const routes = [
 const viewports = [
   { name: "desktop", width: 1440, height: 1000, deviceScaleFactor: 1 },
   { name: "tablet", width: 1024, height: 900, deviceScaleFactor: 1 },
-  { name: "mobile", width: 390, height: 844, deviceScaleFactor: 1 },
+  { name: "mobile-390", width: 390, height: 844, deviceScaleFactor: 1 },
+  { name: "mobile-430", width: 430, height: 932, deviceScaleFactor: 1 },
 ];
 
 const severeImpacts = new Set(["serious", "critical"]);

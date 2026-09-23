@@ -42,6 +42,7 @@ class PreviewHandler(SimpleHTTPRequestHandler):
             self.send_header("Content-Encoding", "gzip")
             self.send_header("Content-Length", str(len(compressed)))
             self.send_header("Last-Modified", self.date_time_string(target.stat().st_mtime))
+            self.end_headers()
             return io.BytesIO(compressed)
         return super().send_head()
 
