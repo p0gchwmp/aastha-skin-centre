@@ -31,9 +31,15 @@ body.concept-page figure.hero-art>img[src*="DSC_5241"]{
 }
 
 /* Light-surface process navigation needs real contrast. The inherited opacity was the actual failure. */
+body.concept-page .process-stage,
+body.concept-page .process-nav,
+body.concept-page .process-content{
+  opacity:1!important;
+}
 body.concept-page .process-nav button{
   opacity:1!important;
   color:#332c2e!important;
+  background:#f0e9df!important;
 }
 body.concept-page .process-nav button.is-active,
 body.concept-page .process-nav button[aria-selected="true"]{
@@ -42,9 +48,30 @@ body.concept-page .process-nav button[aria-selected="true"]{
   background:#611b34!important;
 }
 
+/* Process chapters are light editorial cards. Keep every chapter readable even while JS switches state. */
+body.concept-page .process-content,
+body.concept-page .process-chapter{
+  color:#171313!important;
+  background:#f6f1e9!important;
+}
+body.concept-page .process-chapter :is(h2,h3,h4,p,.kicker,small,strong){
+  color:#332c2e!important;
+}
+body.concept-page .process-chapter .kicker,
+body.concept-page .process-chapter small{
+  opacity:1!important;
+}
+
 /* Small clinical labels stay intentionally subtle through size/weight, never through low opacity. */
 body.concept-page.treatment-page .editorial-section :is(.section-no,.eyeline,.kicker,small),
 body.concept-page .v6-compass :is(small,strong){
+  opacity:1!important;
+}
+
+/* Drag-card labels are small text; use a darker bronze instead of the decorative pale gold. */
+body.concept-page .drag-card>.num,
+body.concept-page .drag-card .num{
+  color:#68491f!important;
   opacity:1!important;
 }
 
@@ -128,4 +155,36 @@ body.concept-page .v30-treatment-tile:not(.dark):not(.wine) p{color:#3f3738}
 @media(max-width:900px){
   body.concept-page .v3-side-index{display:none!important}
   body.concept-page figure.hero-art{margin-inline:0!important}
+
+  /* Legacy treatment directory accumulated a desktop min-width in later layers. Collapse it deterministically. */
+  body.concept-page .v3-search-shell,
+  body.concept-page .v3-filter-panel,
+  body.concept-page .v3-filter-buttons,
+  body.concept-page .v3-directory{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+  body.concept-page .v3-search-shell{
+    grid-template-columns:minmax(0,1fr)!important;
+    overflow:hidden!important;
+  }
+  body.concept-page .v3-filter-panel{
+    overflow:hidden!important;
+  }
+  body.concept-page .v3-filter-buttons{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body.concept-page .v3-filter-panel h3,
+  body.concept-page .v3-filter-buttons button{
+    min-width:0!important;
+    max-width:100%!important;
+    overflow-wrap:anywhere;
+  }
+}
+
+@media(max-width:430px){
+  body.concept-page .v3-filter-panel{padding:18px!important}
+  body.concept-page .v3-filter-buttons button{padding:12px 10px!important}
 }

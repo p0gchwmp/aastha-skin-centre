@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Apply approved Aastha photography to the editorial site.
-
-Clinic visual cues and clinical photographs are served locally by this preview.
-The approved Dr. Cheena portrait remains sourced from the clinic's public media
-until the final production media migration.
-"""
+"""Apply approved Aastha photography to the editorial site."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -26,22 +21,11 @@ CUE_META = {
 }
 
 RESULT_COUNTS = {
-    "acne-scar-treatment":4,
-    "acne-treatment":1,
-    "alopecia-areata-treatment":1,
-    "botulinum-toxin-dermal-fillers":9,
-    "chemical-peels":1,
-    "contact-dermatitis-treatment":1,
-    "dark-circles-under-eye-treatment":1,
-    "fungal-infection-treatment":1,
-    "hair-fall-treatment":6,
-    "hair-transplant":2,
-    "laser-hair-reduction":7,
-    "laser-tattoo-removal":1,
-    "mnrf-treatment":3,
-    "psoriasis-treatment":1,
-    "q-switched-laser-toning":4,
-    "wart-mole-skin-tag-removal":1,
+    "acne-scar-treatment":4, "acne-treatment":1, "alopecia-areata-treatment":1,
+    "botulinum-toxin-dermal-fillers":9, "chemical-peels":1, "contact-dermatitis-treatment":1,
+    "dark-circles-under-eye-treatment":1, "fungal-infection-treatment":1, "hair-fall-treatment":6,
+    "hair-transplant":2, "laser-hair-reduction":7, "laser-tattoo-removal":1, "mnrf-treatment":3,
+    "psoriasis-treatment":1, "q-switched-laser-toning":4, "wart-mole-skin-tag-removal":1,
 }
 
 
@@ -63,7 +47,8 @@ def cue_url(cue: str) -> str:
 
 
 def replace_hero(raw: str, slug: str) -> str:
-    if slug in {"", ".", "dr-cheena-langer"}:
+    is_doctor = slug in {"", ".", "dr-cheena-langer"}
+    if is_doctor:
         src=DR_CHEENA
         alt="Dr. Cheena Langer, Consultant Dermatologist at Aastha Skin Centre Jammu"
         label="Dr. Cheena Langer · Aastha Skin Centre Jammu"
@@ -72,19 +57,18 @@ def replace_hero(raw: str, slug: str) -> str:
         src=cue_url(cue)
         alt,label=CUE_META.get(cue, CUE_META["clinical-skin-care"])
 
-    # Replace only generic/placeholder hero artwork. Purpose-built page photography is left alone.
     pattern=r'(<figure\b[^>]*class=["\'][^"\']*hero-art[^"\']*["\'][^>]*>.*?<img\b[^>]*?)src=["\'](?:/assets/images/professional/[^"\']+|/assets/images/premium-v2/[^"\']+)["\']([^>]*>)'
     def repl(m: re.Match[str]) -> str:
         before=m.group(1)
         after=m.group(2)
         after=re.sub(r'\s+alt=["\'][^"\']*["\']','',after,flags=re.I)
-        fallback = "/assets/images/visual-cues/medical-experience.jpg" if slug in {"", ".", "dr-cheena-langer"} else ""
-        if fallback:
-            after = re.sub(r'\s+onerror=["\'][^"\']*["\']', '', after, flags=re.I)
-            fallback_attr = f' onerror="this.onerror=null;this.src=\'{fallback}\'"'
-        else:
-            fallback_attr = ""
-        return f'{before}src="{src}" alt="{alt}" data-existing-aastha-media="true"{fallback_attr}{after}'
+        after=re.sub(r'\s+onerror=["\'][^"\']*["\']','',after,flags=re.I)
+        dimensions=""
+        if is_doctor:
+            after=re.sub(r'\s+(?:width|height)=["\'][^"\']*["\']','',after,flags=re.I)
+            dimensions=' width="596" height="900"'
+        return f'{before}src="{src}" alt="{alt}" data-existing-aastha-media="true"{dimensions}{after}'
+
     updated=re.sub(pattern,repl,raw,count=1,flags=re.I|re.S)
     if updated!=raw:
         updated=re.sub(r'(<figure\b[^>]*class=["\'][^"\']*hero-art[^"\']*["\'][^>]*>.*?<figcaption\b[^>]*>).*?(</figcaption>)',rf'\1{label}\2',updated,count=1,flags=re.I|re.S)
@@ -93,9 +77,10 @@ def replace_hero(raw: str, slug: str) -> str:
 
 def results_section(slug: str, count: int) -> str:
     figures=[]
+    treatment=slug.replace('-', ' ')
     for i in range(1,count+1):
         src=f"/assets/images/clinical-results/{slug}/{slug}-{i:02d}.webp"
-        figures.append(f'''<figure class="legacy-result-card"><img src="{src}" loading="lazy" decoding="async" alt="Clinical example related to {slug.replace('-', ' ')}" onerror="this.closest('figure').remove()"><figcaption>Clinical example · {i:02d}</figcaption></figure>''')
+        figures.append(f'''<figure class="legacy-result-card"><img src="{src}" loading="lazy" decoding="async" alt="Clinical photograph related to {treatment} at Aastha Skin Centre"><figcaption>Clinical photograph · Aastha Skin Centre</figcaption></figure>''')
     return f'''<section class="editorial-section v36-legacy-results" data-existing-aastha-results><div class="concept-shell"><div class="section-head"><div><span class="section-no">Clinical examples</span></div><div><h2 class="display-heading">Selected clinical photographs.</h2><p class="section-copy">A small selection of photographs from Aastha Skin Centre records. Appearance, treatment choice and response vary between patients, so suitability is assessed individually.</p></div></div><div class="legacy-result-grid">{''.join(figures)}</div></div></section>'''
 
 
@@ -110,8 +95,7 @@ def upgrade_media(dist: Path, concept_pages: list[Path]) -> int:
         raw=page.read_text(encoding="utf-8")
         updated=replace_hero(raw,slug)
         if slug in RESULT_COUNTS and 'data-existing-aastha-results' not in updated:
-            block=results_section(slug,RESULT_COUNTS[slug])
-            updated=updated.replace('</main>',block+'</main>',1)
+            updated=updated.replace('</main>',results_section(slug,RESULT_COUNTS[slug])+'</main>',1)
         if updated!=raw:
             page.write_text(updated,encoding="utf-8")
             changed+=1
