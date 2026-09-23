@@ -20,6 +20,10 @@ EXACT_REPLACEMENTS = {
         "6 PM–8 PM. Please confirm same-day availability before travelling.",
     "Monday–Saturday 6 PM–8 PM, with Sunday 10:30 AM–12 PM":
         "6 PM–8 PM. Please confirm same-day availability before travelling",
+    "Dr. Cheena: Mon–Sat 11:00 AM–4:00 PM":
+        "Dr. Cheena: 11:00 AM–3:00 PM",
+    "Dr. Cheena: Mon–Sat 6:00 PM–8:00 PM":
+        "Dr. Cheena: 6:00 PM–8:00 PM",
 }
 
 
@@ -37,18 +41,26 @@ def patch_remaining_facts(pages: list[Path]) -> int:
                 updated = updated.replace(old, new)
                 changed += 1
 
-        # Catch older template variants that split the same schedule across
+        # Catch older template variants that split the same schedules across
         # slightly different markup. These are known stale clinic values.
         regex_replacements = (
             (r"11:00 AM–4:00 PM", "11:00 AM–3:00 PM"),
             (r"11 AM–4 PM", "11 AM–3 PM"),
+            (r'<div class="v4-fact"><small>Sunday doctor</small>.*?</div>', ""),
+            (r"<li>Sunday doctor hours:\s*[^<]+</li>", ""),
             (r"(?:<br>\s*)?Sun(?:day)?\s+11:00 AM–3:00 PM", ""),
             (r"(?:<br>\s*)?Sun(?:day)?\s+10:30 AM–12:00 PM", ""),
             (r"(?:<br>\s*)?Sun(?:day)?\s+11 AM–3 PM", ""),
             (r"(?:<br>\s*)?Sun(?:day)?\s+10:30 AM–12 PM", ""),
+            (r'<small>Doctor</small><strong>11 AM–3 PM</strong><p>Monday–Saturday\.</p>',
+             '<small>Doctor</small><strong>11 AM–3 PM</strong><p>Current consultation slot. Confirm same-day availability.</p>'),
+            (r'<small>Doctor</small><strong>6 PM–8 PM</strong><p>Monday–Saturday\.</p>',
+             '<small>Doctor</small><strong>6 PM–8 PM</strong><p>Current consultation slot. Confirm same-day availability.</p>'),
+            (r'<small>Reception</small><strong>10 AM–8 PM</strong><p>Monday–Saturday\.</p>',
+             '<small>Clinic hours</small><strong>10 AM–8 PM</strong><p>Confirm same-day availability before travelling.</p>'),
         )
         for pattern, replacement in regex_replacements:
-            updated, count = re.subn(pattern, replacement, updated, flags=re.I)
+            updated, count = re.subn(pattern, replacement, updated, flags=re.I | re.S)
             changed += count
 
         # Avoid stray line breaks after removing obsolete Sunday windows.
