@@ -8,6 +8,7 @@ import shutil
 import build_static_dist
 import concept_bundle_assets
 import concept_admin_upgrade
+import concept_fact_patch_extra
 import concept_media_upgrade
 import generate_concept_v13_pages
 import generate_concept_v18_system_pages
@@ -191,6 +192,7 @@ def main() -> int:
 
     rewrites = normalize_concept_links(concept_pages, concept_route_map(concept_root))
     clean_patient_copy(concept_pages)
+    concept_fact_patch_extra.patch_remaining_facts(concept_pages)
     concept_media_upgrade.upgrade_media(dist, concept_pages)
 
     # Media upgrades can replace hero <img> nodes, so enforce LCP attributes
