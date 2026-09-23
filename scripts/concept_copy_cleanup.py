@@ -20,8 +20,20 @@ REPLACEMENTS = {
         "Explore care by concern and treatment.",
     "The original treatment directory is preserved here, but compressed into a filterable editorial interface instead of a long stack of cards.":
         "Browse treatments by clinical category and open the detailed guide that matches your concern.",
+    "Dr. Cheena Langer · independently published record":
+        "Dr. Cheena Langer · media, academic & professional work",
+    "A source-linked record of selected news coverage, authored patient-education articles, conference activity and professional work. The clinic does not reproduce publisher articles or imagery here; each item opens the original source.":
+        "Explore selected news coverage, conference lectures, professional roles, authored patient-education pieces and peer-reviewed academic work. Each item links to its original source.",
     "The clinic does not reproduce publisher articles or imagery here; each item opens the original source.":
         "Each item links directly to the original publisher, journal or professional body.",
+    "Selected independently published coverage with direct links to the original publisher.":
+        "Selected coverage of lectures, conference leadership and professional milestones.",
+    "Professional records are linked to the organisation that publishes them.":
+        "Selected professional roles and credentials with direct links to the publishing organisation.",
+    "A selected indexed publication with the original journal record.":
+        "Selected peer-reviewed work with a direct link to the indexed publication.",
+    "Media and professional records add context; clinical suitability still depends on an individual consultation.":
+        "Explore the clinical profile or book a consultation for individual assessment and treatment planning.",
     "Clinical depth without a wall of cards.":
         "Clinical areas, clearly organised.",
     "The same breadth from the original profile is here, but organised as a direct, editorial directory.":
@@ -48,8 +60,6 @@ REPLACEMENTS = {
         "Homepage",
     "Doctor concept":
         "Doctor profile",
-    "The original treatment directory is preserved here, but compressed into a filterable editorial interface instead of a long stack of cards.":
-        "Browse treatment families, then filter the directory to find the most relevant guide.",
     "These clinic-supplied images are now stored with this preview instead of being hotlinked. Individual presentation, treatment suitability and results vary.":
         "These photographs help illustrate the range of presentations and treatment contexts seen in dermatology practice. Individual findings, suitability and response vary.",
     "From the existing Aastha media library.":
@@ -90,7 +100,6 @@ def clean_patient_copy(pages: list[Path]) -> int:
             (r"\bclinic-supplied\b", "clinical"),
             (r"\bexisting Aastha website media\b", "Aastha Skin Centre"),
             (r"\bexisting Aastha media library\b", "clinical media"),
-            (r"\bexisting Aastha website media\b", "Aastha Skin Centre"),
             (r"\bfrom the existing Aastha media library\b", "Selected clinical photographs"),
             (r"\bclinic-supplied media\b", "clinical example"),
         )

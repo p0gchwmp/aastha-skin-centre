@@ -51,6 +51,7 @@ CSS_FILES = [
     "editorial-experience-v46-nav-state.css",
     "editorial-experience-v47-media-authority.css",
     "editorial-experience-v48-visibility.css",
+    "editorial-experience-v49-polish.css",
 ]
 
 JS_FILES = [
@@ -95,6 +96,7 @@ JS_FILES = [
     "editorial-experience-v43-a11y.js",
     "editorial-experience-v45-micro-motion.js",
     "editorial-experience-v46-nav-state.js",
+    "editorial-experience-v49-polish.js",
 ]
 
 

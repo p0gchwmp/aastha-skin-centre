@@ -1,0 +1,191 @@
+/* Aastha Editorial Experience v49 — public polish pass.
+ * Final presentation layer: remove design-lab residue, reduce mobile chrome,
+ * keep page navigation scannable and make the authority hub image-led.
+ */
+
+/* Preview design controls must never sit over patient-facing pages. */
+body.concept-page :is(.v11-palette-lab,.v12-theme-lab,.v12-mode-badge,[data-theme-lab],[data-palette-lab]){
+  display:none!important;
+}
+
+/* Media / professional activity: a composed image-led hero using Aastha-owned imagery. */
+body.concept-page .v47-media-hero{
+  min-height:min(780px,86svh)!important;
+  align-items:center!important;
+  padding:132px 0 72px!important;
+  isolation:isolate;
+}
+body.concept-page .v47-media-hero::after{display:none!important}
+body.concept-page .v47-media-hero::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  right:max(24px,4vw);
+  top:118px;
+  bottom:54px;
+  width:min(38vw,560px);
+  border:1px solid var(--line-strong);
+  background:
+    linear-gradient(180deg,rgba(18,14,16,.02),rgba(18,14,16,.16)),
+    url('/assets/images/visual-cues/medical-experience.jpg') center/cover no-repeat;
+  box-shadow:0 28px 70px rgba(25,17,20,.10);
+}
+body.concept-page .v47-media-hero .concept-shell{
+  position:relative;
+  z-index:2;
+  padding-right:min(44vw,630px);
+}
+body.concept-page .v47-media-hero .hero-title{max-width:8.8ch!important}
+body.concept-page .v47-media-hero .hero-copy{max-width:56ch!important}
+body.concept-page .v47-authority-grid article{
+  min-height:250px!important;
+  display:flex;
+  flex-direction:column;
+}
+body.concept-page .v47-authority-grid article a{margin-top:auto;padding-top:20px}
+body.concept-page .v47-media-list article{align-items:start}
+body.concept-page .v47-media-list h2{max-width:18ch!important}
+
+/* Bottom actions stay useful without covering the page. */
+body.concept-page .v3-quickbar{
+  transition:opacity .18s ease,translate .18s ease,visibility .18s ease;
+  box-shadow:0 12px 34px rgba(12,9,10,.16);
+}
+body.concept-page .v3-quickbar.is-v49-hidden{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  translate:-50% 10px!important;
+}
+
+@media(max-width:900px){
+  /* Header: preserve brand + search + booking without consuming the viewport. */
+  body.concept-page .concept-nav .concept-shell{
+    width:calc(100% - 24px)!important;
+    min-height:64px!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    gap:10px!important;
+  }
+  body.concept-page .brand-mark{
+    min-width:0;
+    font-size:.72rem!important;
+    line-height:1.05;
+    letter-spacing:.105em!important;
+    overflow:hidden;
+  }
+  body.concept-page .brand-mark span{
+    margin-top:5px;
+    font-size:.96rem!important;
+    line-height:1!important;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  body.concept-page .v41-header-actions{gap:6px!important;min-width:0}
+  body.concept-page .v41-mobile-explore{
+    width:40px!important;
+    height:40px!important;
+    flex-basis:40px!important;
+    background:color-mix(in srgb,var(--theme-paper) 92%,white 8%)!important;
+  }
+  body.concept-page .v41-header-actions .nav-cta{
+    min-height:40px!important;
+    padding:0 12px!important;
+    font-size:.6rem!important;
+    line-height:1!important;
+    letter-spacing:.045em!important;
+  }
+
+  /* The on-page map becomes a compact horizontal rail rather than a second header. */
+  body.concept-page .v7-page-map{top:64px!important;box-shadow:0 7px 18px rgba(20,14,17,.045)!important}
+  body.concept-page .v7-page-map>.concept-shell{
+    width:100%!important;
+    max-width:none!important;
+    min-height:50px!important;
+    display:flex!important;
+    align-items:stretch!important;
+    gap:0!important;
+    padding:0 12px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    scroll-snap-type:x proximity;
+    scrollbar-width:none;
+  }
+  body.concept-page .v7-page-map>.concept-shell::-webkit-scrollbar{display:none}
+  body.concept-page .v7-page-map>.concept-shell>span{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    padding:0 13px 0 2px!important;
+    font-size:.52rem!important;
+    letter-spacing:.105em!important;
+  }
+  body.concept-page .v7-page-map a{
+    flex:0 0 auto;
+    display:flex!important;
+    align-items:center!important;
+    min-height:50px!important;
+    padding:0 13px!important;
+    font-size:.59rem!important;
+    letter-spacing:.035em!important;
+    white-space:nowrap!important;
+    scroll-snap-align:start;
+  }
+  body.concept-page .v7-page-map a::after{left:12px!important;right:12px!important;bottom:6px!important}
+
+  body.concept-page .v3-quickbar{
+    width:min(calc(100% - 20px),540px)!important;
+    bottom:max(8px,env(safe-area-inset-bottom))!important;
+    border-color:rgba(255,255,255,.16)!important;
+  }
+  body.concept-page .v3-quickbar a{
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 8px!important;
+    font-size:.58rem!important;
+    letter-spacing:.075em!important;
+  }
+  body.concept-page .concept-footer{
+    padding-bottom:calc(96px + env(safe-area-inset-bottom))!important;
+  }
+
+  /* Media hero keeps a real image on mobile without sacrificing legibility. */
+  body.concept-page .v47-media-hero{
+    min-height:auto!important;
+    padding:108px 0 320px!important;
+    align-items:flex-start!important;
+  }
+  body.concept-page .v47-media-hero .concept-shell{padding-right:0!important}
+  body.concept-page .v47-media-hero::before{
+    top:auto;
+    left:15px;
+    right:15px;
+    bottom:36px;
+    width:auto;
+    height:240px;
+    background-position:center 36%;
+  }
+  body.concept-page .v47-media-hero .hero-title{
+    max-width:10ch!important;
+    font-size:clamp(3.2rem,14vw,5.4rem)!important;
+  }
+  body.concept-page .v47-media-list article{grid-template-columns:1fr!important;gap:16px!important;padding:30px 0!important}
+  body.concept-page .v47-media-list h2{font-size:clamp(2rem,9vw,3.2rem)!important;max-width:18ch!important}
+  body.concept-page .v47-authority-grid article{min-height:0!important;padding:26px 22px!important}
+}
+
+@media(max-width:520px){
+  body.concept-page .concept-nav .concept-shell{width:calc(100% - 20px)!important;gap:7px!important}
+  body.concept-page .brand-mark{font-size:.67rem!important}
+  body.concept-page .brand-mark span{font-size:.88rem!important}
+  body.concept-page .v41-mobile-explore{width:38px!important;height:38px!important;flex-basis:38px!important}
+  body.concept-page .v41-header-actions .nav-cta{min-height:38px!important;padding-inline:11px!important}
+  body.concept-page .v47-media-hero{padding-bottom:292px!important}
+  body.concept-page .v47-media-hero::before{height:215px;bottom:32px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  body.concept-page .v3-quickbar{transition:none!important}
+}
