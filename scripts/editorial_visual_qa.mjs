@@ -46,7 +46,24 @@ async function settle(page) {
       await document.fonts?.ready;
     } catch {}
   });
-  await page.waitForTimeout(650);
+  await page.waitForTimeout(350);
+
+  // Full-page screenshots do not naturally intersect every below-fold reveal.
+  // Sweep the real scroll position once so QA captures the page a visitor actually sees while reading.
+  await page.evaluate(async () => {
+    const root = document.documentElement;
+    const max = Math.max(0, root.scrollHeight - innerHeight);
+    const step = Math.max(600, Math.floor(innerHeight * 0.85));
+    for (let y = 0; y <= max; y += step) {
+      scrollTo(0, Math.min(y, max));
+      await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    }
+    scrollTo(0, max);
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    scrollTo(0, 0);
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  });
+  await page.waitForTimeout(180);
 }
 
 async function inspectRoute(viewport, route) {
@@ -141,6 +158,17 @@ async function inspectRoute(viewport, route) {
     );
   }
 
+  const compactViolation = (v) => ({
+    id: v.id,
+    impact: v.impact,
+    help: v.help,
+    nodes: v.nodes.map((node) => ({
+      target: node.target,
+      html: node.html?.slice(0, 500) || "",
+      failureSummary: node.failureSummary || "",
+    })),
+  });
+
   summary.routes.push({
     viewport: viewport.name,
     route: route.path,
@@ -148,17 +176,8 @@ async function inspectRoute(viewport, route) {
     httpStatus,
     metrics,
     axe: {
-      seriousOrCritical: severe.map((v) => ({
-        id: v.id,
-        impact: v.impact,
-        help: v.help,
-        nodes: v.nodes.length,
-      })),
-      moderate: moderate.map((v) => ({
-        id: v.id,
-        help: v.help,
-        nodes: v.nodes.length,
-      })),
+      seriousOrCritical: severe.map(compactViolation),
+      moderate: moderate.map(compactViolation),
     },
     screenshot: screenshotPath,
   });

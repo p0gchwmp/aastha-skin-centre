@@ -1,15 +1,51 @@
 /* Aastha Editorial Experience v50 — launch QA accessibility + resilient visibility */
 
 /* Content must never depend on JavaScript to become readable. Motion is progressive enhancement. */
-body.concept-page [data-reveal]{opacity:1!important;transform:none!important}
+body.concept-page [data-reveal]{opacity:1!important;transform:none!important;visibility:visible!important}
 
-/* Light-surface navigation needs real text contrast, not decorative grey. */
-body.concept-page .process-nav button:not(.is-active):not([aria-selected="true"]){
-  color:#4a4143!important;
+/* Figure elements carry browser margins unless reset explicitly; those margins caused the 390px hero overflow. */
+body.concept-page figure.hero-art{
+  margin:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+body.concept-page figure.hero-art>img{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+/* The approved public portrait is intrinsically 596×900. Reserve that exact shape before the image arrives. */
+body.concept-page figure.hero-art:has(>img[src*="DSC_5241"]){
+  aspect-ratio:596/900!important;
+  min-height:0!important;
+}
+body.concept-page figure.hero-art>img[src*="DSC_5241"]{
+  aspect-ratio:596/900!important;
+  height:100%!important;
+  min-height:0!important;
+  object-fit:cover!important;
+}
+
+/* Light-surface process navigation needs real contrast. The inherited opacity was the actual failure. */
+body.concept-page .process-nav button{
+  opacity:1!important;
+  color:#332c2e!important;
 }
 body.concept-page .process-nav button.is-active,
 body.concept-page .process-nav button[aria-selected="true"]{
+  opacity:1!important;
   color:#fff!important;
+  background:#611b34!important;
+}
+
+/* Small clinical labels stay intentionally subtle through size/weight, never through low opacity. */
+body.concept-page.treatment-page .editorial-section :is(.section-no,.eyeline,.kicker,small),
+body.concept-page .v6-compass :is(small,strong){
+  opacity:1!important;
 }
 
 /* Preserve the small visual side-index dots while making the actual hit targets accessible. */
@@ -47,17 +83,18 @@ body.concept-page .v6-compass-stage{
 }
 body.concept-page .v6-compass-head p,
 body.concept-page .v6-compass-stage p{
-  color:#4a4143!important;
+  color:#3f3738!important;
 }
 body.concept-page .v6-compass-head>div:first-child{
   color:#fff!important;
   background:#2c1a24!important;
 }
 body.concept-page .v6-compass-head>div:first-child small{
-  color:#f4e9e1!important;
+  color:#fff!important;
   opacity:1!important;
 }
 body.concept-page .v6-compass-nav button{
+  opacity:1!important;
   color:#171313!important;
   background:#f4efe6!important;
 }
@@ -74,7 +111,8 @@ body.concept-page .v6-compass-stage .v6-compass-tag{
 
 /* Journal category labels were too pale on cream cards at mobile sizes. */
 body.concept-page .v18-journal-card:not(:first-child) small{
-  color:#6b4b2e!important;
+  color:#5b3d25!important;
+  opacity:1!important;
 }
 
 /* Generic readable ink on known light cards that accumulated conflicting theme inheritance. */
@@ -85,8 +123,9 @@ body.concept-page .v30-treatment-tile:not(.dark):not(.wine){color:#171313}
 body.concept-page .editorial-panel:not(.dark):not(.wine) p,
 body.concept-page .pattern-stage p,
 body.concept-page .v30-card:not(.dark):not(.wine) p,
-body.concept-page .v30-treatment-tile:not(.dark):not(.wine) p{color:#4a4143}
+body.concept-page .v30-treatment-tile:not(.dark):not(.wine) p{color:#3f3738}
 
 @media(max-width:900px){
   body.concept-page .v3-side-index{display:none!important}
+  body.concept-page figure.hero-art{margin-inline:0!important}
 }

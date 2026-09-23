@@ -7,32 +7,77 @@
     else fn();
   };
 
+  const wireTabSet = (list, panel, prefix, orientation = 'vertical') => {
+    if (!list || !panel) return;
+    const buttons = [...list.querySelectorAll('button[aria-selected]')];
+    if (!buttons.length) return;
+
+    const setIndex = [...document.querySelectorAll('[role="tablist"]')].indexOf(list) + 1;
+    const panelId = panel.id || `${prefix}-panel-${Math.max(1, setIndex)}`;
+    panel.id = panelId;
+    list.setAttribute('role', 'tablist');
+    list.setAttribute('aria-orientation', orientation);
+    panel.setAttribute('role', 'tabpanel');
+
+    const sync = (active) => {
+      buttons.forEach((button) => {
+        const selected = button === active;
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+      });
+      if (active?.id) panel.setAttribute('aria-labelledby', active.id);
+    };
+
+    buttons.forEach((button, buttonIndex) => {
+      const buttonId = button.id || `${prefix}-tab-${Math.max(1, setIndex)}-${buttonIndex + 1}`;
+      button.id = buttonId;
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-controls', panelId);
+      if (button.getAttribute('aria-selected') === 'true') sync(button);
+      button.addEventListener('click', () => sync(button));
+      button.addEventListener('keydown', (event) => {
+        const keys = orientation === 'vertical' ? ['ArrowUp', 'ArrowDown'] : ['ArrowLeft', 'ArrowRight'];
+        if (!keys.includes(event.key) && event.key !== 'Home' && event.key !== 'End') return;
+        event.preventDefault();
+        const current = buttons.indexOf(button);
+        let next = current;
+        if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = buttons.length - 1;
+        else if (event.key === keys[0]) next = (current - 1 + buttons.length) % buttons.length;
+        else next = (current + 1) % buttons.length;
+        buttons[next].focus();
+        buttons[next].click();
+      });
+    });
+
+    if (!buttons.some((button) => button.getAttribute('aria-selected') === 'true')) sync(buttons[0]);
+  };
+
   ready(() => {
     /* Older atlas controls use aria-selected. Give them the tab semantics that attribute requires. */
     document.querySelectorAll('.v3-atlas').forEach((atlas, index) => {
       const list = atlas.querySelector('.v3-atlas-nav');
       const panel = atlas.querySelector('.v3-atlas-stage');
-      const buttons = [...(list?.querySelectorAll('button') || [])];
-      if (!list || !panel || !buttons.length) return;
+      wireTabSet(list, panel, `v50-atlas-${index + 1}`, 'vertical');
+    });
 
-      const panelId = panel.id || `v50-atlas-panel-${index + 1}`;
-      panel.id = panelId;
+    /* Clinical compass was the remaining four-node aria-allowed-attr failure on treatment pages. */
+    document.querySelectorAll('.v6-compass').forEach((compass, index) => {
+      const list = compass.querySelector('.v6-compass-nav');
+      const panel = compass.querySelector('.v6-compass-stage');
+      wireTabSet(list, panel, `v50-compass-${index + 1}`, matchMedia('(max-width:900px)').matches ? 'horizontal' : 'vertical');
+    });
+
+    /* Last-resort normalization for legacy button groups that use aria-selected without tab semantics. */
+    document.querySelectorAll('button[aria-selected]:not([role])').forEach((button, index) => {
+      const list = button.parentElement;
+      const siblings = list ? [...list.querySelectorAll(':scope > button[aria-selected]')] : [];
+      if (!list || siblings.length < 2) return;
       list.setAttribute('role', 'tablist');
-      list.setAttribute('aria-orientation', 'vertical');
-      panel.setAttribute('role', 'tabpanel');
-
-      buttons.forEach((button, buttonIndex) => {
-        const buttonId = button.id || `v50-atlas-tab-${index + 1}-${buttonIndex + 1}`;
-        button.id = buttonId;
-        button.setAttribute('role', 'tab');
-        button.setAttribute('aria-controls', panelId);
-        const selected = button.getAttribute('aria-selected') === 'true';
-        button.tabIndex = selected ? 0 : -1;
-        if (selected) panel.setAttribute('aria-labelledby', buttonId);
-        button.addEventListener('click', () => {
-          buttons.forEach((item) => { item.tabIndex = item === button ? 0 : -1; });
-          panel.setAttribute('aria-labelledby', buttonId);
-        });
+      siblings.forEach((item, itemIndex) => {
+        item.setAttribute('role', 'tab');
+        item.tabIndex = item.getAttribute('aria-selected') === 'true' ? 0 : -1;
+        if (!item.id) item.id = `v50-legacy-tab-${index + 1}-${itemIndex + 1}`;
       });
     });
 
