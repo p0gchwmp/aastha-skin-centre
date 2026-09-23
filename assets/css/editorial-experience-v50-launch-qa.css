@@ -1,234 +1,94 @@
 /* Aastha Editorial Experience v50 — launch QA accessibility + resilient visibility */
 
-/* Content must never depend on JavaScript to become readable. Motion is progressive enhancement. */
 body.concept-page [data-reveal]{opacity:1!important;transform:none!important;visibility:visible!important}
 
-/* Figure elements carry browser margins unless reset explicitly; those margins caused the 390px hero overflow. */
-body.concept-page figure.hero-art{
-  margin:0!important;
-  width:100%!important;
-  max-width:100%!important;
-  min-width:0!important;
-}
-body.concept-page figure.hero-art>img{
-  display:block!important;
-  width:100%!important;
-  max-width:100%!important;
-  min-width:0!important;
-  box-sizing:border-box!important;
-}
-
-/* Reserve a stable portrait shape. Do not stretch the approved portrait to a grid row height. */
+body.concept-page figure.hero-art{margin:0!important;width:100%!important;max-width:100%!important;min-width:0!important}
+body.concept-page figure.hero-art>img{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important}
 body.concept-page figure.hero-art>img[src*="DSC_5241"],
 body.concept-page figure.hero-art>img[data-existing-aastha-media="true"][src*="DSC_5241"]{
-  aspect-ratio:596/900!important;
-  width:100%!important;
-  height:auto!important;
-  min-height:0!important;
-  padding:0!important;
-  object-fit:cover!important;
+  aspect-ratio:596/900!important;width:100%!important;height:auto!important;min-height:0!important;padding:0!important;object-fit:cover!important
 }
 
-/* Light-surface process navigation needs real contrast. */
-body.concept-page .process-stage,
-body.concept-page .process-nav,
-body.concept-page .process-content{opacity:1!important}
+body.concept-page .process-stage,body.concept-page .process-nav,body.concept-page .process-content{opacity:1!important}
 
-/* Homepage consultation process: light editorial treatment. Route-specific selectors deliberately beat legacy layers. */
-html body.concept-page #approach .process-stage .process-nav>button[data-process-target]{
-  opacity:1!important;
-  color:#332c2e!important;
-  background:#f0e9df!important;
-}
+/* Homepage consultation process: deterministic light treatment. */
+html body.concept-page #approach .process-stage .process-nav>button[data-process-target]{opacity:1!important;color:#332c2e!important;background:#f0e9df!important}
 html body.concept-page #approach .process-stage .process-nav>button[data-process-target].is-active,
-html body.concept-page #approach .process-stage .process-nav>button[data-process-target][aria-selected="true"]{
-  opacity:1!important;
-  color:#fff!important;
-  background:#611b34!important;
-}
+html body.concept-page #approach .process-stage .process-nav>button[data-process-target][aria-selected="true"]{opacity:1!important;color:#fff!important;background:#611b34!important}
 html body.concept-page #approach .process-content,
-html body.concept-page #approach .process-chapter{
-  color:#171313!important;
-  background:#f6f1e9!important;
-}
+html body.concept-page #approach .process-chapter{color:#171313!important;background:#f6f1e9!important}
 html body.concept-page #approach .process-chapter>h3,
 html body.concept-page #approach .process-chapter>p,
-html body.concept-page #approach .process-chapter>.kicker{
-  color:#332c2e!important;
-  opacity:1!important;
-}
+html body.concept-page #approach .process-chapter>.kicker{color:#332c2e!important;opacity:1!important}
 
-/* Treatment route theatre is intentionally dark. Never combine its white type with a light chapter background. */
-html body.concept-page.treatment-page .v8-route-theatre{
-  color:#fff!important;
-  background:#110d10!important;
-}
-html body.concept-page.treatment-page .v8-route-theatre .process-nav{
-  opacity:1!important;
-  background:#151014!important;
-}
-html body.concept-page.treatment-page .v8-route-theatre .process-nav>button[data-process-target]{
-  opacity:1!important;
-  color:#d8d0c5!important;
-  background:transparent!important;
-}
+/* Treatment route theatre is intentionally dark. */
+html body.concept-page.treatment-page .v8-route-theatre{color:#fff!important;background:#110d10!important}
+html body.concept-page.treatment-page .v8-route-theatre .process-nav{opacity:1!important;background:#151014!important}
+html body.concept-page.treatment-page .v8-route-theatre .process-nav>button[data-process-target]{opacity:1!important;color:#d8d0c5!important;background:transparent!important}
 html body.concept-page.treatment-page .v8-route-theatre .process-nav>button[data-process-target].is-active,
-html body.concept-page.treatment-page .v8-route-theatre .process-nav>button[data-process-target][aria-selected="true"]{
-  opacity:1!important;
-  color:#fff!important;
-  background:linear-gradient(90deg,rgba(106,28,56,.42),transparent)!important;
-}
-html body.concept-page.treatment-page .v8-route-theatre .process-content{
-  color:#fff!important;
-  background:radial-gradient(circle at 80% 20%,rgba(106,28,56,.22),transparent 32%),#110d10!important;
-}
-html body.concept-page.treatment-page .v8-route-theatre .process-chapter,
-html body.concept-page.treatment-page .v8-route-theatre .process-chapter[id^="acne-"]{
-  color:#fff!important;
-  background:transparent!important;
-}
+html body.concept-page.treatment-page .v8-route-theatre .process-nav>button[data-process-target][aria-selected="true"]{opacity:1!important;color:#fff!important;background:linear-gradient(90deg,rgba(106,28,56,.42),transparent)!important}
+html body.concept-page.treatment-page .v8-route-theatre .process-content{color:#fff!important;background:radial-gradient(circle at 80% 20%,rgba(106,28,56,.22),transparent 32%),#110d10!important}
+html body.concept-page.treatment-page .v8-route-theatre .process-chapter{color:#fff!important;background:transparent!important}
 html body.concept-page.treatment-page .v8-route-theatre .process-chapter>h2,
 html body.concept-page.treatment-page .v8-route-theatre .process-chapter>h3,
-html body.concept-page.treatment-page .v8-route-theatre .process-chapter>h4{
-  color:#fff!important;
-}
-html body.concept-page.treatment-page .v8-route-theatre .process-chapter>p{
-  color:#d8d0c5!important;
-}
+html body.concept-page.treatment-page .v8-route-theatre .process-chapter>h4{color:#fff!important}
+html body.concept-page.treatment-page .v8-route-theatre .process-chapter>p{color:#d8d0c5!important}
 html body.concept-page.treatment-page .v8-route-theatre .process-chapter>.kicker,
-html body.concept-page.treatment-page .v8-route-theatre .process-chapter>small{
-  color:#d8b895!important;
-  opacity:1!important;
-}
+html body.concept-page.treatment-page .v8-route-theatre .process-chapter>small{color:#d8b895!important;opacity:1!important}
 
-/* Small clinical labels stay intentionally subtle through size/weight, never through low opacity. */
-body.concept-page.treatment-page .editorial-section :is(.section-no,.eyeline,.kicker,small),
-body.concept-page .v6-compass :is(small,strong){opacity:1!important}
+/* Acne chapters must never inherit a light panel behind theatre typography. */
+html body.concept-page.treatment-page article.process-chapter[id^="acne-"]{background:#110d10!important;color:#fff!important}
+html body.concept-page.treatment-page article.process-chapter[id^="acne-"]>h2,
+html body.concept-page.treatment-page article.process-chapter[id^="acne-"]>h3,
+html body.concept-page.treatment-page article.process-chapter[id^="acne-"]>h4{color:#fff!important}
+html body.concept-page.treatment-page article.process-chapter[id^="acne-"]>p{color:#d8d0c5!important}
+html body.concept-page.treatment-page article.process-chapter[id^="acne-"]>.kicker{color:#d8b895!important;opacity:1!important}
 
-/* Drag-card labels: readable on both cream and dark alternating cards. */
-body.concept-page .drag-card:nth-child(odd)>.num,
-body.concept-page .drag-card:nth-child(odd) .num{
-  color:#68491f!important;
-  opacity:1!important;
-}
-body.concept-page .drag-card:nth-child(even)>.num,
-body.concept-page .drag-card:nth-child(even) .num{
-  color:#f4efe6!important;
-  opacity:1!important;
-}
+body.concept-page.treatment-page .editorial-section :is(.section-no,.eyeline,.kicker,small),body.concept-page .v6-compass :is(small,strong){opacity:1!important}
 
-/* Preserve the small visual side-index dots while making the actual hit targets accessible. */
+/* Rail labels: home keeps intentional alternating cards; doctor/treatment rails are light. */
+body.concept-page:not(.profile-page):not(.treatment-page) .drag-card:nth-child(odd)>.num,
+body.concept-page:not(.profile-page):not(.treatment-page) .drag-card:nth-child(odd) .num{color:#68491f!important;opacity:1!important}
+body.concept-page:not(.profile-page):not(.treatment-page) .drag-card:nth-child(even)>.num,
+body.concept-page:not(.profile-page):not(.treatment-page) .drag-card:nth-child(even) .num{color:#f4efe6!important;opacity:1!important}
+body.concept-page.profile-page .drag-card>.num,
+body.concept-page.profile-page .drag-card .num,
+body.concept-page.treatment-page .drag-card>.num,
+body.concept-page.treatment-page .drag-card .num{color:#68491f!important;opacity:1!important}
+
 body.concept-page .v3-side-index{gap:0!important}
-body.concept-page .v3-side-index a{
-  width:28px!important;
-  height:28px!important;
-  border:0!important;
-  background:transparent!important;
-  display:grid!important;
-  place-items:center!important;
-  transform:none!important;
-}
-body.concept-page .v3-side-index a::after{
-  content:"";
-  width:8px;
-  height:8px;
-  border:1px solid var(--theme-ink,var(--ink,#171313));
-  background:transparent;
-  box-sizing:border-box;
-}
-body.concept-page .v3-side-index a.is-active::after{
-  background:var(--theme-accent,var(--wine,#611b34));
-  border-color:var(--theme-accent,var(--wine,#611b34));
-}
+body.concept-page .v3-side-index a{width:28px!important;height:28px!important;border:0!important;background:transparent!important;display:grid!important;place-items:center!important;transform:none!important}
+body.concept-page .v3-side-index a::after{content:"";width:8px;height:8px;border:1px solid var(--theme-ink,var(--ink,#171313));background:transparent;box-sizing:border-box}
+body.concept-page .v3-side-index a.is-active::after{background:var(--theme-accent,var(--wine,#611b34));border-color:var(--theme-accent,var(--wine,#611b34))}
 body.concept-page .v3-side-index a::before{right:30px!important}
 
-/* Clinical compass: deterministic light/dark contrast regardless of inherited theme variables. */
 body.concept-page .v6-compass,
 body.concept-page .v6-compass-head>div:not(:first-child),
 body.concept-page .v6-compass-body,
-body.concept-page .v6-compass-stage{
-  color:#171313!important;
-  background:#f4efe6!important;
-}
-body.concept-page .v6-compass-head p,
-body.concept-page .v6-compass-stage p{color:#3f3738!important}
-body.concept-page .v6-compass-head>div:first-child{
-  color:#fff!important;
-  background:#2c1a24!important;
-}
-body.concept-page .v6-compass-head>div:first-child small{
-  color:#fff!important;
-  opacity:1!important;
-}
-body.concept-page .v6-compass-nav button{
-  opacity:1!important;
-  color:#171313!important;
-  background:#f4efe6!important;
-}
-body.concept-page .v6-compass-nav button[aria-selected="true"]{
-  color:#fff!important;
-  background:#611b34!important;
-}
-body.concept-page .v6-compass-nav button[aria-selected="true"] small,
-body.concept-page .v6-compass-nav button[aria-selected="true"] strong{color:#fff!important}
-body.concept-page .v6-compass-stage .v6-compass-tag{
-  color:#2f292a!important;
-  background:#e3e8e1!important;
-}
+body.concept-page .v6-compass-stage{color:#171313!important;background:#f4efe6!important}
+body.concept-page .v6-compass-head p,body.concept-page .v6-compass-stage p{color:#3f3738!important}
+body.concept-page .v6-compass-head>div:first-child{color:#fff!important;background:#2c1a24!important}
+body.concept-page .v6-compass-head>div:first-child small{color:#fff!important;opacity:1!important}
+body.concept-page .v6-compass-nav button{opacity:1!important;color:#171313!important;background:#f4efe6!important}
+body.concept-page .v6-compass-nav button[aria-selected="true"]{color:#fff!important;background:#611b34!important}
+body.concept-page .v6-compass-nav button[aria-selected="true"] small,body.concept-page .v6-compass-nav button[aria-selected="true"] strong{color:#fff!important}
+body.concept-page .v6-compass-stage .v6-compass-tag{color:#2f292a!important;background:#e3e8e1!important}
 
-/* Journal category labels were too pale on cream cards at mobile sizes. */
-body.concept-page .v18-journal-card:not(:first-child) small{
-  color:#5b3d25!important;
-  opacity:1!important;
-}
+body.concept-page .v18-journal-card:not(:first-child) small{color:#5b3d25!important;opacity:1!important}
 
-/* Generic readable ink on known light cards that accumulated conflicting theme inheritance. */
-body.concept-page .editorial-panel:not(.dark):not(.wine),
-body.concept-page .pattern-stage,
-body.concept-page .v30-card:not(.dark):not(.wine),
-body.concept-page .v30-treatment-tile:not(.dark):not(.wine){color:#171313}
-body.concept-page .editorial-panel:not(.dark):not(.wine) p,
-body.concept-page .pattern-stage p,
-body.concept-page .v30-card:not(.dark):not(.wine) p,
-body.concept-page .v30-treatment-tile:not(.dark):not(.wine) p{color:#3f3738}
+body.concept-page .editorial-panel:not(.dark):not(.wine),body.concept-page .pattern-stage,body.concept-page .v30-card:not(.dark):not(.wine),body.concept-page .v30-treatment-tile:not(.dark):not(.wine){color:#171313}
+body.concept-page .editorial-panel:not(.dark):not(.wine) p,body.concept-page .pattern-stage p,body.concept-page .v30-card:not(.dark):not(.wine) p,body.concept-page .v30-treatment-tile:not(.dark):not(.wine) p{color:#3f3738}
 
 @media(max-width:900px){
   html{max-width:100%!important;overflow-x:clip!important}
   body.concept-page{width:100%!important;max-width:100%!important;overflow-x:clip!important}
   body.concept-page .v3-side-index{display:none!important}
   body.concept-page figure.hero-art{margin-inline:0!important}
-
-  /* Legacy treatment directory accumulated desktop widths in later layers. */
-  body.concept-page .v3-search-shell,
-  body.concept-page .v3-filter-panel,
-  body.concept-page .v3-filter-buttons,
-  body.concept-page .v3-directory{
-    width:100%!important;
-    max-width:100%!important;
-    min-width:0!important;
-    box-sizing:border-box!important;
-  }
-  body.concept-page .v3-search-shell{
-    grid-template-columns:minmax(0,1fr)!important;
-    overflow:hidden!important;
-  }
+  body.concept-page .v3-search-shell,body.concept-page .v3-filter-panel,body.concept-page .v3-filter-buttons,body.concept-page .v3-directory{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important}
+  body.concept-page .v3-search-shell{grid-template-columns:minmax(0,1fr)!important;overflow:hidden!important}
   body.concept-page .v3-filter-panel{overflow:hidden!important}
-  body.concept-page .v3-filter-buttons{
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  }
-  body.concept-page .v3-filter-panel h3,
-  body.concept-page .v3-filter-buttons button{
-    min-width:0!important;
-    max-width:100%!important;
-    overflow-wrap:anywhere;
-  }
-  /* Horizontal rails may scroll internally, never widen the document root. */
-  body.concept-page :is(.v3-marquee,.v3-marquee-shell,.v3-filter-buttons,.process-nav,.drag-rail){
-    max-width:100%!important;
-  }
+  body.concept-page .v3-filter-buttons{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.concept-page .v3-filter-panel h3,body.concept-page .v3-filter-buttons button{min-width:0!important;max-width:100%!important;overflow-wrap:anywhere}
+  body.concept-page :is(.v3-marquee,.v3-marquee-shell,.v3-filter-buttons,.process-nav,.drag-rail){max-width:100%!important}
 }
-
-@media(max-width:430px){
-  body.concept-page .v3-filter-panel{padding:18px!important}
-  body.concept-page .v3-filter-buttons button{padding:12px 10px!important}
-}
+@media(max-width:430px){body.concept-page .v3-filter-panel{padding:18px!important}body.concept-page .v3-filter-buttons button{padding:12px 10px!important}}

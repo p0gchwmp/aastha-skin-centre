@@ -28,6 +28,13 @@ RESULT_COUNTS = {
     "psoriasis-treatment":1, "q-switched-laser-toning":4, "wart-mole-skin-tag-removal":1,
 }
 
+RUNTIME_PUBLIC_CLASSES = (
+    "v8-dark-system",
+    "v11-copy-polish",
+    "v18-unified",
+    "v49-public-polish",
+)
+
 
 def cue_for(slug: str) -> str:
     s=slug.lower()
@@ -44,6 +51,26 @@ def cue_for(slug: str) -> str:
 
 def cue_url(cue: str) -> str:
     return f"/assets/images/visual-cues/{cue}.jpg"
+
+
+def prime_runtime_classes(raw: str) -> str:
+    """Apply deterministic runtime classes before first paint to prevent CLS.
+
+    The related enhancement scripts still run and remain idempotent; priming the
+    classes simply prevents deferred JS from changing the layout after paint.
+    """
+    pattern = re.compile(r'<body\s+class="([^"]*\bconcept-page\b[^"]*)"', re.I)
+
+    def repl(match: re.Match[str]) -> str:
+        classes = match.group(1).split()
+        for name in RUNTIME_PUBLIC_CLASSES:
+            if name not in classes:
+                classes.append(name)
+        if "treatment-page" in classes and "v7-unified-treatment" not in classes:
+            classes.append("v7-unified-treatment")
+        return '<body class="' + " ".join(classes) + '"'
+
+    return pattern.sub(repl, raw, count=1)
 
 
 def replace_hero(raw: str, slug: str) -> str:
@@ -93,7 +120,8 @@ def upgrade_media(dist: Path, concept_pages: list[Path]) -> int:
         rel=page.parent.relative_to(concept_root).as_posix()
         slug="" if rel in (".","") else rel.split("/")[-1]
         raw=page.read_text(encoding="utf-8")
-        updated=replace_hero(raw,slug)
+        updated=prime_runtime_classes(raw)
+        updated=replace_hero(updated,slug)
         if slug in RESULT_COUNTS and 'data-existing-aastha-results' not in updated:
             updated=updated.replace('</main>',results_section(slug,RESULT_COUNTS[slug])+'</main>',1)
         if updated!=raw:
