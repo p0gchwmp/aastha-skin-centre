@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 from pathlib import Path
 
 CSS_FILES = [
@@ -52,6 +53,7 @@ CSS_FILES = [
     "editorial-experience-v47-media-authority.css",
     "editorial-experience-v48-visibility.css",
     "editorial-experience-v49-polish.css",
+    "editorial-experience-v50-launch-qa.css",
 ]
 
 JS_FILES = [
@@ -97,7 +99,24 @@ JS_FILES = [
     "editorial-experience-v45-micro-motion.js",
     "editorial-experience-v46-nav-state.js",
     "editorial-experience-v49-polish.js",
+    "editorial-experience-v50-launch-qa.js",
 ]
+
+EXTERNAL_ENHANCEMENT_PATTERNS = [
+    re.compile(r'<link\s+rel=["\']preconnect["\'][^>]*fonts\.googleapis\.com[^>]*>', re.I),
+    re.compile(r'<link\s+rel=["\']preconnect["\'][^>]*fonts\.gstatic\.com[^>]*>', re.I),
+    re.compile(r'<link\s+href=["\']https://fonts\.googleapis\.com/[^"\']+["\'][^>]*>', re.I),
+    re.compile(r'<link\s+rel=["\']preconnect["\'][^>]*cdn\.jsdelivr\.net[^>]*>', re.I),
+    re.compile(r'<script\s+src=["\']https://cdn\.jsdelivr\.net/npm/motion@[^"\']+["\'][^>]*></script>', re.I),
+]
+
+FAVICON_TAG = (
+    '<link rel="icon" href="data:image/svg+xml,'
+    '%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E'
+    '%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%235e1731%22/%3E'
+    '%3Ctext x=%2232%22 y=%2242%22 text-anchor=%22middle%22 font-size=%2231%22 '
+    'font-family=%22Georgia,serif%22 fill=%22white%22%3EA%3C/text%3E%3C/svg%3E">'
+)
 
 
 def _bundle(folder: Path, filenames: list[str], kind: str) -> tuple[str, Path]:
@@ -116,6 +135,13 @@ def _bundle(folder: Path, filenames: list[str], kind: str) -> tuple[str, Path]:
     return url, target
 
 
+def _strip_external_enhancements(source: str) -> str:
+    updated = source
+    for pattern in EXTERNAL_ENHANCEMENT_PATTERNS:
+        updated = pattern.sub("", updated)
+    return updated
+
+
 def bundle_concept_assets(dist: Path, concept_pages: list[Path]) -> tuple[str, str, int]:
     css_dir = dist / "assets" / "css"
     js_dir = dist / "assets" / "js"
@@ -126,16 +152,18 @@ def bundle_concept_assets(dist: Path, concept_pages: list[Path]) -> tuple[str, s
     js_tags = [f'<script src="/assets/js/{name}" defer></script>' for name in JS_FILES]
     js_tags.append('<script src="/assets/js/editorial-experience-v24.js" defer></script>')
     bundle_css_tag = f'<link rel="stylesheet" href="{css_url}">'
-    bundle_js_tag = f'<script src="{js_url}" defer></script>'
+    bundle_js_tag = f'<script src="{js_url}" defer fetchpriority="low"></script>'
 
     changed = 0
     for page in concept_pages:
         source = page.read_text(encoding="utf-8")
-        updated = source
+        updated = _strip_external_enhancements(source)
         for tag in css_tags:
             updated = updated.replace(tag, "")
         for tag in js_tags:
             updated = updated.replace(tag, "")
+        if FAVICON_TAG not in updated:
+            updated = updated.replace("</head>", f"{FAVICON_TAG}</head>", 1)
         if bundle_css_tag not in updated:
             updated = updated.replace("</head>", f"{bundle_css_tag}</head>", 1)
         if bundle_js_tag not in updated:

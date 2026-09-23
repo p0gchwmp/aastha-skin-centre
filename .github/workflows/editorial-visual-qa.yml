@@ -47,8 +47,10 @@ jobs:
           npx playwright install --with-deps chromium
 
       - name: Start local preview
+        env:
+          PORT: "4173"
         run: |
-          python3 -m http.server 4173 --directory dist > /tmp/aastha-visual-server.log 2>&1 &
+          python3 scripts/serve_concept_preview.py > /tmp/aastha-visual-server.log 2>&1 &
           echo $! > /tmp/aastha-visual-server.pid
           for i in {1..30}; do
             if curl -fsS http://127.0.0.1:4173/ >/dev/null; then

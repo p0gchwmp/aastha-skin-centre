@@ -1,0 +1,92 @@
+/* Aastha Editorial Experience v50 — launch QA accessibility + resilient visibility */
+
+/* Content must never depend on JavaScript to become readable. Motion is progressive enhancement. */
+body.concept-page [data-reveal]{opacity:1!important;transform:none!important}
+
+/* Light-surface navigation needs real text contrast, not decorative grey. */
+body.concept-page .process-nav button:not(.is-active):not([aria-selected="true"]){
+  color:#4a4143!important;
+}
+body.concept-page .process-nav button.is-active,
+body.concept-page .process-nav button[aria-selected="true"]{
+  color:#fff!important;
+}
+
+/* Preserve the small visual side-index dots while making the actual hit targets accessible. */
+body.concept-page .v3-side-index{gap:0!important}
+body.concept-page .v3-side-index a{
+  width:28px!important;
+  height:28px!important;
+  border:0!important;
+  background:transparent!important;
+  display:grid!important;
+  place-items:center!important;
+  transform:none!important;
+}
+body.concept-page .v3-side-index a::after{
+  content:"";
+  width:8px;
+  height:8px;
+  border:1px solid var(--theme-ink,var(--ink,#171313));
+  background:transparent;
+  box-sizing:border-box;
+}
+body.concept-page .v3-side-index a.is-active::after{
+  background:var(--theme-accent,var(--wine,#611b34));
+  border-color:var(--theme-accent,var(--wine,#611b34));
+}
+body.concept-page .v3-side-index a::before{right:30px!important}
+
+/* Clinical compass: deterministic light/dark contrast regardless of inherited theme variables. */
+body.concept-page .v6-compass,
+body.concept-page .v6-compass-head>div:not(:first-child),
+body.concept-page .v6-compass-body,
+body.concept-page .v6-compass-stage{
+  color:#171313!important;
+  background:#f4efe6!important;
+}
+body.concept-page .v6-compass-head p,
+body.concept-page .v6-compass-stage p{
+  color:#4a4143!important;
+}
+body.concept-page .v6-compass-head>div:first-child{
+  color:#fff!important;
+  background:#2c1a24!important;
+}
+body.concept-page .v6-compass-head>div:first-child small{
+  color:#f4e9e1!important;
+  opacity:1!important;
+}
+body.concept-page .v6-compass-nav button{
+  color:#171313!important;
+  background:#f4efe6!important;
+}
+body.concept-page .v6-compass-nav button[aria-selected="true"]{
+  color:#fff!important;
+  background:#611b34!important;
+}
+body.concept-page .v6-compass-nav button[aria-selected="true"] small,
+body.concept-page .v6-compass-nav button[aria-selected="true"] strong{color:#fff!important}
+body.concept-page .v6-compass-stage .v6-compass-tag{
+  color:#2f292a!important;
+  background:#e3e8e1!important;
+}
+
+/* Journal category labels were too pale on cream cards at mobile sizes. */
+body.concept-page .v18-journal-card:not(:first-child) small{
+  color:#6b4b2e!important;
+}
+
+/* Generic readable ink on known light cards that accumulated conflicting theme inheritance. */
+body.concept-page .editorial-panel:not(.dark):not(.wine),
+body.concept-page .pattern-stage,
+body.concept-page .v30-card:not(.dark):not(.wine),
+body.concept-page .v30-treatment-tile:not(.dark):not(.wine){color:#171313}
+body.concept-page .editorial-panel:not(.dark):not(.wine) p,
+body.concept-page .pattern-stage p,
+body.concept-page .v30-card:not(.dark):not(.wine) p,
+body.concept-page .v30-treatment-tile:not(.dark):not(.wine) p{color:#4a4143}
+
+@media(max-width:900px){
+  body.concept-page .v3-side-index{display:none!important}
+}
