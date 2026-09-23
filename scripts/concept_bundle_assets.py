@@ -6,9 +6,8 @@ import hashlib
 import re
 from pathlib import Path
 
-# Keep the legacy experience layers bundled for request efficiency. The final QA
-# layer is intentionally isolated below so a malformed/unfinished legacy block
-# can never swallow launch-critical accessibility and responsive overrides.
+# Keep the legacy experience layers bundled for request efficiency. Final QA
+# layers stay isolated so legacy parser/specificity issues cannot swallow launch-critical overrides.
 CSS_FILES = [
     "editorial-experience-v3.css", "editorial-experience-v3-fixes.css", "editorial-experience-v4.css",
     "editorial-experience-v5.css", "editorial-experience-v6.css", "editorial-experience-v6-fixes.css",
@@ -29,7 +28,10 @@ CSS_FILES = [
     "editorial-experience-v48-visibility.css", "editorial-experience-v49-polish.css",
 ]
 
-FINAL_QA_CSS = "editorial-experience-v50-launch-qa.css"
+FINAL_QA_CSS = [
+    "editorial-experience-v50-launch-qa.css",
+    "editorial-experience-v51-final-gate.css",
+]
 
 JS_FILES = [
     "editorial-experience-v3.js", "editorial-experience-v3-fixes.js", "editorial-experience-v4.js",
@@ -44,11 +46,19 @@ JS_FILES = [
     "editorial-experience-v27-bridge.js", "editorial-experience-v28.js", "editorial-experience-v29.js",
     "editorial-experience-v30.js", "editorial-experience-v31.js", "editorial-experience-v32.js",
     "editorial-experience-v34.js", "editorial-experience-v35.js", "editorial-experience-v36-media.js",
-    "editorial-experience-v36.js", "editorial-experience-v37-motion.js", "editorial-experience-v38-refinement.js",
+    "editorial-experience-v36.js", "editorial-experience-v38-refinement.js",
     "editorial-experience-v39-explore.js", "editorial-experience-v41-interaction.js",
-    "editorial-experience-v43-a11y.js", "editorial-experience-v45-micro-motion.js",
+    "editorial-experience-v43-a11y.js",
     "editorial-experience-v46-nav-state.js", "editorial-experience-v49-polish.js",
     "editorial-experience-v50-launch-qa.js",
+]
+
+# v37-motion and v45-micro-motion are visual-only Motion enhancements. They are
+# intentionally excluded from the initial JS bundle: core interactions work without them,
+# while skipping their parse/listener work improves mobile main-thread time.
+OPTIONAL_MOTION_JS = [
+    "editorial-experience-v37-motion.js",
+    "editorial-experience-v45-micro-motion.js",
 ]
 
 EXTERNAL_ENHANCEMENT_PATTERNS = [
@@ -94,14 +104,14 @@ def _strip_external_enhancements(source: str) -> str:
 def _strip_layered_asset_tags(source: str) -> str:
     """Remove plain/cache-busted layer tags once their content is bundled or re-injected."""
     updated = source
-    for name in [*CSS_FILES, FINAL_QA_CSS]:
+    for name in [*CSS_FILES, *FINAL_QA_CSS]:
         updated = re.sub(
             rf'<link\b[^>]*href=["\']/assets/css/{re.escape(name)}(?:\?[^"\']*)?["\'][^>]*>',
             "",
             updated,
             flags=re.I,
         )
-    for name in [*JS_FILES, "editorial-experience-v24.js"]:
+    for name in [*JS_FILES, *OPTIONAL_MOTION_JS, "editorial-experience-v24.js"]:
         updated = re.sub(
             rf'<script\b[^>]*src=["\']/assets/js/{re.escape(name)}(?:\?[^"\']*)?["\'][^>]*>\s*</script>',
             "",
@@ -117,12 +127,13 @@ def bundle_concept_assets(dist: Path, concept_pages: list[Path]) -> tuple[str, s
     css_url, _ = _bundle(css_dir, CSS_FILES, "css")
     js_url, _ = _bundle(js_dir, JS_FILES, "js")
 
-    final_qa_source = css_dir / FINAL_QA_CSS
-    if not final_qa_source.exists():
-        raise RuntimeError(f"Missing final QA stylesheet: {final_qa_source}")
+    for name in FINAL_QA_CSS:
+        source = css_dir / name
+        if not source.exists():
+            raise RuntimeError(f"Missing final QA stylesheet: {source}")
 
     bundle_css_tag = f'<link rel="stylesheet" href="{css_url}">'
-    final_qa_tag = f'<link rel="stylesheet" href="/assets/css/{FINAL_QA_CSS}">'
+    final_qa_tags = "".join(f'<link rel="stylesheet" href="/assets/css/{name}">' for name in FINAL_QA_CSS)
     bundle_js_tag = f'<script src="{js_url}" defer fetchpriority="low"></script>'
 
     changed = 0
@@ -134,14 +145,15 @@ def bundle_concept_assets(dist: Path, concept_pages: list[Path]) -> tuple[str, s
             updated = updated.replace("</head>", f"{FAVICON_TAG}</head>", 1)
         if bundle_css_tag not in updated:
             updated = updated.replace("</head>", f"{bundle_css_tag}</head>", 1)
-        # Parser boundary is deliberate: launch-critical overrides must be the final stylesheet.
-        if final_qa_tag not in updated:
-            updated = updated.replace("</head>", f"{final_qa_tag}</head>", 1)
+        # Parser boundaries are deliberate: launch-critical overrides load last and separately.
+        if all(f'/assets/css/{name}' not in updated for name in FINAL_QA_CSS):
+            updated = updated.replace("</head>", f"{final_qa_tags}</head>", 1)
         if bundle_js_tag not in updated:
             updated = updated.replace("</body>", f"{bundle_js_tag}</body>", 1)
         if updated != source:
             page.write_text(updated, encoding="utf-8")
             changed += 1
 
-    print(f"Concept bundles: {css_url} + {js_url}; final QA: /assets/css/{FINAL_QA_CSS} across {changed} pages")
+    qa_names = ", ".join(f"/assets/css/{name}" for name in FINAL_QA_CSS)
+    print(f"Concept bundles: {css_url} + {js_url}; final QA: {qa_names} across {changed} pages")
     return css_url, js_url, changed

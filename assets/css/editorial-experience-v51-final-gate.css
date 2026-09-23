@@ -1,0 +1,53 @@
+/* Aastha Editorial Experience v51 — final acne route + launch gate */
+
+/* Acne route is intentionally light and readable in every interactive state.
+   This overrides the legacy v8 dark-theatre skin only for #route on acne pages. */
+html body.concept-page.treatment-page #route .process-stage.v8-route-theatre,
+html body.concept-page.treatment-page #route .process-content,
+html body.concept-page.treatment-page #route .process-chapter,
+html body.concept-page.treatment-page #route article.process-chapter[id^="acne-"]{
+  background:#f6f1e9!important;
+  color:#171313!important;
+}
+
+html body.concept-page.treatment-page #route .process-nav{
+  background:#f0e9df!important;
+  border-right-color:#d6cec3!important;
+}
+html body.concept-page.treatment-page #route .process-nav>button[data-process-target]{
+  opacity:1!important;
+  color:#332c2e!important;
+  background:#f0e9df!important;
+  border-bottom-color:#d6cec3!important;
+}
+html body.concept-page.treatment-page #route .process-nav>button[data-process-target].is-active,
+html body.concept-page.treatment-page #route .process-nav>button[data-process-target][aria-selected="true"]{
+  color:#fff!important;
+  background:#611b34!important;
+}
+
+html body.concept-page.treatment-page #route .process-chapter>h2,
+html body.concept-page.treatment-page #route .process-chapter>h3,
+html body.concept-page.treatment-page #route .process-chapter>h4,
+html body.concept-page.treatment-page #route #acne-severity>h3{
+  color:#171313!important;
+}
+html body.concept-page.treatment-page #route .process-chapter>p,
+html body.concept-page.treatment-page #route #acne-maintain>p{
+  color:#3f3738!important;
+}
+html body.concept-page.treatment-page #route .process-chapter>.kicker,
+html body.concept-page.treatment-page #route .process-chapter>small{
+  color:#68491f!important;
+  opacity:1!important;
+}
+
+/* Keep the authored route header as the only dark anchor in this module. */
+html body.concept-page.treatment-page #route .v8-route-head{
+  color:#fff!important;
+  background:linear-gradient(90deg,#28141f,#110d10)!important;
+  border-bottom-color:rgba(255,255,255,.1)!important;
+}
+html body.concept-page.treatment-page #route .v8-route-head>span{
+  color:#d8b895!important;
+}
